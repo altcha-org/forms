@@ -1,0 +1,129 @@
+{
+	"description": "Simplifique o processo de solicitação e aprovação de reembolsos de despesas.",
+	"name": "Formulário de Reembolso de Despesas",
+	"categories": ["Funcionários"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Solicitação de Reembolso de Despesas",
+			"text": "Este formulário foi desenvolvido para garantir que suas despesas sejam processadas de forma rápida e precisa. Por favor, preencha todos os campos necessários com o máximo de detalhes possível e anexe quaisquer recibos ou documentos de apoio relevantes.",
+			"blocks": [
+				{
+					"label": "Nome do Funcionário",
+					"help": "Digite seu nome completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Endereço de E-mail",
+					"help": "Forneça seu endereço de e-mail para comunicação relacionada ao reembolso.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Telefone",
+					"help": "Digite seu número de telefone para qualquer acompanhamento necessário.",
+					"name": "phone",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Nome do Gerente/Supervisor",
+					"help": "Digite o nome do seu gerente ou supervisor para aprovação.",
+					"name": "supervisor",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Data da Despesa",
+					"help": "Especifique a data em que a despesa foi incorrida.",
+					"name": "date",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Categoria de Despesa",
+					"help": "Selecione a categoria da despesa.",
+					"name": "category",
+					"options": {
+						"options": "Viagem, Refeições, Materiais de Escritório, Outros"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "SelectInput"
+				},
+				{
+					"label": "Descrição da Despesa",
+					"help": "Forneça uma breve descrição da despesa.",
+					"name": "expense_description",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Valor",
+					"help": "Digite o valor total a ser reembolsado.",
+					"name": "amount",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "NumberInput"
+				},
+				{
+					"label": "Moeda",
+					"help": "Selecione a moeda do valor da despesa.",
+					"name": "currency",
+					"default": "GBP",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "TextInput"
+				},
+				{
+					"label": "Método de Pagamento Utilizado",
+					"help": "Indique o método utilizado para pagar a despesa.",
+					"name": "payment_method",
+					"options": {
+						"options": "Cartão de Crédito Pessoal, Cartão de Crédito Empresarial, Dinheiro, Outro"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "SelectInput"
+				},
+				{
+					"label": "Anexo do Recibo",
+					"help": "Faça upload de uma cópia do recibo ou de quaisquer documentos de apoio.",
+					"name": "receipt",
+					"options": {},
+					"required": true,
+					"type": "FileInput"
+				},
+				{
+					"label": "Notas Adicionais",
+					"help": "Opcional: Forneça qualquer informação adicional ou contexto para a despesa.",
+					"name": "notes",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Assinatura",
+					"help": "Assine para verificar a precisão das informações fornecidas.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

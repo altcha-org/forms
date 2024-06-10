@@ -1,0 +1,69 @@
+{
+	"description": "Raccogliere informazioni e opinioni con un sondaggio.",
+	"name": "Modulo di Sondaggio",
+	"categories": ["Feedback"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Apprezziamo il tuo Feedback!",
+			"text": "Grazie per dedicare del tempo a partecipare al nostro sondaggio. Il tuo feedback è estremamente importante per noi e ci aiuterà a migliorare i nostri prodotti e servizi.",
+			"blocks": [
+				{
+					"label": "Nome e Cognome",
+					"help": "Opzionale: Inserisci il tuo nome completo.",
+					"name": "name",
+					"options": {},
+					"required": false,
+					"type": "TextInput"
+				},
+				{
+					"label": "Indirizzo Email",
+					"help": "Opzionale: Fornisci il tuo indirizzo email se desideri ricevere ulteriori informazioni.",
+					"name": "email",
+					"options": {},
+					"required": false,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Domanda 1",
+					"help": "Fornisci una domanda rilevante per lo scopo del tuo sondaggio.",
+					"name": "question_1",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Domanda 2",
+					"help": "Fornisci una domanda rilevante per lo scopo del tuo sondaggio.",
+					"name": "question_2",
+					"options": {
+						"inline": true,
+						"options": "Sì, No"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Domanda 3",
+					"help": "Fornisci una domanda rilevante per lo scopo del tuo sondaggio.",
+					"name": "question_3",
+					"options": {
+						"max": 10,
+						"style": "numbers"
+					},
+					"required": true,
+					"size": "md",
+					"type": "RatingInput"
+				},
+				{
+					"label": "Commenti Aggiuntivi",
+					"help": "Fornisci eventuali commenti o suggerimenti aggiuntivi.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

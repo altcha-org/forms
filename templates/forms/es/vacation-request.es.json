@@ -1,0 +1,81 @@
+{
+	"description": "Permite a los empleados solicitar tiempo libre y gestionar aprobaciones.",
+	"name": "Formulario de Solicitud de Vacaciones",
+	"categories": ["Empleados"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulario de Solicitud de Vacaciones",
+			"text": "Para garantizar que su tiempo libre sea aprobado y documentado adecuadamente, complete el formulario con todos los detalles necesarios.",
+			"blocks": [
+				{
+					"label": "Nombre del Empleado",
+					"help": "Ingrese su nombre completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Dirección de Correo Electrónico",
+					"help": "Proporcione su dirección de correo electrónico para comunicarse sobre su solicitud.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Teléfono",
+					"help": "Ingrese su número de teléfono para cualquier seguimiento necesario.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Departamento",
+					"help": "Especifique su departamento o equipo.",
+					"name": "department",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Nombre del Gerente/Supervisor",
+					"help": "Ingrese el nombre de su supervisor o gerente para la aprobación.",
+					"name": "supervisor",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Fecha de Inicio de las Vacaciones",
+					"help": "Seleccione la fecha de inicio para sus vacaciones.",
+					"name": "date_start",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Fecha de Fin de las Vacaciones",
+					"help": "Seleccione la fecha de fin para sus vacaciones.",
+					"name": "date_end",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Firma",
+					"help": "Firme para verificar la exactitud de la información proporcionada.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

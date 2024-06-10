@@ -1,0 +1,129 @@
+{
+	"description": "Vereinfachen Sie den Prozess des Beantragens und Genehmigens von Spesenrückerstattungen.",
+	"name": "Spesenrückerstattungsformular",
+	"categories": ["Mitarbeiter"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Spesenrückerstattungsantrag",
+			"text": "Dieses Formular wurde entwickelt, um sicherzustellen, dass Ihre Spesen schnell und korrekt bearbeitet werden. Bitte füllen Sie alle erforderlichen Felder so detailliert wie möglich aus und fügen Sie relevante Quittungen oder Belege hinzu.",
+			"blocks": [
+				{
+					"label": "Mitarbeitername",
+					"help": "Geben Sie Ihren vollständigen Namen ein.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "Texteingabe"
+				},
+				{
+					"label": "E-Mail-Adresse",
+					"help": "Geben Sie Ihre E-Mail-Adresse zur Kommunikation bezüglich der Rückerstattung an.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "E-Mail-Eingabe"
+				},
+				{
+					"label": "Telefonnummer",
+					"help": "Geben Sie Ihre Telefonnummer für eventuelle Rückfragen an.",
+					"name": "phone",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "Telefonnummer-Eingabe"
+				},
+				{
+					"label": "Name des Managers/Vorgesetzten",
+					"help": "Geben Sie den Namen Ihres Managers oder Vorgesetzten für die Genehmigung an.",
+					"name": "supervisor",
+					"options": {},
+					"required": true,
+					"type": "Texteingabe"
+				},
+				{
+					"label": "Datum der Ausgabe",
+					"help": "Geben Sie das Datum an, an dem die Ausgabe getätigt wurde.",
+					"name": "date",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DatumUhrzeit-Eingabe"
+				},
+				{
+					"label": "Ausgabenkategorie",
+					"help": "Wählen Sie die Kategorie der Ausgabe aus.",
+					"name": "category",
+					"options": {
+						"options": "Reisen, Mahlzeiten, Büromaterial, Sonstiges"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "Auswahleingabe"
+				},
+				{
+					"label": "Ausgabenbeschreibung",
+					"help": "Geben Sie eine kurze Beschreibung der Ausgabe an.",
+					"name": "expense_description",
+					"options": {},
+					"required": true,
+					"type": "MehrzeiligeTexteingabe"
+				},
+				{
+					"label": "Betrag",
+					"help": "Geben Sie den Gesamtbetrag zur Rückerstattung an.",
+					"name": "amount",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "Zahleneingabe"
+				},
+				{
+					"label": "Währung",
+					"help": "Wählen Sie die Währung des Ausgabenbetrags aus.",
+					"name": "currency",
+					"default": "GBP",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "Texteingabe"
+				},
+				{
+					"label": "Verwendete Zahlungsmethode",
+					"help": "Geben Sie die für die Ausgabe verwendete Zahlungsmethode an.",
+					"name": "payment_method",
+					"options": {
+						"options": "Persönliche Kreditkarte, Geschäftskreditkarte, Bar, Sonstiges"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "Auswahleingabe"
+				},
+				{
+					"label": "Beleganhang",
+					"help": "Laden Sie eine Kopie des Belegs oder relevante Dokumente hoch.",
+					"name": "receipt",
+					"options": {},
+					"required": true,
+					"type": "DateiEingabe"
+				},
+				{
+					"label": "Zusätzliche Hinweise",
+					"help": "Optional: Geben Sie zusätzliche Informationen oder Kontext zur Ausgabe an.",
+					"name": "notes",
+					"options": {},
+					"required": false,
+					"type": "MehrzeiligeTexteingabe"
+				},
+				{
+					"label": "Unterschrift",
+					"help": "Unterschreiben Sie zur Bestätigung der bereitgestellten Informationen.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "UnterschriftenEingabe"
+				}
+			]
+		}
+	]
+}

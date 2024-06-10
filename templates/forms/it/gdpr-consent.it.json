@@ -1,0 +1,64 @@
+{
+	"description": "Garantire la conformità al GDPR con un Modulo di Consenso.",
+	"name": "Modulo di Consenso per il Trattamento dei Dati Personali",
+	"categories": ["GDPR"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Modulo di Consenso per il Trattamento dei Dati Personali",
+			"text": "Questo modulo di consenso è utilizzato per ottenere il consenso esplicito da parte degli individui per il trattamento dei loro dati personali per [purpose]. I dati raccolti possono includere [description of data]. Firmando questo modulo, l'individuo accetta di concedere il consenso per la durata specificata.",
+			"blocks": [
+				{
+					"label": "Nome Completo",
+					"help": "Inserire il nome completo dell'individuo che fornisce il consenso.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Indirizzo Email",
+					"help": "Fornire l'indirizzo email dell'individuo che fornisce il consenso.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numero di Telefono",
+					"help": "Fornire il numero di telefono dell'individuo che fornisce il consenso.",
+					"name": "phone",
+					"options": {},
+					"required": true,
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Indirizzo",
+					"help": "Fornire l'indirizzo postale dell'individuo che fornisce il consenso.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Opzione di Consenso",
+					"help": "Acconsentire o non acconsentire al trattamento dei dati personali.",
+					"name": "consent",
+					"options": {
+						"options": ["Acconsento", "NON acconsento"]
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Firma",
+					"help": "Firmare per confermare l'autenticità del consenso.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

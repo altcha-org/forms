@@ -1,0 +1,84 @@
+{
+	"description": "GDPR-compliant template for Data Subject Access Request.",
+	"name": "Data Subject Access Request Form (DSAR)",
+	"categories": ["GDPR"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Data Subject Access Request Form",
+			"text": "Please complete the fields below to request access to your personal data held by our organisation. Your request will be processed promptly in accordance with data protection regulations. Thank you for your cooperation.",
+			"blocks": [
+				{
+					"label": "Requester's Full Name",
+					"help": "Enter the full name of the individual making the DSAR.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Requester's Contact Information",
+					"help": "Provide contact details such as email address and phone number for communication regarding the request.",
+					"name": "contact_information",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Requester's Address",
+					"help": "Provide the postal address of the requester for mailing any requested documents or information.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Requester's Identification",
+					"help": "Attach a copy of a valid identification document (e.g., passport, driving licence) to verify the requester's identity.",
+					"name": "identification",
+					"options": {
+						"accept": ".jpg,.jpeg,.pdf",
+						"maxFileSize": 10
+					},
+					"required": true,
+					"size": "md",
+					"type": "FileInput"
+				},
+				{
+					"label": "Preferred Delivery Method",
+					"help": "Specify how the requested information should be delivered.",
+					"name": "delivery_method",
+					"options": {
+						"options": "Email, Postal mail"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Description of Request",
+					"help": "Specify the details of the information being requested, including relevant timeframes or specific data categories.",
+					"name": "description_of_request",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Additional Comments",
+					"help": "Optional: Provide any additional information or context related to the request.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Signature",
+					"help": "Sign to confirm the authenticity of the request and agree to the terms and conditions.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,69 @@
+{
+	"description": "Sammeln Sie Einblicke und Meinungen mit einer Umfrage.",
+	"name": "Umfrageformular",
+	"categories": ["Rückmeldung"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Wir Schätzen Ihr Feedback!",
+			"text": "Vielen Dank, dass Sie sich die Zeit nehmen, an unserer Umfrage teilzunehmen. Ihr Feedback ist unglaublich wichtig für uns und wird uns helfen, unsere Produkte und Dienstleistungen zu verbessern.",
+			"blocks": [
+				{
+					"label": "Vollständiger Name",
+					"help": "Optional: Bitte geben Sie Ihren vollständigen Namen ein.",
+					"name": "name",
+					"options": {},
+					"required": false,
+					"type": "TextInput"
+				},
+				{
+					"label": "E-Mail-Adresse",
+					"help": "Optional: Geben Sie Ihre E-Mail-Adresse an, wenn Sie weitere Informationen erhalten möchten.",
+					"name": "email",
+					"options": {},
+					"required": false,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Frage 1",
+					"help": "Stellen Sie eine Frage, die für den Zweck Ihrer Umfrage relevant ist.",
+					"name": "question_1",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Frage 2",
+					"help": "Stellen Sie eine Frage, die für den Zweck Ihrer Umfrage relevant ist.",
+					"name": "question_2",
+					"options": {
+						"inline": true,
+						"options": "Ja, Nein"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Frage 3",
+					"help": "Stellen Sie eine Frage, die für den Zweck Ihrer Umfrage relevant ist.",
+					"name": "question_3",
+					"options": {
+						"max": 10,
+						"style": "numbers"
+					},
+					"required": true,
+					"size": "md",
+					"type": "RatingInput"
+				},
+				{
+					"label": "Zusätzliche Kommentare",
+					"help": "Bitte geben Sie zusätzliche Kommentare oder Vorschläge ab.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

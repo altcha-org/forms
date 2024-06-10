@@ -1,0 +1,167 @@
+{
+	"description": "Richiedi facilmente l'acquisto di hardware o software con un modulo di richiesta dettagliato.",
+	"name": "Modulo di Richiesta di Acquisto di Hardware o Software",
+	"categories": ["Dipendenti"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Modulo di Richiesta di Acquisto di Hardware o Software",
+			"text": "Si prega di compilare i campi di seguito per richiedere nuovo hardware o software per il vostro dipartimento. Fornire informazioni dettagliate ci aiuterà a elaborare rapidamente la vostra richiesta.",
+			"blocks": [
+				{
+					"label": "Nome Dipendente",
+					"help": "Si prega di inserire il vostro nome completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Indirizzo Email",
+					"help": "Fornire il vostro indirizzo email per la comunicazione relativa alla vostra richiesta.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numero di Telefono",
+					"help": "Inserire il numero di telefono per eventuali follow-up necessari.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Dipartimento",
+					"help": "Specificare il vostro dipartimento o team.",
+					"name": "department",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Nome Manager/Supervisore",
+					"help": "Inserire il nome del vostro supervisore o manager per l'approvazione.",
+					"name": "supervisor",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Tipo di Acquisto",
+					"help": "Selezionare se si sta richiedendo hardware o software.",
+					"name": "type",
+					"options": {
+						"options": "Software, Hardware"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Nome Prodotto",
+					"help": "Specificare il nome del prodotto hardware o software.",
+					"name": "product_name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Descrizione Prodotto",
+					"help": "Fornire una breve descrizione del prodotto.",
+					"name": "product_description",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Nome Fornitore",
+					"help": "Inserire il nome del fornitore o del fornitore.",
+					"name": "vendor_name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Informazioni di Contatto del Fornitore",
+					"help": "Fornire i dettagli di contatto per il fornitore (numero di telefono, email, sito web).",
+					"name": "product_contact",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Quantità",
+					"help": "Indicare la quantità di hardware o software necessaria.",
+					"name": "quantity",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "NumberInput"
+				},
+				{
+					"label": "Costo per Unità",
+					"help": "Inserire il costo per unità del prodotto.",
+					"name": "cost_per_unit",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "NumberInput"
+				},
+				{
+					"label": "Giustificazione per l'Acquisto",
+					"help": "Fornire una spiegazione dettagliata del motivo per cui è necessario l'hardware o il software.",
+					"name": "justification",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Codice di Bilancio",
+					"help": "Inserire il codice di bilancio o il numero di conto per l'acquisto.",
+					"name": "budget_code",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "TextInput"
+				},
+				{
+					"label": "Data di Consegna Richiesta",
+					"help": "Specificare la data entro cui è necessario l'hardware o il software.",
+					"name": "delivery_date",
+					"options": {
+						"min": "adesso"
+					},
+					"required": false,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Luogo di Consegna",
+					"help": "Fornire l'indirizzo di consegna o il luogo in cui il prodotto deve essere inviato.",
+					"name": "delivery_location",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Commenti Aggiuntivi o Istruzioni Speciali",
+					"help": "Opzionale: Includere eventuali commenti aggiuntivi o istruzioni speciali relative all'acquisto.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Firma",
+					"help": "Firmare per verificare l'accuratezza delle informazioni fornite.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

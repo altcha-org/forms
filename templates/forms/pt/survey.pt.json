@@ -1,0 +1,69 @@
+{
+	"description": "Obtenha insights e opiniões com uma pesquisa.",
+	"name": "Formulário de Pesquisa",
+	"categories": ["Feedback"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Valorizamos Seu Feedback!",
+			"text": "Obrigado por dedicar seu tempo para participar da nossa pesquisa. Seu feedback é incrivelmente importante para nós e nos ajudará a melhorar nossos produtos e serviços.",
+			"blocks": [
+				{
+					"label": "Nome completo",
+					"help": "Opcional: Por favor, insira seu nome completo.",
+					"name": "name",
+					"options": {},
+					"required": false,
+					"type": "TextInput"
+				},
+				{
+					"label": "Endereço de E-mail",
+					"help": "Opcional: Forneça seu endereço de e-mail se desejar receber informações de acompanhamento.",
+					"name": "email",
+					"options": {},
+					"required": false,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Pergunta 1",
+					"help": "Forneça uma pergunta relevante para o propósito da sua pesquisa.",
+					"name": "question_1",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Pergunta 2",
+					"help": "Forneça uma pergunta relevante para o propósito da sua pesquisa.",
+					"name": "question_2",
+					"options": {
+						"inline": true,
+						"options": "Sim, Não"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Pergunta 3",
+					"help": "Forneça uma pergunta relevante para o propósito da sua pesquisa.",
+					"name": "question_3",
+					"options": {
+						"max": 10,
+						"style": "números"
+					},
+					"required": true,
+					"size": "md",
+					"type": "RatingInput"
+				},
+				{
+					"label": "Comentários Adicionais",
+					"help": "Por favor, forneça quaisquer comentários ou sugestões adicionais.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

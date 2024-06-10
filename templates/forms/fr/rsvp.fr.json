@@ -1,0 +1,69 @@
+{
+	"description": "Gérez la participation à des événements et les détails des invités avec un formulaire de confirmation RSVP efficace.",
+	"name": "Formulaire RSVP",
+	"categories": ["Inscriptions"],
+	"steps": [
+		{
+			"title": "RSVP pour [Nom de l'événement]",
+			"text": "Pour nous aider à nous préparer à l'événement, veuillez prendre un moment pour remplir ce formulaire RSVP. Votre réponse nous permettra de vous accueillir, vous et vos invités, de manière appropriée.",
+			"blocks": [
+				{
+					"label": "Nom complet",
+					"help": "Veuillez saisir votre nom complet.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Adresse e-mail",
+					"help": "Indiquez votre adresse e-mail pour recevoir des mises à jour sur l'événement.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numéro de téléphone",
+					"help": "Facultatif : saisissez votre numéro de téléphone pour tout changement de dernière minute ou mises à jour.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Confirmation de participation",
+					"help": "Allez-vous assister à l'événement ?",
+					"name": "attendance",
+					"options": {
+						"inline": true,
+						"options": "Oui, Non"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Nombre d'invités",
+					"help": "Indiquez le nombre d'invités que vous allez amener.",
+					"name": "number_of_guests",
+					"default": "1",
+					"options": {
+						"options": "Oui, Non"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "NumberInput"
+				},
+				{
+					"label": "Commentaires supplémentaires",
+					"help": "Facultatif : incluez toute information supplémentaire ou demandes spéciales.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

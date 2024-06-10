@@ -1,0 +1,92 @@
+{
+	"description": "Mit diesem umfassenden Formular können Sie die Datenverarbeitungseinwilligung einfach widerrufen.",
+	"name": "Formular zum Widerruf der Datenverarbeitungseinwilligung",
+	"categories": ["DSGVO"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formular zum Widerruf der Datenverarbeitungseinwilligung",
+			"text": "Bitte füllen Sie die folgenden Felder aus, um Ihre Einwilligung zur Verarbeitung Ihrer persönlichen Daten zu widerrufen. Ihr Antrag wird umgehend gemäß den Datenschutzbestimmungen bearbeitet. Vielen Dank für Ihre Mitarbeit.",
+			"blocks": [
+				{
+					"label": "Vollständiger Name des Antragstellers",
+					"help": "Geben Sie den vollständigen Namen der Person ein, die den Widerruf der Einwilligung beantragt.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Kontaktdaten des Antragstellers",
+					"help": "Geben Sie Kontaktdaten wie E-Mail-Adresse und Telefonnummer an, um die Kommunikation bezüglich des Widerrufs zu ermöglichen.",
+					"name": "contact_information",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Adresse des Antragstellers",
+					"help": "Geben Sie die Postanschrift des Antragstellers an, um eine Bestätigung oder Nachverfolgung per Post zu ermöglichen.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Identifizierung des Antragstellers",
+					"help": "Fügen Sie eine Kopie eines gültigen Identifikationsdokuments (z. B. Reisepass, Führerschein) hinzu, um die Identität des Antragstellers zu überprüfen.",
+					"name": "identification",
+					"options": {
+						"accept": ".jpg,.jpeg,.pdf",
+						"maxFileSize": 10
+					},
+					"required": true,
+					"size": "md",
+					"type": "FileInput"
+				},
+				{
+					"label": "Bevorzugte Kommunikationsmethode",
+					"help": "Geben Sie an, wie der Antragsteller bezüglich des Löschungsantrags kontaktiert werden möchte.",
+					"name": "delivery_method",
+					"options": {
+						"options": "E-Mail, Post"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Beschreibung der Daten",
+					"help": "Geben Sie die personenbezogenen Daten an, für die die Person die Einwilligung zur Verarbeitung widerrufen möchte.",
+					"name": "description_of_data",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Grund für den Widerruf",
+					"help": "Geben Sie eine kurze Erklärung ab, warum der Widerruf der Einwilligung beantragt wird.",
+					"name": "reason_for_withdrawal",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Zusätzliche Kommentare",
+					"help": "Optional: Geben Sie zusätzliche Informationen oder Kontext zum Antrag auf Widerruf der Einwilligung an.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Unterschrift",
+					"help": "Unterschreiben Sie zur Bestätigung der Echtheit des Antrags und zur Zustimmung zum Widerruf der Einwilligung.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,68 @@
+{
+	"description": "Permita aos clientes agendar consultas diretamente a partir do seu site.",
+	"name": "Formulário de Agendamento de Consultas",
+	"categories": ["Registros"],
+	"steps": [
+		{
+			"title": "Agende Sua Consulta",
+			"text": "Para agendar sua consulta, por favor preencha o formulário abaixo com os detalhes necessários. Isso nos ajudará a garantir que podemos acomodar o horário e necessidades de serviço preferidos.",
+			"blocks": [
+				{
+					"label": "Nome Completo",
+					"help": "Por favor, insira seu nome completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Endereço de E-mail",
+					"help": "Forneça seu endereço de e-mail para receber confirmações e atualizações de agendamento.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Telefone",
+					"help": "Digite seu número de telefone para qualquer acompanhamento ou lembretes necessários.",
+					"name": "phone",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Data da Consulta",
+					"help": "Selecione a data e horário desejados para sua consulta.",
+					"name": "date_time",
+					"options": {
+						"datetime": true,
+						"min": "now"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Serviço Necessário",
+					"help": "Selecione o tipo de serviço que você precisa a partir das opções disponíveis.",
+					"name": "services",
+					"options": {
+						"options": "Serviço 1, Serviço 2, Serviço 3"
+					},
+					"required": true,
+					"type": "MultiCheckboxInput"
+				},
+				{
+					"label": "Notas Adicionais",
+					"help": "Opcional: Forneça qualquer informação adicional ou solicitações especiais para sua consulta.",
+					"name": "notes",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

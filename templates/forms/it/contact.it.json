@@ -1,0 +1,61 @@
+{
+	"description": "Modulo facile da utilizzare per i visitatori per contattare la tua attività o il team di supporto.",
+	"name": "Modulo Contattaci",
+	"categories": ["Contatto"],
+	"steps": [
+		{
+			"title": "Contattaci",
+			"blocks": [
+				{
+					"label": "Nome Completo",
+					"help": "Si prega di inserire il proprio nome completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "CasellaTesto"
+				},
+				{
+					"label": "Nome Azienda",
+					"help": "Opzionale: Se del caso, fornire il nome della propria azienda.",
+					"name": "company",
+					"options": {},
+					"required": false,
+					"type": "CasellaTesto"
+				},
+				{
+					"label": "Indirizzo Email",
+					"help": "Si prega di fornire il proprio indirizzo email in modo che possiamo rispondere alla vostra richiesta.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "CasellaEmail"
+				},
+				{
+					"label": "Numero di Telefono",
+					"help": "Opzionale: Fornire il proprio numero di telefono se si preferisce essere contattati telefonicamente.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "CasellaTelefono"
+				},
+				{
+					"label": "Oggetto",
+					"help": "Descrivere brevemente il motivo del contatto.",
+					"name": "subject",
+					"options": {},
+					"required": true,
+					"type": "CasellaTesto"
+				},
+				{
+					"label": "Messaggio",
+					"help": "Si prega di inserire i dettagli della richiesta o del feedback.",
+					"name": "message",
+					"options": {},
+					"required": true,
+					"type": "CasellaTestoMultiriga"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,64 @@
+{
+	"description": "Assicurarsi la conformità al GDPR con il modulo di riconoscimento della politica di conservazione dei dati.",
+	"name": "Modulo di riconoscimento della politica di conservazione dei dati",
+	"categories": ["GDPR"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Modulo di riconoscimento della politica di conservazione dei dati",
+			"text": "Si prega di compilare i campi sottostanti per confermare di aver letto e compreso la politica di conservazione dei dati dell'organizzazione. Il tuo riconoscimento è essenziale per garantire la conformità alle normative sulla protezione dei dati. Grazie per la collaborazione.",
+			"blocks": [
+				{
+					"label": "Nome dipendente",
+					"help": "Inserire il nome completo del dipendente che riconosce la politica.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Indirizzo email",
+					"help": "Fornire l'indirizzo email per la comunicazione relativa al riconoscimento.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numero di telefono",
+					"help": "Opzionale: Inserire il numero di telefono per eventuali follow-up.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Data del riconoscimento",
+					"help": "Inserire la data in cui viene effettuato il riconoscimento.",
+					"name": "date",
+					"default": "now",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Ho letto e compreso la politica di conservazione dei dati.",
+					"name": "acknowledgement_statement",
+					"options": {},
+					"required": true,
+					"type": "CheckboxInput"
+				},
+				{
+					"label": "Firma",
+					"help": "Firma per confermare il tuo riconoscimento e accordo con la politica.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

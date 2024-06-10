@@ -1,0 +1,79 @@
+{
+	"descrizione": "Richiedi facilmente l'accettazione delle politiche con il modulo diretto.",
+	"nome": "Modulo di Accettazione delle Politiche",
+	"categorie": ["Dipendenti"],
+	"premium": true,
+	"passaggi": [
+		{
+			"titolo": "Modulo di Accettazione delle Politiche",
+			"testo": "Si prega di compilare i campi sottostanti per confermare di aver letto, compreso e accettato di conformarsi alla politica specificata. La tua accettazione è essenziale per garantire che tutti i dipendenti siano informati e rispettino le politiche della nostra azienda.",
+			"blocchi": [
+				{
+					"etichetta": "Nome Dipendente",
+					"aiuto": "Inserisci il tuo nome completo.",
+					"nome": "nome",
+					"opzioni": {},
+					"richiesto": true,
+					"tipo": "TextInput"
+				},
+				{
+					"etichetta": "Indirizzo Email",
+					"aiuto": "Fornisci il tuo indirizzo email per la comunicazione relativa alla tua richiesta.",
+					"nome": "email",
+					"opzioni": {},
+					"richiesto": true,
+					"tipo": "EmailInput"
+				},
+				{
+					"etichetta": "Numero di Telefono",
+					"aiuto": "Facoltativo: Inserisci il tuo numero di telefono per eventuali seguiti necessari.",
+					"nome": "telefono",
+					"opzioni": {},
+					"richiesto": false,
+					"dimensione": "sm",
+					"tipo": "PhoneInput"
+				},
+				{
+					"etichetta": "Titolo Politica",
+					"aiuto": "Specifica il titolo della politica oggetto di accettazione.",
+					"nome": "policy_title",
+					"opzioni": {},
+					"richiesto": true,
+					"tipo": "TextInput"
+				},
+				{
+					"etichetta": "Descrizione Politica",
+					"aiuto": "Descrivi brevemente la politica o includi un riassunto.",
+					"nome": "policy_description",
+					"opzioni": {},
+					"richiesto": true,
+					"tipo": "MultiLineTextInput"
+				},
+				{
+					"etichetta": "Data della Politica",
+					"aiuto": "Inserisci la data di entrata in vigore della politica.",
+					"nome": "policy_date",
+					"opzioni": {},
+					"richiesto": true,
+					"dimensione": "sm",
+					"tipo": "DateTimeInput"
+				},
+				{
+					"etichetta": "Ho letto e compreso la politica.",
+					"nome": "acknowledgement_statement",
+					"opzioni": {},
+					"richiesto": true,
+					"tipo": "CheckboxInput"
+				},
+				{
+					"etichetta": "Firma",
+					"aiuto": "Firma per confermare la tua accettazione e accordo con la politica.",
+					"nome": "firma",
+					"opzioni": {},
+					"richiesto": true,
+					"tipo": "SignatureInput"
+				}
+			]
+		}
+	]
+}

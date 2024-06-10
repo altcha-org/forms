@@ -1,0 +1,68 @@
+{
+	"description": "Permettez aux clients de prendre rendez-vous directement depuis votre site web.",
+	"name": "Formulaire de Réservation de Rendez-vous",
+	"categories": ["Inscriptions"],
+	"steps": [
+		{
+			"title": "Réserver Votre Rendez-vous",
+			"text": "Pour réserver votre rendez-vous, veuillez remplir le formulaire ci-dessous avec les informations nécessaires. Cela nous aidera à nous assurer que nous pouvons répondre à vos horaires préférés et à vos besoins de service.",
+			"blocks": [
+				{
+					"label": "Nom Complet",
+					"help": "Veuillez saisir votre nom complet.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Adresse E-mail",
+					"help": "Indiquez votre adresse e-mail pour recevoir les confirmations et les mises à jour de rendez-vous.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numéro de Téléphone",
+					"help": "Entrez votre numéro de téléphone pour tout suivi éventuel ou rappels.",
+					"name": "phone",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Date du Rendez-vous",
+					"help": "Sélectionnez la date et l'heure souhaitées pour votre rendez-vous.",
+					"name": "date_time",
+					"options": {
+						"datetime": true,
+						"min": "now"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Service Requis",
+					"help": "Sélectionnez le type de service dont vous avez besoin parmi les options disponibles.",
+					"name": "services",
+					"options": {
+						"options": "Service 1, Service 2, Service 3"
+					},
+					"required": true,
+					"type": "MultiCheckboxInput"
+				},
+				{
+					"label": "Notes Additionnelles",
+					"help": "Facultatif : Fournissez toute information supplémentaire ou demande spéciale pour votre rendez-vous.",
+					"name": "notes",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

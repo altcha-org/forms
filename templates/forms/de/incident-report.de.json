@@ -1,0 +1,140 @@
+{
+	"description": "Effizientes Melden von Arbeitsunfällen mit einem umfassenden Formular.",
+	"name": "Arbeitsunfall-Berichtsformular",
+	"categories": ["Mitarbeiter"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Arbeitsunfall-Berichtsformular",
+			"text": "Bitte füllen Sie die untenstehenden Felder aus, um Arbeitsunfälle umgehend zu melden. Ihr detaillierter Bericht ist entscheidend für die Sicherheit und das Wohlergehen unserer Mitarbeiter. Vielen Dank für Ihre Mitarbeit bei der Aufrechterhaltung eines sicheren Arbeitsumfelds.",
+			"blocks": [
+				{
+					"label": "Name des Mitarbeiters",
+					"help": "Geben Sie Ihren vollständigen Namen ein.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "E-Mail-Adresse",
+					"help": "Geben Sie Ihre E-Mail-Adresse für weitere Kommunikation an.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Telefonnummer",
+					"help": "Geben Sie Ihre Telefonnummer für eventuelle Nachverfolgungen an.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Abteilung",
+					"help": "Geben Sie Ihre Abteilung oder Ihr Team an.",
+					"name": "department",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Name des Managers/Supervisors",
+					"help": "Geben Sie den Namen Ihres Vorgesetzten oder Managers ein.",
+					"name": "supervisor",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Datum des Vorfalls",
+					"help": "Geben Sie das Datum an, an dem der Vorfall aufgetreten ist.",
+					"name": "date",
+					"options": {
+						"datetime": true
+					},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Ort des Vorfalls",
+					"help": "Geben Sie den genauen Ort des Vorfalls an.",
+					"name": "location",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Art des Vorfalls",
+					"help": "Wählen Sie die Art des Vorfalls aus.",
+					"name": "type",
+					"options": {
+						"options": "Verletzung, Beinaheunfall, Sachschaden"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Beschreibung des Vorfalls",
+					"help": "Geben Sie eine ausführliche Beschreibung dessen, was passiert ist.",
+					"name": "description",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Zeugen",
+					"help": "Listen Sie die Namen und Kontaktdaten möglicher Zeugen auf.",
+					"name": "witnesses",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Erlittene Verletzungen",
+					"help": "Beschreiben Sie alle im Zusammenhang mit dem Vorfall erlittenen Verletzungen.",
+					"name": "injuries",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Unverzüglich ergriffene Maßnahmen",
+					"help": "Beschreiben Sie alle unverzüglich als Reaktion auf den Vorfall ergriffenen Maßnahmen.",
+					"name": "immediate_action",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Mitwirkende Faktoren",
+					"help": "Identifizieren Sie alle Faktoren, die zum Vorfall beigetragen haben könnten.",
+					"name": "contributing_factors",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Vorgeschlagene präventive Maßnahmen",
+					"help": "Schlagen Sie Maßnahmen vor, um ähnliche Vorfälle in Zukunft zu verhindern.",
+					"name": "suggested_measures",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Unterschrift",
+					"help": "Unterschreiben Sie, um die Richtigkeit der bereitgestellten Informationen zu bestätigen.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,92 @@
+{
+	"description": "Retirez facilement votre consentement au traitement des données avec ce formulaire complet.",
+	"name": "Formulaire de retrait du consentement au traitement des données",
+	"categories": ["RGPD"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulaire de retrait du consentement au traitement des données",
+			"text": "Veuillez remplir les champs ci-dessous pour retirer votre consentement au traitement de vos données personnelles. Votre demande sera traitée rapidement conformément aux réglementations sur la protection des données. Merci pour votre coopération.",
+			"blocks": [
+				{
+					"label": "Nom complet du demandeur",
+					"help": "Entrez le nom complet de la personne demandant le retrait du consentement.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Coordonnées du demandeur",
+					"help": "Fournissez des coordonnées telles qu'une adresse e-mail et un numéro de téléphone pour la communication concernant la demande de retrait.",
+					"name": "contact_information",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Adresse du demandeur",
+					"help": "Fournissez l'adresse postale du demandeur pour l'envoi de toute confirmation ou suivi.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Identification du demandeur",
+					"help": "Joignez une copie d'un document d'identification valide (p.ex., passeport, permis de conduire) pour vérifier l'identité du demandeur.",
+					"name": "identification",
+					"options": {
+						"accept": ".jpg,.jpeg,.pdf",
+						"maxFileSize": 10
+					},
+					"required": true,
+					"size": "md",
+					"type": "FileInput"
+				},
+				{
+					"label": "Méthode de communication préférée",
+					"help": "Précisez comment le demandeur préfère être contacté concernant la demande d'effacement.",
+					"name": "delivery_method",
+					"options": {
+						"options": "E-mail, Courrier postal"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Description des données",
+					"help": "Spécifiez les données personnelles pour lesquelles la personne souhaite retirer son consentement au traitement.",
+					"name": "description_of_data",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Motif du retrait",
+					"help": "Fournissez une brève explication de la raison pour laquelle le retrait du consentement est demandé.",
+					"name": "reason_for_withdrawal",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Commentaires supplémentaires",
+					"help": "Optionnel : Fournissez toute information supplémentaire ou contexte lié à la demande de retrait du consentement.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Signature",
+					"help": "Signez pour confirmer l'authenticité de la demande et accepter le retrait du consentement.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

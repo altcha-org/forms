@@ -1,0 +1,69 @@
+{
+	"description": "Gestisci la partecipazione agli eventi e i dettagli degli ospiti con un modulo di conferma di presenza efficiente.",
+	"name": "Modulo di Conferma di Presenza",
+	"categories": ["Registrazioni"],
+	"steps": [
+		{
+			"title": "Conferma di Presenza per [Nome dell'Evento]",
+			"text": "Per aiutarci a prepararci per l'evento, ti preghiamo di compilare questo modulo di conferma di presenza. La tua risposta ci permetterà di ospitarti e ai tuoi ospiti nel modo appropriato.",
+			"blocks": [
+				{
+					"label": "Nome Completo",
+					"help": "Inserisci il tuo nome completo.",
+					"name": "nome",
+					"options": {},
+					"required": true,
+					"type": "Casella di Testo"
+				},
+				{
+					"label": "Indirizzo Email",
+					"help": "Fornisci il tuo indirizzo email per ricevere gli aggiornamenti sull'evento.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "Casella Email"
+				},
+				{
+					"label": "Numero di Telefono",
+					"help": "Facoltativo: Inserisci il tuo numero di telefono per eventuali cambiamenti o aggiornamenti dell'ultimo minuto.",
+					"name": "telefono",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "Casella Telefono"
+				},
+				{
+					"label": "Conferma di Presenza",
+					"help": "Parteciperai all'evento?",
+					"name": "presenza",
+					"options": {
+						"inline": true,
+						"options": "Sì, No"
+					},
+					"required": true,
+					"type": "Selezione Radio"
+				},
+				{
+					"label": "Numero di Ospiti",
+					"help": "Indica il numero di ospiti che porterai con te.",
+					"name": "numero_di_ospiti",
+					"default": "1",
+					"options": {
+						"options": "Sì, No"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "Casella Numerica"
+				},
+				{
+					"label": "Commenti Aggiuntivi",
+					"help": "Facoltativo: Includi altre informazioni o richieste speciali.",
+					"name": "commenti",
+					"options": {},
+					"required": false,
+					"type": "Casella di Testo Multipla"
+				}
+			]
+		}
+	]
+}

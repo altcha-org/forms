@@ -1,0 +1,81 @@
+{
+	"description": "Permita aos funcionários solicitar tempo de férias e gerenciar aprovações.",
+	"name": "Formulário de Solicitação de Férias",
+	"categories": ["Funcionários"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulário de Solicitação de Férias",
+			"text": "Para garantir que seu tempo de folga seja aprovado e documentado corretamente, complete o formulário com todos os detalhes necessários.",
+			"blocks": [
+				{
+					"label": "Nome do Funcionário",
+					"help": "Digite seu nome completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Endereço de E-mail",
+					"help": "Forneça seu endereço de e-mail para comunicação sobre sua solicitação.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Telefone",
+					"help": "Digite seu número de telefone para qualquer acompanhamento necessário.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Departamento",
+					"help": "Especifique seu departamento ou equipe.",
+					"name": "department",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Nome do Gerente/Supervisor",
+					"help": "Digite o nome do seu supervisor ou gerente para aprovação.",
+					"name": "supervisor",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Data de Início das Férias",
+					"help": "Selecione a data de início das suas férias.",
+					"name": "date_start",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Data de Término das Férias",
+					"help": "Selecione a data de término das suas férias.",
+					"name": "date_end",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Assinatura",
+					"help": "Assine para verificar a precisão das informações fornecidas.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

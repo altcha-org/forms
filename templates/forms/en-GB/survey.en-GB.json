@@ -1,0 +1,69 @@
+{
+	"description": "Gather insights and opinions with a survey.",
+	"name": "Survey Form",
+	"categories": ["Feedback"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "We Value Your Feedback!",
+			"text": "Thank you for taking the time to participate in our survey. Your feedback is incredibly important to us and will help us improve our products and services.",
+			"blocks": [
+				{
+					"label": "Full name",
+					"help": "Optional: Please enter your full name.",
+					"name": "name",
+					"options": {},
+					"required": false,
+					"type": "TextInput"
+				},
+				{
+					"label": "Email Address",
+					"help": "Optional: Provide your email address if you would like to receive follow-up information.",
+					"name": "email",
+					"options": {},
+					"required": false,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Question 1",
+					"help": "Provide a question relevant to your survey purpose.",
+					"name": "question_1",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Question 2",
+					"help": "Provide a question relevant to your survey purpose.",
+					"name": "question_2",
+					"options": {
+						"inline": true,
+						"options": "Yes, No"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Question 3",
+					"help": "Provide a question relevant to your survey purpose.",
+					"name": "question_3",
+					"options": {
+						"max": 10,
+						"style": "numbers"
+					},
+					"required": true,
+					"size": "md",
+					"type": "RatingInput"
+				},
+				{
+					"label": "Additional Comments",
+					"help": "Please provide any additional comments or suggestions.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

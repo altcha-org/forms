@@ -1,0 +1,64 @@
+{
+	"description": "Garanta a conformidade com o GDPR com um Formulário de Consentimento.",
+	"name": "Formulário de Consentimento de Processamento de Dados Pessoais",
+	"categories": ["GDPR"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulário de Consentimento de Processamento de Dados Pessoais",
+			"text": "Este formulário de consentimento é usado para obter o consentimento explícito de indivíduos para o processamento de seus dados pessoais para [finalidade]. Os dados coletados podem incluir [descrição dos dados]. Ao assinar este formulário, o indivíduo concorda em conceder o consentimento pela duração especificada.",
+			"blocks": [
+				{
+					"label": "Nome Completo",
+					"help": "Insira o nome completo do indivíduo que está fornecendo consentimento.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Endereço de E-mail",
+					"help": "Forneça o endereço de e-mail do indivíduo que está fornecendo consentimento.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Telefone",
+					"help": "Forneça o número de telefone do indivíduo que está fornecendo consentimento.",
+					"name": "phone",
+					"options": {},
+					"required": true,
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Endereço",
+					"help": "Forneça o endereço postal do indivíduo que está fornecendo consentimento.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Opção de Consentimento",
+					"help": "Conceder consentimento ou recusar o consentimento para o processamento de dados pessoais.",
+					"name": "consent",
+					"options": {
+						"options": ["Eu consinto", "Eu NÃO consinto"]
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Assinatura",
+					"help": "Assine para confirmar a autenticidade do consentimento.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

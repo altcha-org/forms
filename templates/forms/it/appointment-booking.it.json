@@ -1,0 +1,68 @@
+{
+	"description": "Consenti ai clienti di prenotare appuntamenti direttamente dal tuo sito web.",
+	"name": "Modulo di Prenotazione Appuntamenti",
+	"categories": ["Registrazioni"],
+	"steps": [
+		{
+			"title": "Prenota il Tuo Appuntamento",
+			"text": "Per prenotare il tuo appuntamento, compila il modulo sottostante con i dettagli necessari. Ciò ci aiuterà a garantire che possiamo soddisfare il tuo orario preferito e le tue esigenze di servizio.",
+			"blocks": [
+				{
+					"label": "Nome Completo",
+					"help": "Si prega di inserire il proprio nome completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Indirizzo Email",
+					"help": "Fornisci il tuo indirizzo email per ricevere conferme di appuntamenti e aggiornamenti.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numero di Telefono",
+					"help": "Inserisci il tuo numero di telefono per eventuali follow-up o promemoria necessari.",
+					"name": "phone",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Data Appuntamento",
+					"help": "Seleziona la data e l'ora desiderate per il tuo appuntamento.",
+					"name": "date_time",
+					"options": {
+						"datetime": true,
+						"min": "now"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Servizio Richiesto",
+					"help": "Seleziona il tipo di servizio di cui hai bisogno tra le opzioni disponibili.",
+					"name": "services",
+					"options": {
+						"options": "Servizio 1, Servizio 2, Servizio 3"
+					},
+					"required": true,
+					"type": "MultiCheckboxInput"
+				},
+				{
+					"label": "Note Aggiuntive",
+					"help": "Opzionale: Fornisci eventuali informazioni aggiuntive o richieste speciali per il tuo appuntamento.",
+					"name": "notes",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

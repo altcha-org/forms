@@ -1,0 +1,64 @@
+{
+	"description": "Asegúrese de cumplir con el GDPR con el formulario de reconocimiento de retención de datos.",
+	"name": "Formulario de Reconocimiento de Política de Retención de Datos",
+	"categories": ["GDPR"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulario de Reconocimiento de Política de Retención de Datos",
+			"text": "Por favor complete los campos a continuación para reconocer que ha leído y comprendido la política de retención de datos de la organización. Su reconocimiento es esencial para garantizar el cumplimiento de las regulaciones de protección de datos. Gracias por su cooperación.",
+			"blocks": [
+				{
+					"label": "Nombre del Empleado",
+					"help": "Ingrese el nombre completo del empleado que reconoce la política.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Dirección de Correo Electrónico",
+					"help": "Proporcione la dirección de correo electrónico para la comunicación relacionada con el reconocimiento.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Teléfono",
+					"help": "Opcional: Ingrese el número de teléfono para cualquier seguimiento necesario.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Fecha de Reconocimiento",
+					"help": "Ingrese la fecha en que se está realizando el reconocimiento.",
+					"name": "date",
+					"default": "now",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "He leído y comprendido la política de retención de datos.",
+					"name": "acknowledgement_statement",
+					"options": {},
+					"required": true,
+					"type": "CheckboxInput"
+				},
+				{
+					"label": "Firma",
+					"help": "Firme para confirmar su reconocimiento y acuerdo con la política.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,55 @@
+{
+	"description": "Gather signatures and support efficiently with a versatile petition form.",
+	"name": "Petition Form",
+	"categories": ["Petitions"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Petition",
+			"text": "Briefly describe the purpose and details of the petition.",
+			"blocks": [
+				{
+					"label": "Full Name",
+					"help": "Please enter your full name.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Email Address",
+					"help": "Provide your email address for further updates and communication.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Phone Number",
+					"help": "Optional: Enter your phone number for any necessary follow-up.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Address",
+					"help": "Provide your residential address to verify your support.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Signature",
+					"help": "Sign to confirm your support for the petition.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

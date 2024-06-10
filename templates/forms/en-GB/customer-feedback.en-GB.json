@@ -1,0 +1,89 @@
+{
+	"description": "Collect detailed feedback from your customers to improve services and products.",
+	"name": "Customer Feedback Form",
+	"categories": ["Feedback"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "We Value Your Feedback!",
+			"text": "Your experience is important to us, and we are committed to continuously improving our products and services. We would greatly appreciate it if you could take a few moments to provide us with your valuable feedback. Your responses will help us understand what we’re doing well and where we can make improvements.",
+			"blocks": [
+				{
+					"label": "Full Name",
+					"help": "Please enter your full name.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Email Address",
+					"help": "Please provide your email address for any follow-up communication.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Phone Number",
+					"help": "Optional: Provide your phone number if you prefer to be contacted by phone.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Overall Satisfaction",
+					"help": "Rate your overall satisfaction with our product/service from 1 to 5 stars.",
+					"name": "rating_overall",
+					"options": {
+						"style": "stars"
+					},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Quality of Product/Service",
+					"help": "Rate the quality of the product or service you received from 1 to 5 stars.",
+					"name": "rating_product",
+					"options": {
+						"style": "stars"
+					},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Customer Support Experience",
+					"help": "Rate your experience with our customer support from 1 to 5 stars.",
+					"name": "rating_customer_support",
+					"options": {
+						"style": "stars"
+					},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Likelihood to Recommend",
+					"help": "How likely are you to recommend our product/service to others? (1 to 10)",
+					"name": "rating_likelihood_to_recommend",
+					"options": {
+						"max": 10,
+						"style": "numbers"
+					},
+					"required": true,
+					"size": "md",
+					"type": "RatingInput"
+				},
+				{
+					"label": "Comments or Suggestions",
+					"help": "Please provide any additional comments or suggestions.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

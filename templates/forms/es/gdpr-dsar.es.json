@@ -1,0 +1,84 @@
+{
+	"description": "Plantilla conforme al GDPR para la Solicitud de Acceso de los Sujetos de Datos.",
+	"name": "Formulario de Solicitud de Acceso de los Sujetos de Datos (DSAR)",
+	"categories": ["GDPR"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulario de Solicitud de Acceso de los Sujetos de Datos",
+			"text": "Por favor complete los campos a continuación para solicitar acceso a sus datos personales en posesión de nuestra organización. Su solicitud será procesada rápidamente de acuerdo con las regulaciones de protección de datos. Gracias por su cooperación.",
+			"blocks": [
+				{
+					"label": "Nombre Completo del Solicitante",
+					"help": "Ingrese el nombre completo del individuo que realiza la DSAR.",
+					"name": "nombre",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Información de Contacto del Solicitante",
+					"help": "Proporcione detalles de contacto como dirección de correo electrónico y número de teléfono para comunicación relacionada con la solicitud.",
+					"name": "informacion_contacto",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Dirección del Solicitante",
+					"help": "Proporcione la dirección postal del solicitante para enviar cualquier documento o información solicitada.",
+					"name": "direccion",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Identificación del Solicitante",
+					"help": "Adjunte una copia de un documento de identificación válido (por ejemplo, pasaporte, licencia de conducir) para verificar la identidad del solicitante.",
+					"name": "identificacion",
+					"options": {
+						"accept": ".jpg,.jpeg,.pdf",
+						"maxFileSize": 10
+					},
+					"required": true,
+					"size": "md",
+					"type": "FileInput"
+				},
+				{
+					"label": "Método de Entrega Preferido",
+					"help": "Especifique cómo se debe entregar la información solicitada.",
+					"name": "metodo_entrega",
+					"options": {
+						"options": "Correo electrónico, Correo postal"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Descripción de la Solicitud",
+					"help": "Especifique los detalles de la información solicitada, incluyendo plazos relevantes o categorías de datos específicos.",
+					"name": "descripcion_solicitud",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Comentarios Adicionales",
+					"help": "Opcional: Proporcione cualquier información adicional o contexto relacionado con la solicitud.",
+					"name": "comentarios",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Firma",
+					"help": "Firme para confirmar la autenticidad de la solicitud y aceptar los términos y condiciones.",
+					"name": "firma",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

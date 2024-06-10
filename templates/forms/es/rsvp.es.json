@@ -1,0 +1,69 @@
+{
+	"description": "Administre la asistencia a eventos y detalles de invitados con un formulario de RSVP eficiente.",
+	"name": "Formulario de RSVP",
+	"categories": ["Inscripciones"],
+	"steps": [
+		{
+			"title": "RSVP para [Nombre del Evento]",
+			"text": "Para ayudarnos a prepararnos para el evento, por favor tómese un momento para completar este formulario de RSVP. Su respuesta nos permitirá poder acomodarlo a usted y a sus invitados de manera apropiada.",
+			"blocks": [
+				{
+					"label": "Nombre Completo",
+					"help": "Por favor ingrese su nombre completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Dirección de Correo Electrónico",
+					"help": "Proporcione su dirección de correo electrónico para recibir actualizaciones sobre el evento.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Teléfono",
+					"help": "Opcional: Ingrese su número de teléfono para cualquier cambio o actualización de último momento.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Confirmación de Asistencia",
+					"help": "¿Asistirá al evento?",
+					"name": "attendance",
+					"options": {
+						"inline": true,
+						"options": "Sí, No"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Número de Invitados",
+					"help": "Indique el número de invitados que traerá.",
+					"name": "number_of_guests",
+					"default": "1",
+					"options": {
+						"options": "Sí, No"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "NumberInput"
+				},
+				{
+					"label": "Comentarios Adicionales",
+					"help": "Opcional: Incluya cualquier información adicional o solicitudes especiales.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

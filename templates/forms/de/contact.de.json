@@ -1,0 +1,61 @@
+{
+	"description": "Einfach zu bedienendes Formular für Besucher, um sich an Ihr Unternehmen oder Ihr Support-Team zu wenden.",
+	"name": "Kontaktformular",
+	"categories": ["Kontakt"],
+	"steps": [
+		{
+			"title": "Kontaktiere uns",
+			"blocks": [
+				{
+					"label": "Vollständiger Name",
+					"help": "Bitte geben Sie Ihren vollständigen Namen ein.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Firmenname",
+					"help": "Optional: Wenn zutreffend, geben Sie den Namen Ihres Unternehmens an.",
+					"name": "company",
+					"options": {},
+					"required": false,
+					"type": "TextInput"
+				},
+				{
+					"label": "E-Mail-Adresse",
+					"help": "Bitte geben Sie Ihre E-Mail-Adresse an, damit wir auf Ihre Anfrage antworten können.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Telefonnummer",
+					"help": "Optional: Geben Sie Ihre Telefonnummer an, wenn Sie lieber telefonisch kontaktiert werden möchten.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Betreff",
+					"help": "Beschreiben Sie kurz den Grund für Ihre Kontaktaufnahme.",
+					"name": "subject",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Nachricht",
+					"help": "Bitte geben Sie die Details Ihrer Anfrage oder Rückmeldung ein.",
+					"name": "message",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

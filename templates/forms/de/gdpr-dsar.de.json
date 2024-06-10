@@ -1,0 +1,84 @@
+{
+	"description": "DSGVO-konformes Template für den Antrag auf Auskunft durch die betroffene Person.",
+	"name": "Formular für den Antrag auf Auskunft durch die betroffene Person (DSAR)",
+	"categories": ["DSGVO"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formular für den Antrag auf Auskunft durch die betroffene Person",
+			"text": "Bitte füllen Sie die unten stehenden Felder aus, um Zugriff auf Ihre persönlichen Daten zu erhalten, die von unserer Organisation gespeichert werden. Ihr Antrag wird entsprechend den Datenschutzbestimmungen umgehend bearbeitet. Vielen Dank für Ihre Mitarbeit.",
+			"blocks": [
+				{
+					"label": "Vollständiger Name des Antragstellers",
+					"help": "Geben Sie den vollständigen Namen der Person ein, die den DSAR stellt.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Kontaktinformationen des Antragstellers",
+					"help": "Geben Sie Kontaktdaten wie E-Mail-Adresse und Telefonnummer für die Kommunikation bezüglich des Antrags an.",
+					"name": "contact_information",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Adresse des Antragstellers",
+					"help": "Geben Sie die Postanschrift des Antragstellers an, um angeforderte Unterlagen oder Informationen per Post zu versenden.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Identifikation des Antragstellers",
+					"help": "Fügen Sie eine Kopie eines gültigen Identifikationsdokuments (z. B. Reisepass, Führerschein) zur Überprüfung der Identität des Antragstellers hinzu.",
+					"name": "identification",
+					"options": {
+						"accept": ".jpg,.jpeg,.pdf",
+						"maxFileSize": 10
+					},
+					"required": true,
+					"size": "md",
+					"type": "FileInput"
+				},
+				{
+					"label": "Bevorzugte Zustellmethode",
+					"help": "Geben Sie an, wie die angeforderten Informationen zugestellt werden sollen.",
+					"name": "delivery_method",
+					"options": {
+						"options": "E-Mail, Postweg"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Beschreibung des Antrags",
+					"help": "Geben Sie die Details der angeforderten Informationen an, einschließlich relevanter Zeitrahmen oder spezifischer Datenkategorien.",
+					"name": "description_of_request",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Zusätzliche Kommentare",
+					"help": "Optional: Geben Sie zusätzliche Informationen oder Zusammenhänge zum Antrag an.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Unterschrift",
+					"help": "Unterschreiben Sie, um die Echtheit des Antrags zu bestätigen und den Allgemeinen Geschäftsbedingungen zuzustimmen.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

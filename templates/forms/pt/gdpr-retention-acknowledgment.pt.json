@@ -1,0 +1,64 @@
+{
+	"description": "Garanta a conformidade com o GDPR com o formulário de reconhecimento da política de retenção de dados.",
+	"name": "Formulário de Reconhecimento da Política de Retenção de Dados",
+	"categories": ["GDPR"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulário de Reconhecimento da Política de Retenção de Dados",
+			"text": "Por favor, complete os campos abaixo para reconhecer que leu e compreendeu a política de retenção de dados da organização. Seu reconhecimento é essencial para garantir conformidade com os regulamentos de proteção de dados. Obrigado pela sua cooperação.",
+			"blocks": [
+				{
+					"label": "Nome do Funcionário",
+					"help": "Digite o nome completo do funcionário que está reconhecendo a política.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Endereço de E-mail",
+					"help": "Forneça o endereço de e-mail para comunicação relacionada ao reconhecimento.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Telefone",
+					"help": "Opcional: Digite o número de telefone para qualquer acompanhamento necessário.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Data do Reconhecimento",
+					"help": "Digite a data em que o reconhecimento está sendo feito.",
+					"name": "date",
+					"default": "now",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Li e entendi a política de retenção de dados.",
+					"name": "acknowledgement_statement",
+					"options": {},
+					"required": true,
+					"type": "CheckboxInput"
+				},
+				{
+					"label": "Assinatura",
+					"help": "Assine para confirmar seu reconhecimento e concordância com a política.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

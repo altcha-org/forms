@@ -1,0 +1,79 @@
+{
+	"description": "Request acknowledgement of policies easily with the straightforward form.",
+	"name": "Policy Acknowledgement Form",
+	"categories": ["Employees"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Policy Acknowledgement Form",
+			"text": "Please complete the fields below to confirm that you have read, understood, and agree to comply with the specified policy. Your acknowledgment is essential to ensure that all employees are informed and adhere to our company policies.",
+			"blocks": [
+				{
+					"label": "Employee Name",
+					"help": "Enter your full name.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Email Address",
+					"help": "Provide your email address for communication regarding your request.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Phone Number",
+					"help": "Optional: Enter your phone number for any necessary follow-up.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Policy Title",
+					"help": "Specify the title of the policy being acknowledged.",
+					"name": "policy_title",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Policy Description",
+					"help": "Briefly describe the policy or include a summary.",
+					"name": "policy_description",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Date of Policy",
+					"help": "Enter the effective date of the policy.",
+					"name": "policy_date",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "I have read and understand the policy.",
+					"name": "acknowledgement_statement",
+					"options": {},
+					"required": true,
+					"type": "CheckboxInput"
+				},
+				{
+					"label": "Signature",
+					"help": "Sign to confirm your acknowledgment and agreement with the policy.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

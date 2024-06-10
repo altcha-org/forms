@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:latest
+    container_name: altcha-redis
+    ports:
+      - '6979:6379'
+    volumes:
+      - redis-data:/data
+
+  postgres:
+    image: postgres:latest
+    container_name: altcha-postgres
+    env_file:
+      - docker-compose.env
+    ports:
+      - '5932:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: altcha-forms
+    ports:
+      - '3000:3000'
+    depends_on:
+      - redis
+      - postgres
+    env_file:
+      - docker-compose.env
+    environment:
+      STORAGE_FS_DIR: /usr/src/app/data
+    volumes:
+      - app-data:/usr/src/app/data
+
+volumes:
+  redis-data:
+  postgres-data:
+  app-data:

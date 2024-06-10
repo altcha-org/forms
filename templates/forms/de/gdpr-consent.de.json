@@ -1,0 +1,64 @@
+{
+	"description": "Stellen Sie die DSGVO-Konformität mit einem Einwilligungsformular sicher.",
+	"name": "Einwilligungsformular zur Verarbeitung persönlicher Daten",
+	"categories": ["DSGVO"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Einwilligungsformular zur Verarbeitung persönlicher Daten",
+			"text": "Dieses Einwilligungsformular wird verwendet, um von Einzelpersonen die ausdrückliche Einwilligung zur Verarbeitung ihrer persönlichen Daten für [Zweck] einzuholen. Die erhobenen Daten können [Beschreibung der Daten] umfassen. Durch Unterzeichnung dieses Formulars erklärt sich die Einzelperson damit einverstanden, für die angegebene Dauer die Einwilligung zu erteilen.",
+			"blocks": [
+				{
+					"label": "Vollständiger Name",
+					"help": "Geben Sie den vollständigen Namen der Person ein, die die Einwilligung erteilt.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "Texteingabe"
+				},
+				{
+					"label": "E-Mail-Adresse",
+					"help": "Geben Sie die E-Mail-Adresse der Person ein, die die Einwilligung erteilt.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "E-Mail-Eingabe"
+				},
+				{
+					"label": "Telefonnummer",
+					"help": "Geben Sie die Telefonnummer der Person ein, die die Einwilligung erteilt.",
+					"name": "phone",
+					"options": {},
+					"required": true,
+					"type": "Telefonnummer-Eingabe"
+				},
+				{
+					"label": "Adresse",
+					"help": "Geben Sie die Postanschrift der Person ein, die die Einwilligung erteilt.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "Adresseneingabe"
+				},
+				{
+					"label": "Einwilligungsoption",
+					"help": "Entweder Einwilligung oder Nichterteilung der Einwilligung zur Verarbeitung persönlicher Daten.",
+					"name": "consent",
+					"options": {
+						"options": ["Ich stimme zu", "Ich stimme NICHT zu"]
+					},
+					"required": true,
+					"type": "Optionsauswahl"
+				},
+				{
+					"label": "Unterschrift",
+					"help": "Unterschreiben Sie, um die Echtheit der Einwilligung zu bestätigen.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "Unterschriftseingabe"
+				}
+			]
+		}
+	]
+}

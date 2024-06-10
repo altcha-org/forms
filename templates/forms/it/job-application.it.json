@@ -1,0 +1,90 @@
+{
+	"description": "Ottimizza il processo di assunzione con questo dettagliato modello di domanda di lavoro.",
+	"name": "Modulo di Domanda di Lavoro",
+	"premium": true,
+	"steps": [
+		{
+			"title": "Unisciti al Nostro Team!",
+			"text": "Siamo entusiasti di saperne di più su di te e su come puoi contribuire al nostro team. Per candidarti a una posizione, ti preghiamo di compilare il modulo qui sotto. Assicurati che tutti i campi obbligatori siano compilati con precisione e fornisci il maggior numero di dettagli possibile per aiutarci a comprendere le tue qualifiche ed esperienze.",
+			"blocks": [
+				{
+					"label": "Nome Completo",
+					"help": "Si prega di inserire il proprio nome completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Indirizzo Email",
+					"help": "Inserisci il tuo indirizzo email per la comunicazione relativa alla tua candidatura.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numero di Telefono",
+					"help": "Inserisci il tuo numero di telefono per scopi di contatto.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Posizione Richiesta",
+					"help": "Indica il ruolo per cui ti stai candidando.",
+					"name": "position",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Curriculum Vitae (CV)",
+					"help": "Carica il tuo CV o curriculum in formato PDF o Word.",
+					"name": "resume",
+					"options": {},
+					"required": true,
+					"type": "FileInput"
+				},
+				{
+					"label": "Profilo LinkedIn",
+					"help": "Opzionale: Fornisci un link al tuo profilo LinkedIn.",
+					"name": "linkedin",
+					"options": {},
+					"required": false,
+					"type": "UrlInput"
+				},
+				{
+					"label": "Disponibilità",
+					"help": "Indica la tua disponibilità per iniziare la posizione.",
+					"name": "availability",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Aspettative Salariali",
+					"help": "Opzionale: Indica le tue aspettative salariali per la posizione.",
+					"name": "salary_expectations",
+					"options": {
+						"unit": "GBP / mese"
+					},
+					"required": false,
+					"size": "sm",
+					"type": "NumberInput"
+				},
+				{
+					"label": "Informazioni Aggiuntive",
+					"help": "Opzionale: Includi qualsiasi informazione aggiuntiva che ritieni rilevante per la tua candidatura.",
+					"name": "additional_information",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

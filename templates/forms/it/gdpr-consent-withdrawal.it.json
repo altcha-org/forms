@@ -1,0 +1,92 @@
+{
+	"description": "Ritira facilmente il consenso al trattamento dei dati con questo modulo completo.",
+	"name": "Modulo di Revoca del Consenso al Trattamento dei Dati",
+	"categories": ["GDPR"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Modulo di Revoca del Consenso al Trattamento dei Dati",
+			"text": "Per favore completa i campi sottostanti per revocare il tuo consenso al trattamento dei tuoi dati personali. La tua richiesta sarà elaborata prontamente in conformità con le normative sulla protezione dei dati. Grazie per la collaborazione.",
+			"blocks": [
+				{
+					"label": "Nome Completo del Richiedente",
+					"help": "Inserisci il nome completo dell'individuo che richiede la revoca del consenso.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Informazioni di Contatto del Richiedente",
+					"help": "Fornisci dettagli di contatto come l'indirizzo email e il numero di telefono per comunicazioni relative alla richiesta di revoca.",
+					"name": "contact_information",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Indirizzo del Richiedente",
+					"help": "Fornisci l'indirizzo postale del richiedente per l'invio di conferme o follow-up.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Identificazione del Richiedente",
+					"help": "Allega una copia di un documento di identità valido (es. passaporto, patente di guida) per verificare l'identità del richiedente.",
+					"name": "identification",
+					"options": {
+						"accept": ".jpg,.jpeg,.pdf",
+						"maxFileSize": 10
+					},
+					"required": true,
+					"size": "md",
+					"type": "FileInput"
+				},
+				{
+					"label": "Metodo Preferito di Comunicazione",
+					"help": "Specifica come il richiedente desidera essere contattato in relazione alla richiesta di cancellazione.",
+					"name": "delivery_method",
+					"options": {
+						"options": "Email, Posta postale"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Descrizione dei Dati",
+					"help": "Specifica i dati personali per i quali l'individuo desidera revocare il consenso al trattamento.",
+					"name": "description_of_data",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Motivo della Revoca",
+					"help": "Fornisci una breve spiegazione del motivo per cui viene richiesta la revoca del consenso.",
+					"name": "reason_for_withdrawal",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Commenti Aggiuntivi",
+					"help": "Opzionale: Fornisci eventuali informazioni aggiuntive o contesto relativi alla richiesta di revoca del consenso.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Firma",
+					"help": "Firma per confermare l'autenticità della richiesta e accettare la revoca del consenso.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

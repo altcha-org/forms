@@ -1,0 +1,79 @@
+{
+	"description": "Fordern Sie die Anerkennung von Richtlinien einfach mit dem unkomplizierten Formular an.",
+	"name": "Formular zur Bestätigung von Richtlinien",
+	"categories": ["Mitarbeiter"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formular zur Bestätigung von Richtlinien",
+			"text": "Bitte füllen Sie die folgenden Felder aus, um zu bestätigen, dass Sie die festgelegte Richtlinie gelesen, verstanden und sich bereit erklärt haben, diese einzuhalten. Ihre Anerkennung ist unerlässlich, um sicherzustellen, dass alle Mitarbeiter informiert sind und sich an unsere Unternehmensrichtlinien halten.",
+			"blocks": [
+				{
+					"label": "Name des Mitarbeiters",
+					"help": "Geben Sie Ihren vollständigen Namen ein.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "E-Mail-Adresse",
+					"help": "Geben Sie Ihre E-Mail-Adresse für die Kommunikation bezüglich Ihrer Anfrage an.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Telefonnummer",
+					"help": "Optional: Geben Sie Ihre Telefonnummer für eventuelle Rückfragen an.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Titel der Richtlinie",
+					"help": "Geben Sie den Titel der zu bestätigenden Richtlinie an.",
+					"name": "policy_title",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Richtlinienbeschreibung",
+					"help": "Beschreiben Sie kurz die Richtlinie oder fügen Sie eine Zusammenfassung hinzu.",
+					"name": "policy_description",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Datum der Richtlinie",
+					"help": "Geben Sie das Inkrafttreten der Richtlinie an.",
+					"name": "policy_date",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Ich habe die Richtlinie gelesen und verstanden.",
+					"name": "acknowledgement_statement",
+					"options": {},
+					"required": true,
+					"type": "CheckboxInput"
+				},
+				{
+					"label": "Unterschrift",
+					"help": "Unterschreiben Sie zur Bestätigung Ihrer Anerkennung und Zustimmung zur Richtlinie.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

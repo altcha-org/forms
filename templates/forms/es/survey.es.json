@@ -1,0 +1,69 @@
+{
+	"description": "Reúna ideas y opiniones con una encuesta.",
+	"name": "Formulario de Encuesta",
+	"categories": ["Comentarios"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "¡Valoramos sus Comentarios!",
+			"text": "Gracias por tomarse el tiempo de participar en nuestra encuesta. Sus comentarios son increíblemente importantes para nosotros y nos ayudarán a mejorar nuestros productos y servicios.",
+			"blocks": [
+				{
+					"label": "Nombre completo",
+					"help": "Opcional: Por favor ingrese su nombre completo.",
+					"name": "name",
+					"options": {},
+					"required": false,
+					"type": "TextInput"
+				},
+				{
+					"label": "Dirección de Correo Electrónico",
+					"help": "Opcional: Proporcione su dirección de correo electrónico si desea recibir información de seguimiento.",
+					"name": "email",
+					"options": {},
+					"required": false,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Pregunta 1",
+					"help": "Proporcione una pregunta relevante para el propósito de su encuesta.",
+					"name": "question_1",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Pregunta 2",
+					"help": "Proporcione una pregunta relevante para el propósito de su encuesta.",
+					"name": "question_2",
+					"options": {
+						"inline": true,
+						"options": "Sí, No"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Pregunta 3",
+					"help": "Proporcione una pregunta relevante para el propósito de su encuesta.",
+					"name": "question_3",
+					"options": {
+						"max": 10,
+						"style": "numbers"
+					},
+					"required": true,
+					"size": "md",
+					"type": "RatingInput"
+				},
+				{
+					"label": "Comentarios Adicionales",
+					"help": "Por favor proporcione cualquier comentario o sugerencia adicional.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

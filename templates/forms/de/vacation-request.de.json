@@ -1,0 +1,81 @@
+{
+	"description": "Ermöglichen Sie Mitarbeitern, Urlaubszeiten anzufordern und Genehmigungen zu verwalten.",
+	"name": "Urlaubsanforderungsformular",
+	"categories": ["Mitarbeiter"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Urlaubsanforderungsformular",
+			"text": "Um sicherzustellen, dass Ihr Urlaub genehmigt und ordnungsgemäß dokumentiert wird, füllen Sie bitte das Formular mit allen erforderlichen Details aus.",
+			"blocks": [
+				{
+					"label": "Mitarbeitername",
+					"help": "Geben Sie Ihren vollständigen Namen ein.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "E-Mail-Adresse",
+					"help": "Geben Sie Ihre E-Mail-Adresse für die Kommunikation bezüglich Ihrer Anfrage an.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Telefonnummer",
+					"help": "Geben Sie Ihre Telefonnummer für eventuelle Rückfragen an.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Abteilung",
+					"help": "Geben Sie Ihre Abteilung oder Ihr Team an.",
+					"name": "department",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Name des Vorgesetzten/Supervisors",
+					"help": "Geben Sie den Namen Ihres Vorgesetzten oder Managers für die Genehmigung an.",
+					"name": "supervisor",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Startdatum des Urlaubs",
+					"help": "Wählen Sie das Startdatum für Ihren Urlaub aus.",
+					"name": "date_start",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Enddatum des Urlaubs",
+					"help": "Wählen Sie das Enddatum für Ihren Urlaub aus.",
+					"name": "date_end",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Unterschrift",
+					"help": "Unterschreiben Sie zur Bestätigung der Richtigkeit der bereitgestellten Informationen.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

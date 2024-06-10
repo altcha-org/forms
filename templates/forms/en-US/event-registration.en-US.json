@@ -1,0 +1,71 @@
+{
+	"description": "Simplify event sign-ups with this comprehensive registration form.",
+	"name": "Event Registration Form",
+	"categories": ["Registrations"],
+	"premium": false,
+	"steps": [
+		{
+			"title": "Welcome to Event Registration!",
+			"text": "Thank you for your interest in our event. To complete your registration and ensure everything is prepared for your participation, please fill out the form below with the necessary details.",
+			"blocks": [
+				{
+					"label": "Your Name",
+					"help": "The registrant's full name.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Email Address",
+					"help": "Contact email for event communications.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Phone Number",
+					"help": "Optional contact number for event-related updates.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Organisation/Company",
+					"help": "Name of the organisation or company (if applicable).",
+					"name": "organization",
+					"options": {},
+					"required": false,
+					"type": "TextInput"
+				},
+				{
+					"label": "Job Title/Position",
+					"help": "The registrant's job title or position (if applicable).",
+					"name": "position",
+					"options": {},
+					"required": false,
+					"type": "TextInput"
+				},
+				{
+					"label": "Billing Address",
+					"help": "The registrant's billing address information (if applicable).",
+					"name": "billing_address",
+					"options": {},
+					"required": false,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Special Requirements",
+					"help": "Note any special requirements or accommodations needed.",
+					"name": "special_requirements",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

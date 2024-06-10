@@ -1,0 +1,140 @@
+{
+	"description": "Informe eficientemente incidentes laborales con un formulario completo.",
+	"name": "Formulario de Reporte de Incidentes Laborales",
+	"categories": ["Empleados"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulario de Reporte de Incidentes Laborales",
+			"text": "Por favor complete los campos a continuación para reportar cualquier incidente laboral de manera pronta. Su informe detallado es crucial para garantizar la seguridad y el bienestar de nuestros empleados. Gracias por su cooperación en mantener un ambiente de trabajo seguro.",
+			"blocks": [
+				{
+					"label": "Nombre del Empleado",
+					"help": "Ingrese su nombre completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "Texto de Entrada"
+				},
+				{
+					"label": "Correo Electrónico",
+					"help": "Proporcione su dirección de correo electrónico para una comunicación adicional.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "Entrada de Correo Electrónico"
+				},
+				{
+					"label": "Número de Teléfono",
+					"help": "Ingrese su número de teléfono para cualquier seguimiento necesario.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "Entrada de Teléfono"
+				},
+				{
+					"label": "Departamento",
+					"help": "Especifique su departamento o equipo.",
+					"name": "department",
+					"options": {},
+					"required": true,
+					"type": "Texto de Entrada"
+				},
+				{
+					"label": "Nombre del Gerente/Supervisor",
+					"help": "Ingrese el nombre de su supervisor o gerente.",
+					"name": "supervisor",
+					"options": {},
+					"required": true,
+					"type": "Texto de Entrada"
+				},
+				{
+					"label": "Fecha del Incidente",
+					"help": "Especifique la fecha en que ocurrió el incidente.",
+					"name": "date",
+					"options": {
+						"datetime": true
+					},
+					"required": true,
+					"size": "sm",
+					"type": "Entrada de Fecha y Hora"
+				},
+				{
+					"label": "Ubicación del Incidente",
+					"help": "Proporcione la ubicación exacta donde ocurrió el incidente.",
+					"name": "location",
+					"options": {},
+					"required": true,
+					"type": "Texto Multilínea"
+				},
+				{
+					"label": "Tipo de Incidente",
+					"help": "Seleccione el tipo de incidente.",
+					"name": "type",
+					"options": {
+						"options": "Lesión, Casi accidente, Daño a la propiedad"
+					},
+					"required": true,
+					"type": "Entrada de Radio"
+				},
+				{
+					"label": "Descripción del Incidente",
+					"help": "Proporcione una descripción detallada de lo sucedido.",
+					"name": "description",
+					"options": {},
+					"required": true,
+					"type": "Texto Multilínea"
+				},
+				{
+					"label": "Testigos",
+					"help": "Enumere los nombres e información de contacto de los testigos.",
+					"name": "witnesses",
+					"options": {},
+					"required": true,
+					"type": "Texto Multilínea"
+				},
+				{
+					"label": "Lesiones Sostenidas",
+					"help": "Describa cualquier lesión sufrida como resultado del incidente.",
+					"name": "injuries",
+					"options": {},
+					"required": true,
+					"type": "Texto Multilínea"
+				},
+				{
+					"label": "Acción Inmediata Tomada",
+					"help": "Describa cualquier acción inmediata tomada en respuesta al incidente.",
+					"name": "immediate_action",
+					"options": {},
+					"required": true,
+					"type": "Texto Multilínea"
+				},
+				{
+					"label": "Factores Contribuyentes",
+					"help": "Identifique cualquier factor que pueda haber contribuido al incidente.",
+					"name": "contributing_factors",
+					"options": {},
+					"required": true,
+					"type": "Texto Multilínea"
+				},
+				{
+					"label": "Medidas Preventivas Sugeridas",
+					"help": "Sugiera medidas para prevenir incidentes similares en el futuro.",
+					"name": "suggested_measures",
+					"options": {},
+					"required": true,
+					"type": "Texto Multilínea"
+				},
+				{
+					"label": "Firma",
+					"help": "Firme para confirmar la precisión de la información proporcionada.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "Entrada de Firma"
+				}
+			]
+		}
+	]
+}

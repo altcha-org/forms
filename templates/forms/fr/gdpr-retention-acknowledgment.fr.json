@@ -1,0 +1,64 @@
+{
+	"description": "Assurez-vous de la conformité au RGPD avec le formulaire d'accusé de réception de la politique de rétention des données.",
+	"name": "Formulaire d'accusé de réception de la politique de rétention des données",
+	"categories": ["RGPD"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulaire d'accusé de réception de la politique de rétention des données",
+			"text": "Veuillez compléter les champs ci-dessous pour attester que vous avez lu et compris la politique de rétention des données de l'organisation. Votre attestation est essentielle pour garantir la conformité aux réglementations en matière de protection des données. Merci pour votre coopération.",
+			"blocks": [
+				{
+					"label": "Nom de l'employé",
+					"help": "Entrez le nom complet de l'employé reconnaissant la politique.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Adresse e-mail",
+					"help": "Indiquez l'adresse e-mail pour la communication concernant l'accusé de réception.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numéro de téléphone",
+					"help": "Optionnel : Entrez le numéro de téléphone pour tout suivi nécessaire.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Date de l'accusé de réception",
+					"help": "Entrez la date à laquelle l'accusé de réception est effectué.",
+					"name": "date",
+					"default": "now",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "J'ai lu et compris la politique de rétention des données.",
+					"name": "acknowledgement_statement",
+					"options": {},
+					"required": true,
+					"type": "CheckboxInput"
+				},
+				{
+					"label": "Signature",
+					"help": "Signez pour confirmer votre accusé de réception et votre accord avec la politique.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

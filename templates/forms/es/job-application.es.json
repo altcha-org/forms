@@ -1,0 +1,90 @@
+{
+	"description": "Simplifique el proceso de contratación con esta detallada plantilla de solicitud de empleo.",
+	"name": "Formulario de Solicitud de Empleo",
+	"premium": true,
+	"steps": [
+		{
+			"title": "¡Únete a Nuestro Equipo!",
+			"text": "Estamos emocionados de conocerte mejor y de saber cómo puedes contribuir a nuestro equipo. Para solicitar un puesto, completa el formulario a continuación. Asegúrate de completar todos los campos requeridos con precisión y proporcionar la mayor cantidad de detalles posible para ayudarnos a entender tus calificaciones y experiencia.",
+			"blocks": [
+				{
+					"label": "Nombre Completo",
+					"help": "Por favor, ingresa tu nombre completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Dirección de Correo Electrónico",
+					"help": "Proporciona tu dirección de correo electrónico para comunicarnos sobre tu solicitud.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Teléfono",
+					"help": "Ingresa tu número de teléfono para fines de contacto.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Posición Solicitada",
+					"help": "Indica el puesto de trabajo para el que estás solicitando.",
+					"name": "position",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Currículum Vitae (CV)",
+					"help": "Sube tu CV o currículum en formato PDF o Word.",
+					"name": "resume",
+					"options": {},
+					"required": true,
+					"type": "FileInput"
+				},
+				{
+					"label": "Perfil de LinkedIn",
+					"help": "Opcional: Proporciona un enlace a tu perfil de LinkedIn.",
+					"name": "linkedin",
+					"options": {},
+					"required": false,
+					"type": "UrlInput"
+				},
+				{
+					"label": "Disponibilidad",
+					"help": "Indica tu disponibilidad para comenzar el puesto.",
+					"name": "availability",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Expectativas Salariales",
+					"help": "Opcional: Indica tus expectativas salariales para el puesto.",
+					"name": "salary_expectations",
+					"options": {
+						"unit": "GBP / mes"
+					},
+					"required": false,
+					"size": "sm",
+					"type": "NumberInput"
+				},
+				{
+					"label": "Información Adicional",
+					"help": "Opcional: Incluye cualquier información adicional que creas relevante para tu solicitud.",
+					"name": "additional_information",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

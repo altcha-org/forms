@@ -1,0 +1,90 @@
+{
+	"description": "Simplifiez le processus de recrutement avec ce modèle détaillé de formulaire de candidature.",
+	"name": "Formulaire de candidature",
+	"premium": true,
+	"steps": [
+		{
+			"title": "Rejoignez notre équipe !",
+			"text": "Nous sommes impatients d'en savoir plus sur vous et sur la manière dont vous pouvez contribuer à notre équipe. Pour postuler à un poste, veuillez remplir le formulaire ci-dessous. Assurez-vous que tous les champs obligatoires sont remplis avec précision et fournissez autant de détails que possible pour nous aider à comprendre vos qualifications et votre expérience.",
+			"blocks": [
+				{
+					"label": "Nom complet",
+					"help": "Veuillez entrer votre nom complet.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Adresse e-mail",
+					"help": "Indiquez votre adresse e-mail pour la communication concernant votre candidature.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numéro de téléphone",
+					"help": "Entrez votre numéro de téléphone à des fins de contact.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Poste demandé",
+					"help": "Indiquez le poste pour lequel vous postulez.",
+					"name": "position",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "CV",
+					"help": "Téléchargez votre CV en format PDF ou Word.",
+					"name": "resume",
+					"options": {},
+					"required": true,
+					"type": "FileInput"
+				},
+				{
+					"label": "Profil LinkedIn",
+					"help": "Facultatif : Fournissez un lien vers votre profil LinkedIn.",
+					"name": "linkedin",
+					"options": {},
+					"required": false,
+					"type": "UrlInput"
+				},
+				{
+					"label": "Disponibilité",
+					"help": "Indiquez votre disponibilité pour commencer le poste.",
+					"name": "availability",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Attentes salariales",
+					"help": "Facultatif : Indiquez vos attentes salariales pour le poste.",
+					"name": "salary_expectations",
+					"options": {
+						"unit": "GBP / mois"
+					},
+					"required": false,
+					"size": "sm",
+					"type": "NumberInput"
+				},
+				{
+					"label": "Informations supplémentaires",
+					"help": "Facultatif : Incluez toute information supplémentaire que vous jugez pertinente pour votre candidature.",
+					"name": "additional_information",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

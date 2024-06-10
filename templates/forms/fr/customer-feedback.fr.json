@@ -1,0 +1,89 @@
+{
+	"description": "Collectez des commentaires détaillés de vos clients pour améliorer les services et les produits.",
+	"name": "Formulaire de retour d'expérience client",
+	"categories": ["Retour d'expérience"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Nous apprécions vos commentaires !",
+			"text": "Votre expérience est importante pour nous, et nous nous engageons à améliorer continuellement nos produits et services. Nous vous serions très reconnaissants si vous pouviez prendre quelques instants pour nous fournir vos précieux commentaires. Vos réponses nous aideront à comprendre ce que nous faisons bien et où nous pouvons apporter des améliorations.",
+			"blocks": [
+				{
+					"label": "Nom complet",
+					"help": "Veuillez entrer votre nom complet.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Adresse e-mail",
+					"help": "Veuillez fournir votre adresse e-mail pour toute communication ultérieure.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numéro de téléphone",
+					"help": "Facultatif : Fournissez votre numéro de téléphone si vous préférez être contacté par téléphone.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Satisfaction générale",
+					"help": "Évaluez votre satisfaction générale par rapport à notre produit/service de 1 à 5 étoiles.",
+					"name": "rating_overall",
+					"options": {
+						"style": "stars"
+					},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Qualité du produit/service",
+					"help": "Évaluez la qualité du produit ou du service que vous avez reçu de 1 à 5 étoiles.",
+					"name": "rating_product",
+					"options": {
+						"style": "stars"
+					},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Expérience du service client",
+					"help": "Évaluez votre expérience avec notre service client de 1 à 5 étoiles.",
+					"name": "rating_customer_support",
+					"options": {
+						"style": "stars"
+					},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Probabilité de recommandation",
+					"help": "Dans quelle mesure êtes-vous susceptible de recommander notre produit/service à d'autres ? (1 à 10)",
+					"name": "rating_likelihood_to_recommend",
+					"options": {
+						"max": 10,
+						"style": "numbers"
+					},
+					"required": true,
+					"size": "md",
+					"type": "RatingInput"
+				},
+				{
+					"label": "Commentaires ou suggestions",
+					"help": "Veuillez fournir tout commentaire ou suggestion supplémentaire.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

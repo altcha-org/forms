@@ -1,0 +1,92 @@
+{
+	"description": "Simplifique a conformidade com o GDPR com o Formulário de Solicitação de Exclusão de Dados.",
+	"name": "Formulário de Solicitação de Exclusão de Dados",
+	"categories": ["GDPR"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulário de Solicitação de Exclusão de Dados",
+			"text": "Por favor, preencha os campos abaixo para solicitar a exclusão de seus dados pessoais. Sua solicitação será processada prontamente de acordo com os regulamentos de proteção de dados. Obrigado pela sua cooperação.",
+			"blocks": [
+				{
+					"label": "Nome Completo do Solicitante",
+					"help": "Digite o nome completo da pessoa que está fazendo a solicitação de exclusão de dados.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Informações de Contato do Solicitante",
+					"help": "Forneça detalhes de contato, como endereço de e-mail e número de telefone, para comunicação referente à solicitação.",
+					"name": "contact_information",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Endereço do Solicitante",
+					"help": "Forneça o endereço postal do solicitante para envio de qualquer confirmação ou acompanhamento.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Identificação do Solicitante",
+					"help": "Anexe uma cópia de um documento de identificação válido (por exemplo, passaporte, carteira de motorista) para verificar a identidade do solicitante.",
+					"name": "identification",
+					"options": {
+						"accept": ".jpg,.jpeg,.pdf",
+						"maxFileSize": 10
+					},
+					"required": true,
+					"size": "md",
+					"type": "FileInput"
+				},
+				{
+					"label": "Método Preferido de Comunicação",
+					"help": "Especifique como o solicitante prefere ser contatado em relação à solicitação de exclusão.",
+					"name": "delivery_method",
+					"options": {
+						"options": "E-mail, Correio Postal"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Descrição dos Dados a Serem Excluídos",
+					"help": "Especifique os dados pessoais que o solicitante deseja ter excluídos.",
+					"name": "description_of_data",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Motivo da Exclusão de Dados",
+					"help": "Forneça uma breve explicação do motivo pelo qual a exclusão de dados está sendo solicitada.",
+					"name": "reason_for_erasure",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Comentários Adicionais",
+					"help": "Opcional: Forneça quaisquer informações adicionais ou contexto relacionados à solicitação de exclusão de dados.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Assinatura",
+					"help": "Assine para confirmar a autenticidade da solicitação e concordar com os termos e condições.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

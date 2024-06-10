@@ -1,0 +1,92 @@
+{
+	"description": "Vereinfachen Sie die DSGVO-Konformität mit dem Formular für das Löschen von Datenanforderungen.",
+	"name": "Formular für das Löschen von Datenanforderungen",
+	"categories": ["DSGVO"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formular für das Löschen von Datenanforderungen",
+			"text": "Bitte füllen Sie die untenstehenden Felder aus, um die Löschung Ihrer personenbezogenen Daten zu beantragen. Ihr Antrag wird schnellstmöglich gemäß den Datenschutzbestimmungen bearbeitet. Vielen Dank für Ihre Mitarbeit.",
+			"blocks": [
+				{
+					"label": "Vollständiger Name des Antragstellers",
+					"help": "Geben Sie den vollständigen Namen der Person ein, die den Datenlöschungsantrag stellt.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Kontaktinformationen des Antragstellers",
+					"help": "Geben Sie Kontaktdaten wie E-Mail-Adresse und Telefonnummer zur Kommunikation im Zusammenhang mit dem Antrag an.",
+					"name": "contact_information",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Adresse des Antragstellers",
+					"help": "Geben Sie die Postanschrift des Antragstellers an, um eine Bestätigung oder Nachverfolgung per Post zu ermöglichen.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Identifikation des Antragstellers",
+					"help": "Fügen Sie eine Kopie eines gültigen Identifikationsdokuments (z. B. Reisepass, Führerschein) hinzu, um die Identität des Antragstellers zu überprüfen.",
+					"name": "identification",
+					"options": {
+						"accept": ".jpg,.jpeg,.pdf",
+						"maxFileSize": 10
+					},
+					"required": true,
+					"size": "md",
+					"type": "FileInput"
+				},
+				{
+					"label": "Bevorzugte Kommunikationsmethode",
+					"help": "Geben Sie an, wie der Antragsteller bezüglich des Löschungsantrags kontaktiert werden möchte.",
+					"name": "delivery_method",
+					"options": {
+						"options": "E-Mail, Post"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Beschreibung der zu löschenden Daten",
+					"help": "Geben Sie die personenbezogenen Daten an, die der Antragsteller gelöscht haben möchte.",
+					"name": "description_of_data",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Grund für die Datenlöschung",
+					"help": "Geben Sie eine kurze Erklärung dafür an, warum die Datenlöschung beantragt wird.",
+					"name": "reason_for_erasure",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Zusätzliche Kommentare",
+					"help": "Optional: Geben Sie zusätzliche Informationen oder Zusammenhänge zum Datenlöschungsantrag an.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Unterschrift",
+					"help": "Unterschreiben Sie zur Bestätigung der Echtheit des Antrags und zur Zustimmung zu den Geschäftsbedingungen.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

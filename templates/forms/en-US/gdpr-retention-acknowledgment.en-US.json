@@ -1,0 +1,64 @@
+{
+	"description": "Ensure GDPR compliance with the data retention acknowledgement form.",
+	"name": "Data Retention Policy Acknowledgement Form",
+	"categories": ["GDPR"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Data Retention Policy Acknowledgement Form",
+			"text": "Please complete the fields below to acknowledge that you have read and understood the organisation's data retention policy. Your acknowledgement is essential for ensuring compliance with data protection regulations. Thank you for your cooperation.",
+			"blocks": [
+				{
+					"label": "Employee Name",
+					"help": "Enter the full name of the employee acknowledging the policy.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Email Address",
+					"help": "Provide the email address for communication regarding the acknowledgement.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Phone Number",
+					"help": "Optional: Enter the phone number for any necessary follow-up.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Date of Acknowledgement",
+					"help": "Enter the date when the acknowledgement is being made.",
+					"name": "date",
+					"default": "now",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "I have read and understand the data retention policy.",
+					"name": "acknowledgement_statement",
+					"options": {},
+					"required": true,
+					"type": "CheckboxInput"
+				},
+				{
+					"label": "Signature",
+					"help": "Sign to confirm your acknowledgement and agreement with the policy.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

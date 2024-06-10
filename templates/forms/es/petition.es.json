@@ -1,0 +1,55 @@
+{
+	"description": "Reúna firmas y apoyo de manera eficiente con un formulario de petición versátil.",
+	"name": "Formulario de Petición",
+	"categories": ["Peticiones"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Petición",
+			"text": "Describa brevemente el propósito y los detalles de la petición.",
+			"blocks": [
+				{
+					"label": "Nombre Completo",
+					"help": "Por favor ingrese su nombre completo.",
+					"name": "nombre",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Correo Electrónico",
+					"help": "Proporcione su dirección de correo electrónico para futuras actualizaciones y comunicación.",
+					"name": "correo",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Teléfono",
+					"help": "Opcional: Ingrese su número de teléfono para cualquier seguimiento necesario.",
+					"name": "teléfono",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Dirección",
+					"help": "Proporcione su dirección residencial para verificar su apoyo.",
+					"name": "dirección",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Firma",
+					"help": "Firme para confirmar su apoyo a la petición.",
+					"name": "firma",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

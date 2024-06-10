@@ -1,0 +1,92 @@
+{
+	"description": "Semplifica la conformità al GDPR con il Modulo di Richiesta di Cancellazione dei Dati.",
+	"name": "Modulo di Richiesta di Cancellazione dei Dati",
+	"categories": ["GDPR"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Modulo di Richiesta di Cancellazione dei Dati",
+			"text": "Si prega di compilare i campi seguenti per richiedere la cancellazione dei tuoi dati personali. La tua richiesta verrà elaborata prontamente in conformità con le normative sulla protezione dei dati. Grazie per la collaborazione.",
+			"blocks": [
+				{
+					"label": "Nome Completo del Richiedente",
+					"help": "Inserire il nome completo dell'individuo che sta facendo la richiesta di cancellazione dei dati.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Informazioni di Contatto del Richiedente",
+					"help": "Fornire dettagli di contatto come l'indirizzo email e il numero di telefono per la comunicazione relativa alla richiesta.",
+					"name": "contact_information",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Indirizzo del Richiedente",
+					"help": "Fornire l'indirizzo postale del richiedente per l'invio di eventuali conferme o follow-up.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Identificazione del Richiedente",
+					"help": "Allegare una copia di un documento d'identità valido (ad esempio, passaporto, patente di guida) per verificare l'identità del richiedente.",
+					"name": "identification",
+					"options": {
+						"accept": ".jpg,.jpeg,.pdf",
+						"maxFileSize": 10
+					},
+					"required": true,
+					"size": "md",
+					"type": "FileInput"
+				},
+				{
+					"label": "Metodo Preferito di Comunicazione",
+					"help": "Specificare come il richiedente preferisce essere contattato riguardo alla richiesta di cancellazione.",
+					"name": "delivery_method",
+					"options": {
+						"options": "Email, Posta"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Descrizione dei Dati da Cancellare",
+					"help": "Specificare i dati personali che il richiedente desidera far cancellare.",
+					"name": "description_of_data",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Motivo della Cancellazione dei Dati",
+					"help": "Fornire una breve spiegazione del motivo per cui la cancellazione dei dati è richiesta.",
+					"name": "reason_for_erasure",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Commenti Aggiuntivi",
+					"help": "Opzionale: Fornire eventuali informazioni o contesto aggiuntivo relativi alla richiesta di cancellazione dei dati.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Firma",
+					"help": "Firma per confermare l'autenticità della richiesta e accettare i termini e le condizioni.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

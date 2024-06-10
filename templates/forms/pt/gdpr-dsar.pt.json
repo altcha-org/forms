@@ -1,0 +1,84 @@
+{
+	"description": "Modelo compatível com o GDPR para Solicitação de Acesso do Titular dos Dados.",
+	"name": "Formulário de Solicitação de Acesso do Titular dos Dados (DSAR)",
+	"categories": ["GDPR"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulário de Solicitação de Acesso do Titular dos Dados",
+			"text": "Por favor, preencha os campos abaixo para solicitar o acesso aos seus dados pessoais mantidos por nossa organização. Sua solicitação será processada prontamente de acordo com as regulamentações de proteção de dados. Obrigado pela sua cooperação.",
+			"blocks": [
+				{
+					"label": "Nome Completo do Solicitante",
+					"help": "Insira o nome completo do indivíduo que está fazendo o DSAR.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Informações de Contato do Solicitante",
+					"help": "Forneça detalhes de contato, como endereço de e-mail e número de telefone para comunicação sobre a solicitação.",
+					"name": "contact_information",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Endereço do Solicitante",
+					"help": "Forneça o endereço postal do solicitante para envio de documentos ou informações solicitadas.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Identificação do Solicitante",
+					"help": "Anexe uma cópia de um documento de identificação válido (por exemplo, passaporte, carteira de motorista) para verificar a identidade do solicitante.",
+					"name": "identification",
+					"options": {
+						"accept": ".jpg,.jpeg,.pdf",
+						"maxFileSize": 10
+					},
+					"required": true,
+					"size": "md",
+					"type": "FileInput"
+				},
+				{
+					"label": "Método de Entrega Preferencial",
+					"help": "Especifique como as informações solicitadas devem ser entregues.",
+					"name": "delivery_method",
+					"options": {
+						"options": "Email, Correio Postal"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Descrição da Solicitação",
+					"help": "Especifique os detalhes das informações solicitadas, incluindo períodos relevantes ou categorias específicas de dados.",
+					"name": "description_of_request",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Comentários Adicionais",
+					"help": "Opcional: Forneça qualquer informação adicional ou contexto relacionado à solicitação.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Assinatura",
+					"help": "Assine para confirmar a autenticidade da solicitação e concordar com os termos e condições.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

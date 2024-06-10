@@ -1,0 +1,71 @@
+{
+	"description": "Simplifique os registos de eventos com este formulário de registo abrangente.",
+	"name": "Formulário de Registo de Eventos",
+	"categories": ["Registos"],
+	"premium": false,
+	"steps": [
+		{
+			"title": "Bem-vindo ao Registo de Eventos!",
+			"text": "Obrigado pelo seu interesse no nosso evento. Para concluir o seu registo e garantir que tudo está preparado para a sua participação, por favor preencha o formulário abaixo com os detalhes necessários.",
+			"blocks": [
+				{
+					"label": "Seu Nome",
+					"help": "Nome completo do registante.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Endereço de Email",
+					"help": "Email de contacto para comunicações do evento.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Telefone",
+					"help": "Número de contacto opcional para atualizações relacionadas com o evento.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Organização/Empresa",
+					"help": "Nome da organização ou empresa (se aplicável).",
+					"name": "organization",
+					"options": {},
+					"required": false,
+					"type": "TextInput"
+				},
+				{
+					"label": "Cargo/Função",
+					"help": "Cargo ou função do registante (se aplicável).",
+					"name": "position",
+					"options": {},
+					"required": false,
+					"type": "TextInput"
+				},
+				{
+					"label": "Endereço de Faturação",
+					"help": "Informações do endereço de faturação do registante (se aplicável).",
+					"name": "billing_address",
+					"options": {},
+					"required": false,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Requisitos Especiais",
+					"help": "Indique quaisquer requisitos especiais ou acomodações necessárias.",
+					"name": "special_requirements",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

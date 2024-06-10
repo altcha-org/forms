@@ -1,0 +1,129 @@
+{
+	"description": "Collect feedback on training sessions to improve future programmes.",
+	"name": "Training Evaluation Form",
+	"categories": ["Employees"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "We Value Your Feedback!",
+			"text": "Thank you for participating in our training session. Your feedback is crucial in helping us improve the quality of our training programmes. Please take a few moments to complete this evaluation form and share your thoughts on various aspects of the training.",
+			"blocks": [
+				{
+					"label": "Participant Name",
+					"help": "Please enter your full name.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Email Address",
+					"help": "Provide your email address for follow-up or further communication.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Training Title",
+					"help": "Specify the title of the training session you attended.",
+					"name": "training_title",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Training Date",
+					"help": "Enter the date of the training session.",
+					"name": "training_date",
+					"options": {},
+					"required": true,
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Trainer's Name",
+					"help": "Provide the name of the trainer or instructor.",
+					"name": "trainer_name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Overall Satisfaction",
+					"help": "Rate your overall satisfaction with the training from 1 to 5 stars.",
+					"name": "overall_satisfaction",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Training Content Quality",
+					"help": "Rate the quality of the training content from 1 to 5 stars.",
+					"name": "training_content_quality",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Trainer's Effectiveness",
+					"help": "Rate the trainer's effectiveness in delivering the material from 1 to 5 stars.",
+					"name": "trainer_effectiveness",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Course Structure",
+					"help": "Rate the structure and organisation of the course from 1 to 5 stars.",
+					"name": "course_structure",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Relevance to Job",
+					"help": "Rate how relevant the training was to your job from 1 to 5 stars.",
+					"name": "relevance_to_job",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Pace of Training",
+					"help": "Rate the pace at which the training was conducted from 1 to 5 stars.",
+					"name": "pace_of_training",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Suggestions for Improvement",
+					"help": "Provide any suggestions for improving the training session.",
+					"name": "suggestions",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Additional Comments",
+					"help": "Optional: Include any additional comments or feedback about the training session.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Would You Recommend This Training?",
+					"help": "Would you recommend this training to others?",
+					"name": "would_recommend",
+					"options": {
+						"inline": true,
+						"options": "Yes, No"
+					},
+					"required": false,
+					"type": "RadioInput"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,129 @@
+{
+	"description": "Simplificar el proceso de solicitud y aprobación de reembolsos de gastos.",
+	"name": "Formulario de Reembolso de Gastos",
+	"categories": ["Empleados"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Solicitud de Reembolso de Gastos",
+			"text": "Este formulario está diseñado para garantizar que sus gastos se procesen de forma rápida y precisa. Por favor, complete todos los campos necesarios con la mayor cantidad de detalles posible y adjunte cualquier recibo relevante o documentos de respaldo.",
+			"blocks": [
+				{
+					"label": "Nombre del Empleado",
+					"help": "Ingrese su nombre completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Dirección de Correo Electrónico",
+					"help": "Proporcione su dirección de correo electrónico para la comunicación relacionada con el reembolso.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Teléfono",
+					"help": "Ingrese su número de teléfono para cualquier seguimiento necesario.",
+					"name": "phone",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Nombre del Gerente/Supervisor",
+					"help": "Ingrese el nombre de su gerente o supervisor para su aprobación.",
+					"name": "supervisor",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Fecha del Gasto",
+					"help": "Especifique la fecha en que se incurrió el gasto.",
+					"name": "date",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Categoría de Gasto",
+					"help": "Seleccione la categoría del gasto.",
+					"name": "category",
+					"options": {
+						"options": "Viajes, Comidas, Material de Oficina, Otros"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "SelectInput"
+				},
+				{
+					"label": "Descripción del Gasto",
+					"help": "Proporcione una breve descripción del gasto.",
+					"name": "expense_description",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Monto",
+					"help": "Ingrese el monto total a reembolsar.",
+					"name": "amount",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "NumberInput"
+				},
+				{
+					"label": "Moneda",
+					"help": "Seleccione la moneda del monto del gasto.",
+					"name": "currency",
+					"default": "GBP",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "TextInput"
+				},
+				{
+					"label": "Método de Pago Utilizado",
+					"help": "Indique el método utilizado para pagar el gasto.",
+					"name": "payment_method",
+					"options": {
+						"options": "Tarjeta de Crédito Personal, Tarjeta de Crédito Corporativa, Efectivo, Otros"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "SelectInput"
+				},
+				{
+					"label": "Adjuntar Recibo",
+					"help": "Suba una copia del recibo o cualquier documento de respaldo.",
+					"name": "receipt",
+					"options": {},
+					"required": true,
+					"type": "FileInput"
+				},
+				{
+					"label": "Notas Adicionales",
+					"help": "Opcional: Proporcione cualquier información adicional o contexto para el gasto.",
+					"name": "notes",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Firma",
+					"help": "Firme para verificar la exactitud de la información proporcionada.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

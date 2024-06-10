@@ -1,0 +1,129 @@
+{
+	"description": "Recopilar comentarios sobre las sesiones de entrenamiento para mejorar los programas futuros.",
+	"name": "Formulario de Evaluación de Entrenamiento",
+	"categories": ["Empleados"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "¡Valoramos tus Comentarios!",
+			"text": "Gracias por participar en nuestra sesión de entrenamiento. Tus comentarios son cruciales para ayudarnos a mejorar la calidad de nuestros programas de entrenamiento. Por favor, tómate unos momentos para completar este formulario de evaluación y compartir tus pensamientos sobre varios aspectos del entrenamiento.",
+			"blocks": [
+				{
+					"label": "Nombre del Participante",
+					"help": "Por favor, ingresa tu nombre completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Dirección de Correo Electrónico",
+					"help": "Proporciona tu dirección de correo electrónico para un seguimiento o comunicación adicional.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Título del Entrenamiento",
+					"help": "Especifica el título de la sesión de entrenamiento a la que asististe.",
+					"name": "training_title",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Fecha del Entrenamiento",
+					"help": "Ingresa la fecha de la sesión de entrenamiento.",
+					"name": "training_date",
+					"options": {},
+					"required": true,
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Nombre del Instructor",
+					"help": "Proporciona el nombre del entrenador o instructor.",
+					"name": "trainer_name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Satisfacción General",
+					"help": "Califica tu satisfacción general con el entrenamiento de 1 a 5 estrellas.",
+					"name": "overall_satisfaction",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Calidad del Contenido del Entrenamiento",
+					"help": "Califica la calidad del contenido del entrenamiento de 1 a 5 estrellas.",
+					"name": "training_content_quality",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Efectividad del Instructor",
+					"help": "Califica la efectividad del instructor en la entrega del material de 1 a 5 estrellas.",
+					"name": "trainer_effectiveness",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Estructura del Curso",
+					"help": "Califica la estructura y organización del curso de 1 a 5 estrellas.",
+					"name": "course_structure",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Relevancia al Trabajo",
+					"help": "Califica qué tan relevante fue el entrenamiento para tu trabajo de 1 a 5 estrellas.",
+					"name": "relevance_to_job",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Ritmo del Entrenamiento",
+					"help": "Califica el ritmo al que se condujo el entrenamiento de 1 a 5 estrellas.",
+					"name": "pace_of_training",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Sugerencias para Mejorar",
+					"help": "Proporciona cualquier sugerencia para mejorar la sesión de entrenamiento.",
+					"name": "suggestions",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Comentarios Adicionales",
+					"help": "Opcional: Incluye cualquier comentario adicional o feedback sobre la sesión de entrenamiento.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "¿Recomendarías Este Entrenamiento?",
+					"help": "¿Recomendarías este entrenamiento a otros?",
+					"name": "would_recommend",
+					"options": {
+						"inline": true,
+						"options": "Sí, No"
+					},
+					"required": false,
+					"type": "RadioInput"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,129 @@
+{
+	"description": "Feedback zu Trainingseinheiten sammeln, um zukünftige Programme zu verbessern.",
+	"name": "Trainingsbewertungsformular",
+	"categories": ["Mitarbeiter"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Wir Schätzen Ihr Feedback!",
+			"text": "Vielen Dank, dass Sie an unserer Trainingseinheit teilgenommen haben. Ihr Feedback ist entscheidend, um die Qualität unserer Schulungsprogramme zu verbessern. Bitte nehmen Sie sich einige Momente Zeit, um dieses Bewertungsformular auszufüllen und Ihre Gedanken zu verschiedenen Aspekten des Trainings zu teilen.",
+			"blocks": [
+				{
+					"label": "Teilnehmername",
+					"help": "Bitte geben Sie Ihren vollständigen Namen ein.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "E-Mail-Adresse",
+					"help": "Geben Sie Ihre E-Mail-Adresse für mögliche Rückfragen oder weitere Kommunikation an.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Titel des Trainings",
+					"help": "Geben Sie den Titel der von Ihnen besuchten Trainingseinheit an.",
+					"name": "training_title",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Trainingsdatum",
+					"help": "Geben Sie das Datum der Trainingseinheit an.",
+					"name": "training_date",
+					"options": {},
+					"required": true,
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Name des Trainers",
+					"help": "Geben Sie den Namen des Trainers oder Instruktors an.",
+					"name": "trainer_name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Gesamte Zufriedenheit",
+					"help": "Bewerten Sie Ihre Gesamtzufriedenheit mit dem Training von 1 bis 5 Sternen.",
+					"name": "overall_satisfaction",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Qualität des Schulungsinhalts",
+					"help": "Bewerten Sie die Qualität des Schulungsinhalts von 1 bis 5 Sternen.",
+					"name": "training_content_quality",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Effektivität des Trainers",
+					"help": "Bewerten Sie die Effektivität des Trainers bei der Vermittlung des Materials von 1 bis 5 Sternen.",
+					"name": "trainer_effectiveness",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Kursstruktur",
+					"help": "Bewerten Sie die Struktur und Organisation des Kurses von 1 bis 5 Sternen.",
+					"name": "course_structure",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Relevanz für den Job",
+					"help": "Bewerten Sie, wie relevant das Training für Ihren Job war, von 1 bis 5 Sternen.",
+					"name": "relevance_to_job",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Tempo des Trainings",
+					"help": "Bewerten Sie das Tempo, in dem das Training durchgeführt wurde, von 1 bis 5 Sternen.",
+					"name": "pace_of_training",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Vorschläge zur Verbesserung",
+					"help": "Geben Sie Anregungen zur Verbesserung der Trainingseinheit an.",
+					"name": "suggestions",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Weitere Kommentare",
+					"help": "Optional: Fügen Sie weitere Kommentare oder Feedback zur Trainingseinheit hinzu.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Würden Sie dieses Training weiterempfehlen?",
+					"help": "Würden Sie dieses Training anderen empfehlen?",
+					"name": "would_recommend",
+					"options": {
+						"inline": true,
+						"options": "Ja, Nein"
+					},
+					"required": false,
+					"type": "RadioInput"
+				}
+			]
+		}
+	]
+}

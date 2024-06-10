@@ -1,0 +1,140 @@
+{
+	"description": "Relate eficientemente incidentes no local de trabalho com um formulário abrangente.",
+	"name": "Formulário de Relatório de Incidentes no Local de Trabalho",
+	"categories": ["Funcionários"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulário de Relatório de Incidentes no Local de Trabalho",
+			"text": "Por favor, preencha os campos abaixo para relatar prontamente quaisquer incidentes no local de trabalho. Seu relatório detalhado é crucial para garantir a segurança e o bem-estar de nossos funcionários. Obrigado pela sua cooperação em manter um ambiente de trabalho seguro.",
+			"blocks": [
+				{
+					"label": "Nome do Funcionário",
+					"help": "Digite seu nome completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Endereço de Email",
+					"help": "Forneça seu endereço de e-mail para comunicação adicional.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Telefone",
+					"help": "Digite seu número de telefone para acompanhamento, se necessário.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Departamento",
+					"help": "Especifique seu departamento ou equipe.",
+					"name": "department",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Nome do Gerente/Supervisor",
+					"help": "Digite o nome do seu supervisor ou gerente.",
+					"name": "supervisor",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Data do Incidente",
+					"help": "Especifique a data em que o incidente ocorreu.",
+					"name": "date",
+					"options": {
+						"datetime": true
+					},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Local do Incidente",
+					"help": "Forneça o local exato onde o incidente ocorreu.",
+					"name": "location",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Tipo de Incidente",
+					"help": "Selecione o tipo de incidente.",
+					"name": "type",
+					"options": {
+						"options": "Lesão, Quase acidente, Danos materiais"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Descrição do Incidente",
+					"help": "Forneça uma descrição detalhada do que aconteceu.",
+					"name": "description",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Testemunhas",
+					"help": "Liste os nomes e informações de contato de quaisquer testemunhas.",
+					"name": "witnesses",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Lesões Sustentadas",
+					"help": "Descreva quaisquer lesões sofridas como resultado do incidente.",
+					"name": "injuries",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Ação Imediata Tomada",
+					"help": "Descreva quaisquer ações imediatas tomadas em resposta ao incidente.",
+					"name": "immediate_action",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Fatores Contribuintes",
+					"help": "Identifique quaisquer fatores que possam ter contribuído para o incidente.",
+					"name": "contributing_factors",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Medidas Preventivas Sugeridas",
+					"help": "Sugira quaisquer medidas para prevenir incidentes semelhantes no futuro.",
+					"name": "suggested_measures",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Assinatura",
+					"help": "Assine para confirmar a precisão das informações fornecidas.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

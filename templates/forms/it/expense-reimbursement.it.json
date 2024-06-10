@@ -1,0 +1,129 @@
+{
+	"description": "Semplifica il processo di richiesta e approvazione dei rimborsi spese.",
+	"name": "Modulo di Rimborso Spese",
+	"categories": ["Dipendenti"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Richiesta di Rimborso Spese",
+			"text": "Questo modulo è progettato per garantire che le tue spese vengano elaborate rapidamente e con precisione. Si prega di compilare tutti i campi necessari con il maggior dettaglio possibile e allegare eventuali ricevute o documenti di supporto pertinenti.",
+			"blocks": [
+				{
+					"label": "Nome dipendente",
+					"help": "Inserisci il tuo nome completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Indirizzo email",
+					"help": "Fornisci il tuo indirizzo email per la comunicazione riguardante il rimborso.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numero di telefono",
+					"help": "Inserisci il tuo numero di telefono per eventuali follow-up necessari.",
+					"name": "phone",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Nome Manager/Supervisore",
+					"help": "Inserisci il nome del tuo manager o supervisore per l'approvazione.",
+					"name": "supervisor",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Data della Spesa",
+					"help": "Specificare la data in cui è stata sostenuta la spesa.",
+					"name": "date",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Categoria Spesa",
+					"help": "Seleziona la categoria della spesa.",
+					"name": "category",
+					"options": {
+						"options": "Viaggio, Pasti, Cancelleria, Altro"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "SelectInput"
+				},
+				{
+					"label": "Descrizione Spesa",
+					"help": "Fornisci una breve descrizione della spesa.",
+					"name": "expense_description",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Importo",
+					"help": "Inserisci l'importo totale da rimborsare.",
+					"name": "amount",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "NumberInput"
+				},
+				{
+					"label": "Valuta",
+					"help": "Seleziona la valuta dell'importo della spesa.",
+					"name": "currency",
+					"default": "GBP",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "TextInput"
+				},
+				{
+					"label": "Metodo di Pagamento Utilizzato",
+					"help": "Indica il metodo utilizzato per pagare la spesa.",
+					"name": "payment_method",
+					"options": {
+						"options": "Carta di Credito Personale, Carta di Credito Aziendale, Contanti, Altro"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "SelectInput"
+				},
+				{
+					"label": "Allegato Ricevuta",
+					"help": "Carica una copia della ricevuta o eventuali documenti di supporto.",
+					"name": "receipt",
+					"options": {},
+					"required": true,
+					"type": "FileInput"
+				},
+				{
+					"label": "Note Aggiuntive",
+					"help": "Opzionale: Fornire eventuali informazioni aggiuntive o contestuali sulla spesa.",
+					"name": "notes",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Firma",
+					"help": "Firma per verificare l'accuratezza delle informazioni fornite.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

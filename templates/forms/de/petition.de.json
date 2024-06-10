@@ -1,0 +1,55 @@
+{
+	"description": "Sammeln Sie Unterschriften und unterstützen Sie effizient mit einem vielseitigen Petitionsformular.",
+	"name": "Petitionsformular",
+	"categories": ["Petitionen"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Petition",
+			"text": "Beschreiben Sie kurz den Zweck und die Details der Petition.",
+			"blocks": [
+				{
+					"label": "Vollständiger Name",
+					"help": "Bitte geben Sie Ihren vollständigen Namen ein.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "E-Mail-Adresse",
+					"help": "Geben Sie Ihre E-Mail-Adresse für weitere Updates und Kommunikation an.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Telefonnummer",
+					"help": "Optional: Geben Sie Ihre Telefonnummer für eventuelle Nachverfolgungen ein.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Adresse",
+					"help": "Geben Sie Ihre Wohnadresse an, um Ihre Unterstützung zu bestätigen.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Unterschrift",
+					"help": "Unterschreiben Sie, um Ihre Unterstützung für die Petition zu bestätigen.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

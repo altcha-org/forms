@@ -1,0 +1,68 @@
+{
+	"description": "Ermöglichen Sie es Klienten, Termine direkt von Ihrer Website aus zu vereinbaren.",
+	"name": "Terminbuchungsformular",
+	"categories": ["Registrierungen"],
+	"steps": [
+		{
+			"title": "Vereinbaren Sie Ihren Termin",
+			"text": "Um Ihren Termin zu vereinbaren, füllen Sie bitte das untenstehende Formular mit den erforderlichen Details aus. Dies hilft uns sicherzustellen, dass wir Ihren bevorzugten Zeitpunkt und Ihre Serviceanforderungen berücksichtigen können.",
+			"blocks": [
+				{
+					"label": "Vollständiger Name",
+					"help": "Bitte geben Sie Ihren vollständigen Namen an.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "Texteingabe"
+				},
+				{
+					"label": "E-Mail-Adresse",
+					"help": "Geben Sie Ihre E-Mail-Adresse an, um Terminbestätigungen und Updates zu erhalten.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "E-Mail-Eingabe"
+				},
+				{
+					"label": "Telefonnummer",
+					"help": "Geben Sie Ihre Telefonnummer für notwendige Rückfragen oder Erinnerungen ein.",
+					"name": "phone",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "Telefonnummer-Eingabe"
+				},
+				{
+					"label": "Termin Datum und Uhrzeit",
+					"help": "Wählen Sie das gewünschte Datum und die Uhrzeit für Ihren Termin aus.",
+					"name": "date_time",
+					"options": {
+						"datetime": true,
+						"min": "jetzt"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "DatumUhrzeit-Eingabe"
+				},
+				{
+					"label": "Benötigter Service",
+					"help": "Wählen Sie die Art des Services aus den verfügbaren Optionen aus, den Sie benötigen.",
+					"name": "services",
+					"options": {
+						"options": "Service 1, Service 2, Service 3"
+					},
+					"required": true,
+					"type": "MehrfachAuswahlKontrollkästchen-Eingabe"
+				},
+				{
+					"label": "Zusätzliche Hinweise",
+					"help": "Optional: Geben Sie zusätzliche Informationen oder spezielle Anfragen für Ihren Termin an.",
+					"name": "notes",
+					"options": {},
+					"required": false,
+					"type": "MehrzeiligeTexteingabe"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,68 @@
+{
+	"description": "Allow clients to schedule appointments directly from your website.",
+	"name": "Appointment Booking Form",
+	"categories": ["Registrations"],
+	"steps": [
+		{
+			"title": "Book Your Appointment",
+			"text": "To book your appointment, please fill out the form below with the necessary details. This will help us ensure that we can accommodate your preferred time and service needs.",
+			"blocks": [
+				{
+					"label": "Full Name",
+					"help": "Please enter your full name.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Email Address",
+					"help": "Provide your email address to receive appointment confirmations and updates.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Phone Number",
+					"help": "Enter your phone number for any necessary follow-up or reminders.",
+					"name": "phone",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Appointment Date",
+					"help": "Select the desired date and time for your appointment.",
+					"name": "date_time",
+					"options": {
+						"datetime": true,
+						"min": "now"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Service Required",
+					"help": "Select the type of service you need from the available options.",
+					"name": "services",
+					"options": {
+						"options": "Service 1, Service 2, Service 3"
+					},
+					"required": true,
+					"type": "MultiCheckboxInput"
+				},
+				{
+					"label": "Additional Notes",
+					"help": "Optional: Provide any additional information or special requests for your appointment.",
+					"name": "notes",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

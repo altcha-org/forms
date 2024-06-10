@@ -1,0 +1,92 @@
+{
+	"description": "Simplifiez la conformité au RGPD avec le formulaire de demande d'effacement de données.",
+	"name": "Formulaire de demande d'effacement de données",
+	"categories": ["RGPD"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulaire de demande d'effacement de données",
+			"text": "Veuillez compléter les champs ci-dessous pour demander l'effacement de vos données personnelles. Votre demande sera traitée rapidement conformément aux réglementations sur la protection des données. Merci pour votre coopération.",
+			"blocks": [
+				{
+					"label": "Nom complet du demandeur",
+					"help": "Indiquez le nom complet de la personne faisant la demande d'effacement des données.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Coordonnées du demandeur",
+					"help": "Fournir les détails de contact tels que l'adresse e-mail et le numéro de téléphone pour la communication concernant la demande.",
+					"name": "contact_information",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Adresse du demandeur",
+					"help": "Fournissez l'adresse postale du demandeur pour l'envoi de toute confirmation ou suivi.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Identification du demandeur",
+					"help": "Joignez une copie d'un document d'identification valide (par ex. : passeport, permis de conduire) pour vérifier l'identité du demandeur.",
+					"name": "identification",
+					"options": {
+						"accept": ".jpg,.jpeg,.pdf",
+						"maxFileSize": 10
+					},
+					"required": true,
+					"size": "md",
+					"type": "FileInput"
+				},
+				{
+					"label": "Méthode de communication préférée",
+					"help": "Précisez comment le demandeur préfère être contacté concernant la demande d'effacement.",
+					"name": "delivery_method",
+					"options": {
+						"options": "E-mail, Courrier postal"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Description des données à effacer",
+					"help": "Précisez les données personnelles que le demandeur souhaite voir effacées.",
+					"name": "description_of_data",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Raison de l'effacement des données",
+					"help": "Fournir une brève explication de la raison pour laquelle l'effacement des données est demandé.",
+					"name": "reason_for_erasure",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Commentaires supplémentaires",
+					"help": "Facultatif : Fournir toute information supplémentaire ou contexte lié à la demande d'effacement des données.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Signature",
+					"help": "Signez pour confirmer l'authenticité de la demande et accepter les termes et conditions.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

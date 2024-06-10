@@ -1,0 +1,79 @@
+{
+	"description": "Solicite o reconhecimento de políticas facilmente com o formulário direto.",
+	"name": "Formulário de Reconhecimento de Política",
+	"categories": ["Funcionários"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulário de Reconhecimento de Política",
+			"text": "Por favor, preencha os campos abaixo para confirmar que leu, entendeu e concorda em cumprir a política especificada. Seu reconhecimento é essencial para garantir que todos os funcionários estejam informados e cumpram as políticas da nossa empresa.",
+			"blocks": [
+				{
+					"label": "Nome do Funcionário",
+					"help": "Insira o seu nome completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Endereço de Email",
+					"help": "Forneça o seu endereço de email para comunicação referente ao seu pedido.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Telefone",
+					"help": "Opcional: Insira o seu número de telefone para qualquer acompanhamento necessário.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Título da Política",
+					"help": "Especifique o título da política sendo reconhecida.",
+					"name": "policy_title",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Descrição da Política",
+					"help": "Descreva brevemente a política ou inclua um resumo.",
+					"name": "policy_description",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Data da Política",
+					"help": "Insira a data efetiva da política.",
+					"name": "policy_date",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Li e entendi a política.",
+					"name": "acknowledgement_statement",
+					"options": {},
+					"required": true,
+					"type": "CheckboxInput"
+				},
+				{
+					"label": "Assinatura",
+					"help": "Assine para confirmar o seu reconhecimento e concordância com a política.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

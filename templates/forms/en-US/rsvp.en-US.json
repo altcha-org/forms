@@ -1,0 +1,69 @@
+{
+	"description": "Manage event attendance and guest details with an efficient RSVP form.",
+	"name": "RSVP Form",
+	"categories": ["Registrations"],
+	"steps": [
+		{
+			"title": "RSVP for [Event Name]",
+			"text": "To help us prepare for the event, please take a moment to fill out this RSVP form. Your response will ensure that we can accommodate you and your guests appropriately.",
+			"blocks": [
+				{
+					"label": "Full Name",
+					"help": "Please enter your full name.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "Text Input"
+				},
+				{
+					"label": "Email Address",
+					"help": "Provide your email address to receive event updates.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "Email Input"
+				},
+				{
+					"label": "Phone Number",
+					"help": "Optional: Enter your phone number for any last-minute changes or updates.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "Phone Input"
+				},
+				{
+					"label": "Attendance Confirmation",
+					"help": "Will you be attending the event?",
+					"name": "attendance",
+					"options": {
+						"inline": true,
+						"options": "Yes, No"
+					},
+					"required": true,
+					"type": "Radio Input"
+				},
+				{
+					"label": "Number of Guests",
+					"help": "Indicate the number of guests you will be bringing.",
+					"name": "number_of_guests",
+					"default": "1",
+					"options": {
+						"options": "Yes, No"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "Number Input"
+				},
+				{
+					"label": "Additional Comments",
+					"help": "Optional: Include any additional information or special requests.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "Multi Line Text Input"
+				}
+			]
+		}
+	]
+}

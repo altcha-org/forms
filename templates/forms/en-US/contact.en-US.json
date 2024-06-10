@@ -1,0 +1,61 @@
+{
+	"description": "Easy-to-use form for visitors to reach out to your business or support team.",
+	"name": "Contact Us Form",
+	"categories": ["Contact"],
+	"steps": [
+		{
+			"title": "Contact Us",
+			"blocks": [
+				{
+					"label": "Full Name",
+					"help": "Please enter your full name.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Company Name",
+					"help": "Optional: If applicable, provide the name of your company.",
+					"name": "company",
+					"options": {},
+					"required": false,
+					"type": "TextInput"
+				},
+				{
+					"label": "Email Address",
+					"help": "Please provide your email address so we can respond to your enquiry.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Phone Number",
+					"help": "Optional: Provide your phone number if you prefer to be contacted by phone.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Subject",
+					"help": "Briefly describe the reason for your contact.",
+					"name": "subject",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Message",
+					"help": "Please enter the details of your enquiry or feedback.",
+					"name": "message",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

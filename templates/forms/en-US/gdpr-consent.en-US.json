@@ -1,0 +1,64 @@
+{
+	"description": "Ensure GDPR compliance with a Consent Form.",
+	"name": "Personal Data Processing Consent Form",
+	"categories": ["GDPR"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Personal Data Processing Consent Form",
+			"text": "This consent form is used to obtain explicit consent from individuals for the processing of their personal data for [purpose]. The collected data may include [description of data]. By signing this form, the individual agrees to grant consent for the specified duration.",
+			"blocks": [
+				{
+					"label": "Full Name",
+					"help": "Enter the full name of the individual providing consent.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Email Address",
+					"help": "Provide the email address of the individual providing consent.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Phone Number",
+					"help": "Provide the phone number of the individual providing consent.",
+					"name": "phone",
+					"options": {},
+					"required": true,
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Address",
+					"help": "Provide the postal address of the individual providing consent.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Consent Option",
+					"help": "Either consent or withhold consent for the processing of personal data.",
+					"name": "consent",
+					"options": {
+						"options": ["I consent", "I do NOT consent"]
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Signature",
+					"help": "Sign to confirm the authenticity of the consent.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

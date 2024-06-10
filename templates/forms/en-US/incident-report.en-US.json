@@ -1,0 +1,140 @@
+{
+	"description": "Efficiently report workplace incidents with a comprehensive form.",
+	"name": "Workplace Incident Report Form",
+	"categories": ["Employees"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Workplace Incident Report Form",
+			"text": "Please complete the fields below to report any workplace incidents promptly. Your detailed report is crucial for ensuring the safety and well-being of our employees. Thank you for your cooperation in maintaining a safe work environment.",
+			"blocks": [
+				{
+					"label": "Employee Name",
+					"help": "Enter your full name.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Email Address",
+					"help": "Provide your email address for further communication.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Phone Number",
+					"help": "Enter your phone number for any necessary follow-up.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Department",
+					"help": "Specify your department or team.",
+					"name": "department",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Manager/Supervisor Name",
+					"help": "Enter the name of your supervisor or manager.",
+					"name": "supervisor",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Incident Date",
+					"help": "Specify the date when the incident occurred.",
+					"name": "date",
+					"options": {
+						"datetime": true
+					},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Location of Incident",
+					"help": "Provide the exact location where the incident took place.",
+					"name": "location",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Type of Incident",
+					"help": "Select the type of incident.",
+					"name": "type",
+					"options": {
+						"options": "Injury, Near miss, Property damage"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Description of Incident",
+					"help": "Provide a detailed description of what happened.",
+					"name": "description",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Witnesses",
+					"help": "List the names and contact information of any witnesses.",
+					"name": "witnesses",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Injuries Sustained",
+					"help": "Describe any injuries sustained as a result of the incident.",
+					"name": "injuries",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Immediate Action Taken",
+					"help": "Describe any immediate actions taken in response to the incident.",
+					"name": "immediate_action",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Contributing Factors",
+					"help": "Identify any factors that may have contributed to the incident.",
+					"name": "contributing_factors",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Preventative Measures Suggested",
+					"help": "Suggest any measures to prevent similar incidents in the future.",
+					"name": "suggested_measures",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Signature",
+					"help": "Sign to confirm the accuracy of the information provided.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

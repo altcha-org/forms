@@ -1,0 +1,140 @@
+{
+	"description": "Segnala efficientemente gli incidenti sul posto di lavoro con un modulo completo.",
+	"name": "Modulo di segnalazione degli incidenti sul posto di lavoro",
+	"categories": ["Dipendenti"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Modulo di segnalazione degli incidenti sul posto di lavoro",
+			"text": "Si prega di completare i campi sottostanti per segnalare tempestivamente eventuali incidenti sul posto di lavoro. La tua segnalazione dettagliata è fondamentale per garantire la sicurezza e il benessere dei nostri dipendenti. Grazie per la collaborazione nel mantenere un ambiente di lavoro sicuro.",
+			"blocks": [
+				{
+					"label": "Nome dipendente",
+					"help": "Inserisci il tuo nome completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Indirizzo email",
+					"help": "Fornisci il tuo indirizzo email per ulteriori comunicazioni.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numero di telefono",
+					"help": "Inserisci il tuo numero di telefono per eventuali follow-up necessari.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Reparto",
+					"help": "Specifica il tuo reparto o team.",
+					"name": "department",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Nome del responsabile/supervisore",
+					"help": "Inserisci il nome del tuo supervisore o responsabile.",
+					"name": "supervisor",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Data dell'incidente",
+					"help": "Specifica la data in cui si è verificato l'incidente.",
+					"name": "date",
+					"options": {
+						"datetime": true
+					},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Luogo dell'incidente",
+					"help": "Indica l'esatta posizione in cui si è verificato l'incidente.",
+					"name": "location",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Tipo di incidente",
+					"help": "Seleziona il tipo di incidente.",
+					"name": "type",
+					"options": {
+						"options": "Lesione, Quasi incidente, Danno materiale"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Descrizione dell'incidente",
+					"help": "Fornisci una dettagliata descrizione di quanto è accaduto.",
+					"name": "description",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Testimoni",
+					"help": "Elencare i nomi e le informazioni di contatto di eventuali testimoni.",
+					"name": "witnesses",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Lesioni riportate",
+					"help": "Descrivere eventuali lesioni riportate a seguito dell'incidente.",
+					"name": "injuries",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Azioni immediate intraprese",
+					"help": "Descrivere eventuali azioni immediate intraprese in risposta all'incidente.",
+					"name": "immediate_action",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Fattori contribuenti",
+					"help": "Identificare eventuali fattori che potrebbero aver contribuito all'incidente.",
+					"name": "contributing_factors",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Misure preventive suggerite",
+					"help": "Suggerire eventuali misure per prevenire incidenti simili in futuro.",
+					"name": "suggested_measures",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Firma",
+					"help": "Firma per confermare l'accuratezza delle informazioni fornite.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

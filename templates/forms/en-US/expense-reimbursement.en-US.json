@@ -1,0 +1,129 @@
+{
+	"description": "Simplify the process of requesting and approving expense reimbursements.",
+	"name": "Expense Reimbursement Form",
+	"categories": ["Employees"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Expense Reimbursement Request",
+			"text": "This form is designed to ensure that your expenses are processed quickly and accurately. Please fill out all the necessary fields with as much detail as possible and attach any relevant receipts or supporting documents.",
+			"blocks": [
+				{
+					"label": "Employee Name",
+					"help": "Enter your full name.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Email Address",
+					"help": "Provide your email address for communication regarding the reimbursement.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Phone Number",
+					"help": "Enter your phone number for any necessary follow-up.",
+					"name": "phone",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Manager/Supervisor Name",
+					"help": "Enter the name of your manager or supervisor for approval.",
+					"name": "supervisor",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Date of Expense",
+					"help": "Specify the date when the expense was incurred.",
+					"name": "date",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Expense Category",
+					"help": "Select the category of the expense.",
+					"name": "category",
+					"options": {
+						"options": "Travel, Meals, Office Supplies, Other"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "SelectInput"
+				},
+				{
+					"label": "Expense Description",
+					"help": "Provide a brief description of the expense.",
+					"name": "expense_description",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Amount",
+					"help": "Enter the total amount to be reimbursed.",
+					"name": "amount",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "NumberInput"
+				},
+				{
+					"label": "Currency",
+					"help": "Select the currency of the expense amount.",
+					"name": "currency",
+					"default": "GBP",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "TextInput"
+				},
+				{
+					"label": "Payment Method Used",
+					"help": "Indicate the method used to pay for the expense.",
+					"name": "payment_method",
+					"options": {
+						"options": "Personal Credit Card, Business Credit Card, Cash, Other"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "SelectInput"
+				},
+				{
+					"label": "Receipt Attachment",
+					"help": "Upload a copy of the receipt or any supporting documents.",
+					"name": "receipt",
+					"options": {},
+					"required": true,
+					"type": "FileInput"
+				},
+				{
+					"label": "Additional Notes",
+					"help": "Optional: Provide any additional information or context for the expense.",
+					"name": "notes",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Signature",
+					"help": "Sign to verify the accuracy of the information provided.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,69 @@
+{
+	"description": "Collectez des informations et des opinions avec un sondage.",
+	"name": "Formulaire de sondage",
+	"categories": ["Retour d'information"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Nous apprécions vos retours !",
+			"text": "Merci de prendre le temps de participer à notre sondage. Vos retours sont extrêmement importants pour nous et nous aideront à améliorer nos produits et services.",
+			"blocks": [
+				{
+					"label": "Nom complet",
+					"help": "Facultatif : Veuillez saisir votre nom complet.",
+					"name": "name",
+					"options": {},
+					"required": false,
+					"type": "TextInput"
+				},
+				{
+					"label": "Adresse e-mail",
+					"help": "Facultatif : Veuillez fournir votre adresse e-mail si vous souhaitez recevoir des informations de suivi.",
+					"name": "email",
+					"options": {},
+					"required": false,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Question 1",
+					"help": "Fournir une question pertinente à l'objectif de votre sondage.",
+					"name": "question_1",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Question 2",
+					"help": "Fournir une question pertinente à l'objectif de votre sondage.",
+					"name": "question_2",
+					"options": {
+						"inline": true,
+						"options": "Oui, Non"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Question 3",
+					"help": "Fournir une question pertinente à l'objectif de votre sondage.",
+					"name": "question_3",
+					"options": {
+						"max": 10,
+						"style": "numbers"
+					},
+					"required": true,
+					"size": "md",
+					"type": "RatingInput"
+				},
+				{
+					"label": "Commentaires supplémentaires",
+					"help": "Veuillez fournir tout commentaire ou suggestion supplémentaire.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

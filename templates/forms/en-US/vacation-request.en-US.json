@@ -1,0 +1,81 @@
+{
+	"description": "Allow employees to request holiday time and manage approvals.",
+	"name": "Holiday Request Form",
+	"categories": ["Employees"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Holiday Request Form",
+			"text": "To ensure your time off is approved and documented properly, please complete the form with all necessary details.",
+			"blocks": [
+				{
+					"label": "Employee Name",
+					"help": "Enter your full name.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Email Address",
+					"help": "Provide your email address for communication regarding your request.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Phone Number",
+					"help": "Enter your phone number for any necessary follow-up.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Department",
+					"help": "Specify your department or team.",
+					"name": "department",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Manager/Supervisor Name",
+					"help": "Enter the name of your supervisor or manager for approval.",
+					"name": "supervisor",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Start Date of Holiday",
+					"help": "Select the start date for your holiday.",
+					"name": "date_start",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "End Date of Holiday",
+					"help": "Select the end date for your holiday.",
+					"name": "date_end",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Signature",
+					"help": "Sign to verify the accuracy of the information provided.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,89 @@
+{
+	"description": "Raccogli feedback dettagliato dai tuoi clienti per migliorare i servizi e i prodotti.",
+	"name": "Modulo di Feedback dei Clienti",
+	"categories": ["Feedback"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Apprezziamo il Tuo Feedback!",
+			"text": "La tua esperienza è importante per noi, e siamo impegnati a migliorare continuamente i nostri prodotti e servizi. Apprezzeremmo molto se potessi dedicare qualche momento per fornirci il tuo prezioso feedback. Le tue risposte ci aiuteranno a capire cosa stiamo facendo bene e dove possiamo apportare miglioramenti.",
+			"blocks": [
+				{
+					"label": "Nome Completo",
+					"help": "Ti preghiamo di inserire il tuo nome completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Indirizzo Email",
+					"help": "Si prega di fornire il proprio indirizzo email per eventuali comunicazioni di follow-up.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numero di Telefono",
+					"help": "Opzionale: Fornisci il tuo numero di telefono se preferisci essere contattato telefonicamente.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Soddisfazione Generale",
+					"help": "Esprimi la tua soddisfazione generale con il nostro prodotto/servizio da 1 a 5 stelle.",
+					"name": "rating_overall",
+					"options": {
+						"style": "stars"
+					},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Qualità del Prodotto/Servizio",
+					"help": "Valuta la qualità del prodotto o servizio ricevuto da 1 a 5 stelle.",
+					"name": "rating_product",
+					"options": {
+						"style": "stars"
+					},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Esperienza con il Supporto Clienti",
+					"help": "Valuta la tua esperienza con il nostro supporto clienti da 1 a 5 stelle.",
+					"name": "rating_customer_support",
+					"options": {
+						"style": "stars"
+					},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Probabilità di Raccomandare",
+					"help": "Quanto sei probabile a raccomandare il nostro prodotto/servizio ad altri? (da 1 a 10)",
+					"name": "rating_likelihood_to_recommend",
+					"options": {
+						"max": 10,
+						"style": "numbers"
+					},
+					"required": true,
+					"size": "md",
+					"type": "RatingInput"
+				},
+				{
+					"label": "Commenti o Suggerimenti",
+					"help": "Si prega di fornire eventuali commenti o suggerimenti aggiuntivi.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

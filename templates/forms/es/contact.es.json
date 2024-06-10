@@ -1,0 +1,61 @@
+{
+	"description": "Formulario fácil de usar para que los visitantes se pongan en contacto con su empresa o equipo de soporte.",
+	"name": "Formulario de Contacto",
+	"categories": ["Contacto"],
+	"steps": [
+		{
+			"title": "Contáctenos",
+			"blocks": [
+				{
+					"label": "Nombre Completo",
+					"help": "Por favor, ingrese su nombre completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Nombre de la Empresa",
+					"help": "Opcional: si corresponde, proporcione el nombre de su empresa.",
+					"name": "company",
+					"options": {},
+					"required": false,
+					"type": "TextInput"
+				},
+				{
+					"label": "Dirección de Correo Electrónico",
+					"help": "Por favor, proporcione su dirección de correo electrónico para que podamos responder a su consulta.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Teléfono",
+					"help": "Opcional: proporcione su número de teléfono si prefiere ser contactado por teléfono.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Asunto",
+					"help": "Describa brevemente el motivo de su contacto.",
+					"name": "subject",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Mensaje",
+					"help": "Por favor, ingrese los detalles de su consulta o comentario.",
+					"name": "message",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

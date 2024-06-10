@@ -1,0 +1,90 @@
+{
+	"description": "Streamline the hiring process with this detailed job application template.",
+	"name": "Job Application Form",
+	"premium": true,
+	"steps": [
+		{
+			"title": "Join Our Team!",
+			"text": "We are excited to learn more about you and how you can contribute to our team. To apply for a position, please complete the form below. Ensure that all required fields are filled out accurately and provide as much detail as possible to help us understand your qualifications and experience.",
+			"blocks": [
+				{
+					"label": "Full Name",
+					"help": "Please enter your full name.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Email Address",
+					"help": "Provide your email address for communication regarding your application.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Phone Number",
+					"help": "Enter your phone number for contact purposes.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Position Applied For",
+					"help": "Indicate the job position you are applying for.",
+					"name": "position",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Resume/CV",
+					"help": "Upload your CV or resume in PDF or Word format.",
+					"name": "resume",
+					"options": {},
+					"required": true,
+					"type": "FileInput"
+				},
+				{
+					"label": "LinkedIn Profile",
+					"help": "Optional: Provide a link to your LinkedIn profile.",
+					"name": "linkedin",
+					"options": {},
+					"required": false,
+					"type": "UrlInput"
+				},
+				{
+					"label": "Availability",
+					"help": "Indicate your availability to start the position.",
+					"name": "availability",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Salary Expectations",
+					"help": "Optional: State your salary expectations for the position.",
+					"name": "salary_expectations",
+					"options": {
+						"unit": "GBP / month"
+					},
+					"required": false,
+					"size": "sm",
+					"type": "NumberInput"
+				},
+				{
+					"label": "Additional Information",
+					"help": "Optional: Include any additional information you believe is relevant to your application.",
+					"name": "additional_information",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

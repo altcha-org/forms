@@ -1,0 +1,64 @@
+{
+	"description": "Assurer la conformité RGPD avec un formulaire de consentement.",
+	"name": "Formulaire de Consentement pour le Traitement des Données Personnelles",
+	"categories": ["RGPD"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulaire de Consentement pour le Traitement des Données Personnelles",
+			"text": "Ce formulaire de consentement est utilisé pour obtenir le consentement explicite des individus pour le traitement de leurs données personnelles à des fins [purpose]. Les données collectées peuvent inclure [description des données]. En signant ce formulaire, l'individu accepte de donner son consentement pour la durée spécifiée.",
+			"blocks": [
+				{
+					"label": "Nom Complet",
+					"help": "Indiquez le nom complet de l'individu donnant son consentement.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Adresse E-mail",
+					"help": "Indiquez l'adresse e-mail de l'individu donnant son consentement.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numéro de Téléphone",
+					"help": "Indiquez le numéro de téléphone de l'individu donnant son consentement.",
+					"name": "phone",
+					"options": {},
+					"required": true,
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Adresse",
+					"help": "Indiquez l'adresse postale de l'individu donnant son consentement.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Option de Consentement",
+					"help": "Donnez ou refusez le consentement pour le traitement des données personnelles.",
+					"name": "consent",
+					"options": {
+						"options": ["Je consens", "Je refuse le consentement"]
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Signature",
+					"help": "Signez pour confirmer l'authenticité du consentement.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

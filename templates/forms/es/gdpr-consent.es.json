@@ -1,0 +1,64 @@
+{
+	"description": "Asegúrese de cumplir con el GDPR con un Formulario de Consentimiento.",
+	"name": "Formulario de Consentimiento para el Procesamiento de Datos Personales",
+	"categories": ["GDPR"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulario de Consentimiento para el Procesamiento de Datos Personales",
+			"text": "Este formulario de consentimiento se utiliza para obtener el consentimiento explícito de las personas para el procesamiento de sus datos personales para [purpose]. Los datos recopilados pueden incluir [description of data]. Al firmar este formulario, la persona acepta otorgar consentimiento por la duración especificada.",
+			"blocks": [
+				{
+					"label": "Nombre Completo",
+					"help": "Ingrese el nombre completo de la persona que otorga el consentimiento.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Dirección de Correo Electrónico",
+					"help": "Proporcione la dirección de correo electrónico de la persona que otorga el consentimiento.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Teléfono",
+					"help": "Proporcione el número de teléfono de la persona que otorga el consentimiento.",
+					"name": "phone",
+					"options": {},
+					"required": true,
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Dirección",
+					"help": "Proporcione la dirección postal de la persona que otorga el consentimiento.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Opción de Consentimiento",
+					"help": "Dar consentimiento o negar el consentimiento para el tratamiento de datos personales.",
+					"name": "consent",
+					"options": {
+						"options": ["Doy mi consentimiento", "NO doy mi consentimiento"]
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Firma",
+					"help": "Firme para confirmar la autenticidad del consentimiento.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

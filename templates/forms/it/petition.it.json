@@ -1,0 +1,55 @@
+{
+	"description": "Raccogli firme e supporta in modo efficiente con un modulo di petizione versatile.",
+	"name": "Modulo di Petizione",
+	"categories": ["Petizioni"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Petizione",
+			"text": "Descrivi brevemente lo scopo e i dettagli della petizione.",
+			"blocks": [
+				{
+					"label": "Nome Completo",
+					"help": "Inserisci il tuo nome completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Indirizzo Email",
+					"help": "Fornisci il tuo indirizzo email per ulteriori aggiornamenti e comunicazioni.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numero di Telefono",
+					"help": "Facoltativo: Inserisci il tuo numero di telefono per eventuali follow-up necessari.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Indirizzo",
+					"help": "Fornisci il tuo indirizzo di residenza per verificare il tuo supporto.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Firma",
+					"help": "Firma per confermare il tuo supporto alla petizione.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

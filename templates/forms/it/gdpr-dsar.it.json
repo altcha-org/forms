@@ -1,0 +1,84 @@
+{
+	"description": "Modello conforme al GDPR per la richiesta di accesso dei titolari dei dati.",
+	"name": "Modulo di Richiesta di Accesso dei Titolari dei Dati (DSAR)",
+	"categories": ["GDPR"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Modulo di Richiesta di Accesso dei Titolari dei Dati",
+			"text": "Si prega di compilare i campi seguenti per richiedere l'accesso ai dati personali detenuti dalla nostra organizzazione. La richiesta sarà elaborata tempestivamente in conformità con le normative sulla protezione dei dati. Grazie per la collaborazione.",
+			"blocks": [
+				{
+					"label": "Nome Completo del Richiedente",
+					"help": "Inserire il nome completo dell'individuo che presenta la DSAR.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Informazioni di Contatto del Richiedente",
+					"help": "Fornire i dettagli di contatto come l'indirizzo email e il numero di telefono per la comunicazione relativa alla richiesta.",
+					"name": "contact_information",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Indirizzo del Richiedente",
+					"help": "Indicare l'indirizzo postale del richiedente per l'invio di eventuali documenti o informazioni richiesti.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Identificazione del Richiedente",
+					"help": "Allegare una copia di un documento di identità valido (ad es. passaporto, patente di guida) per verificare l'identità del richiedente.",
+					"name": "identification",
+					"options": {
+						"accept": ".jpg,.jpeg,.pdf",
+						"maxFileSize": 10
+					},
+					"required": true,
+					"size": "md",
+					"type": "FileInput"
+				},
+				{
+					"label": "Metodo di Consegna Preferito",
+					"help": "Specificare come dovrebbero essere consegnate le informazioni richieste.",
+					"name": "delivery_method",
+					"options": {
+						"options": "Email, Posta ordinaria"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Descrizione della Richiesta",
+					"help": "Specificare i dettagli delle informazioni richieste, incluse eventuali tempistiche rilevanti o categorie di dati specifici.",
+					"name": "description_of_request",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Commenti Aggiuntivi",
+					"help": "Opzionale: Fornire eventuali informazioni aggiuntive o contesto relativo alla richiesta.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Firma",
+					"help": "Firmare per confermare l'autenticità della richiesta e accettare i termini e le condizioni.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

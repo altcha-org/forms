@@ -1,0 +1,69 @@
+{
+	"description": "Verwalten Sie die Teilnahme an Veranstaltungen und Gästedetails mit einem effizienten RSVP-Formular.",
+	"name": "RSVP-Formular",
+	"categories": ["Anmeldungen"],
+	"steps": [
+		{
+			"title": "RSVP für [Event Name]",
+			"text": "Um uns bei der Vorbereitung auf die Veranstaltung zu helfen, füllen Sie bitte dieses RSVP-Formular aus. Ihre Antwort gewährleistet, dass wir Sie und Ihre Gäste angemessen unterbringen können.",
+			"blocks": [
+				{
+					"label": "Vollständiger Name",
+					"help": "Bitte geben Sie Ihren vollständigen Namen ein.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "Texteingabe"
+				},
+				{
+					"label": "E-Mail-Adresse",
+					"help": "Geben Sie Ihre E-Mail-Adresse an, um Veranstaltungsaktualisierungen zu erhalten.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "E-Mail-Eingabe"
+				},
+				{
+					"label": "Telefonnummer",
+					"help": "Optionale: Geben Sie Ihre Telefonnummer für etwaige kurzfristige Änderungen oder Aktualisierungen ein.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "Telefonnummer-Eingabe"
+				},
+				{
+					"label": "Teilnahmebestätigung",
+					"help": "Wirst du an der Veranstaltung teilnehmen?",
+					"name": "attendance",
+					"options": {
+						"inline": true,
+						"options": "Ja, Nein"
+					},
+					"required": true,
+					"type": "Radioeingabe"
+				},
+				{
+					"label": "Anzahl der Gäste",
+					"help": "Geben Sie an, wie viele Gäste Sie mitbringen werden.",
+					"name": "number_of_guests",
+					"default": "1",
+					"options": {
+						"options": "Ja, Nein"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "Zahleneingabe"
+				},
+				{
+					"label": "Zusätzliche Kommentare",
+					"help": "Optional: Fügen Sie zusätzliche Informationen oder spezielle Anfragen hinzu.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "Mehrzeilige Texteingabe"
+				}
+			]
+		}
+	]
+}

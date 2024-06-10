@@ -1,0 +1,90 @@
+{
+	"description": "Optimieren Sie den Einstellungsprozess mit dieser ausführlichen Vorlage für Bewerbungsformulare.",
+	"name": "Bewerbungsformular",
+	"premium": true,
+	"steps": [
+		{
+			"title": "Treten Sie unserem Team bei!",
+			"text": "Wir freuen uns darauf, mehr über Sie und Ihren Beitrag zu unserem Team zu erfahren. Um sich um eine Position zu bewerben, füllen Sie bitte das unten stehende Formular aus. Stellen Sie sicher, dass alle erforderlichen Felder korrekt ausgefüllt sind und geben Sie so viele Details wie möglich an, um uns Ihre Qualifikationen und Erfahrungen zu verdeutlichen.",
+			"blocks": [
+				{
+					"label": "Vollständiger Name",
+					"help": "Geben Sie Ihren vollständigen Namen ein.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "E-Mail-Adresse",
+					"help": "Geben Sie Ihre E-Mail-Adresse für die Kommunikation bezüglich Ihrer Bewerbung an.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Telefonnummer",
+					"help": "Geben Sie Ihre Telefonnummer für Kontaktzwecke ein.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Angeworbene Position",
+					"help": "Geben Sie die Stelle an, für die Sie sich bewerben.",
+					"name": "position",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Lebenslauf/CV",
+					"help": "Laden Sie Ihren Lebenslauf oder CV im PDF- oder Word-Format hoch.",
+					"name": "resume",
+					"options": {},
+					"required": true,
+					"type": "FileInput"
+				},
+				{
+					"label": "LinkedIn-Profil",
+					"help": "Optional: Geben Sie einen Link zu Ihrem LinkedIn-Profil an.",
+					"name": "linkedin",
+					"options": {},
+					"required": false,
+					"type": "UrlInput"
+				},
+				{
+					"label": "Verfügbarkeit",
+					"help": "Geben Sie Ihre Verfügbarkeit für den Beginn der Position an.",
+					"name": "availability",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Gehaltsvorstellungen",
+					"help": "Optional: Geben Sie Ihre Gehaltsvorstellungen für die Position an.",
+					"name": "salary_expectations",
+					"options": {
+						"unit": "GBP / Monat"
+					},
+					"required": false,
+					"size": "sm",
+					"type": "NumberInput"
+				},
+				{
+					"label": "Zusätzliche Informationen",
+					"help": "Optional: Fügen Sie alle zusätzlichen Informationen hinzu, die Sie für relevant für Ihre Bewerbung halten.",
+					"name": "additional_information",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

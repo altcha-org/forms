@@ -1,0 +1,79 @@
+{
+	"description": "Demander l'accus&#233; de r&#233;ception des politiques facilement avec le formulaire simple.",
+	"name": "Formulaire d'accusé de réception de la politique",
+	"categories": ["Employés"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulaire d'accusé de réception de la politique",
+			"text": "Veuillez remplir les champs ci-dessous pour confirmer que vous avez lu, compris et acceptez de vous conformer à la politique spécifiée. Votre reconnaissance est essentielle pour garantir que tous les employés soient informés et respectent nos politiques d'entreprise.",
+			"blocks": [
+				{
+					"label": "Nom de l'employé",
+					"help": "Entrez votre nom complet.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Adresse e-mail",
+					"help": "Fournir votre adresse e-mail pour toute communication concernant votre demande.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numéro de téléphone",
+					"help": "Facultatif : saisissez votre numéro de téléphone pour tout suivi nécessaire.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Titre de la politique",
+					"help": "Spécifiez le titre de la politique faisant l'objet de l'accusé de réception.",
+					"name": "policy_title",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Description de la politique",
+					"help": "Décrivez brièvement la politique ou incluez un résumé.",
+					"name": "policy_description",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Date de la politique",
+					"help": "Entrez la date d'entrée en vigueur de la politique.",
+					"name": "policy_date",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "J'ai lu et compris la politique.",
+					"name": "acknowledgement_statement",
+					"options": {},
+					"required": true,
+					"type": "CheckboxInput"
+				},
+				{
+					"label": "Signature",
+					"help": "Signez pour confirmer votre reconnaissance et votre accord avec la politique.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

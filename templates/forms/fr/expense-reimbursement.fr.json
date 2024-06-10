@@ -1,0 +1,129 @@
+{
+	"description": "Simplifiez le processus de demande et d'approbation des remboursements de frais.",
+	"name": "Formulaire de Remboursement de Frais",
+	"categories": ["Employés"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Demande de Remboursement de Frais",
+			"text": "Ce formulaire est conçu pour garantir le traitement rapide et précis de vos dépenses. Veuillez remplir tous les champs nécessaires avec autant de détails que possible et joindre les reçus ou documents justificatifs pertinents.",
+			"blocks": [
+				{
+					"label": "Nom de l'Employé",
+					"help": "Saisissez votre nom complet.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Adresse E-mail",
+					"help": "Fournissez votre adresse e-mail pour la communication concernant le remboursement.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numéro de Téléphone",
+					"help": "Indiquez votre numéro de téléphone pour tout suivi nécessaire.",
+					"name": "phone",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Nom du Manager/Superviseur",
+					"help": "Saisissez le nom de votre manager ou superviseur pour l'approbation.",
+					"name": "supervisor",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Date de la Dépense",
+					"help": "Précisez la date à laquelle la dépense a été engagée.",
+					"name": "date",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Catégorie de la Dépense",
+					"help": "Sélectionnez la catégorie de la dépense.",
+					"name": "category",
+					"options": {
+						"options": "Voyage, Repas, Fournitures de Bureau, Autre"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "SelectInput"
+				},
+				{
+					"label": "Description de la Dépense",
+					"help": "Fournissez une brève description de la dépense.",
+					"name": "expense_description",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Montant",
+					"help": "Saisissez le montant total à rembourser.",
+					"name": "amount",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "NumberInput"
+				},
+				{
+					"label": "Devise",
+					"help": "Sélectionnez la devise du montant de la dépense.",
+					"name": "currency",
+					"default": "GBP",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "TextInput"
+				},
+				{
+					"label": "Méthode de Paiement Utilisée",
+					"help": "Indiquez la méthode utilisée pour payer la dépense.",
+					"name": "payment_method",
+					"options": {
+						"options": "Carte de Crédit Personnelle, Carte de Crédit Professionnelle, Espèces, Autre"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "SelectInput"
+				},
+				{
+					"label": "Pièce Jointe du Reçu",
+					"help": "Téléchargez une copie du reçu ou tout document justificatif.",
+					"name": "receipt",
+					"options": {},
+					"required": true,
+					"type": "FileInput"
+				},
+				{
+					"label": "Notes Supplémentaires",
+					"help": "Facultatif : Fournissez toute information supplémentaire ou contexte pour la dépense.",
+					"name": "notes",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Signature",
+					"help": "Signez pour certifier l'exactitude des informations fournies.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,55 @@
+{
+	"description": "Recolher assinaturas e oferecer suporte de forma eficiente com um formulário de petição versátil.",
+	"name": "Formulário de Petição",
+	"categories": ["Petições"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Petição",
+			"text": "Descreva brevemente o propósito e os detalhes da petição.",
+			"blocks": [
+				{
+					"label": "Nome Completo",
+					"help": "Por favor, insira seu nome completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Endereço de Email",
+					"help": "Forneça seu endereço de email para atualizações e comunicação futuras.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Telefone",
+					"help": "Opcional: Insira seu número de telefone para qualquer acompanhamento necessário.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Endereço",
+					"help": "Forneça seu endereço residencial para verificar seu apoio.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Assinatura",
+					"help": "Assine para confirmar seu apoio à petição.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

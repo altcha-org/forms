@@ -1,0 +1,68 @@
+{
+	"description": "Permita a los clientes programar citas directamente desde su sitio web.",
+	"name": "Formulario de Reserva de Citas",
+	"categories": ["Registros"],
+	"steps": [
+		{
+			"title": "Reserve su Cita",
+			"text": "Para reservar su cita, complete el formulario a continuación con los detalles necesarios. Esto nos ayudará a asegurar que podamos satisfacer su horario preferido y sus necesidades de servicio.",
+			"blocks": [
+				{
+					"label": "Nombre Completo",
+					"help": "Por favor ingrese su nombre completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Correo Electrónico",
+					"help": "Proporcione su dirección de correo electrónico para recibir confirmaciones y actualizaciones de citas.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Teléfono",
+					"help": "Ingrese su número de teléfono para cualquier seguimiento o recordatorios necesarios.",
+					"name": "phone",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Fecha de la Cita",
+					"help": "Seleccione la fecha y hora deseadas para su cita.",
+					"name": "date_time",
+					"options": {
+						"datetime": true,
+						"min": "now"
+					},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Servicio Requerido",
+					"help": "Seleccione el tipo de servicio que necesita entre las opciones disponibles.",
+					"name": "services",
+					"options": {
+						"options": "Servicio 1, Servicio 2, Servicio 3"
+					},
+					"required": true,
+					"type": "MultiCheckboxInput"
+				},
+				{
+					"label": "Notas Adicionales",
+					"help": "Opcional: Proporcione cualquier información adicional o solicitudes especiales para su cita.",
+					"name": "notes",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}

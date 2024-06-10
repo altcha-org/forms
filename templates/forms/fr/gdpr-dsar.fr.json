@@ -1,0 +1,84 @@
+{
+	"description": "Modèle conforme au RGPD pour la Demande d'Accès des Personnes Concernées aux Données.",
+	"name": "Formulaire de Demande d'Accès des Personnes Concernées (DSAR)",
+	"categories": ["RGPD"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulaire de Demande d'Accès des Personnes Concernées",
+			"text": "Veuillez remplir les champs ci-dessous pour demander l'accès à vos données personnelles détenues par notre organisation. Votre demande sera traitée rapidement conformément aux réglementations sur la protection des données. Merci pour votre coopération.",
+			"blocks": [
+				{
+					"label": "Nom Complet du Demandeur",
+					"help": "Entrez le nom complet de la personne faisant la DSAR.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Coordonnées du Demandeur",
+					"help": "Fournissez des coordonnées telles qu'une adresse e-mail et un numéro de téléphone pour la communication relative à la demande.",
+					"name": "contact_information",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Adresse du Demandeur",
+					"help": "Fournissez l'adresse postale du demandeur pour l'envoi de tout document ou information demandé.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Identification du Demandeur",
+					"help": "Joignez une copie d'un document d'identification valide (par ex., passeport, permis de conduire) pour vérifier l'identité du demandeur.",
+					"name": "identification",
+					"options": {
+						"accept": ".jpg,.jpeg,.pdf",
+						"maxFileSize": 10
+					},
+					"required": true,
+					"size": "md",
+					"type": "FileInput"
+				},
+				{
+					"label": "Méthode de Livraison Préférée",
+					"help": "Spécifiez comment les informations demandées doivent être livrées.",
+					"name": "delivery_method",
+					"options": {
+						"options": "E-mail, Courrier postal"
+					},
+					"required": true,
+					"type": "RadioInput"
+				},
+				{
+					"label": "Description de la Demande",
+					"help": "Précisez les détails des informations demandées, y compris les périodes pertinentes ou les catégories de données spécifiques.",
+					"name": "description_of_request",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Commentaires Supplémentaires",
+					"help": "Facultatif : Fournissez toute information supplémentaire ou contexte lié à la demande.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Signature",
+					"help": "Signez pour confirmer l'authenticité de la demande et accepter les termes et conditions.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

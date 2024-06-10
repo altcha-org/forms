@@ -1,0 +1,64 @@
+{
+	"description": "Stellen Sie die DSGVO-Konformität mit dem Formular zur Datenspeicherbestätigung sicher.",
+	"name": "Formular zur Bestätigung der Datenretentionsrichtlinie",
+	"categories": ["DSGVO"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formular zur Bestätigung der Datenretentionsrichtlinie",
+			"text": "Bitte füllen Sie die folgenden Felder aus, um zu bestätigen, dass Sie die Datenspeicherungsrichtlinie der Organisation gelesen und verstanden haben. Ihre Bestätigung ist entscheidend für die Einhaltung der Datenschutzbestimmungen. Vielen Dank für Ihre Mitarbeit.",
+			"blocks": [
+				{
+					"label": "Mitarbeitername",
+					"help": "Geben Sie den vollständigen Namen des Mitarbeiters ein, der die Richtlinie bestätigt.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "Texteingabe"
+				},
+				{
+					"label": "E-Mail-Adresse",
+					"help": "Geben Sie die E-Mail-Adresse für die Kommunikation bezüglich der Bestätigung an.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "E-Mail-Eingabe"
+				},
+				{
+					"label": "Telefonnummer",
+					"help": "Optional: Geben Sie die Telefonnummer für eventuelle Nachverfolgungen ein.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "Telefonnummer-Eingabe"
+				},
+				{
+					"label": "Datum der Bestätigung",
+					"help": "Geben Sie das Datum an, an dem die Bestätigung erfolgt.",
+					"name": "date",
+					"default": "jetzt",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "Datum-Zeit-Eingabe"
+				},
+				{
+					"label": "Ich habe die Datenschutzerhaltungspolitik gelesen und verstanden.",
+					"name": "acknowledgement_statement",
+					"options": {},
+					"required": true,
+					"type": "Checkbox-Eingabe"
+				},
+				{
+					"label": "Unterschrift",
+					"help": "Unterschreiben Sie zur Bestätigung Ihrer Zustimmung und Vereinbarung mit der Richtlinie.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "Unterschriften-Eingabe"
+				}
+			]
+		}
+	]
+}

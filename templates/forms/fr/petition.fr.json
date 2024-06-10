@@ -1,0 +1,55 @@
+{
+	"description": "Collectez des signatures et soutenez efficacement avec un formulaire de pétition polyvalent.",
+	"name": "Formulaire de pétition",
+	"categories": ["Pétitions"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Pétition",
+			"text": "Décrivez brièvement l'objectif et les détails de la pétition.",
+			"blocks": [
+				{
+					"label": "Nom complet",
+					"help": "Veuillez saisir votre nom complet.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Adresse e-mail",
+					"help": "Fournissez votre adresse e-mail pour des mises à jour et des communications ultérieures.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numéro de téléphone",
+					"help": "Facultatif : saisissez votre numéro de téléphone pour tout suivi nécessaire.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Adresse",
+					"help": "Fournissez votre adresse résidentielle pour vérifier votre soutien.",
+					"name": "address",
+					"options": {},
+					"required": true,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Signature",
+					"help": "Signez pour confirmer votre soutien à la pétition.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

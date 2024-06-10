@@ -1,0 +1,129 @@
+{
+	"description": "Recueillir des feedbacks sur les sessions de formation pour améliorer les programmes futurs.",
+	"name": "Formulaire d'évaluation de la formation",
+	"categories": ["Employés"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Nous apprécions votre retour !",
+			"text": "Merci d'avoir participé à notre session de formation. Vos commentaires sont essentiels pour nous aider à améliorer la qualité de nos programmes de formation. Veuillez prendre quelques instants pour remplir ce formulaire d'évaluation et partager vos réflexions sur différents aspects de la formation.",
+			"blocks": [
+				{
+					"label": "Nom du participant",
+					"help": "Veuillez saisir votre nom complet.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Adresse e-mail",
+					"help": "Indiquez votre adresse e-mail pour un suivi ou une communication ultérieure.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Titre de la formation",
+					"help": "Précisez le titre de la session de formation à laquelle vous avez participé.",
+					"name": "training_title",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Date de la formation",
+					"help": "Saisissez la date de la session de formation.",
+					"name": "training_date",
+					"options": {},
+					"required": true,
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Nom du formateur",
+					"help": "Indiquez le nom du formateur ou instructeur.",
+					"name": "trainer_name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Satisfaction globale",
+					"help": "Évaluez votre satisfaction globale par rapport à la formation de 1 à 5 étoiles.",
+					"name": "overall_satisfaction",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Qualité du contenu de la formation",
+					"help": "Évaluez la qualité du contenu de la formation de 1 à 5 étoiles.",
+					"name": "training_content_quality",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Efficacité du formateur",
+					"help": "Évaluez l'efficacité du formateur dans la présentation du matériel de 1 à 5 étoiles.",
+					"name": "trainer_effectiveness",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Structure du cours",
+					"help": "Évaluez la structure et l'organisation du cours de 1 à 5 étoiles.",
+					"name": "course_structure",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Pertinence par rapport au travail",
+					"help": "Évaluez la pertinence de la formation par rapport à votre travail de 1 à 5 étoiles.",
+					"name": "relevance_to_job",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Rythme de la formation",
+					"help": "Évaluez le rythme auquel la formation a été menée de 1 à 5 étoiles.",
+					"name": "pace_of_training",
+					"options": {},
+					"required": true,
+					"type": "RatingInput"
+				},
+				{
+					"label": "Suggestions d'amélioration",
+					"help": "Fournissez toutes suggestions pour améliorer la session de formation.",
+					"name": "suggestions",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Commentaires supplémentaires",
+					"help": "Optionnel : Inclure tout commentaire supplémentaire ou feedback sur la session de formation.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Recommanderiez-vous cette formation ?",
+					"help": "Recommanderiez-vous cette formation à d'autres ?",
+					"name": "would_recommend",
+					"options": {
+						"inline": true,
+						"options": "Oui, Non"
+					},
+					"required": false,
+					"type": "RadioInput"
+				}
+			]
+		}
+	]
+}

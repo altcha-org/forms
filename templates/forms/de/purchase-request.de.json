@@ -1,0 +1,167 @@
+{
+	"description": "Fordern Sie Hardware- oder Softwarekäufe einfach mit einem detaillierten Antragsformular an.",
+	"name": "Antragsformular für den Kauf von Hardware oder Software",
+	"categories": ["Mitarbeiter"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Antragsformular für den Kauf von Hardware oder Software",
+			"text": "Bitte füllen Sie die folgenden Felder aus, um neue Hardware oder Software für Ihre Abteilung anzufordern. Detaillierte Informationen helfen uns, Ihren Antrag schnell zu bearbeiten.",
+			"blocks": [
+				{
+					"label": "Mitarbeitername",
+					"help": "Bitte geben Sie Ihren vollständigen Namen ein.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "Eingabefeld"
+				},
+				{
+					"label": "E-Mail-Adresse",
+					"help": "Geben Sie Ihre E-Mail-Adresse für die Kommunikation bezüglich Ihres Antrags an.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "E-Mail-Eingabe"
+				},
+				{
+					"label": "Telefonnummer",
+					"help": "Geben Sie Ihre Telefonnummer für eventuelle Rückfragen an.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "Telefonnummer-Eingabe"
+				},
+				{
+					"label": "Abteilung",
+					"help": "Geben Sie Ihre Abteilung oder Ihr Team an.",
+					"name": "department",
+					"options": {},
+					"required": true,
+					"type": "Eingabefeld"
+				},
+				{
+					"label": "Name des Managers/Vorgesetzten",
+					"help": "Geben Sie den Namen Ihres Vorgesetzten oder Managers für die Genehmigung an.",
+					"name": "supervisor",
+					"options": {},
+					"required": true,
+					"type": "Eingabefeld"
+				},
+				{
+					"label": "Art des Kaufs",
+					"help": "Wählen Sie aus, ob Sie Hardware oder Software anfordern.",
+					"name": "type",
+					"options": {
+						"options": "Software, Hardware"
+					},
+					"required": true,
+					"type": "Radio-Auswahl"
+				},
+				{
+					"label": "Produktname",
+					"help": "Geben Sie den Namen des Hardware- oder Softwareprodukts an.",
+					"name": "product_name",
+					"options": {},
+					"required": true,
+					"type": "Eingabefeld"
+				},
+				{
+					"label": "Produktbeschreibung",
+					"help": "Geben Sie eine kurze Beschreibung des Produkts an.",
+					"name": "product_description",
+					"options": {},
+					"required": true,
+					"type": "Mehrzeiliges Texteingabefeld"
+				},
+				{
+					"label": "Name des Lieferanten",
+					"help": "Geben Sie den Namen des Lieferanten an.",
+					"name": "vendor_name",
+					"options": {},
+					"required": true,
+					"type": "Eingabefeld"
+				},
+				{
+					"label": "Kontaktinformationen des Lieferanten",
+					"help": "Geben Sie die Kontaktdaten des Lieferanten an (Telefonnummer, E-Mail, Website).",
+					"name": "product_contact",
+					"options": {},
+					"required": true,
+					"type": "Mehrzeiliges Texteingabefeld"
+				},
+				{
+					"label": "Menge",
+					"help": "Geben Sie die Menge der benötigten Hardware oder Software an.",
+					"name": "quantity",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "Zahlen-Eingabe"
+				},
+				{
+					"label": "Kosten pro Einheit",
+					"help": "Geben Sie den Preis pro Einheit des Produkts an.",
+					"name": "cost_per_unit",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "Zahlen-Eingabe"
+				},
+				{
+					"label": "Begründung für den Kauf",
+					"help": "Geben Sie eine detaillierte Erklärung dafür an, warum die Hardware oder Software benötigt wird.",
+					"name": "justification",
+					"options": {},
+					"required": true,
+					"type": "Mehrzeiliges Texteingabefeld"
+				},
+				{
+					"label": "Budgetcode",
+					"help": "Geben Sie den Budgetcode oder die Kontonummer für den Kauf an.",
+					"name": "budget_code",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "Eingabefeld"
+				},
+				{
+					"label": "Lieferdatum erforderlich",
+					"help": "Geben Sie das Datum an, an dem die Hardware oder Software benötigt wird.",
+					"name": "delivery_date",
+					"options": {
+						"min": "jetzt"
+					},
+					"required": false,
+					"size": "sm",
+					"type": "Datum und Uhrzeit-Eingabe"
+				},
+				{
+					"label": "Lieferort",
+					"help": "Geben Sie die Lieferadresse oder den Ort an, an den das Produkt gesendet werden soll.",
+					"name": "delivery_location",
+					"options": {},
+					"required": true,
+					"type": "Mehrzeiliges Texteingabefeld"
+				},
+				{
+					"label": "Zusätzliche Kommentare oder besondere Anweisungen",
+					"help": "Optional: Fügen Sie weitere Kommentare oder besondere Anweisungen zum Kauf hinzu.",
+					"name": "comments",
+					"options": {},
+					"required": false,
+					"type": "Mehrzeiliges Texteingabefeld"
+				},
+				{
+					"label": "Unterschrift",
+					"help": "Unterschreiben Sie, um die Richtigkeit der angegebenen Informationen zu bestätigen.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "Unterschriftenfeld"
+				}
+			]
+		}
+	]
+}

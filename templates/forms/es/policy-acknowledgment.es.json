@@ -1,0 +1,79 @@
+{
+	"description": "Solicite fácilmente el reconocimiento de políticas con el formulario directo.",
+	"name": "Formulario de Reconocimiento de Políticas",
+	"categories": ["Empleados"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulario de Reconocimiento de Políticas",
+			"text": "Por favor complete los campos a continuación para confirmar que ha leído, comprendido y acepta cumplir con la política especificada. Su reconocimiento es esencial para garantizar que todos los empleados estén informados y cumplan con las políticas de nuestra empresa.",
+			"blocks": [
+				{
+					"label": "Nombre del Empleado",
+					"help": "Ingrese su nombre completo.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Dirección de Correo Electrónico",
+					"help": "Proporcione su dirección de correo electrónico para comunicarse sobre su solicitud.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Número de Teléfono",
+					"help": "Opcional: Ingrese su número de teléfono para cualquier seguimiento necesario.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Título de la Política",
+					"help": "Especifique el título de la política que se está reconociendo.",
+					"name": "policy_title",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Descripción de la Política",
+					"help": "Describa brevemente la política o incluya un resumen.",
+					"name": "policy_description",
+					"options": {},
+					"required": true,
+					"type": "MultiLineTextInput"
+				},
+				{
+					"label": "Fecha de la Política",
+					"help": "Ingrese la fecha efectiva de la política.",
+					"name": "policy_date",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "He leído y entendido la política.",
+					"name": "acknowledgement_statement",
+					"options": {},
+					"required": true,
+					"type": "CheckboxInput"
+				},
+				{
+					"label": "Firma",
+					"help": "Firme para confirmar su reconocimiento y acuerdo con la política.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

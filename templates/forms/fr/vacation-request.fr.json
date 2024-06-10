@@ -1,0 +1,81 @@
+{
+	"description": "Permettez aux employés de demander des congés et de gérer les approbations.",
+	"name": "Formulaire de demande de congé",
+	"categories": ["Employés"],
+	"premium": true,
+	"steps": [
+		{
+			"title": "Formulaire de demande de congé",
+			"text": "Pour garantir que votre congé est approuvé et documenté correctement, veuillez remplir le formulaire avec tous les détails nécessaires.",
+			"blocks": [
+				{
+					"label": "Nom de l'employé",
+					"help": "Entrez votre nom complet.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Adresse e-mail",
+					"help": "Fournissez votre adresse e-mail pour la communication concernant votre demande.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Numéro de téléphone",
+					"help": "Entrez votre numéro de téléphone pour tout suivi nécessaire.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Département",
+					"help": "Spécifiez votre département ou équipe.",
+					"name": "department",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Nom du responsable/superviseur",
+					"help": "Entrez le nom de votre superviseur ou manager pour l'approbation.",
+					"name": "supervisor",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "Date de début du congé",
+					"help": "Sélectionnez la date de début de votre congé.",
+					"name": "date_start",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Date de fin du congé",
+					"help": "Sélectionnez la date de fin de votre congé.",
+					"name": "date_end",
+					"options": {},
+					"required": true,
+					"size": "sm",
+					"type": "DateTimeInput"
+				},
+				{
+					"label": "Signature",
+					"help": "Signez pour vérifier l'exactitude des informations fournies.",
+					"name": "signature",
+					"options": {},
+					"required": true,
+					"type": "SignatureInput"
+				}
+			]
+		}
+	]
+}

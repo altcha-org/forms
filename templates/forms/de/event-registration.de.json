@@ -1,0 +1,71 @@
+{
+	"description": "Vereinfachen Sie die Anmeldung für Veranstaltungen mit diesem umfassenden Anmeldeformular.",
+	"name": "Veranstaltungsanmeldeformular",
+	"categories": ["Anmeldungen"],
+	"premium": false,
+	"steps": [
+		{
+			"title": "Willkommen zur Veranstaltungsanmeldung!",
+			"text": "Vielen Dank für Ihr Interesse an unserer Veranstaltung. Um Ihre Anmeldung abzuschließen und sicherzustellen, dass alles für Ihre Teilnahme vorbereitet ist, füllen Sie bitte das untenstehende Formular mit den erforderlichen Angaben aus.",
+			"blocks": [
+				{
+					"label": "Ihr Name",
+					"help": "Der vollständige Name des Teilnehmers.",
+					"name": "name",
+					"options": {},
+					"required": true,
+					"type": "TextInput"
+				},
+				{
+					"label": "E-Mail-Adresse",
+					"help": "Kontakt-E-Mail für Veranstaltungskommunikation.",
+					"name": "email",
+					"options": {},
+					"required": true,
+					"type": "EmailInput"
+				},
+				{
+					"label": "Telefonnummer",
+					"help": "Optionale Telefonnummer für eventbezogene Updates.",
+					"name": "phone",
+					"options": {},
+					"required": false,
+					"size": "sm",
+					"type": "PhoneInput"
+				},
+				{
+					"label": "Organisation/Firma",
+					"help": "Name der Organisation oder Firma (falls zutreffend).",
+					"name": "organization",
+					"options": {},
+					"required": false,
+					"type": "TextInput"
+				},
+				{
+					"label": "Berufsbezeichnung/Position",
+					"help": "Die Berufsbezeichnung oder Position des Teilnehmers (falls zutreffend).",
+					"name": "position",
+					"options": {},
+					"required": false,
+					"type": "TextInput"
+				},
+				{
+					"label": "Rechnungsadresse",
+					"help": "Die Rechnungsadresse des Teilnehmers (falls zutreffend).",
+					"name": "billing_address",
+					"options": {},
+					"required": false,
+					"type": "AddressInput"
+				},
+				{
+					"label": "Besondere Anforderungen",
+					"help": "Nennen Sie spezielle Anforderungen oder benötigte Unterbringungen.",
+					"name": "special_requirements",
+					"options": {},
+					"required": false,
+					"type": "MultiLineTextInput"
+				}
+			]
+		}
+	]
+}
