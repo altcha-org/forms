@@ -402,7 +402,7 @@
 	},
 	"notification": {
 		"connection_successful": "Conexão bem sucedida",
-		"success": "Sucesso"
+		"success": "Alterações aplicadas"
 	},
 	"period": {
 		"month": "mo",
@@ -566,6 +566,7 @@
 		"requires_javascript": "Esta página requer JavaScript para funcionar corretamente. Por favor, ative o JavaScript no seu navegador.",
 		"response_encrypted": "Protegido pelo Encryption Shield.",
 		"security_check": "Por favor, complete a verificação de segurança para enviar o formulário.",
+		"select_region_to_register": "Selecione uma região diferente para autenticar ou registrar.",
 		"share_encryption_key": "Compartilhe a chave privada baixada com seus colegas de equipe que precisam de acesso ao aplicativo. Caso contrário, eles não conseguirão ler os dados criptografados. Eles podem importar as chaves em seus perfis.",
 		"sign": "Assinar",
 		"sign_form": "Assine o formulário",
@@ -581,6 +582,7 @@
 		"upgrade_for_premium_templates": "Faça upgrade do seu plano para acessar modelos e recursos premium.",
 		"users_account_name": "Conta de {name}",
 		"user_not_found_info": "O endereço de e-mail __{email}__ não foi encontrado em nossa base de dados.\n\nPara se registrar, por favor aceite os Termos de Serviço e clique no botão _Registrar_.",
+		"user_not_found_passkeys": "No próximo passo, __você se autenticará usando seus dados biométricos (Passkeys)__. Siga as instruções na tela para completar seu registro.",
 		"using_plan": "Plano {plan}",
 		"verify_email": "Precisamos verificar a propriedade do seu e-mail. Por favor, clique em Verificar para confirmar.",
 		"warning_no_encryption_keys": "Para proteger seus dados com criptografia, crie uma nova chave de criptografia.",

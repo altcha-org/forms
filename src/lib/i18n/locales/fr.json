@@ -402,7 +402,7 @@
 	},
 	"notification": {
 		"connection_successful": "Connexion réussie",
-		"success": "Succès"
+		"success": "Modifications appliquées"
 	},
 	"period": {
 		"month": "mois",
@@ -566,6 +566,7 @@
 		"requires_javascript": "Cette page nécessite JavaScript pour fonctionner correctement. Veuillez activer JavaScript dans votre navigateur.",
 		"response_encrypted": "Protégé avec le Bouclier de Chiffrement.",
 		"security_check": "Veuillez compléter le contrôle de sécurité pour soumettre le formulaire.",
+		"select_region_to_register": "Sélectionnez une région différente pour vous authentifier ou vous inscrire.",
 		"share_encryption_key": "Partagez la clé privée téléchargée avec vos coéquipiers qui ont besoin d'accéder à l'application. Sinon, ils ne pourront pas lire les données chiffrées. Ils peuvent importer des clés dans leur profil.",
 		"sign": "Signer",
 		"sign_form": "Signer le formulaire",
@@ -581,6 +582,7 @@
 		"upgrade_for_premium_templates": "Mettez à niveau votre plan pour accéder aux modèles et fonctionnalités premium.",
 		"users_account_name": "Compte de {name}",
 		"user_not_found_info": "L'adresse e-mail __{email}__ n'a pas été trouvée dans notre base de données.\n\nPour vous inscrire, veuillez accepter les conditions d'utilisation et cliquer sur le bouton _S'inscrire_.",
+		"user_not_found_passkeys": "À l'étape suivante, __vous vous authentifierez en utilisant vos données biométriques (Passkeys)__. Suivez les instructions à l'écran pour compléter votre inscription.",
 		"using_plan": "Plan {plan}",
 		"verify_email": "Nous devons vérifier la propriété de votre e-mail. Veuillez cliquer sur Vérifier pour confirmer.",
 		"warning_no_encryption_keys": "Pour sécuriser vos données avec le chiffrement, créez une nouvelle clé de chiffrement.",

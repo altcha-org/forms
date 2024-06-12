@@ -402,7 +402,7 @@
 	},
 	"notification": {
 		"connection_successful": "Connessione riuscita",
-		"success": "Successo"
+		"success": "Modifiche applicate"
 	},
 	"period": {
 		"month": "mo",
@@ -566,6 +566,7 @@
 		"requires_javascript": "Questa pagina richiede JavaScript per funzionare correttamente. Abilita JavaScript nel tuo browser.",
 		"response_encrypted": "Protetto con lo scudo di crittografia.",
 		"security_check": "Completa il controllo di sicurezza per inviare il modulo.",
+		"select_region_to_register": "Seleziona una regione diversa per autenticarti o registrarti.",
 		"share_encryption_key": "Condividi la chiave privata scaricata con i tuoi compagni di squadra che hanno bisogno di accedere all'app. Altrimenti, non potranno leggere i dati criptati. Possono importare le chiavi nel loro profilo.",
 		"sign": "Firma",
 		"sign_form": "Firma il modulo",
@@ -581,6 +582,7 @@
 		"upgrade_for_premium_templates": "Aggiorna il tuo piano per accedere a modelli e funzionalità premium.",
 		"users_account_name": "Account di {name}",
 		"user_not_found_info": "L'indirizzo email __{email}__ non è stato trovato nel nostro database.\n\nPer registrarti, per favore accetta i Termini di Servizio e clicca sul pulsante _Registrati_.",
+		"user_not_found_passkeys": "Nel passaggio successivo, __ti autenticherai utilizzando i tuoi dati biometrici (Passkeys)__. Segui le istruzioni sullo schermo per completare la registrazione.",
 		"using_plan": "Piano {plan}",
 		"verify_email": "Abbiamo bisogno di verificare la proprietà della tua email. Per favore clicca su Verifica per confermarla.",
 		"warning_no_encryption_keys": "Per proteggere i tuoi dati con la crittografia, crea una nuova chiave di crittografia.",

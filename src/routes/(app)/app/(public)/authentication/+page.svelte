@@ -36,6 +36,7 @@
 	let registerEmail: string | undefined = void 0;
 
 	$: region = data.region;
+	$: privacyPolicyUrl = data.privacyPolicyUrl;
 	$: termsOfServiceUrl = data.termsOfServiceUrl;
 
 	onMount(() => {
@@ -200,9 +201,13 @@
 			value={$_('text.user_not_found_info', { values: { email: registerEmail } })}
 		/>
 
-		<div>
+		<div class="flex gap-3">
 			<span class="inline-flex gap-1">
 				<a href={termsOfServiceUrl} target="_blank" class="link">{$_('label.terms_of_service')}</a>
+				<ExternalIcon class="w-3 h-3" />
+			</span>
+			<span class="inline-flex gap-1">
+				<a href={privacyPolicyUrl} target="_blank" class="link">{$_('label.privacy_policy')}</a>
 				<ExternalIcon class="w-3 h-3" />
 			</span>
 		</div>
@@ -214,5 +219,33 @@
 				required: true
 			}}
 		/>
+
+		<div class="flex items-start gap-3 border-y border-base-300 py-6">
+			<div>
+				<FingerprintIcon class="w-6 h-6 mt-0.5" />
+			</div>
+
+			<div>
+				<MarkdownRenderer
+					value={$_('text.user_not_found_passkeys')}
+				/>
+			</div>
+		</div>
+
+		{#if data.availableRegions.length > 1}
+		<div class="flex flex-col gap-1 items-center justify-center text-sm">
+			<div class="text-center">
+				<span class="opacity-60">{$_('text.select_region_to_register')}</span>
+			</div>
+
+			<div class="flex gap-3 items-center justify-center">
+				{#each data.availableRegions as { region, url }}
+					<a href={url} class="link">
+						<span>{$_('region.' + region)}</span>
+					</a>
+				{/each}
+			</div>
+		</div>
+		{/if}
 	</div>
 </Modal>

@@ -82,7 +82,7 @@
 		{/if}
 	{/await}
 
-	<div class="flex flex-wrap gap-8">
+	<div class="flex flex-wrap lg:flex-nowrap gap-8">
 		<div class="grow flex flex-col gap-6">
 			{#if data.forms.length === 0}
 				<div class="prose">

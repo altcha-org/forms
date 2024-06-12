@@ -402,7 +402,7 @@
 	},
 	"notification": {
 		"connection_successful": "Verbindung erfolgreich",
-		"success": "Erfolg"
+		"success": "Änderungen angewendet"
 	},
 	"period": {
 		"month": "Monat",
@@ -566,6 +566,7 @@
 		"requires_javascript": "Diese Seite erfordert JavaScript, um ordnungsgemäß zu funktionieren. Bitte aktivieren Sie JavaScript in Ihrem Browser.",
 		"response_encrypted": "Geschützt mit dem Verschlüsselungsschutz.",
 		"security_check": "Bitte schließen Sie die Sicherheitsüberprüfung ab, um das Formular einzureichen.",
+		"select_region_to_register": "Wählen Sie eine andere Region, um sich zu authentifizieren oder zu registrieren.",
 		"share_encryption_key": "Teilen Sie den heruntergeladenen privaten Schlüssel mit Ihren Teamkollegen, die Zugriff auf die App benötigen. Andernfalls können sie nicht auf die verschlüsselten Daten zugreifen. Sie können Schlüssel in ihrem Profil importieren.",
 		"sign": "Unterschreiben",
 		"sign_form": "Unterschreiben Sie das Formular",
@@ -581,6 +582,7 @@
 		"upgrade_for_premium_templates": "Aktualisieren Sie Ihren Plan, um auf Premium-Vorlagen und Funktionen zuzugreifen.",
 		"users_account_name": "Konto von {name}",
 		"user_not_found_info": "Die E-Mail-Adresse __{email}__ wurde nicht in unserer Datenbank gefunden.\n\nZur Registrierung akzeptieren Sie bitte die Nutzungsbedingungen und klicken Sie auf die Schaltfläche _Registrieren_.",
+		"user_not_found_passkeys": "Im nächsten Schritt __werden Sie sich mit Ihren biometrischen Daten (Passkeys) authentifizieren__. Folgen Sie den Anweisungen auf dem Bildschirm, um Ihre Registrierung abzuschließen.",
 		"using_plan": "Plan verwenden: {plan}",
 		"verify_email": "Wir müssen den Besitz Ihrer E-Mail verifizieren. Bitte klicken Sie auf Verifizieren, um dies zu bestätigen.",
 		"warning_no_encryption_keys": "Um Ihre Daten mit Verschlüsselung zu sichern, erstellen Sie einen neuen Verschlüsselungsschlüssel.",

@@ -67,7 +67,7 @@ export class UsersService {
 		role?: 'admin' | 'member'
 	) {
 		const t = await i18n(data.locale);
-		const name = data.name || data.email?.split('@')[0] || '';
+		const name = data.name || data.email?.split(/[\@\+]/)[0] || '';
 		const plan = await plansService.getDefaultPlan();
 		let user: IUserSchema | undefined = void 0;
 		try {

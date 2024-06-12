@@ -401,8 +401,8 @@
 		"users": "Users"
 	},
 	"notification": {
-		"connection_successful": "Connection successful",
-		"success": "Success"
+		"connection_successful": "Connection Successful",
+		"success": "Changes Applied"
 	},
 	"period": {
 		"month": "mo",
@@ -566,6 +566,7 @@
 		"requires_javascript": "This page requires JavaScript to function properly. Please enable JavaScript in your browser.",
 		"response_encrypted": "Protected with encryption shield.",
 		"security_check": "Please complete the security check to submit the form.",
+		"select_region_to_register": "Select a different region to authenticate or register.",
 		"share_encryption_key": "Share the downloaded private key with your team-mates who need access to the app. Otherwise, they won't be able to read the encrypted data. They can import keys in their profile.",
 		"sign": "Sign",
 		"sign_form": "Sign the form",
@@ -581,6 +582,7 @@
 		"upgrade_for_premium_templates": "Upgrade your plan to access premium templates and features.",
 		"users_account_name": "{name}'s account",
 		"user_not_found_info": "The email address __{email}__ was not found in our database.\n\nTo register, please accept the Terms of Service and click the _Register_ button.",
+		"user_not_found_passkeys": "In the next step, __you will authenticate using your biometrics__ (Passkeys). Follow the on-screen instructions to complete your registration.",
 		"using_plan": "{plan} plan",
 		"verify_email": "We need to verify the ownership of your email. Please click Verify to confirm it.",
 		"warning_no_encryption_keys": "To secure your data with encryption, create a new encryption key.",
