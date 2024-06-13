@@ -50,8 +50,8 @@ export function generatePassword(len: number, patterns: RegExp[] = [/[a-zA-Z0-9]
 }
 
 export function isMobile() {
-	// @ts-expect-error
 	return (
+		// @ts-expect-error
 		('userAgentData' in navigator && navigator.userAgentData?.mobile) || window.innerWidth < 1000
 	);
 }

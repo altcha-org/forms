@@ -55,6 +55,7 @@
 		"confirm": "Bestätigen",
 		"confirm_recovery": "Wiederherstellung bestätigen",
 		"copy_secret_to_clipboard": "Geheimnis kopieren",
+		"copy_to_clipboard": "Kopieren",
 		"create": "Erstellen",
 		"create_account": "Konto erstellen",
 		"create_api_key": "API-Schlüssel erstellen",
@@ -628,7 +629,7 @@
 		"welcome_back": "Willkommen zurück, {name}"
 	},
 	"tooltip": {
-		"copy_to_clipboard": "In Zwischenablage kopieren",
+		"copy_to_clipboard": "Kopieren",
 		"generate_password": "Zufällig generieren",
 		"next_page": "Nächste Seite",
 		"previous_page": "Vorherige Seite",
