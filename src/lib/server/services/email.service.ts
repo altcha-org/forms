@@ -18,6 +18,7 @@ export interface EmailServiceSendOptions {
 	}[];
 	from?: string;
 	html?: string;
+	responseId?: string;
 	subject?: string;
 	text?: string;
 	to: string | string[];
@@ -88,6 +89,13 @@ export class EmailService {
 		}
 		// @ts-expect-error
 		const defaultFrom = transport._defaults.from;
+		const headers: Record<string, string> = {};
+		if (options.accountId) {
+			headers['x-account-id'] = options.accountId;
+		}
+		if (options.responseId) {
+			headers['x-response-id'] = options.responseId;
+		}
 		const result = await transport.sendMail({
 			attachments: options.attachments?.map(({ content, contentType, filename }) => {
 				return {
@@ -100,6 +108,7 @@ export class EmailService {
 					filename
 				};
 			}),
+			headers,
 			text: options.text,
 			from: options.from || defaultFrom,
 			html: options.html,

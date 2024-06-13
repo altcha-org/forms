@@ -38,6 +38,8 @@ export const actions = {
 						responseId: response.id
 					},
 					{
+						accountId: response.accountId,
+						responseId: response.id,
 						to: data.sendToEmail
 					}
 				);
