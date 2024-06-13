@@ -107,9 +107,9 @@ For self-hosting, follow the instructions below.
 ### Prerequisites
 
 - Postgres 16+
-- Redis 7+
-- S3-compatible object store (recommended)
-- SMTP server for email
+- Redis 7+ (optional)
+- S3-compatible object store (optional)
+- SMTP server for email (optional)
 
 ### Docker Compose
 
@@ -137,7 +137,7 @@ Navigate to `http://localhost:3000/app` and complete the registration to create 
 
 ### Environment Variables
 
-Configure `DATABASE_URL`, `REDIS_URL`, and `BASE_URL`. See [env.ts](/src/lib/server/env.ts) for all supported variables.
+Configure `DATABASE_URL`, and `BASE_URL`. See [env.ts](/src/lib/server/env.ts) for all supported variables.
 
 ## Roadmap
 

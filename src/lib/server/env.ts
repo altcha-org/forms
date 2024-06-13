@@ -18,7 +18,7 @@ export const schema = t.Object({
 		default: ''
 	}),
 	/**
-	 * Base URL for the application. Can contain variable `_region_` which will get replaced with the current REGION.
+	 * Base URL for the application, where the application will be accessible at. Can contain variable `_region_` which will get replaced with the current REGION.
 	 */
 	BASE_URL: t.String({
 		default: 'http://localhost',
@@ -293,9 +293,9 @@ export const schema = t.Object({
 	/**
 	 * Redis server URL
 	 */
-	REDIS_URL: t.String({
+	REDIS_URL: t.Optional(t.String({
 		format: 'uri'
-	}),
+	})),
 
 	// User access recovery settings
 	/**

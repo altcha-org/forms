@@ -1,13 +1,16 @@
 import { Redis } from 'ioredis';
 import { env } from './env.js';
 
-const client = new Redis(env.REDIS_URL, {
+const client = env.REDIS_URL ? new Redis(env.REDIS_URL, {
 	lazyConnect: true
-});
+}) : null;
 
 const TTL = 86400 * 90;
 
 export async function getAccountUsage(accountId: string, month?: string) {
+	if (!client) {
+		return 0;
+	}
 	if (!month) {
 		const date = new Date().toISOString().split('T')[0];
 		month = date.slice(0, -3);
@@ -17,6 +20,9 @@ export async function getAccountUsage(accountId: string, month?: string) {
 }
 
 export async function incrementAccountUsage(accountId: string, apiKeyId: string) {
+	if (!client) {
+		return 0;
+	}
 	const date = new Date().toISOString().split('T')[0];
 	const month = date.slice(0, -3);
 	const day = date.slice(-2);
