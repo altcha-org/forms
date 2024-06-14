@@ -16,6 +16,7 @@ declare global {
 		interface Locals {
 			account?: IAccount;
 			apiKey?: IApiKey;
+			apiKeyReferrer?: string;
 			device?: IDevice;
 			deviceId?: string;
 			error?: any;

@@ -112,7 +112,8 @@
 		"update": "Update",
 		"upgrade": "Upgrade",
 		"use": "Use",
-		"verify": "Verify"
+		"verify": "Verify",
+		"show_usage": "Show Usage"
 	},
 	"complexity": {
 		"low": "Low",
@@ -391,7 +392,10 @@
 		"users": "Users",
 		"visuals": "Visuals",
 		"your_account": "Your account",
-		"your_name": "Your name"
+		"your_name": "Your name",
+		"account_usage": "Account Usage",
+		"classifications": "Classifications",
+		"referrers": "Referrers"
 	},
 	"limit": {
 		"api": "API requests",
@@ -414,7 +418,8 @@
 		"search": "Search...",
 		"select_country": "Select country...",
 		"upload_banner": "Upload banner...",
-		"upload_logo": "Upload logo..."
+		"upload_logo": "Upload logo...",
+		"select": "Select..."
 	},
 	"processor": {
 		"description": {

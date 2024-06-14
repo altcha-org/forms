@@ -5,7 +5,7 @@
  */
 
 import assert from 'node:assert';
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, exists } from 'node:fs/promises';
 import OpenAI from 'openai';
 
 const sourceFile = 'src/lib/i18n/locales/en-GB.json';
@@ -35,24 +35,54 @@ async function translate(text: string, lang: string) {
 	return chat.choices[0]?.message?.content;
 }
 
+const targetFile = sourceFile.replace('en-GB', targetLangCode);
+const targetExists = await exists(targetFile);
 const start = performance.now();
-const contents = JSON.parse(await readFile(sourceFile, 'utf8'));
+const sourceContents = JSON.parse(await readFile(sourceFile, 'utf8'));
+const targetContents = targetExists ? JSON.parse(await readFile(targetFile, 'utf8')) : null;
 const result = {};
 
-for (const section in contents) {
+for (const section in sourceContents) {
 	console.log(`Translating section ${section}...`);
-	const sectionResult = await translate(
-		JSON.stringify(contents[section], null, '  '),
-		targetLangCode
-	);
-	if (!sectionResult) {
-		throw new Error('Unexpected result');
+	if (targetContents) {
+		const missing = getMissingKeys(sourceContents[section], targetContents[section]);
+		if (Object.keys(missing).length) {
+			const sectionResult = await translate(
+				JSON.stringify(missing, null, '  '),
+				targetLangCode
+			);
+			if (!sectionResult) {
+				throw new Error('Unexpected result');
+			}
+			result[section] = {
+				...targetContents[section],
+				...JSON.parse(sectionResult),
+			};
+		} else {
+			result[section] = targetContents[section];
+		}
+	} else {
+		const sectionResult = await translate(
+			JSON.stringify(sourceContents[section], null, '  '),
+			targetLangCode
+		);
+		if (!sectionResult) {
+			throw new Error('Unexpected result');
+		}
+		result[section] = JSON.parse(sectionResult);
 	}
-	result[section] = JSON.parse(sectionResult);
 }
 
 console.log('Done in', Math.round(performance.now() - start), 'ms');
 if (result) {
-	const targetFile = sourceFile.replace('en-GB', targetLangCode);
 	await writeFile(targetFile, JSON.stringify(result, null, '  '));
+}
+
+function getMissingKeys(source: Record<string, string>, target: Record<string, string>) {
+	return Object.entries(source).reduce((acc, [ key, value ]) => {
+		if (!target[key]) {
+			acc[key] = value;
+		}
+		return acc;
+	}, {});
 }

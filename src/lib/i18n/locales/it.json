@@ -112,7 +112,8 @@
 		"update": "Aggiorna",
 		"upgrade": "Aggiorna",
 		"use": "Usa",
-		"verify": "Verifica"
+		"verify": "Verifica",
+		"show_usage": "Mostra Utilizzo"
 	},
 	"complexity": {
 		"low": "Basso",
@@ -391,7 +392,10 @@
 		"users": "Utenti",
 		"visuals": "Visuali",
 		"your_account": "Il tuo account",
-		"your_name": "Il tuo nome"
+		"your_name": "Il tuo nome",
+		"account_usage": "Utilizzo dell'account",
+		"classifications": "Classificazioni",
+		"referrers": "Referenti"
 	},
 	"limit": {
 		"api": "Richieste API",
@@ -414,7 +418,8 @@
 		"search": "Cerca...",
 		"select_country": "Seleziona paese...",
 		"upload_banner": "Carica banner...",
-		"upload_logo": "Carica logo..."
+		"upload_logo": "Carica logo...",
+		"select": "Seleziona..."
 	},
 	"processor": {
 		"description": {

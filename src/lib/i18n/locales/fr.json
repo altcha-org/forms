@@ -112,7 +112,8 @@
 		"update": "Mettre à jour",
 		"upgrade": "Mettre à niveau",
 		"use": "Utiliser",
-		"verify": "Vérifier"
+		"verify": "Vérifier",
+		"show_usage": "Afficher l'utilisation"
 	},
 	"complexity": {
 		"low": "Faible",
@@ -391,7 +392,10 @@
 		"users": "Utilisateurs",
 		"visuals": "Visuels",
 		"your_account": "Votre compte",
-		"your_name": "Votre nom"
+		"your_name": "Votre nom",
+		"account_usage": "Utilisation du compte",
+		"classifications": "Classifications",
+		"referrers": "Référents"
 	},
 	"limit": {
 		"api": "Demandes d'API",
@@ -414,7 +418,8 @@
 		"search": "Rechercher...",
 		"select_country": "Sélectionner un pays...",
 		"upload_banner": "Télécharger une bannière...",
-		"upload_logo": "Télécharger un logo..."
+		"upload_logo": "Télécharger un logo...",
+		"select": "Sélectionnez..."
 	},
 	"processor": {
 		"description": {

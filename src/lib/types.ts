@@ -151,3 +151,8 @@ export interface ILabel {
 	color: string;
 	label: string;
 }
+
+export interface IBarChartItem {
+	label: string;
+	value: number;
+}

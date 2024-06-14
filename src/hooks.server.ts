@@ -16,18 +16,23 @@ import ipMiddleware from '$lib/server/middleware/ip.middleware';
 import localeMiddleware from '$lib/server/middleware/locale.middleware';
 import { BaseError, RateLimitError } from '$lib/server/errors';
 import '$lib/server/jobs';
+import usageMiddleware from '$lib/server/middleware/usage.middleware';
 
 if (env.LICENSE) {
 	await license.load(env.LICENSE);
 }
 
-const middlewares: ((event: RequestEvent) => Promise<void> | void)[] = [
+const beforeMiddlewares: ((event: RequestEvent) => Promise<void> | void)[] = [
 	domainMiddleware(),
 	ipMiddleware(),
 	localeMiddleware(),
 	apiKeyMiddleware(),
 	authMiddleware(),
 	deviceMiddleware()
+];
+
+const afterMiddlewares: ((event: RequestEvent) => Promise<void> | void)[] = [
+	usageMiddleware(),
 ];
 
 export const handle: Handle = async ({ event, resolve }) => {
@@ -38,10 +43,13 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 	let response: any = null;
 	try {
-		for (const middleware of middlewares) {
+		for (const middleware of beforeMiddlewares) {
 			await middleware(event);
 		}
 		response = await resolve(event);
+		for (const middleware of afterMiddlewares) {
+			await middleware(event);
+		}
 	} catch (err: any) {
 		event.locals.error = err;
 	}

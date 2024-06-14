@@ -6,6 +6,7 @@
 	export let block: IFormBlockPartial;
 	export let disabled: boolean = false;
 	export let error: string | undefined = void 0;
+	export let hideLabel: boolean = false;
 	export let preview: boolean = false;
 	export let value: string | null | undefined = block.default;
 	export let visible: boolean = true;
@@ -14,7 +15,7 @@
 	$: value === void 0 ? (value = block.default) : void 0;
 </script>
 
-<BaseInput {block} {error} {value} on:change>
+<BaseInput {block} {error} {hideLabel} {value} on:change>
 	<select
 		class="select select-bordered shadow-sm {value === void 0 ? 'text-base-content/50' : ''}"
 		name={block.name}
