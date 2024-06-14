@@ -1,5 +1,5 @@
 import { Redis } from 'ioredis';
-import { RateLimiterRedis, type RateLimiterRes } from 'rate-limiter-flexible';
+import { RateLimiterRedis, RateLimiterMemory, type RateLimiterRes } from 'rate-limiter-flexible';
 import { env } from '$lib/server/env';
 import type { RequestEvent } from '@sveltejs/kit';
 
@@ -11,27 +11,27 @@ export const LEVELS = ['L1', 'L2', 'L3'] as const;
 
 const keyPrefix = 'rlimit:';
 
-export const rateLimitLevels = client ? LEVELS.reduce(
+export const rateLimitLevels = LEVELS.reduce(
 	(acc, level) => {
 		const [points, duration] = env[`RATE_LIMIT_${level}` as keyof typeof env]?.split('/') || [];
 		return {
 			...acc,
-			[level]: new RateLimiterRedis({
+			[level]: client ? new RateLimiterRedis({
 				storeClient: client,
 				duration: +duration,
 				inMemoryBlockOnConsumed: +points,
 				points: +points,
 				keyPrefix: keyPrefix + level
-			})
+			}) : new RateLimiterMemory({
+				duration: +duration,
+				points: +points,
+			}),
 		};
 	},
 	{} as Record<(typeof LEVELS)[number], RateLimiterRedis>
-) : {} as Record<(typeof LEVELS)[number], RateLimiterRedis>;
+);
 
 export async function rateLimitByKey(level: keyof typeof rateLimitLevels, key: string) {
-	if (!client) {
-		return null;
-	}
 	const limiter = rateLimitLevels[level];
 	return limiter.consume(key);
 }
@@ -41,9 +41,6 @@ export async function rateLimit<T extends RequestEvent = RequestEvent>(
 	event: T,
 	key: string = event.locals.apiKey?.id || event.locals.remoteAddress
 ) {
-	if (!client) {
-		return null;
-	}
 	const limiter = rateLimitLevels[level];
 	let res: RateLimiterRes | null = null;
 	try {
