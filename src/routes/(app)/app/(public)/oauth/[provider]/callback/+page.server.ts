@@ -1,7 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 import { Type as t } from '@sinclair/typebox';
 import { env } from '$lib/server/env';
-import { usersService } from '$lib/server/services/users.service';
+import { usersService, type IUser } from '$lib/server/services/users.service';
 import { actionHandler } from '$lib/server/handlers';
 import { ForbiddenError } from '$lib/server/errors';
 import { getOAuthProvider } from '$lib/server/oauth';
@@ -18,7 +18,7 @@ export const actions = {
 				throw new ForbiddenError();
 			}
 			const { accessToken, profile } = await getOAuthProvider(event.params.provider).callback(code);
-			let user = await usersService.findUserByEmail(profile.email);
+			let user = await usersService.findUserForWebauthn(profile.email);
 			let userCreated = false;
 			if (!user) {
 				if (env.REGISTRATIONS_DISABLED === '1') {
@@ -36,12 +36,16 @@ export const actions = {
 					},
 					state.get('invite')
 				);
-				user = await usersService.findUser(id);
+				user = await usersService.findUserForWebauthn(id);
 				if (!user) {
 					throw new ForbiddenError();
 				}
 				userCreated = true;
-			} else if (user.deleted) {
+			} else if (
+				user.deleted ||
+				(user.oauthProvider && user.oauthProvider !== provider) ||
+				user.webauthnAuthenticators?.length
+			) {
 				throw new ForbiddenError();
 			} else {
 				await usersService.updateUser(user.id, {

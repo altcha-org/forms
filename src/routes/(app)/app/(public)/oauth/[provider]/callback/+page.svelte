@@ -26,7 +26,7 @@
 			<div>{$_('text.oauth_failed')}</div>
 			<div class="text-sm opacity-60">{error.error}</div>
 			<div>
-				<a href="/app/authentication" class="btn btn-sm btn-primary">{$_('button.log_in')}</a>
+				<a href="/app/authentication" class="btn btn-sm btn-primary">{$_('button.authenticate')}</a>
 			</div>
 		</div>
 	{:else}

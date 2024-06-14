@@ -1,6 +1,6 @@
 import { randomBytes } from 'node:crypto';
 import argon2 from 'argon2';
-import { eq } from 'drizzle-orm';
+import { count, eq } from 'drizzle-orm';
 import jwt from 'jsonwebtoken';
 import duration from 'parse-duration';
 import { db } from '$lib/server/db';
