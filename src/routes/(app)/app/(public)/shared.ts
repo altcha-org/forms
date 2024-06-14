@@ -37,6 +37,7 @@ export async function initPasskeyRegistration(
 		}
 	} catch (err: any) {
 		console.error('Passkey sever error', err);
+		reportAuthError(err, userId, 'register');
 	}
 	return {
 		error: 'error.authentication_failed'
@@ -99,9 +100,25 @@ export async function initPasskeyAuthentication(
 			}
 		} catch (err: any) {
 			console.error('Passkey server error', err);
+			reportAuthError(err, 'auth');
 		}
 	}
 	return {
 		error: 'error.authentication_failed'
 	};
+}
+
+async function reportAuthError(error: any, kind: string, userId?: string) {
+	await fetch('/app/passkey/debug', {
+		body: JSON.stringify({
+			deviceName: getDeviceName() || '',
+			kind,
+			userId:  userId || '',
+			error: String(error)
+		}),
+		headers: {
+			'content-type': 'application/json'
+		},
+		method: 'POST'
+	});
 }

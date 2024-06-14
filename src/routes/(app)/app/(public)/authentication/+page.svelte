@@ -5,7 +5,7 @@
 	import { page } from '$app/stores';
 	import { goto, invalidateAll } from '$app/navigation';
 	import { browserSupportsWebAuthn } from '@simplewebauthn/browser';
-	import { debounce } from '$lib/helpers';
+	import {  debounce } from '$lib/helpers';
 	import EmailInput from '$lib/components/blocks/EmailInput.svelte';
 	import Alert from '$lib/components/Alert.svelte';
 	import Form from '$lib/components/Form.svelte';
@@ -59,7 +59,7 @@
 		}
 	}
 
-	function onAuth({ error, success }: Awaited<ReturnType<typeof initPasskeyAuthentication>>) {
+	async function onAuth({ error, success }: Awaited<ReturnType<typeof initPasskeyAuthentication>>) {
 		authError = error?.startsWith('error.') ? $_(error) : error;
 		if (success) {
 			goto('/app', {
@@ -226,26 +226,24 @@
 			</div>
 
 			<div>
-				<MarkdownRenderer
-					value={$_('text.user_not_found_passkeys')}
-				/>
+				<MarkdownRenderer value={$_('text.user_not_found_passkeys')} />
 			</div>
 		</div>
 
 		{#if data.availableRegions.length > 1}
-		<div class="flex flex-col gap-1 items-center justify-center text-sm">
-			<div class="text-center">
-				<span class="opacity-60">{$_('text.select_region_to_register')}</span>
-			</div>
+			<div class="flex flex-col gap-1 items-center justify-center text-sm">
+				<div class="text-center">
+					<span class="opacity-60">{$_('text.select_region_to_register')}</span>
+				</div>
 
-			<div class="flex gap-3 items-center justify-center">
-				{#each data.availableRegions as { region, url }}
-					<a href={url} class="link">
-						<span>{$_('region.' + region)}</span>
-					</a>
-				{/each}
+				<div class="flex gap-3 items-center justify-center">
+					{#each data.availableRegions as { region, url }}
+						<a href={url} class="link">
+							<span>{$_('region.' + region)}</span>
+						</a>
+					{/each}
+				</div>
 			</div>
-		</div>
 		{/if}
 	</div>
 </Modal>
