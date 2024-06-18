@@ -35,6 +35,7 @@
 			action="/app/forms/{form.id}/inbox?/flagResponse"
 			class="flex items-center"
 			data={{ responseId: response.id, flag: !response.flag }}
+			successToast={false}
 			let:loading
 		>
 			<button type="submit" disabled={loading}>

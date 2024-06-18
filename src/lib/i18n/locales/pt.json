@@ -113,7 +113,14 @@
 		"upgrade": "Atualizar",
 		"use": "Utilizar",
 		"verify": "Verificar",
-		"show_usage": "Mostrar Uso"
+		"show_usage": "Mostrar Uso",
+		"add_entry": "Adicionar Entrada",
+		"load_more": "Carregar mais",
+		"manage_identities": "Gerenciar Identidades",
+		"search": "Pesquisar",
+		"view_identity": "Visualizar Identidade",
+		"view_related_responses": "Visualizar Respostas Relacionadas",
+		"view_responses": "Visualizar Respostas"
 	},
 	"complexity": {
 		"low": "Baixo",
@@ -195,7 +202,8 @@
 		"success_redirect": "Uma URL para redirecionar após uma submissão bem-sucedida. Variáveis de dados estão disponíveis.",
 		"success_text": "O texto a ser mostrado após uma submissão bem-sucedida. Suporta Markdown.",
 		"user_email": "Digite o endereço de e-mail do usuário.",
-		"user_role": "Selecione a função do usuário. A função de Administrador concede acesso a todas as configurações."
+		"user_role": "Selecione a função do usuário. A função de Administrador concede acesso a todas as configurações.",
+		"identities_search": "Pesquise identidades usando o ID, ID externo ou o endereço de e-mail do usuário."
 	},
 	"label": {
 		"access": "Acesso",
@@ -395,7 +403,16 @@
 		"your_name": "Seu nome",
 		"account_usage": "Uso da Conta",
 		"classifications": "Classificações",
-		"referrers": "Referenciadores"
+		"referrers": "Referenciadores",
+		"delete_identity": "Excluir identidade e respostas",
+		"identities": "Identidades",
+		"identities_total": "Total de identidades",
+		"items_found": "Itens encontrados",
+		"last_used_at": "Último uso",
+		"metadata": "Metadados",
+		"metadata_key": "Chave de metadados",
+		"metadata_value": "Valor de metadados",
+		"responses": "Respostas"
 	},
 	"limit": {
 		"api": "Pedidos da API",
@@ -407,7 +424,8 @@
 	},
 	"notification": {
 		"connection_successful": "Conexão bem sucedida",
-		"success": "Alterações aplicadas"
+		"success": "Alterações aplicadas",
+		"deleted": "Excluído"
 	},
 	"period": {
 		"month": "mo",
@@ -593,7 +611,11 @@
 		"verify_email": "Precisamos verificar a propriedade do seu e-mail. Por favor, clique em Verificar para confirmar.",
 		"warning_no_encryption_keys": "Para proteger seus dados com criptografia, crie uma nova chave de criptografia.",
 		"wrong_link": "Este não é um link válido.",
-		"x_files": "{x} arquivo(s)"
+		"x_files": "{x} arquivo(s)",
+		"confirm_delete_identity": "Tem certeza? Os dados serão perdidos.",
+		"delete_identity": "Você está prestes a excluir a identidade **{id}** junto com todas as suas __{responses} respostas__. Esta ação irá excluir dados do banco de dados de forma __permanente__ e é irreversível.",
+		"identities_info": "As identidades são IDs de usuários anonimizados que permitem que você pesquise e exclua rapidamente dados associados a um usuário específico.",
+		"identity_linked_to_responses": "Esta identidade está vinculada a {count} resposta(s)."
 	},
 	"title": {
 		"add_block": "Adicionar Bloco",
@@ -631,7 +653,10 @@
 		"update": "Atualizar",
 		"unexpected_error": "Erro Inesperado",
 		"verify_email": "Verificar Email",
-		"welcome_back": "Bem-vindo de volta, {name}"
+		"welcome_back": "Bem-vindo de volta, {name}",
+		"add_metadata": "Adicionar Metadados",
+		"identities": "Identidades",
+		"search_results": "Resultados da pesquisa"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Copiar",

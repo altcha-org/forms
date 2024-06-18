@@ -113,7 +113,14 @@
 		"upgrade": "Actualizar",
 		"use": "Usar",
 		"verify": "Verificar",
-		"show_usage": "Mostrar uso"
+		"show_usage": "Mostrar uso",
+		"add_entry": "Agregar entrada",
+		"load_more": "Cargar más",
+		"manage_identities": "Gestionar Identidades",
+		"search": "Buscar",
+		"view_identity": "Ver identidad",
+		"view_related_responses": "Ver respuestas relacionadas",
+		"view_responses": "Ver respuestas"
 	},
 	"complexity": {
 		"low": "Bajo",
@@ -195,7 +202,8 @@
 		"success_redirect": "Una URL a la que redirigir después de una presentación exitosa. Variables de datos están disponibles.",
 		"success_text": "El texto que se mostrará después de una presentación exitosa. Admite Markdown.",
 		"user_email": "Ingrese la dirección de correo electrónico del usuario.",
-		"user_role": "Seleccione el rol del usuario. El rol de Admin otorga acceso a todas las configuraciones."
+		"user_role": "Seleccione el rol del usuario. El rol de Admin otorga acceso a todas las configuraciones.",
+		"identities_search": "Buscar identidades utilizando el ID, el ID externo o la dirección de correo electrónico del usuario."
 	},
 	"label": {
 		"access": "Acceso",
@@ -395,7 +403,16 @@
 		"your_name": "Tu nombre",
 		"account_usage": "Uso de la cuenta",
 		"classifications": "Clasificaciones",
-		"referrers": "Referentes"
+		"referrers": "Referentes",
+		"delete_identity": "Eliminar identidad y respuestas",
+		"identities": "Identidades",
+		"identities_total": "Total de identidades",
+		"items_found": "Elementos encontrados",
+		"last_used_at": "Último uso",
+		"metadata": "Metadatos",
+		"metadata_key": "Clave de metadatos",
+		"metadata_value": "Valor de metadatos",
+		"responses": "Respuestas"
 	},
 	"limit": {
 		"api": "Solicitudes de API",
@@ -407,7 +424,8 @@
 	},
 	"notification": {
 		"connection_successful": "Conexión exitosa",
-		"success": "Cambios aplicados"
+		"success": "Cambios aplicados",
+		"deleted": "Eliminado"
 	},
 	"period": {
 		"month": "mo",
@@ -593,7 +611,11 @@
 		"verify_email": "Necesitamos verificar la propiedad de tu correo electrónico. Por favor, haz clic en Verificar para confirmarlo.",
 		"warning_no_encryption_keys": "Para proteger tus datos con encriptación, crea una nueva clave de encriptación.",
 		"wrong_link": "Este no es un enlace válido.",
-		"x_files": "{x} archivo(s)"
+		"x_files": "{x} archivo(s)",
+		"confirm_delete_identity": "¿Estás seguro? Los datos se perderán.",
+		"delete_identity": "Estás a punto de eliminar la identidad **{id}** junto con todas sus __respuestas {responses}__. Esta acción eliminará __permanentemente__ los datos de la base de datos y es irreversible.",
+		"identities_info": "Las identidades son ID de usuario anonimizados que te permiten buscar y eliminar rápidamente los datos asociados con un usuario específico.",
+		"identity_linked_to_responses": "Esta identidad está vinculada a {count} respuesta(s)."
 	},
 	"title": {
 		"add_block": "Agregar Bloque",
@@ -631,7 +653,10 @@
 		"update": "Actualizar",
 		"unexpected_error": "Error Inesperado",
 		"verify_email": "Verificar Correo Electrónico",
-		"welcome_back": "Bienvenido de nuevo, {name}"
+		"welcome_back": "Bienvenido de nuevo, {name}",
+		"add_metadata": "Agregar metadatos",
+		"identities": "Identidades",
+		"search_results": "Resultados de búsqueda"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Copiar",

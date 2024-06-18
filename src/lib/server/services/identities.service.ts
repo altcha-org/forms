@@ -1,8 +1,10 @@
 import { createHash } from 'node:crypto';
-import { eq } from 'drizzle-orm';
+import { count, and, eq } from 'drizzle-orm';
 import { db } from '$lib/server/db';
 import { identities } from '$lib/server/db/schema';
 import { EIdPrefix, idgen } from '$lib/server/id';
+import type { RequestEvent } from '@sveltejs/kit';
+import { EEvents, eventsService } from './events.service';
 
 export type IIdentity = NonNullable<Awaited<ReturnType<IdentitiesService['findIdentity']>>>;
 
@@ -12,6 +14,11 @@ export interface IIdentitiesListForAccountOptions {
 	accountId: string;
 	limit: number;
 	offset: number;
+}
+
+export interface IIdentitiesSearchOptions {
+	accountId: string;
+	query: string;
 }
 
 export class IdentitiesService {
@@ -62,6 +69,16 @@ export class IdentitiesService {
 		return result;
 	}
 
+	async countIdentitiesForAccount(accountId: string) {
+		const result = await db
+			.select({
+				value: count()
+			})
+			.from(identities)
+			.where(eq(identities.accountId, accountId));
+		return result[0].value;
+	}
+
 	async deleteIdentity(identityId: string) {
 		await db.delete(identities).where(eq(identities.id, identityId));
 	}
@@ -86,6 +103,45 @@ export class IdentitiesService {
 			limit: options.limit,
 			offset: options.offset,
 			where: eq(identities.accountId, options.accountId)
+		});
+	}
+
+	async searchIdentity(options: IIdentitiesSearchOptions) {
+		const columns = {
+			createdAt: true,
+			externalId: true,
+			id: true,
+		} as const satisfies Partial<Record<keyof IIdentitySchema, boolean>>;
+		if (idgen.isValid(options.query, EIdPrefix.IDENTITY)) {
+			// id
+			return db.query.identities.findFirst({
+				columns,
+				where: and(eq(identities.accountId, options.accountId), eq(identities.id, options.query)),
+			});
+		} else if (options.query.includes('@')) {
+			// email
+			return db.query.identities.findFirst({
+				columns,
+				where: and(eq(identities.accountId, options.accountId), eq(identities.externalId, this.hashEmail(options.query))),
+			});
+		}
+		// external id
+		return db.query.identities.findFirst({
+			columns,
+			where: and(eq(identities.accountId, options.accountId), eq(identities.externalId, options.query)),
+		});
+	}
+
+	async trackDeleteEvent(event: RequestEvent, identity: IIdentity) {
+		await eventsService.trackEvent({
+			account: event.locals.account,
+			data: {
+				identityId: identity.id,
+				externalId: identity.externalId,
+			},
+			event: EEvents.IDENTITIES_DELETE,
+			ipAddress: event.locals.remoteAddress,
+			user: event.locals.user
 		});
 	}
 

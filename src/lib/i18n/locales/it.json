@@ -113,7 +113,14 @@
 		"upgrade": "Aggiorna",
 		"use": "Usa",
 		"verify": "Verifica",
-		"show_usage": "Mostra Utilizzo"
+		"show_usage": "Mostra Utilizzo",
+		"add_entry": "Aggiungi voce",
+		"load_more": "Carica altri",
+		"manage_identities": "Gestisci Identità",
+		"search": "Cerca",
+		"view_identity": "Visualizza identità",
+		"view_related_responses": "Visualizza risposte correlate",
+		"view_responses": "Visualizza risposte"
 	},
 	"complexity": {
 		"low": "Basso",
@@ -195,7 +202,8 @@
 		"success_redirect": "Un URL a cui reindirizzare dopo una sottomissione riuscita. Le variabili di dati sono disponibili.",
 		"success_text": "Il testo da mostrare dopo una sottomissione riuscita. Supporta Markdown.",
 		"user_email": "Inserisci l'indirizzo email dell'utente.",
-		"user_role": "Seleziona il ruolo dell'utente. Il ruolo di Amministratore garantisce l'accesso a tutte le impostazioni."
+		"user_role": "Seleziona il ruolo dell'utente. Il ruolo di Amministratore garantisce l'accesso a tutte le impostazioni.",
+		"identities_search": "Cerca identità utilizzando l'ID, l'ID esterno o l'indirizzo email dell'utente."
 	},
 	"label": {
 		"access": "Accesso",
@@ -395,7 +403,16 @@
 		"your_name": "Il tuo nome",
 		"account_usage": "Utilizzo dell'account",
 		"classifications": "Classificazioni",
-		"referrers": "Referenti"
+		"referrers": "Referenti",
+		"delete_identity": "Elimina identità e risposte",
+		"identities": "Identità",
+		"identities_total": "Totale identità",
+		"items_found": "Elementi trovati",
+		"last_used_at": "Ultimo utilizzo",
+		"metadata": "Metadati",
+		"metadata_key": "Chiave dei metadati",
+		"metadata_value": "Valore dei metadati",
+		"responses": "Risposte"
 	},
 	"limit": {
 		"api": "Richieste API",
@@ -407,7 +424,8 @@
 	},
 	"notification": {
 		"connection_successful": "Connessione riuscita",
-		"success": "Modifiche applicate"
+		"success": "Modifiche applicate",
+		"eliminato": "Eliminato"
 	},
 	"period": {
 		"month": "mo",
@@ -593,7 +611,11 @@
 		"verify_email": "Abbiamo bisogno di verificare la proprietà della tua email. Per favore clicca su Verifica per confermarla.",
 		"warning_no_encryption_keys": "Per proteggere i tuoi dati con la crittografia, crea una nuova chiave di crittografia.",
 		"wrong_link": "Questo non è un link valido.",
-		"x_files": "{x} file(i)"
+		"x_files": "{x} file(i)",
+		"confirm_delete_identity": "Sei sicuro? I dati verranno persi.",
+		"delete_identity": "Stai per eliminare l'identità **{id}** insieme a tutte le sue __{responses} risposte__. Questa azione eliminerà __permanentemente__ i dati dal database e sarà irreversibile.",
+		"identities_info": "Le identità sono ID utente anonimizzati che ti consentono di cercare rapidamente e eliminare i dati associati a un utente specifico.",
+		"identity_linked_to_responses": "Quest'identità è collegata a {count} risposta/e."
 	},
 	"title": {
 		"add_block": "Aggiungi Blocco",
@@ -631,7 +653,10 @@
 		"update": "Aggiorna",
 		"unexpected_error": "Errore Imprevisto",
 		"verify_email": "Verifica Email",
-		"welcome_back": "Bentornato, {name}"
+		"welcome_back": "Bentornato, {name}",
+		"add_metadata": "Aggiungi metadati",
+		"identities": "Identità",
+		"search_results": "Risultati della ricerca"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Copia",

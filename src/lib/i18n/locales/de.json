@@ -113,7 +113,14 @@
 		"upgrade": "Upgrade",
 		"use": "Verwenden",
 		"verify": "Überprüfen",
-		"show_usage": "Anzeige Verwendung"
+		"show_usage": "Anzeige Verwendung",
+		"add_entry": "Eintrag hinzufügen",
+		"load_more": "Mehr laden",
+		"manage_identities": "Identitäten verwalten",
+		"search": "Suchen",
+		"view_identity": "Identität anzeigen",
+		"view_related_responses": "Verwandte Antworten anzeigen",
+		"view_responses": "Antworten anzeigen"
 	},
 	"complexity": {
 		"low": "Niedrig",
@@ -195,7 +202,8 @@
 		"success_redirect": "Eine URL zur Weiterleitung nach erfolgreichem Absenden. Datenvariablen sind verfügbar.",
 		"success_text": "Der Text, der nach einem erfolgreichen Absenden angezeigt werden soll. Unterstützt Markdown.",
 		"user_email": "Geben Sie die E-Mail-Adresse des Benutzers ein.",
-		"user_role": "Wählen Sie die Rolle des Benutzers aus. Die Rolle „Admin“ gewährt Zugriff auf alle Einstellungen."
+		"user_role": "Wählen Sie die Rolle des Benutzers aus. Die Rolle „Admin“ gewährt Zugriff auf alle Einstellungen.",
+		"identities_search": "Suche nach Identitäten anhand der ID, der externen ID oder der E-Mail-Adresse des Benutzers."
 	},
 	"label": {
 		"access": "Zugriff",
@@ -395,7 +403,17 @@
 		"your_name": "Ihr Name",
 		"account_usage": "Kontonutzung",
 		"classifications": "Klassifizierungen",
-		"referrers": "Verweiser"
+		"referrers": "Verweiser",
+		"delete_identity": "Identität und Antworten löschen",
+		"identities": "Identitäten",
+		"identities_total": "Gesamtzahl Identitäten",
+		"items_found": "Elemente gefunden",
+		"last_used_at": "Zuletzt verwendet",
+		"max_wtotalidth": "Max. Breite",
+		"metadata": "Metadaten",
+		"metadata_key": "Metadaten-Schlüssel",
+		"metadata_value": "Metadaten-Wert",
+		"responses": "Antworten"
 	},
 	"limit": {
 		"api": "API-Anfragen",
@@ -407,7 +425,8 @@
 	},
 	"notification": {
 		"connection_successful": "Verbindung erfolgreich",
-		"success": "Änderungen angewendet"
+		"success": "Änderungen angewendet",
+		"deleted": "Gelöscht"
 	},
 	"period": {
 		"month": "Monat",
@@ -593,7 +612,11 @@
 		"verify_email": "Wir müssen den Besitz Ihrer E-Mail verifizieren. Bitte klicken Sie auf Verifizieren, um dies zu bestätigen.",
 		"warning_no_encryption_keys": "Um Ihre Daten mit Verschlüsselung zu sichern, erstellen Sie einen neuen Verschlüsselungsschlüssel.",
 		"wrong_link": "Dies ist kein gültiger Link.",
-		"x_files": "{x} Datei(en)"
+		"x_files": "{x} Datei(en)",
+		"confirm_delete_identity": "Sind Sie sicher? Daten gehen verloren.",
+		"delete_identity": "Sie sind dabei, die Identität **{id}** zusammen mit all ihren {responses} Antworten zu löschen. Diese Aktion wird Daten aus der Datenbank __dauerhaft__ löschen und ist nicht rückgängig zu machen.",
+		"identities_info": "Identitäten sind anonymisierte Benutzer-IDs, die es Ihnen ermöglichen, schnell nach Daten eines bestimmten Benutzers zu suchen und diese zu löschen.",
+		"identity_linked_to_responses": "Diese Identität ist mit {count} Antwort(en) verknüpft."
 	},
 	"title": {
 		"add_block": "Block hinzufügen",
@@ -631,7 +654,10 @@
 		"update": "Aktualisieren",
 		"unexpected_error": "Unerwarteter Fehler",
 		"verify_email": "E-Mail verifizieren",
-		"welcome_back": "Willkommen zurück, {name}"
+		"welcome_back": "Willkommen zurück, {name}",
+		"add_metadata": "Metadaten hinzufügen",
+		"identities": "Identitäten",
+		"search_results": "Suchergebnisse"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Kopieren",

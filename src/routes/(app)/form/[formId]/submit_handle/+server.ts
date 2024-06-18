@@ -77,7 +77,7 @@ export const POST = requestHandler(
 							externalId = identitiesService.hashEmail(String(email));
 						}
 					}
-					if (externalId) {
+					if (externalId?.length) {
 						identity = await identitiesService.upsertIdentity({
 							accountId: form.account.id,
 							externalId

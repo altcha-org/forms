@@ -14,6 +14,7 @@ export enum EEvents {
 	EMERGENCY_ACCESS = 'emergency.access',
 	FORMS_DELETE = 'forms.delete',
 	FORMS_UPDATE = 'forms.update',
+	IDENTITIES_DELETE = 'identities.delete',
 	RESPONSES_ACCESS = 'responses.access',
 	RESPONSES_DELETE = 'responses.delete',
 	RESPONSES_UNDELETE = 'responses.undelete',

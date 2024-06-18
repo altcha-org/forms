@@ -19,6 +19,7 @@
 		deviceName: getDeviceName(),
 		deviceTimezone: getTimeZone()
 	}}
+	successToast={false}
 	let:error
 >
 	{#if error}

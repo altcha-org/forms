@@ -76,7 +76,7 @@
 				{/if}
 			</span>
 			{#if !hideAside}
-				<span class="label-text-alt">
+				<span class="flex items-center gap-3 label-text-alt">
 					<slot name="aside" />
 				</span>
 			{/if}

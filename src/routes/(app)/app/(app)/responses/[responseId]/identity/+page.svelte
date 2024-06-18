@@ -11,8 +11,20 @@
 <List
 	items={[
 		[$_('label.id'), identity?.id],
-		[$_('label.external_id'), identity?.externalId]
+		[$_('label.external_id'), identity?.externalId],
 	]}
 />
 
-<div></div>
+{#if identity}
+<div class="flex gap-3">
+	<div>
+		<a href="/app/accounts/{data.account.id}/identities/{identity.id}" class="btn btn-sm">{$_('button.view_identity')}</a>
+	</div>
+
+	{#if data.totalResponses}
+	<div>
+		<a href="/app/accounts/{data.account.id}/identities/{identity.id}/responses" class="btn btn-sm">{$_('button.view_related_responses', { values: { count: data.totalResponses } })}</a>
+	</div>
+	{/if}
+</div>
+{/if}

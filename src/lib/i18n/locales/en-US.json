@@ -113,7 +113,14 @@
 		"upgrade": "Upgrade",
 		"use": "Use",
 		"verify": "Verify",
-		"show_usage": "Show Usage"
+		"show_usage": "Show Usage",
+		"add_entry": "Add Entry",
+		"load_more": "Load more",
+		"manage_identities": "Manage Identities",
+		"search": "Search",
+		"view_identity": "View Identity",
+		"view_related_responses": "View Related Responses",
+		"view_responses": "View Responses"
 	},
 	"complexity": {
 		"low": "Low",
@@ -195,7 +202,8 @@
 		"success_redirect": "A URL to redirect to after a successful submission. Data variables are available.",
 		"success_text": "The text to be shown after a successful submission. Supports Markdown.",
 		"user_email": "Enter the user's email address.",
-		"user_role": "Select the user's role. The Admin role grants access to all settings."
+		"user_role": "Select the user's role. The Admin role grants access to all settings.",
+		"identities_search": "Search for identities using the ID, external ID, or the user's email address."
 	},
 	"label": {
 		"access": "Access",
@@ -395,7 +403,16 @@
 		"your_name": "Your name",
 		"account_usage": "Account Usage",
 		"classifications": "Classifications",
-		"referrers": "Referrers"
+		"referrers": "Referrers",
+		"delete_identity": "Delete identity and responses",
+		"identities": "Identities",
+		"identities_total": "Total identities",
+		"items_found": "Items found",
+		"last_used_at": "Last used",
+		"metadata": "Metadata",
+		"metadata_key": "Metadata Key",
+		"metadata_value": "Metadata Value",
+		"responses": "Responses"
 	},
 	"limit": {
 		"api": "API requests",
@@ -407,7 +424,8 @@
 	},
 	"notification": {
 		"connection_successful": "Connection Successful",
-		"success": "Changes Applied"
+		"success": "Changes Applied",
+		"deleted": "Deleted"
 	},
 	"period": {
 		"month": "mo",
@@ -593,7 +611,11 @@
 		"verify_email": "We need to verify the ownership of your email. Please click Verify to confirm it.",
 		"warning_no_encryption_keys": "To secure your data with encryption, create a new encryption key.",
 		"wrong_link": "This is not a valid link.",
-		"x_files": "{x} file(s)"
+		"x_files": "{x} file(s)",
+		"confirm_delete_identity": "Are you sure? Data will be lost.",
+		"delete_identity": "You are about to delete the identity **{id}** along with all its __{responses} responses__. This action will __permanently__ delete data from the database and is irreversible.",
+		"identities_info": "Identities are anonymized user IDs that enable you to quickly search for and delete data associated with a specific user.",
+		"identity_linked_to_responses": "This identity is linked to {count} response(s)."
 	},
 	"title": {
 		"add_block": "Add Block",
@@ -631,7 +653,10 @@
 		"update": "Update",
 		"unexpected_error": "Unexpected Error",
 		"verify_email": "Verify Email",
-		"welcome_back": "Welcome back, {name}"
+		"welcome_back": "Welcome back, {name}",
+		"add_metadata": "Add Metadata",
+		"identities": "Identities",
+		"search_results": "Search results"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Copy",

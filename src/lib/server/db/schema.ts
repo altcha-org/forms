@@ -582,11 +582,12 @@ export const responsesRelations = relations(responses, ({ many, one }) => ({
 	notes: many(notes)
 }));
 
-export const identitiesRelations = relations(identities, ({ one }) => ({
+export const identitiesRelations = relations(identities, ({ one, many }) => ({
 	account: one(accounts, {
 		fields: [identities.accountId],
 		references: [accounts.id]
-	})
+	}),
+	response: many(responses),
 }));
 
 export const notesRelations = relations(notes, ({ one }) => ({

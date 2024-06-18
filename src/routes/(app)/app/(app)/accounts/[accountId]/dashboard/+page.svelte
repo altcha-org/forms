@@ -208,6 +208,11 @@
 						>
 					</div>
 					<div>
+						<a href="/app/accounts/{data.account.id}/identities" class="link"
+							>{$_('button.manage_identities')}</a
+						>
+					</div>
+					<div>
 						<a href="/app/accounts/{data.account.id}/users" class="link"
 							>{$_('button.manage_users')}</a
 						>

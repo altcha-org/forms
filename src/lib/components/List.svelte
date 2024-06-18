@@ -28,15 +28,23 @@
 	{#each items as item, i}
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<div
-			class="p-2 lg:p-4 focus-within:outline outline-primary"
+			class="flex p-2 lg:p-4 focus-within:outline outline-primary"
 			on:dblclick|preventDefault={() => onDblClick(i, item)}
 		>
-			<slot {item} index={i}>
-				{#if Array.isArray(item)}
-					<div class="text-sm opacity-60">{item[0]}</div>
-					<div class="line-clamp-4">{item[1] || '—'}</div>
-				{/if}
-			</slot>
+		 	<div class="grow overflow-hidden">
+				<slot {item} index={i}>
+					{#if Array.isArray(item)}
+						<div class="text-sm opacity-60">{item[0]}</div>
+						<div class="">{item[1] || '—'}</div>
+					{/if}
+				</slot>
+			</div>
+
+			{#if $$slots.actions}
+			<div>
+				<slot name="actions" {item} index={i} />
+			</div>
+			{/if}
 		</div>
 
 		{#if i < items.length - 1}

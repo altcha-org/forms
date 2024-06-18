@@ -107,6 +107,16 @@ export class ResponsesService {
 		return result[0].value;
 	}
 
+	async countResponsesForIdentity(identityId: string) {
+		const result = await db
+			.select({
+				value: count()
+			})
+			.from(responses)
+			.where(eq(responses.identityId, identityId));
+		return result[0].value;
+	}
+
 	async countResponses(formId: string) {
 		const results = await db
 			.select({
@@ -354,13 +364,21 @@ export class ResponsesService {
 		return db
 			.select({
 				createdAt: responses.createdAt,
+				data: responses.data,
+				dataEncrypted: responses.dataEncrypted,
+				encrypted: responses.encrypted,
+				encryptionKeyHash: responses.encryptionKeyHash,
 				formId: responses.formId,
 				flag: responses.flag,
 				id: responses.id,
+				labels: responses.labels,
+				notes: count(notes.id),
 				spam: responses.spam,
-				read: responses.read
+				read: responses.read,
+				updatedAt: responses.updatedAt
 			})
 			.from(responses)
+			.leftJoin(notes, eq(responses.id, notes.responseId))
 			.groupBy(responses.id)
 			.orderBy(desc(responses.id))
 			.offset(options.offset)

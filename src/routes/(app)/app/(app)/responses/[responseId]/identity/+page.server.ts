@@ -15,16 +15,12 @@ export const load = loadHandler(async ({ parent }) => {
 	if (identity && identity.accountId !== response.accountId) {
 		throw new ForbiddenError();
 	}
-	const responses = identity
-		? await responsesService.listResponsesForIdentity({
-				identityId: identity.id,
-				limit: 100,
-				offset: 0
-			})
-		: [];
+	const totalResponses = identity
+		? await responsesService.countResponsesForIdentity(identity.id)
+		: 0;
 	return {
 		identity,
-		responses
+		totalResponses,
 	};
 }) satisfies PageServerLoad;
 

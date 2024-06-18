@@ -3,7 +3,6 @@
 	import Form from '$lib/components/Form.svelte';
 	import FormStep from '$lib/components/FormStep.svelte';
 	import ImageUpload from '$lib/components/ImageUpload.svelte';
-	import ImageInput from '$lib/components/blocks/ImageInput.svelte';
 	import StickyButtons from '$lib/components/StickyButtons.svelte';
 	import Tabs from '$lib/components/Tabs.svelte';
 	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
@@ -264,6 +263,6 @@
 			{/if}
 		</div>
 
-		<StickyButtons disabled={!changed && !formChanged} {loading} />
+		<StickyButtons disabled={!changed && !formChanged} />
 	</div>
 </Form>
