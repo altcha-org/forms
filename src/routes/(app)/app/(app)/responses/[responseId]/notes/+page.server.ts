@@ -28,7 +28,7 @@ export const actions = {
 				throw new ForbiddenError();
 			}
 			const encrypted = response.form.account?.encryptionEnabled
-				? await accountsService.encryptData(response.accountId, data.text)
+				? await accountsService.encryptData(response.accountId, data.text, response.form.encryptionKeyHash)
 				: null;
 			if (data.sendToEmail) {
 				await emailService.sendTemplate(

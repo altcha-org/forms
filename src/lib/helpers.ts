@@ -189,7 +189,7 @@ export function getDeviceName() {
 			const platform = navigator.userAgentData.platform;
 			// @ts-ignore
 			const brands: { brand: string }[] = navigator.userAgentData.brands || [];
-			const model = brands.find(({ brand }) => brand !== 'Not A(Brand')?.brand;
+			const model = brands.find(({ brand }) => !['Not A)Brand', 'Not/A)Brand', 'Not A;Brand'].includes(brand))?.brand;
 			if (platform) {
 				return [platform, model, mobile ? '(mobile)' : ''].filter((p) => !!p).join(' ');
 			}
