@@ -120,7 +120,8 @@
 		"search": "Pesquisar",
 		"view_identity": "Visualizar Identidade",
 		"view_related_responses": "Visualizar Respostas Relacionadas",
-		"view_responses": "Visualizar Respostas"
+		"view_responses": "Visualizar Respostas",
+		"stop": "Parar"
 	},
 	"complexity": {
 		"low": "Baixo",
@@ -412,7 +413,8 @@
 		"metadata": "Metadados",
 		"metadata_key": "Chave de metadados",
 		"metadata_value": "Valor de metadados",
-		"responses": "Respostas"
+		"responses": "Respostas",
+		"max_wtotalidth": "Largura máxima"
 	},
 	"limit": {
 		"api": "Pedidos da API",
@@ -615,7 +617,14 @@
 		"confirm_delete_identity": "Tem certeza? Os dados serão perdidos.",
 		"delete_identity": "Você está prestes a excluir a identidade **{id}** junto com todas as suas __{responses} respostas__. Esta ação irá excluir dados do banco de dados de forma __permanente__ e é irreversível.",
 		"identities_info": "As identidades são IDs de usuários anonimizados que permitem que você pesquise e exclua rapidamente dados associados a um usuário específico.",
-		"identity_linked_to_responses": "Esta identidade está vinculada a {count} resposta(s)."
+		"identity_linked_to_responses": "Esta identidade está vinculada a {count} resposta(s).",
+		"no_results": "Nenhum resultado encontrado.",
+		"search_errors": "Foram detetados erros durante a pesquisa, provavelmente devido à falta de chaves de criptografia.",
+		"search_found_forms": "Encontrado(s) {count} formulário(s)",
+		"search_found_responses": "Encontrada(s) {count} resposta(s)",
+		"search_scanned_forms": "{count} formulário(s)",
+		"search_scanned_responses": "{count} resposta(s)",
+		"searching": "Pesquisando..."
 	},
 	"title": {
 		"add_block": "Adicionar Bloco",
@@ -656,7 +665,8 @@
 		"welcome_back": "Bem-vindo de volta, {name}",
 		"add_metadata": "Adicionar Metadados",
 		"identities": "Identidades",
-		"search_results": "Resultados da pesquisa"
+		"search_results": "Resultados da pesquisa",
+		"search": "Pesquisar"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Copiar",

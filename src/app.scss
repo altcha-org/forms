@@ -233,3 +233,8 @@
 .hide-scrollbar {
 	scrollbar-width: none;
 }
+
+mark {
+	background-color: oklch(var(--wa) / 0.2);
+	color: currentColor;
+}

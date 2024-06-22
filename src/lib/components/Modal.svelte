@@ -127,26 +127,32 @@
 			class="modal-action justify-start sticky bottom-0 z-40 bg-base-200 border-t-2 border-base-300 px-5 py-3"
 			class:justify-center={fullscreen}
 		>
-			{#if !hideButton}
-				<button
-					type="button"
-					class="btn btn-primary btn-wide"
-					disabled={disabled || loading}
-					on:click|preventDefault={() => onSave()}
-				>
-					{#if loading}
-						<span class="loading loading-spinner loading-sm"></span>
-					{:else}
-						{buttonLabel}
-					{/if}
-				</button>
-			{/if}
+		 	<div class="grow flex gap-3">
+				{#if !hideButton}
+					<button
+						type="button"
+						class="btn btn-primary btn-wide"
+						disabled={disabled || loading}
+						on:click|preventDefault={() => onSave()}
+					>
+						{#if loading}
+							<span class="loading loading-spinner loading-sm"></span>
+						{:else}
+							{buttonLabel}
+						{/if}
+					</button>
+				{/if}
 
-			{#if cancelable}
-				<button type="button" class="btn btn-ghost opacity-60" on:click={() => onClose()}
-					>{$_('button.cancel')}</button
-				>
-			{/if}
+				<slot name="actions_cancel" />
+
+				{#if cancelable}
+					<button type="button" class="btn btn-ghost opacity-60" on:click={() => onClose()}
+						>{$_('button.cancel')}</button
+					>
+				{/if}
+			</div>
+
+			<slot name="actions" />
 		</div>
 	</div>
 </dialog>

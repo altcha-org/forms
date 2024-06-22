@@ -120,7 +120,8 @@
 		"search": "Rechercher",
 		"view_identity": "Voir l'identité",
 		"view_related_responses": "Voir les réponses connexes",
-		"view_responses": "Voir les réponses"
+		"view_responses": "Voir les réponses",
+		"stop": "Arrêt"
 	},
 	"complexity": {
 		"low": "Faible",
@@ -412,7 +413,8 @@
 		"metadata": "Métadonnées",
 		"metadata_key": "Clé des métadonnées",
 		"metadata_value": "Valeur des métadonnées",
-		"responses": "Réponses"
+		"responses": "Réponses",
+		"max_wtotalidth": "Largeur maximale"
 	},
 	"limit": {
 		"api": "Demandes d'API",
@@ -615,7 +617,14 @@
 		"confirm_delete_identity": "Êtes-vous sûr ? Les données seront perdues.",
 		"delete_identity": "Vous êtes sur le point de supprimer l'identité ** {id} ** ainsi que toutes ses __{responses} réponses__. Cette action supprimera définitivement les données de la base de données et est irréversible.",
 		"identities_info": "Les identités sont des identifiants d'utilisateur anonymisés qui vous permettent de rechercher et supprimer rapidement les données associées à un utilisateur spécifique.",
-		"identity_linked_to_responses": "Cette identité est liée à {count} réponse(s)."
+		"identity_linked_to_responses": "Cette identité est liée à {count} réponse(s).",
+		"no_results": "Aucun résultat trouvé.",
+		"search_errors": "Des erreurs ont été détectées lors de la recherche, probablement dues à des clés de chiffrement manquantes.",
+		"search_found_forms": "Trouvé {count} formulaire(s)",
+		"search_found_responses": "Trouvé {count} réponse(s)",
+		"search_scanned_forms": "{count} formulaire(s)",
+		"search_scanned_responses": "{count} réponse(s)",
+		"searching": "Recherche en cours..."
 	},
 	"title": {
 		"add_block": "Ajouter un bloc",
@@ -656,7 +665,8 @@
 		"welcome_back": "Bienvenue de retour, {name}",
 		"add_metadata": "Ajouter des métadonnées",
 		"identities": "Identités",
-		"search_results": "Résultats de la recherche"
+		"search_results": "Résultats de la recherche",
+		"search": "Rechercher"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Copier",

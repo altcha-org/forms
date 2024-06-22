@@ -16,12 +16,13 @@ export const load = loadHandler(async ({ locals, params, parent }) => {
 		encryptionKeys: encryptionKeysService.countActiveEncryptionKeysForAccount(params.accountId),
 		count: formsService.countResponsesForForms(params.accountId),
 		forms: await formsService.listFormsForUser(accountId, user.id),
-		responses: await responsesService.listResponsesForAccount({
+		responses: await responsesService.listResponsesForAccountAndUser({
 			accountId,
 			limit: 30,
 			offset: 0,
 			orderBy: 'id',
-			orderDir: 'desc'
+			orderDir: 'desc',
+			userId: user.id,
 		})
 	};
 }) satisfies PageServerLoad;

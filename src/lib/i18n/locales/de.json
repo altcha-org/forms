@@ -120,7 +120,8 @@
 		"search": "Suchen",
 		"view_identity": "Identität anzeigen",
 		"view_related_responses": "Verwandte Antworten anzeigen",
-		"view_responses": "Antworten anzeigen"
+		"view_responses": "Antworten anzeigen",
+		"stop": "Halt"
 	},
 	"complexity": {
 		"low": "Niedrig",
@@ -616,7 +617,14 @@
 		"confirm_delete_identity": "Sind Sie sicher? Daten gehen verloren.",
 		"delete_identity": "Sie sind dabei, die Identität **{id}** zusammen mit all ihren {responses} Antworten zu löschen. Diese Aktion wird Daten aus der Datenbank __dauerhaft__ löschen und ist nicht rückgängig zu machen.",
 		"identities_info": "Identitäten sind anonymisierte Benutzer-IDs, die es Ihnen ermöglichen, schnell nach Daten eines bestimmten Benutzers zu suchen und diese zu löschen.",
-		"identity_linked_to_responses": "Diese Identität ist mit {count} Antwort(en) verknüpft."
+		"identity_linked_to_responses": "Diese Identität ist mit {count} Antwort(en) verknüpft.",
+		"no_results": "Keine Ergebnisse gefunden.",
+		"search_errors": "Es wurden Fehler bei der Suche festgestellt, wahrscheinlich aufgrund fehlender Verschlüsselungsschlüssel.",
+		"search_found_forms": "{count} Formular(e)",
+		"search_found_responses": "{count} Antwort(en)",
+		"search_scanned_forms": "{count} Formular(e)",
+		"search_scanned_responses": "{count} Antwort(en)",
+		"searching": "Suche läuft..."
 	},
 	"title": {
 		"add_block": "Block hinzufügen",
@@ -657,7 +665,8 @@
 		"welcome_back": "Willkommen zurück, {name}",
 		"add_metadata": "Metadaten hinzufügen",
 		"identities": "Identitäten",
-		"search_results": "Suchergebnisse"
+		"search_results": "Suchergebnisse",
+		"search": "Suche"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Kopieren",

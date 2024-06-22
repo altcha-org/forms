@@ -1,8 +1,8 @@
 import {} from '@altcha/crypto';
-import { and, asc, count, desc, eq, inArray, sql, lt, type SQL } from 'drizzle-orm';
+import { and, asc, count, desc, eq, or, inArray, sql, lt, type SQL } from 'drizzle-orm';
 import { db } from '$lib/server/db';
 import { roundTime } from '$lib/server/helpers';
-import { notes, responses } from '$lib/server/db/schema';
+import { accountsToUsers, forms, formsToUsers, notes, responses } from '$lib/server/db/schema';
 import { filesService } from '$lib/server/services/files.service';
 import { accountsService } from '$lib/server/services/accounts.service';
 import { plansService } from '$lib/server/services/plans.service';
@@ -356,6 +356,48 @@ export class ResponsesService {
 					eq(responses.accountId, options.accountId),
 					eq(responses.deleted, false),
 					eq(responses.spam, false)
+				)
+			);
+	}
+
+	async listResponsesForAccountAndUser(
+		options: IPaginationOptions & IOrderByOptions & { accountId: string; userId: string }
+	) {
+		return db
+			.select({
+				createdAt: responses.createdAt,
+				data: responses.data,
+				dataEncrypted: responses.dataEncrypted,
+				encrypted: responses.encrypted,
+				encryptionKeyHash: responses.encryptionKeyHash,
+				formId: responses.formId,
+				flag: responses.flag,
+				id: responses.id,
+				labels: responses.labels,
+				notes: count(notes.id),
+				spam: responses.spam,
+				read: responses.read,
+				updatedAt: responses.updatedAt
+			})
+			.from(responses)
+			.leftJoin(notes, eq(responses.id, notes.responseId))
+			.leftJoin(forms, eq(forms.id, responses.formId))
+			.leftJoin(formsToUsers, eq(formsToUsers.formId, responses.formId))
+			.leftJoin(accountsToUsers, eq(accountsToUsers.accountId, responses.accountId))
+			.groupBy(responses.id)
+			.orderBy(this.getOrderBy(options))
+			.offset(options.offset)
+			.limit(options.limit)
+			.where(
+				and(
+					eq(responses.accountId, options.accountId),
+					eq(responses.deleted, false),
+					eq(responses.spam, false),
+					or(
+						eq(forms.restricted, false),
+						eq(accountsToUsers.role, 'admin'),
+						eq(formsToUsers.userId, options.userId)
+					)
 				)
 			);
 	}

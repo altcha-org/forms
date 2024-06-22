@@ -120,7 +120,8 @@
 		"search": "Search",
 		"view_identity": "View Identity",
 		"view_related_responses": "View Related Responses",
-		"view_responses": "View Responses"
+		"view_responses": "View Responses",
+		"stop": "Stop"
 	},
 	"complexity": {
 		"low": "Low",
@@ -412,7 +413,8 @@
 		"metadata": "Metadata",
 		"metadata_key": "Metadata Key",
 		"metadata_value": "Metadata Value",
-		"responses": "Responses"
+		"responses": "Responses",
+		"max_wtotalidth": "Max. width"
 	},
 	"limit": {
 		"api": "API requests",
@@ -615,7 +617,14 @@
 		"confirm_delete_identity": "Are you sure? Data will be lost.",
 		"delete_identity": "You are about to delete the identity **{id}** along with all its __{responses} responses__. This action will __permanently__ delete data from the database and is irreversible.",
 		"identities_info": "Identities are anonymized user IDs that enable you to quickly search for and delete data associated with a specific user.",
-		"identity_linked_to_responses": "This identity is linked to {count} response(s)."
+		"identity_linked_to_responses": "This identity is linked to {count} response(s).",
+		"no_results": "No results found.",
+		"search_errors": "Errors were detected during the search, likely due to missing encryption keys.",
+		"search_found_forms": "Found {count} form(s)",
+		"search_found_responses": "Found {count} response(s)",
+		"search_scanned_forms": "{count} form(s)",
+		"search_scanned_responses": "{count} response(s)",
+		"searching": "Searching..."
 	},
 	"title": {
 		"add_block": "Add Block",
@@ -656,7 +665,8 @@
 		"welcome_back": "Welcome back, {name}",
 		"add_metadata": "Add Metadata",
 		"identities": "Identities",
-		"search_results": "Search results"
+		"search_results": "Search results",
+		"search": "Search"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Copy",

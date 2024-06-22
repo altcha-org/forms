@@ -120,7 +120,8 @@
 		"search": "Cerca",
 		"view_identity": "Visualizza identità",
 		"view_related_responses": "Visualizza risposte correlate",
-		"view_responses": "Visualizza risposte"
+		"view_responses": "Visualizza risposte",
+		"stop": "Fermarsi"
 	},
 	"complexity": {
 		"low": "Basso",
@@ -412,7 +413,8 @@
 		"metadata": "Metadati",
 		"metadata_key": "Chiave dei metadati",
 		"metadata_value": "Valore dei metadati",
-		"responses": "Risposte"
+		"responses": "Risposte",
+		"max_wtotalidth": "Larghezza massima"
 	},
 	"limit": {
 		"api": "Richieste API",
@@ -425,7 +427,8 @@
 	"notification": {
 		"connection_successful": "Connessione riuscita",
 		"success": "Modifiche applicate",
-		"eliminato": "Eliminato"
+		"eliminato": "Eliminato",
+		"deleted": "Eliminato"
 	},
 	"period": {
 		"month": "mo",
@@ -615,7 +618,14 @@
 		"confirm_delete_identity": "Sei sicuro? I dati verranno persi.",
 		"delete_identity": "Stai per eliminare l'identità **{id}** insieme a tutte le sue __{responses} risposte__. Questa azione eliminerà __permanentemente__ i dati dal database e sarà irreversibile.",
 		"identities_info": "Le identità sono ID utente anonimizzati che ti consentono di cercare rapidamente e eliminare i dati associati a un utente specifico.",
-		"identity_linked_to_responses": "Quest'identità è collegata a {count} risposta/e."
+		"identity_linked_to_responses": "Quest'identità è collegata a {count} risposta/e.",
+		"no_results": "Nessun risultato trovato.",
+		"search_errors": "Sono stati rilevati errori durante la ricerca, probabilmente a causa di chiavi di crittografia mancanti.",
+		"search_found_forms": "Trovato(i) {count} modulo(i)",
+		"search_found_responses": "Trovato(i) {count} risposta(e)",
+		"search_scanned_forms": "{count} modulo(i)",
+		"search_scanned_responses": "{count} risposta(e)",
+		"searching": "Ricerca in corso..."
 	},
 	"title": {
 		"add_block": "Aggiungi Blocco",
@@ -656,7 +666,8 @@
 		"welcome_back": "Bentornato, {name}",
 		"add_metadata": "Aggiungi metadati",
 		"identities": "Identità",
-		"search_results": "Risultati della ricerca"
+		"search_results": "Risultati della ricerca",
+		"search": "Cerca"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Copia",
