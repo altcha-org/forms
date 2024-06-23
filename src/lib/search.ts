@@ -1,9 +1,11 @@
-import { create, insert, search } from '@orama/orama';
+import { create, insert } from '@orama/orama';
 import { afterInsert as highlightAfterInsert, searchWithHighlight } from '@orama/plugin-match-highlight';
 import type { FlattenSchemaProperty, Orama, PartialSchemaDeep, Schema } from '@orama/orama';
 
 export class Search<T extends Record<string, 'string' | 'string[]' | 'number' | 'number[]' | 'boolean' | 'boolean[]' | 'enum' | 'enum[]'>> {
   orama?: Orama<T>;
+
+  finalized: boolean = false;
 
   constructor(readonly schema: T) {
   }
@@ -12,22 +14,20 @@ export class Search<T extends Record<string, 'string' | 'string[]' | 'number' | 
     return this.orama?.data.docs.count || null;
   }
 
+  reset() {
+    this.orama = void 0;
+  }
+
   async getOrama() {
     if (!this.orama) {
       this.orama = await create<T>({
         schema: this.schema,
-        components: {
-          tokenizer: {
-            stemming: true,
-            stemmerSkipProperties: ['email']
-          }
-        },
         plugins: [
           {
             name: 'highlight',
             afterInsert: highlightAfterInsert
           }
-        ]
+        ],
       });
     }
     return this.orama;
@@ -55,8 +55,8 @@ export const formsSearch = new Search({
 });
 
 export const responsesSearch = new Search({
-  email: 'string',
+  emailField: 'string',
   primaryField: 'string',
   secondaryField: 'string',
-  otherFields: 'string[]'
+  otherFields: 'string'
 });

@@ -10,6 +10,10 @@
 	$: account = data.account;
 </script>
 
+<svelte:head>
+	<title>{$_('label.settings')} | ALTCHA Forms</title>
+</svelte:head>
+
 <Head
 	baseUrl="/app/accounts/{account.id}"
 	tabs={[

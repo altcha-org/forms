@@ -16,7 +16,10 @@ export const load = loadHandler(async ({ locals, parent, url }) => {
     offset,
   });
   return {
-		forms: await formsService.listFormsForUser(identity.accountId, locals.user.id),
+		forms: await formsService.listFormsForUser({
+      accountId: identity.accountId,
+      userId: locals.user.id,
+    }),
     limit,
     offset,
     responses,

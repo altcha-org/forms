@@ -1,17 +1,21 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
 	import { page } from '$app/stores';
-	import { createEventDispatcher, onMount } from 'svelte';
+	import { createEventDispatcher, onDestroy, onMount } from 'svelte';
 	import { formsSearch, responsesSearch } from '$lib/search';
 	import { debounce } from '$lib/helpers';
 	import { decryptData } from '$lib/helpers';
 	import { encryptionKeys } from '$lib/stores';
 	import { formatDateTime, formatTimeShort } from '$lib/format';
 	import SearchIcon from '$lib/components/icons/Search.svelte';
+	import NoteIcon from '$lib/components/icons/Note.svelte';
+	import StarFillIcon from '$lib/components/icons/StarFill.svelte';
 	import StringHighlight from '$lib/components/StringHighlight.svelte';
 	import FormResponseCount from '$lib/components/FormResponseCount.svelte';
 	import Alert from '$lib/components/Alert.svelte';
 	import type { IForm, IResponse } from '$lib/types';
+
+	interface IResponseCount { count: number; id: string; spam: boolean | null; read: boolean | null };
 
 	export let loading: boolean = false;
 	export let totalForms: number = 0;
@@ -30,9 +34,17 @@
 	$: account = $page.data.account;
 	$: _onTermChange(term);
 
+	onDestroy(() => {
+		searchStopped = true;
+	});
+
 	onMount(async () => {
 		if (elInput) {
 			elInput.focus();
+		}
+		if (responsesSearch.size !== null && !responsesSearch.finalized) {
+			formsSearch.reset();
+			responsesSearch.reset();
 		}
 	});
 
@@ -56,9 +68,36 @@
 		}
 	}
 
-	async function makeSearch() {
+	async function loadForms() {
 		let offset = 0;
 		let forms: IForm[] = [];
+		loading = true;
+		try {
+			while (true) {
+				const result = await makeFormsRequest(offset);
+				if (result.forms.length) {
+					forms = result.forms;
+					for (const form of forms) {
+						await indexForm(form, result.responseCount.filter(({ id }) => id === form.id));
+					}
+					await onTermChange(term);
+				}
+				const hasMore = result.total > (result.offset + result.limit);
+				if (!hasMore) {
+					formsSearch.finalized = true;
+					break;
+				}
+				offset += result.limit;
+			}
+		} finally {
+			loading = false;
+		}
+		return forms;
+	}
+
+	async function makeSearch() {
+		const forms: IForm[] = await loadForms();
+		let offset = 0;
 		loading = true;
     erroredResponses = 0;
 		try {
@@ -66,29 +105,23 @@
         if (searchStopped) {
           break;
         }
-				const result = await makeRequest(offset);
-				if (result.forms.length) {
-					forms = result.forms;
-					for (const form of forms) {
-						await indexForm(form, result.responseCount.filter(({ id }) => id === form.id));
-					}
-					_onTermChange(term);
-				}
-				for (const response of result.responses.results) {
+				const result = await makeResponsesRequest(offset);
+				for (const response of result.responses) {
           if (searchStopped) {
             break;
           }
 					const form = forms.find(({ id }) => id === response.formId);
 					if (form) {
 						await indexResponse(form, response);
-						_onTermChange(term);
 					}
 				}
-				const hasMore = result.responses.total > result.responses.offset + result.responses.limit;
+				await onTermChange(term);
+				const hasMore = result.total > (result.offset + result.limit);
 				if (!hasMore) {
+					responsesSearch.finalized = true;
 					break;
 				}
-				offset += result.responses.limit;
+				offset += result.limit;
 			}
 		} finally {
 			loading = false;
@@ -96,17 +129,34 @@
 		}
 	}
 
-	async function makeRequest(
+	async function makeFormsRequest(
 		offset: number = 0,
-		includeForms: boolean = offset === 0
 	): Promise<{
+		offset: number;
+		limit: number;
+		total: number;
 		forms: IForm[];
-		responseCount: { count: number; id: string; read: boolean | null; spam: boolean | null }[];
-		responses: { results: IResponse[]; offset: number; limit: number; total: number };
+		responseCount: IResponseCount[];
 	}> {
-		const url = new URL(`/app/accounts/${account.id}/responses/search`, location.origin);
+		const url = new URL(`/app/accounts/${account.id}/search/forms`, location.origin);
+		url.searchParams.set('offset', String(offset));
+		const resp = await fetch(url, {
+			method: 'GET'
+		});
+		return resp.json();
+	}
+
+	async function makeResponsesRequest(
+		offset: number = 0,
+	): Promise<{
+		offset: number;
+		limit: number;
+		total: number;
+		responses: Array<IResponse & { notes: number }>;
+	}> {
+		const url = new URL(`/app/accounts/${account.id}/search/responses`, location.origin);
 		url.searchParams.set('term', term);
-		url.searchParams.set('includeForms', includeForms ? 'true' : 'false');
+		url.searchParams.set('limit', '1');
 		url.searchParams.set('offset', String(offset));
 		const resp = await fetch(url, {
 			method: 'GET'
@@ -125,7 +175,7 @@
 		totalForms = formsSearch.size || 0;
 	}
 
-	async function indexResponse(form: IForm, response: IResponse) {
+	async function indexResponse(form: IForm, response: IResponse & { notes: number }) {
 		let data: Record<string, any> = response.data || {};
 		if (response.encrypted && response.dataEncrypted && response.encryptionKeyHash) {
 			data = await decryptData(response.dataEncrypted, response.encryptionKeyHash, $encryptionKeys);
@@ -134,15 +184,34 @@
         return false;
       }
 		}
+		const entries = Object.entries(data);
 		const primaryField = data[form.displayBlocks[0]];
 		const secondaryField = data[form.displayBlocks[1]];
-		const email = Object.values(data).find((value: string) => value.includes('@'));
+		const { emailField, otherFields } = entries.reduce((acc, [ key, value ]) => {
+			if (value && value.includes('@')) {
+				acc.emailField = value;
+			} else if (value?.length > 2 && key !== form.displayBlocks[0] && key !== form.displayBlocks[1]) {
+				acc.otherFields.push(value);
+			}
+			return acc;
+		}, {
+			emailField: '',
+			otherFields: [],
+		} as {
+			emailField: string;
+			otherFields: string[];
+		});
 		await responsesSearch.put({
 			createdAt: response.createdAt,
-			email,
+			emailField,
+			flag: response.flag,
+			formId: form.id,
+			formName: form.name,
 			id: response.id,
-			otherFields: [],
+			otherFields: otherFields.join('\n'),
+			notes: response.notes,
 			primaryField,
+			read: response.read,
 			secondaryField
 		});
 		totalResponses = responsesSearch.size || 0;
@@ -158,8 +227,8 @@
 </script>
 
 <div class="flex flex-col gap-6">
-	<div class="flex flex-col gap-2">
-		<label class="input input-bordered flex items-center gap-4 w-full">
+	<div class="flex flex-col gap-2 sticky top-16 z-40 bg-base-100">
+		<label class="input input-bordered shadow-sm flex items-center gap-4 w-full">
 			{#if loading}
 				<span class="loading loading-spinner loading-xs"></span>
 			{:else}
@@ -236,38 +305,65 @@
         {#each searchResponsesResuls.hits as hit, i (hit.id)}
           <a
             href="/app/responses/{hit.id}/data"
-            class="flex border-base-300 px-4 py-2 hover:bg-primary/5 focus-within:outline outline-primary cursor-pointer"
+            class="block border-base-300 px-4 py-2 hover:bg-primary/5 focus-within:outline outline-primary cursor-pointer"
             class:border-b={i < searchResponsesResuls.hits.length - 1}
             on:click={() => dispatch('click', { hit })}
             tabindex="0"
           >
-            <div class="grow">
-              <div class="font-bold">
-                <StringHighlight
-                  value={hit.document.primaryField}
-                  highlights={Object.values(hit.positions.primaryField || {}).flat()}
-                />
-              </div>
-              {#if hit.document.secondaryField}
-                <div class="text-sm text-base-content/60">
-                  <StringHighlight
-                    value={hit.document.secondaryField}
-                    highlights={Object.values(hit.positions.secondaryField || {}).flat()}
-                  />
-                </div>
-              {/if}
-              {#if hit.document.email}
-                <div class="text-sm text-base-content/60">
-                  <StringHighlight
-                    value={hit.document.email}
-                    highlights={Object.values(hit.positions.email || {}).flat()}
-                  />
-                </div>
-              {/if}
-            </div>
-            <div class="text-xs opacity-60">
-              {formatTimeShort(hit.document.createdAt)}
-            </div>
+						<div class="flex">
+							<div class="grow">
+								<span class="text-xs font-bold opacity-80">{hit.document.formName}</span>
+							</div>
+
+							<div class="shrink-0 flex gap-3">
+								<div class="text-xs opacity-60">
+									{formatTimeShort(hit.document.createdAt)}
+								</div>
+								{#if hit.document.notes > 0}
+									<a href="/app/responses/{hit.id}/notes">
+										<NoteIcon class="w-4 h-4 text-base-content/30" />
+									</a>
+								{/if}
+							</div>
+						</div>
+
+						<div class="flex gap-1 items-center">
+							{#if hit.document.flag}
+							<StarFillIcon class="w-4 h-4 text-warning" />
+							{/if}
+							<div class="line-clamp-2" class:font-bold={!hit.document.read}>
+								<StringHighlight
+									value={hit.document.primaryField}
+									highlights={Object.values(hit.positions.primaryField || {}).flat()}
+								/>
+							</div>
+						</div>
+						{#if hit.document.secondaryField}
+							<div class="line-clamp-2 text-sm text-base-content/60">
+								<StringHighlight
+									value={hit.document.secondaryField}
+									highlights={Object.values(hit.positions.secondaryField || {}).flat()}
+								/>
+							</div>
+						{/if}
+						{#if hit.document.emailField}
+							<div class="text-sm text-base-content/60">
+								<StringHighlight
+									value={hit.document.emailField}
+									highlights={Object.values(hit.positions.emailField || {}).flat()}
+								/>
+							</div>
+						{/if}
+
+						{#if Object.keys(hit.positions.otherFields).length}
+							<div class="text-sm text-base-content/60 line-clamp-3">
+								<StringHighlight
+									value={hit.document.otherFields}
+									highlights={Object.values(hit.positions.otherFields || {}).flat()}
+								/>
+							</div>
+						{/if}
+						
           </a>
         {/each}
       {/if}

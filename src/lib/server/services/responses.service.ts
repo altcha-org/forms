@@ -107,6 +107,30 @@ export class ResponsesService {
 		return result[0].value;
 	}
 
+	async countResponsesForAccountUser(accountId: string, userId: string) {
+		const result = await db
+			.select({
+				value: count(responses.id)
+			})
+			.from(responses)
+			.leftJoin(forms, eq(forms.id, responses.formId))
+			.leftJoin(formsToUsers, eq(formsToUsers.formId, responses.formId))
+			.leftJoin(accountsToUsers, eq(accountsToUsers.accountId, responses.accountId))
+			.where(
+				and(
+					eq(responses.accountId, accountId),
+					eq(responses.deleted, false),
+					eq(responses.spam, false),
+					or(
+						eq(forms.restricted, false),
+						eq(accountsToUsers.role, 'admin'),
+						eq(formsToUsers.userId, userId)
+					)
+				)
+			);
+		return result[0].value;
+	}
+
 	async countResponsesForIdentity(identityId: string) {
 		const result = await db
 			.select({

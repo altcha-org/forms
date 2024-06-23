@@ -31,11 +31,11 @@
 			class="flex p-2 lg:p-4 focus-within:outline outline-primary"
 			on:dblclick|preventDefault={() => onDblClick(i, item)}
 		>
-		 	<div class="grow overflow-hidden">
+		 	<div class="grow w-full">
 				<slot {item} index={i}>
 					{#if Array.isArray(item)}
 						<div class="text-sm opacity-60">{item[0]}</div>
-						<div class="">{item[1] || '—'}</div>
+						<div class="overflow-auto w-full">{item[1] || '—'}</div>
 					{/if}
 				</slot>
 			</div>

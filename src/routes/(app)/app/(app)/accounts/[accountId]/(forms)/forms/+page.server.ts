@@ -12,7 +12,10 @@ export const load = loadHandler(async ({ locals, params }) => {
 	return {
 		accountRole: user.accountsToUsers.find(({ account }) => account.id === params.accountId)?.role,
 		count: formsService.countResponsesForForms(params.accountId),
-		forms: await formsService.listFormsForUser(params.accountId, user.id)
+		forms: await formsService.listFormsForUser({
+			accountId: params.accountId,
+			userId: user.id,
+		})
 	};
 }) satisfies PageServerLoad;
 

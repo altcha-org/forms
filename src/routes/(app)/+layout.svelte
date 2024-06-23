@@ -37,7 +37,7 @@
 </script>
 
 <svelte:head>
-	<title>Altcha Forms</title>
+	<title>ALTCHA Forms</title>
 </svelte:head>
 
 <slot />

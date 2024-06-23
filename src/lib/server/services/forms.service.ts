@@ -81,7 +81,7 @@ export class FormsService {
 		return idgen.prefixed(EIdPrefix.FORM);
 	}
 
-	getOrderBy(options: IOrderByOptions) {
+	getOrderBy(options: Partial<IOrderByOptions>) {
 		const fn = options.orderDir === 'asc' ? asc : desc;
 		switch (options.orderBy) {
 			case 'name':
@@ -195,7 +195,7 @@ export class FormsService {
 			.where(eq(forms.id, formId));
 	}
 
-	async listFormsForUser(accountId: string, userId: string) {
+	async listFormsForUser(options: Partial<IPaginationOptions & IOrderByOptions> & { accountId: string, userId: string }) {
 		return db
 			.selectDistinctOn([forms.id, forms.name], {
 				contextInfo: forms.contextInfo,
@@ -208,14 +208,16 @@ export class FormsService {
 				status: forms.status
 			})
 			.from(forms)
-			.orderBy(asc(forms.name), asc(forms.id))
+			.orderBy(this.getOrderBy(options))
+			.offset(options.offset || 0)
+			.limit(options.limit || 500)
 			.where(
 				and(
-					eq(forms.accountId, accountId),
+					eq(forms.accountId, options.accountId),
 					or(
 						eq(forms.restricted, false),
 						eq(accountsToUsers.role, 'admin'),
-						eq(formsToUsers.userId, userId)
+						eq(formsToUsers.userId, options.userId)
 					)
 				)
 			)

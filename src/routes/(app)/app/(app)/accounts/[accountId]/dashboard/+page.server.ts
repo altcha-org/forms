@@ -15,10 +15,13 @@ export const load = loadHandler(async ({ locals, params, parent }) => {
 		apiKeys: apiKeysService.countActiveApiKeysForAccount(params.accountId),
 		encryptionKeys: encryptionKeysService.countActiveEncryptionKeysForAccount(params.accountId),
 		count: formsService.countResponsesForForms(params.accountId),
-		forms: await formsService.listFormsForUser(accountId, user.id),
+		forms: await formsService.listFormsForUser({
+			accountId,
+			userId: user.id,
+		}),
 		responses: await responsesService.listResponsesForAccountAndUser({
 			accountId,
-			limit: 30,
+			limit: 50,
 			offset: 0,
 			orderBy: 'id',
 			orderDir: 'desc',

@@ -31,6 +31,10 @@
 	).toString();
 </script>
 
+<svelte:head>
+	<title>{$form.name} | ALTCHA Forms</title>
+</svelte:head>
+
 <Head
 	baseUrl="/app/forms/{$form.id}"
 	tabs={[
