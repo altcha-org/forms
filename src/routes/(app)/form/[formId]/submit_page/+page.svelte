@@ -62,7 +62,12 @@
 						{#if data.form.captchaInvisible}
 							<AltchaInvisible bind:loading {challengeurl} />
 						{:else}
-							<Altcha auto={data.form.captchaAuto} {challengeurl} />
+							<Altcha
+								auto={data.form.captchaAuto}
+								floating={data.form.captchaFloating}
+								hideBranding={data.form.hidePoweredBy}
+								{challengeurl}
+							/>
 						{/if}
 					</div>
 				</div>

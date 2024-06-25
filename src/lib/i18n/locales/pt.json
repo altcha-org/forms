@@ -204,7 +204,8 @@
 		"success_text": "O texto a ser mostrado após uma submissão bem-sucedida. Suporta Markdown.",
 		"user_email": "Digite o endereço de e-mail do usuário.",
 		"user_role": "Selecione a função do usuário. A função de Administrador concede acesso a todas as configurações.",
-		"identities_search": "Pesquise identidades usando o ID, ID externo ou o endereço de e-mail do usuário."
+		"identities_search": "Pesquise identidades usando o ID, ID externo ou o endereço de e-mail do usuário.",
+		"floating_captcha": "Exibe o Captcha como um elemento flutuante após o envio do formulário."
 	},
 	"label": {
 		"access": "Acesso",
@@ -414,7 +415,8 @@
 		"metadata_key": "Chave de metadados",
 		"metadata_value": "Valor de metadados",
 		"responses": "Respostas",
-		"max_wtotalidth": "Largura máxima"
+		"max_wtotalidth": "Largura máxima",
+		"floating_captcha": "Floating UI"
 	},
 	"limit": {
 		"api": "Pedidos da API",

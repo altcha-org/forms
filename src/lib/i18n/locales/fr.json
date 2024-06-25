@@ -204,7 +204,8 @@
 		"success_text": "Le texte à afficher après une soumission réussie. Prend en charge Markdown.",
 		"user_email": "Entrez l'adresse e-mail de l'utilisateur.",
 		"user_role": "Sélectionnez le rôle de l'utilisateur. Le rôle administrateur accorde l'accès à tous les paramètres.",
-		"identities_search": "Recherche d'identités en utilisant l'identifiant, l'identifiant externe ou l'adresse e-mail de l'utilisateur."
+		"identities_search": "Recherche d'identités en utilisant l'identifiant, l'identifiant externe ou l'adresse e-mail de l'utilisateur.",
+		"floating_captcha": "Affiche le Captcha sous forme d'élément flottant lors de la soumission du formulaire."
 	},
 	"label": {
 		"access": "Accès",
@@ -414,7 +415,8 @@
 		"metadata_key": "Clé des métadonnées",
 		"metadata_value": "Valeur des métadonnées",
 		"responses": "Réponses",
-		"max_wtotalidth": "Largeur maximale"
+		"max_wtotalidth": "Largeur maximale",
+		"floating_captcha": "Floating UI"
 	},
 	"limit": {
 		"api": "Demandes d'API",

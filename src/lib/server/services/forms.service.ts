@@ -44,6 +44,7 @@ export class FormsService {
 		banner: true,
 		captchaAuto: true,
 		captchaComplexity: true,
+		captchaFloating: true,
 		captchaInvisible: true,
 		confetti: true,
 		contextInfo: true,
@@ -347,6 +348,7 @@ export class FormsService {
 				| 'badges'
 				| 'captchaAuto'
 				| 'captchaComplexity'
+				| 'captchaFloating'
 				| 'captchaInvisible'
 				| 'confetti'
 				| 'contextInfo'
@@ -377,6 +379,7 @@ export class FormsService {
 				badges: data.badges,
 				captchaAuto: data.captchaAuto,
 				captchaComplexity: data.captchaComplexity,
+				captchaFloating: data.captchaFloating,
 				captchaInvisible: data.captchaInvisible,
 				confetti: data.confetti,
 				contextInfo: data.contextInfo,

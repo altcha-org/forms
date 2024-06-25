@@ -204,7 +204,8 @@
 		"success_text": "Der Text, der nach einem erfolgreichen Absenden angezeigt werden soll. Unterstützt Markdown.",
 		"user_email": "Geben Sie die E-Mail-Adresse des Benutzers ein.",
 		"user_role": "Wählen Sie die Rolle des Benutzers aus. Die Rolle „Admin“ gewährt Zugriff auf alle Einstellungen.",
-		"identities_search": "Suche nach Identitäten anhand der ID, der externen ID oder der E-Mail-Adresse des Benutzers."
+		"identities_search": "Suche nach Identitäten anhand der ID, der externen ID oder der E-Mail-Adresse des Benutzers.",
+		"floating_captcha": "Zeigt das Captcha als schwebendes Element nach dem Absenden des Formulars an."
 	},
 	"label": {
 		"access": "Zugriff",
@@ -414,7 +415,8 @@
 		"metadata": "Metadaten",
 		"metadata_key": "Metadaten-Schlüssel",
 		"metadata_value": "Metadaten-Wert",
-		"responses": "Antworten"
+		"responses": "Antworten",
+		"floating_captcha": "Floating UI"
 	},
 	"limit": {
 		"api": "API-Anfragen",

@@ -204,7 +204,8 @@
 		"success_text": "The text to be shown after a successful submission. Supports Markdown.",
 		"user_email": "Enter the user's email address.",
 		"user_role": "Select the user's role. The Admin role grants access to all settings.",
-		"identities_search": "Search for identities using the ID, external ID, or the user's email address."
+		"identities_search": "Search for identities using the ID, external ID, or the user's email address.",
+		"floating_captcha": "Displays the Captcha as a floating element upon form submission."
 	},
 	"label": {
 		"access": "Access",
@@ -414,7 +415,8 @@
 		"metadata_key": "Metadata Key",
 		"metadata_value": "Metadata Value",
 		"responses": "Responses",
-		"max_wtotalidth": "Max. width"
+		"max_wtotalidth": "Max. width",
+		"floating_captcha": "Floating UI"
 	},
 	"limit": {
 		"api": "API requests",

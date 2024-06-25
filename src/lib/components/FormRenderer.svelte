@@ -19,7 +19,7 @@
 	export let encrypted: boolean = false;
 	export let form: Pick<
 		IForm,
-		'captchaAuto' | 'captchaInvisible' | 'contextInfo' | 'id' | 'steps' | 'submitLabel'
+		'captchaAuto' | 'captchaFloating' | 'captchaInvisible' | 'contextInfo' | 'hidePoweredBy' | 'id' | 'steps' | 'submitLabel'
 	>;
 	export let preview: boolean = false;
 
@@ -154,7 +154,12 @@
 							<div class="flex flex-col gap-1">
 								<div class="flex">
 									<div class="bg-base-100 w-full max-w-[260px]">
-										<Altcha auto={form.captchaAuto} {challengeurl} />
+										<Altcha
+											auto={form.captchaAuto}
+											floating={form.captchaFloating}
+											hideBranding={form.hidePoweredBy}
+											{challengeurl}
+										/>
 									</div>
 								</div>
 							</div>

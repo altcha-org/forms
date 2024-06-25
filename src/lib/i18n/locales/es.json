@@ -204,7 +204,8 @@
 		"success_text": "El texto que se mostrará después de una presentación exitosa. Admite Markdown.",
 		"user_email": "Ingrese la dirección de correo electrónico del usuario.",
 		"user_role": "Seleccione el rol del usuario. El rol de Admin otorga acceso a todas las configuraciones.",
-		"identities_search": "Buscar identidades utilizando el ID, el ID externo o la dirección de correo electrónico del usuario."
+		"identities_search": "Buscar identidades utilizando el ID, el ID externo o la dirección de correo electrónico del usuario.",
+		"floating_captcha": "Muestra el Captcha como un elemento flotante al enviar el formulario."
 	},
 	"label": {
 		"access": "Acceso",
@@ -414,7 +415,8 @@
 		"metadata_key": "Clave de metadatos",
 		"metadata_value": "Valor de metadatos",
 		"responses": "Respuestas",
-		"max_wtotalidth": "Ancho máximo"
+		"max_wtotalidth": "Ancho máximo",
+		"floating_captcha": "Floating UI"
 	},
 	"limit": {
 		"api": "Solicitudes de API",

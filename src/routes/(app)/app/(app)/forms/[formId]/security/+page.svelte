@@ -84,11 +84,21 @@
 
 				<ToggleInput
 					block={{
+						label: $_('label.floating_captcha'),
+						help: $_('help.floating_captcha'),
+						name: 'captchaFloating'
+					}}
+					disabled={$form.captchaInvisible}
+					bind:value={$form.captchaFloating}
+				/>
+
+				<ToggleInput
+					block={{
 						label: $_('label.captcha_auto'),
 						help: $_('help.captcha_auto'),
 						name: 'captchaAuto'
 					}}
-					disabled={$form.captchaInvisible}
+					disabled={$form.captchaInvisible || $form.captchaFloating}
 					bind:value={$form.captchaAuto}
 				/>
 
@@ -148,6 +158,6 @@
 			</div>
 		</div>
 
-		<StickyButtons disabled={!changed} {loading}></StickyButtons>
+		<StickyButtons disabled={!changed}></StickyButtons>
 	</div>
 </Form>

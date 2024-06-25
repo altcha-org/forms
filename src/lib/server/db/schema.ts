@@ -208,6 +208,7 @@ export const forms = pgTable('forms', {
 	banner: varchar('banner', { length: 32 }),
 	captchaAuto: boolean('captcha_auto').notNull().default(false),
 	captchaComplexity: complexityEnum('captcha_complexity').notNull().default('medium'),
+	captchaFloating: boolean('captcha_floating').notNull().default(false),
 	captchaInvisible: boolean('captcha_invisible').notNull().default(true),
 	confetti: boolean('confetti').notNull().default(false),
 	contextInfo: boolean('context_info').notNull().default(true),
