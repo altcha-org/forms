@@ -4,6 +4,7 @@
 	import type { IFormBlockPartial } from '$lib/types';
 
 	export let block: IFormBlockPartial;
+	export let disabled: boolean = false;
 	export let error: string | undefined = void 0;
 	export let preview: boolean = false;
 	export let value: string | null | undefined = block.default;
@@ -26,7 +27,7 @@
 						class="radio radio-sm bg-base-100"
 						name={block.name}
 						value={option.value}
-						disabled={!value?.includes(option.value) && !canAddMore}
+						disabled={disabled || (!value?.includes(option.value) && !canAddMore)}
 						readonly={block.readonly}
 						required={visible && !preview && block.required}
 						bind:group={value}

@@ -121,7 +121,10 @@
 		"view_identity": "Voir l'identité",
 		"view_related_responses": "Voir les réponses connexes",
 		"view_responses": "Voir les réponses",
-		"stop": "Arrêt"
+		"stop": "Arrêt",
+		"copy_address": "Copier l'adresse",
+		"export": "Exporter",
+		"export_responses": "Exporter les réponses"
 	},
 	"complexity": {
 		"low": "Faible",
@@ -205,7 +208,9 @@
 		"user_email": "Entrez l'adresse e-mail de l'utilisateur.",
 		"user_role": "Sélectionnez le rôle de l'utilisateur. Le rôle administrateur accorde l'accès à tous les paramètres.",
 		"identities_search": "Recherche d'identités en utilisant l'identifiant, l'identifiant externe ou l'adresse e-mail de l'utilisateur.",
-		"floating_captcha": "Affiche le Captcha sous forme d'élément flottant lors de la soumission du formulaire."
+		"floating_captcha": "Affiche le Captcha sous forme d'élément flottant lors de la soumission du formulaire.",
+		"export_include_attachments": "Inclure les fichiers, pièces jointes et signatures dans l'exportation.",
+		"export_individual_files": "Générer un fichier individuel pour chaque réponse."
 	},
 	"label": {
 		"access": "Accès",
@@ -416,7 +421,10 @@
 		"metadata_value": "Valeur des métadonnées",
 		"responses": "Réponses",
 		"max_wtotalidth": "Largeur maximale",
-		"floating_captcha": "Floating UI"
+		"floating_captcha": "Floating UI",
+		"export_format": "Format d'export",
+		"export_include_attachments": "Inclure les pièces jointes",
+		"export_individual_files": "Exporter en fichiers individuels"
 	},
 	"limit": {
 		"api": "Demandes d'API",
@@ -626,7 +634,11 @@
 		"search_found_responses": "Trouvé {count} réponse(s)",
 		"search_scanned_forms": "{count} formulaire(s)",
 		"search_scanned_responses": "{count} réponse(s)",
-		"searching": "Recherche en cours..."
+		"searching": "Recherche en cours...",
+		"export_all_responses": "Exporter __toutes les réponses__.",
+		"export_x_errors": "Échec de l'exportation de {x} réponse(s) probablement en raison de clés d'encodage manquantes.",
+		"export_x_responses": "Exporter __{count} sélectionné(s)__ réponse(s).",
+		"x_out_of": "{x} / {of}"
 	},
 	"title": {
 		"add_block": "Ajouter un bloc",
@@ -668,7 +680,8 @@
 		"add_metadata": "Ajouter des métadonnées",
 		"identities": "Identités",
 		"search_results": "Résultats de la recherche",
-		"search": "Rechercher"
+		"search": "Rechercher",
+		"export": "Exporter"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Copier",

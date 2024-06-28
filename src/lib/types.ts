@@ -113,7 +113,7 @@ export interface IReponseLogEntry {
 	text: string;
 }
 
-export type TResponseData = Record<string, unknown>;
+export type TResponseData = Record<string, any>;
 
 export type WebAuthnAuthenticator = Omit<
 	AuthenticatorDevice,

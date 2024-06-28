@@ -10,26 +10,34 @@ export const GET = requestHandler(
 		if (!account) {
 			throw new ForbiddenError();
 		}
-		const { orderBy, orderDir, offset, limit } = searchParams;
-		const total = await responsesService.countResponsesForAccountUser(account.id, user.id);
+		const { formId, orderBy, orderDir, offset, limit } = searchParams;
+		const responseIds = searchParams.responseIds?.split(',').filter((p) => !!p);
+		const total = responseIds?.length
+			? responseIds.length
+			: formId
+				? await responsesService.countResponsesForForm(formId)
+				: await responsesService.countResponsesForAccountUser(account.id, user.id);
 		const responses = await responsesService.listResponsesForAccountAndUser({
 			accountId: account.id,
+			formId: searchParams.formId,
 			limit,
 			offset,
 			orderBy,
 			orderDir,
-			userId: user.id,
+			responseIds,
+			userId: user.id
 		});
 		return {
 			offset,
 			limit,
 			responses,
-			total,
+			total
 		};
 	},
 	{
 		rateLimit: 'L1',
 		searchParams: t.Object({
+			formId: t.Optional(t.String()),
 			limit: t.Integer({
 				default: 30,
 				maximum: 100,
@@ -44,7 +52,8 @@ export const GET = requestHandler(
 			}),
 			orderBy: t.String({
 				default: 'id'
-			})
-		}),
+			}),
+			responseIds: t.Optional(t.String())
+		})
 	}
 ) satisfies RequestHandler;

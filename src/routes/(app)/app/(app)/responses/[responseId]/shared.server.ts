@@ -11,7 +11,13 @@ export async function responseMiddleware(event: RequestEvent<{ responseId: strin
 	if (!response) {
 		throw new ForbiddenError();
 	}
-	checkUserAccountAccess(event.locals.user, response.form.account.id);
+	checkUserAccountAccess(event.locals.user, response.form.accountId);
+	const role = event.locals.user.accountsToUsers.find(
+		({ account }) => account.id === response.form.accountId
+	)?.role;
+	if (response.form.restricted && role !== 'admin' && !response.form.formsToUsers.some(({ userId }) => userId === event.locals.user?.id)) {
+		throw new ForbiddenError();
+	}
 	return {
 		response
 	};

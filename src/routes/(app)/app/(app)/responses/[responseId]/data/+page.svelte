@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
 	import Form from '$lib/components/Form.svelte';
-	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
 	import FormDataRenderer from '$lib/components/FormDataRenderer.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import MultiLineTextInput from '$lib/components/blocks/MultiLineTextInput.svelte';
@@ -15,9 +14,9 @@
 	import TrashIcon from '$lib/components/icons/Trash.svelte';
 	import ResponseDataProvider from '$lib/components/ResponseDataProvider.svelte';
 	import Alert from '$lib/components/Alert.svelte';
-	import { encryptionKeys, form, responseDataPromise } from '$lib/stores';
+	import Export from '$lib/components/Export.svelte';
+	import { encryptionKeys, form, formExport } from '$lib/stores';
 	import { forceDownload } from '$lib/helpers';
-	import { exportReponse } from '$lib/exporter';
 	import { formatDateTime } from '$lib/format';
 	import type { IFileWithoutAccount, IFormBlock } from '$lib/types';
 	import type { PageData } from './$types';
@@ -40,33 +39,8 @@
 		}
 	}
 
-	async function onDownload(format: 'pdf' | 'csv' | 'json') {
-		const buf = exportReponse(
-			$form,
-			data.response,
-			await $responseDataPromise,
-			await data.files,
-			format
-		);
-		let type: string = '';
-		let filename: string = '';
-		switch (format) {
-			case 'csv':
-				type = 'text/csv';
-				filename = `${data.response.id}.csv`;
-				break;
-			case 'json':
-				type = 'application/json';
-				filename = `${data.response.id}.json`;
-				break;
-			case 'pdf':
-				type = 'application/pdf';
-				filename = `${data.response.id}.pdf`;
-				break;
-		}
-		if (buf) {
-			forceDownload(buf, filename, type);
-		}
+	async function onDownload() {
+		$formExport = true;
 	}
 
 	function onEdit(block: IFormBlock, value?: any) {
@@ -231,31 +205,13 @@
 	</div>
 
 	<div class="flex gap-3">
-		<div class="dropdown" class:disabled={data.response.encrypted && !hasEncryptionKey}>
-			<div tabindex="0" role="button" class="btn btn-sm gap-2">
-				<span>{$_('button.download')}</span>
-				<ArrowDownIcon class="w-4 h-4" />
-			</div>
-			<DropdownMenu>
-				<ul class="menu gap-1">
-					<li>
-						<button type="button" on:click|preventDefault={() => onDownload('pdf')}>
-							<span>{$_('button.export_pdf')}</span>
-						</button>
-					</li>
-					<li>
-						<button type="button" on:click|preventDefault={() => onDownload('csv')}>
-							<span>{$_('button.export_csv')}</span>
-						</button>
-					</li>
-					<li>
-						<button type="button" on:click|preventDefault={() => onDownload('json')}>
-							<span>{$_('button.export_json')}</span>
-						</button>
-					</li>
-				</ul>
-			</DropdownMenu>
-		</div>
+		<button
+			type="button"
+			class="btn btn-sm"
+			on:click|preventDefault={() => onDownload()}
+		>
+			<span>{$_('button.download')}</span>
+		</button>
 
 		{#if data.response.encrypted}
 			<button
@@ -269,3 +225,20 @@
 		{/if}
 	</div>
 </div>
+
+<Modal
+	action=""
+	title={$_('title.export')}
+	subtitle={data.response.id}
+	hideButton
+	bind:open={$formExport}
+>
+	{#if $formExport}
+	<Export
+		form={$form}
+		singleResponse={true}
+		responseIds={[data.response.id]}
+		on:finish={() => $formExport = false}
+	/>
+	{/if}
+</Modal>

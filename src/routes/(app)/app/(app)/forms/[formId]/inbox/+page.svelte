@@ -6,6 +6,7 @@
 	import CheckboxIcon from '$lib/components/icons/Checkbox.svelte';
 	import Pagination from '$lib/components/Pagination.svelte';
 	import ResponseListBulkActions from '$lib/components/ResponseListBulkActions.svelte';
+	import { formExport, formExportResponses } from '$lib/stores';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -19,6 +20,13 @@
 	let selected: string[] = [];
 
 	$: onFilterChange(data.filter);
+
+	function onExport() {
+		if (selected.length) {
+			$formExport = true;
+			$formExportResponses = selected;
+		}
+	}
 
 	function onFilterChange(_: typeof data.filter) {
 		selected = [];
@@ -134,7 +142,11 @@
 		</div>
 
 		{#if selected.length}
-			<ResponseListBulkActions form={data.form} bind:selected />
+			<ResponseListBulkActions
+				form={data.form}
+				bind:selected
+				on:export={() => onExport()}
+			/>
 		{/if}
 	</div>
 </div>

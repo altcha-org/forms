@@ -30,6 +30,8 @@ export const darkTheme = writable<boolean>(
 );
 export const device = writable<IDevicePartial | undefined>(void 0);
 export const form = writable<IForm>(void 0);
+export const formExport = writable<boolean>(false);
+export const formExportResponses = writable<string[]>([]);
 export const formPreview = writable<boolean>(false);
 export const language = writable<string | null>(browser ? localStorage.getItem('language') : null);
 export const responseDataPromise = writable<Promise<TResponseData>>(void 0);

@@ -3,86 +3,167 @@ import { Pdf } from '$lib/pdf';
 import { formatDateTime } from '$lib/format';
 import type { IFile, IForm, IResponse, TResponseData } from '$lib/types';
 
-export function exportReponse(
+type TPartialFile = Pick<IFile, 'id' | 'encrypted' | 'encryptionKeyHash' | 'name' | 'size' | 'type'>
+
+type TFormats = 'pdf' | 'csv' | 'json';
+
+type TExportResponsesResult = {
+	contents: ArrayBufferLike;
+	name: string;
+	type: string;
+}[];
+
+interface IExportResponsesOptions {
+	individual?: boolean;
+}
+
+export function exportResponses(
 	form: IForm,
-	response: IResponse,
-	data: TResponseData,
-	files: Pick<IFile, 'id' | 'encrypted' | 'encryptionKeyHash' | 'name' | 'size' | 'type'>[] = [],
-	format: 'pdf' | 'csv' | 'json'
-) {
+	responses: { response: IResponse, data: TResponseData, files?: TPartialFile[] }[],
+	format: TFormats,
+	options: IExportResponsesOptions = {}
+): TExportResponsesResult {
 	switch (format) {
 		case 'csv':
-			const head = Object.keys(data);
-			const body = Object.values(data);
-			return new TextEncoder().encode(csv([head, body])).buffer;
+			return exportResponsesAsCSV(form, responses, options);
 		case 'json':
-			return exportReponseAsJSON(form, response, data, files);
+			return exportResponsesAsJSON(form, responses, options);
 		case 'pdf':
-			return exportResponseAsPDF(form, response, data, files);
+			return exportResponsesAsPDF(form, responses, options);
 		default:
 			throw new Error('Unsupported export format.');
 	}
 }
 
-export function exportReponseAsJSON(
+export function exportResponsesAsCSV(
 	form: IForm,
-	response: IResponse,
-	data: TResponseData,
-	files: Pick<IFile, 'id' | 'encrypted' | 'encryptionKeyHash' | 'name' | 'size' | 'type'>[] = []
-) {
-	for (const step of form.steps) {
-		for (const block of step.blocks) {
-			const value = data[block.name];
-			if (value && ['FileInput', 'SignatureInput'].includes(block.type)) {
-				const fileIds = String(value || '').split(',');
-				data[block.name] = fileIds
-					.map((fileId) => files.find(({ id }) => id === fileId))
-					.filter((file) => !!file)
-					.map((file) => {
-						return {
-							encrypted: file?.encrypted,
-							encryptionKeyHash: file?.encrypted ? file?.encryptionKeyHash : void 0,
-							id: file?.id,
-							name: file?.name,
-							size: file?.size,
-							type: file?.type
-						};
-					});
-			}
+	responses: { response: IResponse, data: TResponseData, files?: TPartialFile[] }[],
+	options: IExportResponsesOptions = {},
+): TExportResponsesResult
+{
+	const blocks = getFormBlocks(form);
+	const head = [
+		'id',
+		'created_at',
+		...blocks.map(({ name }) => name),
+	];
+	const body = responses.reduce((acc, { data, response }) => {
+		const row: string[] = [
+			response.id,
+			new Date(response.createdAt).toISOString(),
+		];
+		acc.push(row);
+		for (const { name } of blocks) {
+			row.push(data[name] === void 0 ? '' : String(data[name]));
 		}
+		return acc;
+	}, [] as string[][]);
+	if (options.individual) {
+		return body.map((row) => {
+			return {
+				contents: new TextEncoder().encode(csv([head, row])).buffer,
+				name: `${row[0]}.csv`,
+				type: 'text/csv',
+			};
+		});
 	}
-	return new TextEncoder().encode(
-		JSON.stringify({
-			response: {
-				context: response.context,
-				id: response.id
-			},
-			data,
-			form: {
-				id: form.id,
-				name: form.name
-			}
-		})
-	).buffer;
+	return [{
+		contents: new TextEncoder().encode(csv([head, ...body])).buffer,
+		name: `${form.id}.csv`,
+		type: 'text/csv',
+	}];
 }
 
-export function exportResponseAsPDF(
+export function exportResponsesAsJSON(
 	form: IForm,
-	response: IResponse,
-	data: TResponseData,
-	files: Pick<IFile, 'id' | 'encrypted' | 'encryptionKeyHash' | 'name' | 'size' | 'type'>[] = []
-) {
-	const pdf = new Pdf({
-		pageNumbers: true
+	responses: { response: IResponse, data: TResponseData, files?: TPartialFile[] }[],
+	options: IExportResponsesOptions = {},
+)
+{
+	const blocks = getFormBlocks(form);
+	const entries: { response: any, data: any }[] = [];
+	for (const { data, files, response } of responses) {
+		entries.push({
+			response: {
+				id: response.id,
+				createdAt: response.createdAt,
+			},
+			data: blocks.reduce((acc, { name, type }) => {
+				if (files && ['ImageInput', 'FileInput', 'SignatureInput'].includes(type)) {
+					const fileIds = String(data[name] || '').split(',');
+					acc[name] = fileIds
+						.map((fileId) => files.find(({ id }) => id === fileId))
+						.filter((file) => !!file)
+						.map((file) => {
+							return {
+								encrypted: file?.encrypted,
+								encryptionKeyHash: file?.encrypted ? file?.encryptionKeyHash : void 0,
+								id: file?.id,
+								name: file?.name,
+								size: file?.size,
+								type: file?.type
+							};
+						});
+				} else {
+					acc[name] = data[name] === void 0 ? '' : String(data[name]);
+				}
+				return acc;
+			}, {} as Record<string, unknown>),
+		});
+	}
+	if (options.individual) {
+		return entries.map((entry) => {
+			return {
+				contents: new TextEncoder().encode(JSON.stringify(entry)).buffer,
+				name: `${entry.response.id}.json`,
+				type: 'application/json',
+			};
+		});
+	}
+	return [{
+		contents: new TextEncoder().encode(JSON.stringify(entries)).buffer,
+		name: `${form.id}.json`,
+		type: 'application/json',
+	}];
+}
+
+export function exportResponsesAsPDF(
+	form: IForm,
+	responses: { response: IResponse, data: TResponseData, files?: TPartialFile[] }[],
+	options: IExportResponsesOptions = {},
+)
+{
+	return responses.map(({ data, response, files }) => {
+		const pdf = new Pdf({
+			pageNumbers: true
+		});
+		pdf.form(form, data, {
+			files,
+			responseId: response.id
+		});
+		pdf.footer(
+			`${formatDateTime(response.createdAt, void 0, void 0, {
+				timeStyle: 'long'
+			})}\n${response.id}`
+		);
+		return {
+			contents: pdf.buffer(),
+			name: `${response.id}.pdf`,
+			type: 'application/pdf',
+		};
 	});
-	pdf.form(form, data, {
-		files,
-		responseId: response.id
-	});
-	pdf.footer(
-		`${formatDateTime(new Date(), void 0, void 0, {
-			timeStyle: 'long'
-		})}\n${response.id}`
-	);
-	return pdf.buffer();
+}
+
+function getFormBlocks(form: IForm) {
+	return form.steps.reduce((acc, step) => {
+		for (const block of step.blocks) {
+			if (block.name) {
+				acc.push({
+					name: block.name,
+					type: block.type,
+				});
+			}
+		}
+		return acc;
+	}, [] as { name: string, type: string }[]);
 }

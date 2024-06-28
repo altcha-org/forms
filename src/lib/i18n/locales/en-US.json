@@ -121,7 +121,10 @@
 		"view_identity": "View Identity",
 		"view_related_responses": "View Related Responses",
 		"view_responses": "View Responses",
-		"stop": "Stop"
+		"stop": "Stop",
+		"copy_address": "Copy Address",
+		"export": "Export",
+		"export_responses": "Export Responses"
 	},
 	"complexity": {
 		"low": "Low",
@@ -205,7 +208,9 @@
 		"user_email": "Enter the user's email address.",
 		"user_role": "Select the user's role. The Admin role grants access to all settings.",
 		"identities_search": "Search for identities using the ID, external ID, or the user's email address.",
-		"floating_captcha": "Displays the Captcha as a floating element upon form submission."
+		"floating_captcha": "Displays the Captcha as a floating element upon form submission.",
+		"export_include_attachments": "Include files, attachments and signatures in the export.",
+		"export_individual_files": "Generate an individual file for each response."
 	},
 	"label": {
 		"access": "Access",
@@ -416,7 +421,10 @@
 		"metadata_value": "Metadata Value",
 		"responses": "Responses",
 		"max_wtotalidth": "Max. width",
-		"floating_captcha": "Floating UI"
+		"floating_captcha": "Floating UI",
+		"export_format": "Export format",
+		"export_include_attachments": "Include attachments",
+		"export_individual_files": "Export as individual files"
 	},
 	"limit": {
 		"api": "API requests",
@@ -626,7 +634,11 @@
 		"search_found_responses": "Found {count} response(s)",
 		"search_scanned_forms": "{count} form(s)",
 		"search_scanned_responses": "{count} response(s)",
-		"searching": "Searching..."
+		"searching": "Searching...",
+		"export_all_responses": "Export all responses.",
+		"export_x_errors": "Failed to export {x} response(s) likely due to missing encryption keys.",
+		"export_x_responses": "Export {count} selected response(s).",
+		"x_out_of": "{x} / {of}"
 	},
 	"title": {
 		"add_block": "Add Block",
@@ -668,7 +680,8 @@
 		"add_metadata": "Add Metadata",
 		"identities": "Identities",
 		"search_results": "Search results",
-		"search": "Search"
+		"search": "Search",
+		"export": "Export"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Copy",

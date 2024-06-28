@@ -25,7 +25,7 @@
 					<AltchaIcon class="w-6 h-6" />
 				</div>
 				<div class="flex gap-2 items-end">
-					<div class="text-lg font-bold leading-4">Altcha Forms</div>
+					<div class="text-lg font-bold leading-4">ALTCHA Forms</div>
 					<div class="text-xs leading-3">{appVersion}</div>
 					{#if !hideLicenseLink}
 						<div class="text-xs leading-3">

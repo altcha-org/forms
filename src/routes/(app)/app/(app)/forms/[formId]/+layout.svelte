@@ -6,15 +6,19 @@
 	import FormRenderer from '$lib/components/FormRenderer.svelte';
 	import FormHeader from '$lib/components/FormHeader.svelte';
 	import FormFooter from '$lib/components/FormFooter.svelte';
+	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
 	import Head from '$lib/components/Head.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import Page from '$lib/components/Page.svelte';
 	import DetailIcon from '$lib/components/icons/Detail.svelte';
 	import OpenLinkIcon from '$lib/components/icons/OpenLink.svelte';
 	import ClipboardIcon from '$lib/components/icons/Clipboard.svelte';
+	import DownloadIcon from '$lib/components/icons/Download.svelte';
+	import MoreIcon from '$lib/components/icons/More.svelte';
+	import Export from '$lib/components/Export.svelte';
 	import bubble from '$lib/bubble';
 	import { formatTimeAgo } from '$lib/format';
-	import { form, formPreview } from '$lib/stores';
+	import { form, formExport, formExportResponses, formPreview } from '$lib/stores';
 	import { copyToClipboard, clone, shortenFormId } from '$lib/helpers';
 	import type { LayoutData } from './$types';
 
@@ -84,14 +88,6 @@
 		</div>
 
 		<div class="flex gap-2">
-			<button
-				type="button"
-				class="btn btn-sm"
-				on:click|preventDefault={() => ($formPreview = true)}
-			>
-				<DetailIcon class="w-4 h-4" />
-				<span class="hidden lg:inline">{$_('button.preview')}</span>
-			</button>
 
 			{#if $form.status === 'draft'}
 				<Form action="/app/forms/{$form.id}/settings?/publishForm" let:loading>
@@ -109,6 +105,50 @@
 					<span class="hidden lg:inline">{$_('button.open')}</span>
 				</a>
 			{/if}
+
+			<div class="dropdown dropdown-end">
+				<div tabindex="0" role="button" class="btn btn-sm btn-square gap-2">
+					<MoreIcon class="w-5 h-5" />
+				</div>
+				<DropdownMenu>
+					<ul class="menu gap-1">
+						<li class="menu-title">{$_('label.actions')}</li>
+						<li>
+							<button
+								type="button"
+								class="justify-between"
+								use:bubble={{
+									handler: () => copyToClipboard(formLink),
+									text: $_('text.copied')
+								}}
+							>
+								<span>{$_('button.copy_address')}</span>
+								<ClipboardIcon class="w-4 h-4" />
+							</button>
+						</li>
+						<li>
+							<button
+								type="button"
+								class="justify-between"
+								on:click|preventDefault={() => ($formPreview = true)}
+							>
+								<span>{$_('button.preview')}</span>
+								<DetailIcon class="w-4 h-4" />
+							</button>
+						</li>
+						<li>
+							<button
+								type="button"
+								class="justify-between"
+								on:click|preventDefault={() => ($formExport = true)}
+							>
+								<span>{$_('button.export_responses')}</span>
+								<DownloadIcon class="w-4 h-4" />
+							</button>
+						</li>
+					</ul>
+				</DropdownMenu>
+			</div>
 		</div>
 	</div>
 
@@ -126,19 +166,6 @@
 			<span class="w-full lg:w-auto"
 				>{$_('label.created_ago', { values: { ago: formatTimeAgo($form.createdAt) } })}</span
 			>
-			<span class="hidden lg:inline">&bull;</span>
-			<span class="flex items-center gap-1 w-full lg:w-auto">
-				<a href={formLink} target="_blank" class="link">{formLinkRelative}</a>
-				<button
-					class="btn btn-xs btn-circle btn-ghost"
-					use:bubble={{
-						handler: () => copyToClipboard(formLink),
-						text: $_('text.copied')
-					}}
-				>
-					<ClipboardIcon class="w-4 h-4" />
-				</button>
-			</span>
 		</div>
 	</div>
 </Head>
@@ -167,4 +194,20 @@
 
 		<FormFooter preview form={data.form} />
 	</div>
+</Modal>
+
+<Modal
+	action=""
+	title={$_('title.export')}
+	hideButton
+	bind:open={$formExport}
+	on:close={() => $formExportResponses = []}
+>
+	{#if $formExport}
+	<Export
+		form={data.form}
+		responseIds={$formExportResponses.length ? $formExportResponses : null}
+		on:finish={() => $formExport = false}
+	/>
+	{/if}
 </Modal>

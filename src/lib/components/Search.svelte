@@ -7,13 +7,14 @@
 	import { decryptData } from '$lib/helpers';
 	import { encryptionKeys } from '$lib/stores';
 	import { formatDateTime, formatTimeShort } from '$lib/format';
+	import { ResponseStream } from '$lib/responseStream';
 	import SearchIcon from '$lib/components/icons/Search.svelte';
 	import NoteIcon from '$lib/components/icons/Note.svelte';
 	import StarFillIcon from '$lib/components/icons/StarFill.svelte';
 	import StringHighlight from '$lib/components/StringHighlight.svelte';
 	import FormResponseCount from '$lib/components/FormResponseCount.svelte';
 	import Alert from '$lib/components/Alert.svelte';
-	import type { IForm, IResponse } from '$lib/types';
+	import type { IForm, IResponse, TResponseData } from '$lib/types';
 
 	interface IResponseCount { count: number; id: string; spam: boolean | null; read: boolean | null };
 
@@ -28,14 +29,16 @@
 	let elInput: HTMLInputElement;
 	let searchFormsResuls: Awaited<ReturnType<(typeof formsSearch)['search']>> | null = null;
 	let searchResponsesResuls: Awaited<ReturnType<(typeof responsesSearch)['search']>> | null = null;
-  let searchStopped: boolean = false;
+	let responseStream: ResponseStream | null = null;
 	let term: string = '';
 
 	$: account = $page.data.account;
 	$: _onTermChange(term);
 
 	onDestroy(() => {
-		searchStopped = true;
+		if (responseStream) {
+			responseStream.controller.abort();
+		}
 	});
 
 	onMount(async () => {
@@ -97,36 +100,21 @@
 
 	async function makeSearch() {
 		const forms: IForm[] = await loadForms();
-		let offset = 0;
 		loading = true;
-    erroredResponses = 0;
-		try {
-			while (true) {
-        if (searchStopped) {
-          break;
-        }
-				const result = await makeResponsesRequest(offset);
-				for (const response of result.responses) {
-          if (searchStopped) {
-            break;
-          }
-					const form = forms.find(({ id }) => id === response.formId);
-					if (form) {
-						await indexResponse(form, response);
-					}
-				}
+		responseStream = new ResponseStream({
+			accountId: account.id,
+			onAfterIndex: async () => {
 				await onTermChange(term);
-				const hasMore = result.total > (result.offset + result.limit);
-				if (!hasMore) {
-					responsesSearch.finalized = true;
-					break;
+			},
+			onResponse: async (response, data, err) => {
+				const form = forms.find(({ id }) => id === response.formId);
+				if (form) {
+					await indexResponse(form, response, data, err);
 				}
-				offset += result.limit;
-			}
-		} finally {
-			loading = false;
-      searchStopped = false;
-		}
+			},
+		});
+		await responseStream.stream();
+		loading = false;
 	}
 
 	async function makeFormsRequest(
@@ -138,25 +126,7 @@
 		forms: IForm[];
 		responseCount: IResponseCount[];
 	}> {
-		const url = new URL(`/app/accounts/${account.id}/search/forms`, location.origin);
-		url.searchParams.set('offset', String(offset));
-		const resp = await fetch(url, {
-			method: 'GET'
-		});
-		return resp.json();
-	}
-
-	async function makeResponsesRequest(
-		offset: number = 0,
-	): Promise<{
-		offset: number;
-		limit: number;
-		total: number;
-		responses: Array<IResponse & { notes: number }>;
-	}> {
-		const url = new URL(`/app/accounts/${account.id}/search/responses`, location.origin);
-		url.searchParams.set('term', term);
-		url.searchParams.set('limit', '1');
+		const url = new URL(`/app/accounts/${account.id}/stream/forms`, location.origin);
 		url.searchParams.set('offset', String(offset));
 		const resp = await fetch(url, {
 			method: 'GET'
@@ -175,14 +145,10 @@
 		totalForms = formsSearch.size || 0;
 	}
 
-	async function indexResponse(form: IForm, response: IResponse & { notes: number }) {
-		let data: Record<string, any> = response.data || {};
-		if (response.encrypted && response.dataEncrypted && response.encryptionKeyHash) {
-			data = await decryptData(response.dataEncrypted, response.encryptionKeyHash, $encryptionKeys);
-      if (data === null) {
-        erroredResponses += 1;
-        return false;
-      }
+	async function indexResponse(form: IForm, response: IResponse & { notes: number }, data: TResponseData | null, error?: unknown) {
+		if (data === null || error) {
+			erroredResponses += 1;
+			return false;
 		}
 		const entries = Object.entries(data);
 		const primaryField = data[form.displayBlocks[0]];
@@ -220,7 +186,7 @@
 
   export function stopSearch() {
     if (loading) {
-      searchStopped = true;
+			responseStream?.controller.abort();
       loading = false;
     }
   }

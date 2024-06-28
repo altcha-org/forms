@@ -121,7 +121,10 @@
 		"view_identity": "Ver identidad",
 		"view_related_responses": "Ver respuestas relacionadas",
 		"view_responses": "Ver respuestas",
-		"stop": "Detener"
+		"stop": "Detener",
+		"copy_address": "Copiar dirección",
+		"export": "Exportar",
+		"export_responses": "Exportar respuestas"
 	},
 	"complexity": {
 		"low": "Bajo",
@@ -205,7 +208,9 @@
 		"user_email": "Ingrese la dirección de correo electrónico del usuario.",
 		"user_role": "Seleccione el rol del usuario. El rol de Admin otorga acceso a todas las configuraciones.",
 		"identities_search": "Buscar identidades utilizando el ID, el ID externo o la dirección de correo electrónico del usuario.",
-		"floating_captcha": "Muestra el Captcha como un elemento flotante al enviar el formulario."
+		"floating_captcha": "Muestra el Captcha como un elemento flotante al enviar el formulario.",
+		"export_include_attachments": "Incluir archivos, adjuntos y firmas en la exportación.",
+		"export_individual_files": "Generar un archivo individual para cada respuesta."
 	},
 	"label": {
 		"access": "Acceso",
@@ -416,7 +421,10 @@
 		"metadata_value": "Valor de metadatos",
 		"responses": "Respuestas",
 		"max_wtotalidth": "Ancho máximo",
-		"floating_captcha": "Floating UI"
+		"floating_captcha": "Floating UI",
+		"export_format": "Formato de exportación",
+		"export_include_attachments": "Incluir adjuntos",
+		"export_individual_files": "Exportar como archivos individuales"
 	},
 	"limit": {
 		"api": "Solicitudes de API",
@@ -626,7 +634,11 @@
 		"search_found_responses": "Se encontró {count} respuesta(s)",
 		"search_scanned_forms": "{count} formulario(s)",
 		"search_scanned_responses": "{count} respuesta(s)",
-		"searching": "Buscando..."
+		"searching": "Buscando...",
+		"export_all_responses": "Exportar __todas las respuestas__.",
+		"export_x_errors": "Error al exportar {x} respuesta(s) probablemente debido a la falta de claves de cifrado.",
+		"export_x_responses": "Exportar __{count} seleccionadas__ respuesta(s).",
+		"x_out_of": "{x} / {of}"
 	},
 	"title": {
 		"add_block": "Agregar Bloque",
@@ -668,7 +680,8 @@
 		"add_metadata": "Agregar metadatos",
 		"identities": "Identidades",
 		"search_results": "Resultados de búsqueda",
-		"search": "Buscar"
+		"search": "Buscar",
+		"export": "Exportar"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Copiar",

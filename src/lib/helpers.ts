@@ -6,7 +6,7 @@ import { cipher, rsa } from '@altcha/crypto';
 import { solveChallengeWorkers } from 'altcha-lib';
 import { encryptionKeys, uploadProgress } from '$lib/stores';
 import * as formats from '$lib/format';
-import type { IEncryptionPrivateKey, IFormBlock, IUploadProgress } from '$lib/types';
+import type { IEncryptionPrivateKey, IFile, IFormBlock, IUploadProgress } from '$lib/types';
 import type { Payload as AltchaPayload, Challenge as AltchaChallenge } from 'altcha-lib/types';
 
 export async function copyToClipboard(text: string) {
@@ -313,7 +313,11 @@ export async function uploadFile(
 				reject(new Error('Upload failed.'));
 			});
 			xhr.addEventListener('load', () => {
-				resolve(json?.fileId || null);
+				finalizeFileUpload(json.fileId, {
+					encryptedSize: json.encrypted && body instanceof Uint8Array ? body.length : void 0,
+				}).then(() => {
+					resolve(json?.fileId || null);
+				}, reject);
 			});
 			xhr.open('PUT', json.uploadUrl);
 			xhr.setRequestHeader('content-type', type);
@@ -321,6 +325,56 @@ export async function uploadFile(
 		});
 	}
 	return null;
+}
+
+export async function finalizeFileUpload(fileId: string, data: Partial<Pick<IFile, 'encryptedSize'>> = {}) {
+	const resp = await fetch(`/storage/${fileId}/finalize`, {
+		body: JSON.stringify(data),
+		headers: {
+			'content-type': 'application/json',
+		},
+		method: 'POST'
+	});
+	if (resp.status > 204) {
+		throw new Error(`Server responded with ${resp.status}.`);		
+	}
+	return true;
+}
+
+export async function downloadFile(file: Pick<IFile, 'id' | 'encrypted' | 'encryptionKeyHash'>, onProgress?: (bytesLoaded: number, totalBytes: number) => void) {
+	const downloadUrl = `/storage/${file.id}?download=1`;
+	const resp = await fetch(downloadUrl);
+	const contentLength = resp.headers.get('content-length');
+	const bytesTotal = contentLength ? parseInt(contentLength, 10) : 0;
+	let bytesLoaded = 0;
+	if (resp.status !== 200) {
+		throw new Error(`Server responded with ${resp.status}.`);
+	}
+	const response = new Response(
+		new ReadableStream({
+			async start(controller) {
+				const reader = resp.body!.getReader();
+				while (true) {
+					const { done, value } = await reader.read();
+					if (done) {
+						break;
+					}
+					bytesLoaded = bytesLoaded + value.byteLength;
+					onProgress?.(bytesLoaded, bytesTotal);
+					controller.enqueue(value);
+				}
+				controller.close();
+			}
+		})
+	);
+	const buffer = await response.arrayBuffer();
+	const key = get(encryptionKeys).find(({ id }) => id === file.encryptionKeyHash);
+	if (!key) {
+		throw new Error(`Failed to decrypt file (encryption key ${file.encryptionKeyHash}).`);
+	}
+	const privateKey = await rsa.importPrivateKeyPem(key.privateKey);
+	const result = await cipher.decrypt(privateKey, new Uint8Array(buffer));
+	return result.buffer;
 }
 
 export async function solveAltcha(header: string) {

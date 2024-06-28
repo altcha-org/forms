@@ -25,6 +25,7 @@ export class FilesService {
 		encryptedSize: true,
 		encryptionKeyHash: true,
 		expiresAt: true,
+		finalized: true,
 		formId: true,
 		id: true,
 		name: true,
@@ -70,7 +71,7 @@ export class FilesService {
 	}
 
 	getExpireTime(ttl: number = 3600000) {
-		return roundTime(Date.now() / ttl);
+		return roundTime(Date.now() + ttl);
 	}
 
 	async getUploadUrl(file: IFile) {
@@ -99,6 +100,7 @@ export class FilesService {
 				encrypted: data.encrypted,
 				encryptionKeyHash: data.encryptionKeyHash,
 				expiresAt: this.getExpireTime(),
+				finalized: false,
 				formId: data.formId,
 				id: this.generateId(),
 				name: data.name,
@@ -149,6 +151,7 @@ export class FilesService {
 				| 'encrypted'
 				| 'encryptionKeyHash'
 				| 'encryptedSize'
+				| 'finalized'
 				| 'responseId'
 				| 'expiresAt'
 				| 'persistent'
@@ -162,6 +165,7 @@ export class FilesService {
 				encryptionKeyHash: data.encryptionKeyHash,
 				encryptedSize: data.encryptedSize,
 				expiresAt: data.expiresAt,
+				finalized: data.finalized,
 				persistent: data.persistent,
 				responseId: data.responseId,
 				updatedAt: new Date()

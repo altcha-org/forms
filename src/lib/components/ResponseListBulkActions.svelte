@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
+	import { createEventDispatcher } from 'svelte';
 	import ArrowDownIcon from '$lib/components/icons/ArrowDown.svelte';
 	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
 	import Form from '$lib/components/Form.svelte';
@@ -7,6 +8,8 @@
 
 	export let form: Pick<IForm, 'id'>;
 	export let selected: string[] = [];
+
+	const dispatch = createEventDispatcher();
 </script>
 
 <div class="dropdown">
@@ -29,6 +32,11 @@
 						<span>{$_('button.mark_as_spam')}</span>
 					</button>
 				</Form>
+			</li>
+			<li>
+				<button type="button" on:click|preventDefault={() => dispatch('export')}>
+					<span>{$_('button.export')}</span>
+				</button>
 			</li>
 			<li>
 				<Form action="/app/forms/{form.id}/inbox?/bulkDelete" data={{ responses: selected }}>

@@ -359,6 +359,7 @@ export const files = pgTable(
 		encrypted: boolean('encrypted').notNull().default(false),
 		encryptionKeyHash: varchar('encryption_key_hash'),
 		encryptedSize: integer('encrypted_size'),
+		finalized: boolean('finalized').notNull().default(true),
 		name: varchar('name', { length: 256 }).notNull(),
 		persistent: boolean('persistent').default(false),
 		public: boolean('public').default(false),
