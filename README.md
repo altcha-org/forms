@@ -144,8 +144,6 @@ Configure `DATABASE_URL`, and `BASE_URL`. See [env.ts](/src/lib/server/env.ts) f
 Some parts of this project are under development. Future enhancements include:
 
 - Search and Analytics: Client-side, end-to-end encrypted search and analysis.
-- Bulk Export: Export responses to PDF, CSV, JSON.
-- Finalize Identity Management: Anonymized identity linking, search, and management.
 
 ## Contributing
 
