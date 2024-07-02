@@ -24,6 +24,7 @@ export const DELETE = requestHandler(
 		await formsService.deleteForm(form.id);
 	},
 	{
+		apiKeyFeatures: ['forms_api'],
 		authorization: 'apiKey',
 		rateLimit: 'L3'
 	}

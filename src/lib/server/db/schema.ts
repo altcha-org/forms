@@ -76,7 +76,7 @@ export const apiKeys = pgTable(
 				onDelete: 'cascade'
 			}),
 		deleted: boolean('deleted').default(false),
-		features: customJson('features').notNull().default('[]').$type<string[]>(),
+		features: customJson('features').notNull().default('[]').$type<Array<'forms_api' | 'antispam_api'>>(),
 		name: varchar('name', { length: 64 }).notNull(),
 		referrer: varchar('referrer', { length: 1024 }).notNull(),
 		secret: varchar('secret', { length: 64 }).notNull(),

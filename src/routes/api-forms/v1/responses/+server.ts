@@ -25,6 +25,7 @@ export const GET = requestHandler(
 		};
 	},
 	{
+		apiKeyFeatures: ['forms_api'],
 		authorization: 'apiKey',
 		rateLimit: 'L1',
 		searchParams: apiParamsSchema

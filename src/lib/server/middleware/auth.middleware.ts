@@ -42,7 +42,7 @@ export default () => {
 							});
 						}
 					}
-					return true;
+					return;
 				}
 			}
 			// delete jwt cookie otherwise

@@ -10,6 +10,7 @@ import { license } from '$lib/server/license';
 import { logger } from '$lib/server/logger';
 import apiKeyMiddleware from '$lib/server/middleware/apiKey.middleware';
 import authMiddleware from '$lib/server/middleware/auth.middleware';
+import corsMiddleware from '$lib/server/middleware/cors.middleware';
 import deviceMiddleware from '$lib/server/middleware/device.middleware';
 import domainMiddleware from '$lib/server/middleware/domain.middleware';
 import ipMiddleware from '$lib/server/middleware/ip.middleware';
@@ -23,6 +24,7 @@ if (env.LICENSE) {
 }
 
 const beforeMiddlewares: ((event: RequestEvent) => Promise<void> | void)[] = [
+	corsMiddleware(),
 	domainMiddleware(),
 	ipMiddleware(),
 	localeMiddleware(),
@@ -44,9 +46,14 @@ export const handle: Handle = async ({ event, resolve }) => {
 	let response: any = null;
 	try {
 		for (const middleware of beforeMiddlewares) {
-			await middleware(event);
+			response = await middleware(event);
+			if (response) {
+				break;
+			}
 		}
-		response = await resolve(event);
+		if (!response) {
+			response = await resolve(event);
+		}
 		for (const middleware of afterMiddlewares) {
 			await middleware(event);
 		}

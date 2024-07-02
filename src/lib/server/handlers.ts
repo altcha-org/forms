@@ -1,12 +1,12 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { compileSchema, validateSchema, type ValidateFunction } from '$lib/server/validation';
-import { BaseError, UnauthorizedError, ValidationError } from '$lib/server/errors';
+import { BaseError, ForbiddenError, UnauthorizedError, ValidationError } from '$lib/server/errors';
 import { checkUserAccountAccess } from '$lib/server/helpers';
+import { rateLimit, rateLimitLevels } from './ratelimiter';
 import type { TSchema, Static } from '@sinclair/typebox';
 import type { RequestEvent } from '@sveltejs/kit';
 import type { IUser } from '$lib/server/services/users.service';
 import type { IApiKey } from './services/apiKeys.service';
-import { rateLimit, rateLimitLevels } from './ratelimiter';
 
 export type TAuthorization = boolean | 'apiKey';
 
@@ -15,6 +15,7 @@ export interface ActionHandlerOptions<
 	BodySchema extends TSchema,
 	SearchParamsSchema extends TSchema
 > {
+	apiKeyFeatures?: IApiKey['features'];
 	authorization?: Authorization;
 	body?: ValidateFunction<BodySchema> | BodySchema;
 	jsonBody?: boolean;
@@ -152,6 +153,9 @@ export function requestHandler<
 		if (options.authorization === 'apiKey') {
 			if (!apiKey) {
 				throw new UnauthorizedError();
+			}
+			if (options.apiKeyFeatures?.length && !options.apiKeyFeatures.every((feature) => apiKey.features.includes(feature))) {
+				throw new ForbiddenError();
 			}
 		} else if (options.authorization !== false && !user) {
 			throw new UnauthorizedError();

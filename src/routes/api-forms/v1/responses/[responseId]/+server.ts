@@ -12,6 +12,7 @@ export const GET = requestHandler(
 		};
 	},
 	{
+		apiKeyFeatures: ['forms_api'],
 		authorization: 'apiKey',
 		rateLimit: 'L1'
 	}
@@ -23,6 +24,7 @@ export const DELETE = requestHandler(
 		await responsesService.deleteResponses([response.id]);
 	},
 	{
+		apiKeyFeatures: ['forms_api'],
 		authorization: 'apiKey',
 		rateLimit: 'L3'
 	}

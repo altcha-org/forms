@@ -34,14 +34,11 @@ export function getMaxNumberForComplexity(complexity: EComplexity) {
 
 export async function createChallenge(options: ICreateChanllengeOptions) {
 	const expire = duration(options.expire || '') || EXPIRE_DEFAULT;
-	const expireSeconds = Math.floor((Date.now() + expire) / 1000);
-	const salt = expireSeconds + '.' + randomBytes(12).toString('hex');
 	const challenge = await lib.createChallenge({
 		algorithm: 'SHA-256',
 		hmacKey: options.hmacKey,
 		maxNumber:
 			options.maxnumber || getMaxNumberForComplexity(options.complexity || EComplexity.MEDIUM),
-		salt,
 		expires: new Date(Date.now() + expire),
 	});
 	return {
@@ -55,12 +52,7 @@ export async function verifySolution(payload: string | Payload, hmacKey: string)
 	if (!parsed.salt || !parsed.challenge || parsed.number === void 0) {
 		return false;
 	}
-	const saltParts = parsed.salt.split('.');
-	const expire = parseInt(saltParts[0], 10);
-	if (expire && expire * 1000 > Date.now()) {
-		return lib.verifySolution(parsed, hmacKey);
-	}
-	return false;
+	return lib.verifySolution(parsed, hmacKey);
 }
 
 export async function protectedEndpoint(event: RequestEvent, hmacKey: string) {
