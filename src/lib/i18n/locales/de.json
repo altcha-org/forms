@@ -121,7 +121,10 @@
 		"stop": "Halt",
 		"copy_address": "Adresse kopieren",
 		"export": "Export",
-		"export_responses": "Antworten exportieren"
+		"export_responses": "Antworten exportieren",
+		"analyze": "Analyse",
+		"show_demo": "Demo anzeigen",
+		"show_more": "Mehr anzeigen"
 	},
 	"complexity": {
 		"low": "Niedrig",
@@ -208,6 +211,12 @@
 		"floating_captcha": "Zeigt das Captcha als schwebendes Element nach dem Absenden des Formulars an.",
 		"export_include_attachments": "Dateien, Anhänge und Signaturen im Export einschließen.",
 		"export_individual_files": "Erzeugen Sie eine separate Datei für jede Antwort."
+	},
+	"interval": {
+		"custom": "Benutzerdefiniert",
+		"last_30_days": "Letzte 30 Tage",
+		"last_month": "Letzter Monat",
+		"this_month": "Dieser Monat"
 	},
 	"label": {
 		"access": "Zugriff",
@@ -421,7 +430,24 @@
 		"floating_captcha": "Floating UI",
 		"export_format": "Exportformat",
 		"export_include_attachments": "Anhänge einschließen",
-		"export_individual_files": "Als einzelne Dateien exportieren"
+		"export_individual_files": "Als einzelne Dateien exportieren",
+		"abandonment_rate": "Abbruchrate",
+		"all_responses": "Alle Antworten",
+		"analytics": "Analytik",
+		"completion_time": "Fertigstellungszeit",
+		"correction_rate": "Korrekturrate",
+		"countries": "Länder",
+		"desktop": "Desktop",
+		"end_date": "Enddatum",
+		"error_rate": "Fehlerquote",
+		"field_drop_off": "Feldausfall",
+		"mobile": "Mobil",
+		"no": "Nein",
+		"overview": "Übersicht",
+		"start_date": "Startdatum",
+		"views": "Ansichten",
+		"views_and_responses": "Ansichten und Antworten",
+		"yes": "Ja"
 	},
 	"limit": {
 		"api": "API-Anfragen",
@@ -626,7 +652,6 @@
 		"identities_info": "Identitäten sind anonymisierte Benutzer-IDs, die es Ihnen ermöglichen, schnell nach Daten eines bestimmten Benutzers zu suchen und diese zu löschen.",
 		"identity_linked_to_responses": "Diese Identität ist mit {count} Antwort(en) verknüpft.",
 		"no_results": "Keine Ergebnisse gefunden.",
-		"search_errors": "Es wurden Fehler bei der Suche festgestellt, wahrscheinlich aufgrund fehlender Verschlüsselungsschlüssel.",
 		"search_found_forms": "{count} Formular(e)",
 		"search_found_responses": "{count} Antwort(en)",
 		"search_scanned_forms": "{count} Formular(e)",
@@ -635,7 +660,15 @@
 		"export_all_responses": "Alle Antworten exportieren.",
 		"export_x_errors": "{x} Antwort(en) konnten nicht exportiert werden, wahrscheinlich aufgrund fehlender Verschlüsselungsschlüssel.",
 		"export_x_responses": "__{count} ausgewählte__ Antwort(en) exportieren.",
-		"x_out_of": "{x} / {of}"
+		"x_out_of": "{x} / {of}",
+		"analytics_not_enabled_for_plan": "Analytics sind in Ihrem Abrechnungsplan nicht verfügbar.",
+		"analytics_responses_select_fields": "Wählen Sie die Felder aus, die Sie analysieren möchten, und klicken Sie auf die Schaltfläche __Analysieren__.",
+		"date_range_invalid": "Ungültiger Datumsbereich.",
+		"date_range_max_days": "Der Datumsbereich darf 31 Tage nicht überschreiten.",
+		"downloading_file_name": "{name} wird heruntergeladen...",
+		"viewing_demo_data": "Sie sehen zufällig generierte Demo-Daten.",
+		"x_responses": "{x} Antwort(en)",
+		"response_stream_errors": "Fehler wurden festgestellt, wahrscheinlich aufgrund fehlender Verschlüsselungsschlüssel."
 	},
 	"title": {
 		"add_block": "Block hinzufügen",
@@ -678,7 +711,10 @@
 		"identities": "Identitäten",
 		"search_results": "Suchergebnisse",
 		"search": "Suche",
-		"export": "Exportieren"
+		"export": "Exportieren",
+		"analytics": "Analytik",
+		"custom_date": "Benutzerdefiniertes Datum",
+		"select_fields": "Felder auswählen"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Kopieren",

@@ -47,6 +47,10 @@
 			label: $_('label.inbox')
 		},
 		{
+			href: '/analytics',
+			label: $_('label.analytics')
+		},
+		{
 			href: '/design',
 			label: $_('label.design')
 		},

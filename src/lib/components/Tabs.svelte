@@ -13,7 +13,7 @@
 
 	function onPageUrlChange(_: typeof $page.url) {
 		const idx = tabs.findIndex(
-			({ href }) => href && $page.url.pathname.endsWith(baseUrl + href?.replace(/\/$/, ''))
+			({ href }) => href && $page.url.pathname.endsWith(baseUrl + href?.replace(/\/?(\?.*)?$/, ''))
 		);
 		if (idx >= 0 && activeIndex !== idx) {
 			activeIndex = idx;

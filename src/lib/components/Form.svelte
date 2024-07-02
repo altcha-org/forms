@@ -125,6 +125,11 @@
 
 	function onSubmit() {
 		loading = true;
+		dispatch('beforesubmit');
+	}
+
+	export function getElement() {
+		return elForm;
 	}
 
 	export function getData() {

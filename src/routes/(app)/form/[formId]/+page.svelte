@@ -56,7 +56,7 @@
 		</div>
 	{:else}
 		<div class="xl:px-5 pb-12">
-			<FormRenderer encrypted={data.encrypted} form={data.form} />
+			<FormRenderer analytics={data.analytics} encrypted={data.encrypted} form={data.form} />
 		</div>
 	{/if}
 </div>

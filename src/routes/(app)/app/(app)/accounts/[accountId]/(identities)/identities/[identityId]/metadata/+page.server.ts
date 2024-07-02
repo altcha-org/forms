@@ -23,10 +23,6 @@ export const actions = {
 			const encrypted = account.encryptionEnabled
 				? await accountsService.encryptData(account.id, JSON.stringify(metadata))
 				: null;
-      console.log('>>', {
-        metadata,
-        encrypted,
-      })
       if (encrypted) {
         updateData.encrypted = true;
         updateData.encryptionKeyHash = encrypted.encryptionKeyHash;

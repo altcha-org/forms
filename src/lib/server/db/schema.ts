@@ -381,6 +381,7 @@ export const plans = pgTable('plans', {
 	auditlogMaxRetention: integer('auditlog_max_retention').notNull().default(365),
 	default: boolean('default').default(false).notNull(),
 	deprecated: boolean('deprecated').default(false).notNull(),
+	featureAnalytics: boolean('feature_analytics').default(true).notNull(),
 	featureAuditlog: boolean('feature_auditlog').default(true).notNull(),
 	featureFiles: boolean('feature_files').default(true).notNull(),
 	featureForms: boolean('feature_forms').default(true).notNull(),
@@ -422,6 +423,31 @@ export const subscriptions = pgTable('subscriptions', {
 	expiresAt: timestamp('expires_at'),
 	updatedAt: timestamp('updated_at').notNull().defaultNow()
 });
+
+export const sessions = pgTable(
+	'sessions',
+	{
+		id: varchar('id', { length: 32 }).primaryKey(),
+		formId: varchar('form_id', { length: 32 })
+			.notNull()
+			.references(() => forms.id, {
+				onDelete: 'cascade'
+			}),
+		responseId: varchar('response_id', { length: 32 }).references(() => responses.id, {
+			onDelete: 'cascade'
+		}),
+		abondoned: boolean('abondoned').notNull().default(false),
+		completionTime: integer('completion_time'),
+		country: varchar('country', { length: 2 }),
+		correction: integer('correction').notNull().default(0),
+		error: boolean('error'),
+		fieldDropOff: varchar('field_drop_off', { length: 120 }),
+		fields: customJson('fields').$type<[ string, number, number, number ][]>(),
+		mobile: boolean('mobile').notNull().default(false),
+		startAt: timestamp('start_at').notNull().defaultNow(),
+		submitAt: timestamp('submit_at'),
+	},
+);
 
 export const auditlog = pgTable(
 	'audit_log',

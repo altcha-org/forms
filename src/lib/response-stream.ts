@@ -5,6 +5,8 @@ import type { IFile, IResponse, TResponseData } from '$lib/types';
 
 export interface IResponseStreamOptions {
 	accountId: string;
+	dateEnd?: Date;
+	dateStart?: Date;
 	formId?: string;
 	files?: boolean;
 	responseIds?: string[];
@@ -99,6 +101,12 @@ export class ResponseStream {
 		const url = new URL(`/app/accounts/${this.options.accountId}/stream/responses`, location.origin);
 		if (this.options.formId) {
 			url.searchParams.set('formId', this.options.formId);
+		}
+		if (this.options.dateEnd) {
+			url.searchParams.set('dateEnd', this.options.dateEnd.toISOString());
+		}
+		if (this.options.dateStart) {
+			url.searchParams.set('dateStart', this.options.dateStart.toISOString());
 		}
 		if (this.options.responseIds?.length) {
 			url.searchParams.set('responseIds', this.options.responseIds.join(','));

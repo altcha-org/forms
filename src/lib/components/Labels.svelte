@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
 	import { createEventDispatcher } from 'svelte';
+  import colors from '$lib/consts/colors';
 	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
 	import DeleteBackIcon from '$lib/components/icons/DeleteBack.svelte';
 	import PlusIcon from '$lib/components/icons/Plus.svelte';
@@ -9,17 +10,9 @@
 	export let labels: ILabel[] | null = [];
 
 	const disptach = createEventDispatcher();
-	const colors = [
+	const labelColors = [
 		'#dddddd',
-		'#f87171',
-		'#f97316',
-		'#facc15',
-		'#bef264',
-		'#86efac',
-		'#5eead4',
-		'#7dd3fc',
-		'#c084fc',
-		'#f9a8d4'
+		...colors,
 	];
 
 	function onLabelsChange() {
@@ -66,7 +59,7 @@
 						</div>
 						<DropdownMenu autoclose>
 							<div class="grid grid-cols-5 gap-1 p-2 w-full">
-								{#each colors as color}
+								{#each labelColors as color}
 									<div class="flex justify-center">
 										<button
 											type="button"

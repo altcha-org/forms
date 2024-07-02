@@ -41,11 +41,12 @@ export async function createChallenge(options: ICreateChanllengeOptions) {
 		hmacKey: options.hmacKey,
 		maxNumber:
 			options.maxnumber || getMaxNumberForComplexity(options.complexity || EComplexity.MEDIUM),
-		salt
+		salt,
+		expires: new Date(Date.now() + expire),
 	});
 	return {
 		challenge,
-		expire
+		expire,
 	};
 }
 

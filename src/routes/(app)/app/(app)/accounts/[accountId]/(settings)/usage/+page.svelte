@@ -122,7 +122,7 @@
 					{#if item[0] === 'limitApi'}
 					<div class="mt-3">
 						<BarChartVertical
-							items={data.days.map(({ date, requests }) => ({ label: date, value: requests }))}
+							items={data.days.map(({ date, requests }) => ({ label: date, value: [requests] }))}
 						/>
 					</div>
 					{/if}
@@ -175,7 +175,7 @@
 						</div>
 						{#if apiKeyUsage?.days}
 						<BarChartVertical
-							items={apiKeyUsage.days.map(({ date, requests }) => ({ label: date, value: requests }))}
+							items={apiKeyUsage.days.map(({ date, requests }) => ({ label: date, value: [requests] }))}
 						/>
 						{/if}
 					</div>

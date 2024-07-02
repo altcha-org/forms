@@ -1,35 +1,37 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n';
   import { formatNumber } from '$lib/format';
+  import colors from '$lib/consts/colors';
 	import type { IBarChartItem } from '$lib/types';
 
   export let items: IBarChartItem[] | Record<string, number>;
+  export let maxRows: number = 0;
 
-	const colors = [
-		'#f87171',
-		'#f97316',
-		'#facc15',
-		'#bef264',
-		'#86efac',
-		'#5eead4',
-		'#7dd3fc',
-		'#c084fc',
-		'#f9a8d4'
-	];
+	const barColors = [...colors].reverse();
 
-  $: itemsArr = (Array.isArray(items) ? items : Object.entries(items).map(([ label, value ]) => ({ label, value })));
-  $: sum = itemsArr.reduce((acc, item) => acc + item.value, 0);
-  $: renderItems = itemsArr.map((item) => {
+  let rows = maxRows;
+
+  $: itemsArr = (Array.isArray(items) ? items : Object.entries(items).map(([ label, value ]) => ({ label, value: [value] })));
+  $: sum = itemsArr.reduce((acc, item) => acc + arrSum(item.value), 0);
+	$: renderItems = itemsArr.map((item) => {
+    const value = item.value[0];
+		return {
+      percent: value ? Math.round((value / sum) * 1000) / 10 : 0,
+      label: item.label,
+      value,
+		};
+	}).sort((a, b) => a.value > b.value ? -1 : 1).map((item, i) => {
     return {
       ...item,
-      percent: item.value ? (Math.round((item.value / sum) * 1000) / 10) : 0,
-    };
-  }).sort((a, b) => a.value > b.value ? -1 : 1).map((item, i) => {
-    return {
-      ...item,
-      color: colors[i % colors.length],
+      color: barColors[i % barColors.length],
     };
   });
+  $: slicedItems = renderItems.slice(0, rows > 0 ? rows : renderItems.length)
+  $: hasMore = slicedItems.length < renderItems.length;
+
+  function arrSum(numbers: number[]) {
+    return numbers.reduce((acc, n) => acc + n, 0);
+  }
 </script>
 
 <div class="flex flex-col gap-3">
@@ -39,11 +41,11 @@
   </div>
   {/if}
 
-  {#each renderItems as item}
+  {#each slicedItems as item}
   <div class="flex flex-col gap-1">
     <div class="flex gap-3 text-sm">
       <div class="grow truncate">
-        <div class="max-w-xs truncate">{item.label}</div>
+        <div class="max-w-sm truncate">{item.label}</div>
       </div>
       <div>
         <span>{formatNumber(item.value)}</span>
@@ -51,9 +53,19 @@
         <span class="opacity-60">{item.percent} %</span>
       </div>
     </div>
-    <div class="bg-base-300/70 rounded-full overflow-hidden">
-      <div class="rounded-full h-2" style="background-color:{item.color};width:{item.percent}%"></div>
+    <div class="overflow-hidden bg-primary/5">
+      <div class="h-2 border-r border-base-100" style="background-color:{item.color};width:{item.percent}%"></div>
     </div>
   </div>
   {/each}
+
+  {#if hasMore}
+  <div>
+    <button
+      type="button"
+      class="link text-sm"
+      on:click={() => rows += maxRows}
+    >{$_('button.show_more')} ({renderItems.length - slicedItems.length})</button>
+  </div>
+  {/if}
 </div>

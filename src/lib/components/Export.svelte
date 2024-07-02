@@ -4,7 +4,7 @@
   import { createEventDispatcher, onDestroy } from 'svelte';
 	import { forceDownload } from '$lib/helpers';
   import { exportResponses } from '$lib/exporter';
-  import { ResponseStream } from '$lib/responseStream';
+  import { ResponseStream } from '$lib/response-stream';
 	import { formatBytes } from '$lib/format';
 	import DownloadIcon from '$lib/components/icons/Download.svelte';
 	import RadioInput from '$lib/components/blocks/RadioInput.svelte';

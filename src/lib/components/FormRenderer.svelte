@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import ArrowLeftIcon from '$lib/components/icons/ArrowLeft.svelte';
 	import Altcha from '$lib/components/Altcha.svelte';
@@ -14,8 +14,10 @@
 	import CheckIcon from '$lib/components/icons/Check.svelte';
 	import { getTimeZone, isMobile, shortenFormId } from '$lib/helpers';
 	import { evalExpression } from '$lib/evaluator';
+	import { Session } from '$lib/session';
 	import type { IForm } from '$lib/types';
 
+	export let analytics: boolean = false;
 	export let encrypted: boolean = false;
 	export let form: Pick<
 		IForm,
@@ -31,18 +33,39 @@
 		: '';
 
 	let activeStepIdx: number = 0;
+	let session: Session | null = null;
 	let browserLoaded: boolean = false;
 	let cmpForm: Form;
+	let __session: string = '';
 
 	$: challengeurl = `/form/${shortenFormId(form.id)}/altcha`;
 	$: hasNextStep = form.steps.length - 1 > activeStepIdx;
 	$: hasPrevStep = activeStepIdx > 0;
 
+	onDestroy(() => {
+		if (session) {
+			session.destroy();
+		}
+	});
+
 	onMount(() => {
 		if (browser) {
 			browserLoaded = true;
+			if (!preview && analytics) {
+				session = new Session({
+					form: cmpForm.getElement(),
+					beaconUrl: `/form/${shortenFormId(form.id)}/beacon`,
+				});
+			}
 		}
 	});
+
+	function onBeforeSubmit() {
+		if (session) {
+			session.end();
+			__session = session.dataToUrlString() || '';
+		}
+	}
 
 	function onNext() {
 		if (cmpForm.reportValidity()) {
@@ -98,10 +121,12 @@
 			action={preview ? '' : `/form/${shortenFormId(form.id)}/submit_handle`}
 			allowSubmit={!preview}
 			data={{
-				__context
+				__context,
+				__session,
 			}}
 			successToast={false}
 			bind:this={cmpForm}
+			on:beforesubmit={onBeforeSubmit}
 			let:formData
 			let:loading
 		>

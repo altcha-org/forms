@@ -35,7 +35,6 @@
 
 	function generatePdf() {
 		const data = Object.fromEntries(new FormData(elForm!)) as Record<string, any>;
-		console.log(data);
 		const pdf = new Pdf({
 			pageNumbers: true
 		});

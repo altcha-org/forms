@@ -14,9 +14,10 @@ export const load = loadHandler(
 			return error(404);
 		}
 		return {
+			analytics: form.account.plan?.featureAnalytics === true,
 			encrypted: !!form.account?.encryptionEnabled,
 			limitFileSize: form.account.plan?.limitFileSize || 10,
-			passwordOk: !!event.cookies.get('form_password')
+			passwordOk: !!event.cookies.get('form_password'),
 		};
 	},
 	{

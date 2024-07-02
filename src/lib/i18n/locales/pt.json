@@ -121,7 +121,10 @@
 		"stop": "Parar",
 		"copy_address": "Copiar Endereço",
 		"export": "Exportar",
-		"export_responses": "Exportar Respostas"
+		"export_responses": "Exportar Respostas",
+		"analyze": "Analisar",
+		"show_demo": "Mostrar demonstração",
+		"show_more": "Mostrar mais"
 	},
 	"complexity": {
 		"low": "Baixo",
@@ -208,6 +211,12 @@
 		"floating_captcha": "Exibe o Captcha como um elemento flutuante após o envio do formulário.",
 		"export_include_attachments": "Incluir arquivos, anexos e assinaturas na exportação.",
 		"export_individual_files": "Gerar um arquivo individual para cada resposta."
+	},
+	"interval": {
+		"custom": "Personalizado",
+		"last_30_days": "Últimos 30 dias",
+		"last_month": "Último mês",
+		"this_month": "Este mês"
 	},
 	"label": {
 		"access": "Acesso",
@@ -421,7 +430,24 @@
 		"floating_captcha": "Floating UI",
 		"export_format": "Formato de exportação",
 		"export_include_attachments": "Incluir anexos",
-		"export_individual_files": "Exportar como arquivos individuais"
+		"export_individual_files": "Exportar como arquivos individuais",
+		"abandonment_rate": "Taxa de Abandono",
+		"all_responses": "Todas as Respostas",
+		"analytics": "Análise",
+		"completion_time": "Tempo de Conclusão",
+		"correction_rate": "Taxa de Correção",
+		"countries": "Países",
+		"desktop": "Desktop",
+		"end_date": "Data de Término",
+		"error_rate": "Taxa de Erro",
+		"field_drop_off": "Desistência de Campo",
+		"mobile": "Celular",
+		"no": "Não",
+		"overview": "Visão Geral",
+		"start_date": "Data de Início",
+		"views": "Visualizações",
+		"views_and_responses": "Visualizações e Respostas",
+		"yes": "Sim"
 	},
 	"limit": {
 		"api": "Pedidos da API",
@@ -626,7 +652,6 @@
 		"identities_info": "As identidades são IDs de usuários anonimizados que permitem que você pesquise e exclua rapidamente dados associados a um usuário específico.",
 		"identity_linked_to_responses": "Esta identidade está vinculada a {count} resposta(s).",
 		"no_results": "Nenhum resultado encontrado.",
-		"search_errors": "Foram detetados erros durante a pesquisa, provavelmente devido à falta de chaves de criptografia.",
 		"search_found_forms": "Encontrado(s) {count} formulário(s)",
 		"search_found_responses": "Encontrada(s) {count} resposta(s)",
 		"search_scanned_forms": "{count} formulário(s)",
@@ -635,7 +660,15 @@
 		"export_all_responses": "Exportar __todas as respostas__.",
 		"export_x_errors": "Falha ao exportar {x} resposta(s) provavelmente devido à falta de chaves de criptografia.",
 		"export_x_responses": "Exportar __{count} selecionadas__ resposta(s).",
-		"x_out_of": "{x} / {of}"
+		"x_out_of": "{x} / {of}",
+		"analytics_not_enabled_for_plan": "A análise não está disponível no seu plano de faturação.",
+		"analytics_responses_select_fields": "Selecione os campos que deseja analisar e clique no botão __Analisar__.",
+		"date_range_invalid": "Intervalo de datas inválido.",
+		"date_range_max_days": "O intervalo de datas não pode exceder 31 dias.",
+		"downloading_file_name": "Baixando {name}...",
+		"viewing_demo_data": "Você está visualizando dados demo gerados aleatoriamente.",
+		"x_responses": "{x} resposta(s)",
+		"response_stream_errors": "Foram detetados erros, provavelmente devido à falta de chaves de encriptação."
 	},
 	"title": {
 		"add_block": "Adicionar Bloco",
@@ -678,7 +711,10 @@
 		"identities": "Identidades",
 		"search_results": "Resultados da pesquisa",
 		"search": "Pesquisar",
-		"export": "Exportar"
+		"export": "Exportar",
+		"analytics": "Análises",
+		"custom_date": "Data Personalizada",
+		"select_fields": "Selecionar Campos"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Copiar",

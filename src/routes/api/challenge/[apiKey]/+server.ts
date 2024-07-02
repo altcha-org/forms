@@ -4,10 +4,10 @@ import { apiKeysService } from '$lib/server/services/apiKeys.service';
 import { ForbiddenError } from '$lib/server/errors';
 import { compileSchema, validateSchema } from '$lib/server/validation';
 import { rateLimit } from '$lib/server/ratelimiter';
-import type { Payload } from 'altcha-lib/types';
-import type { RequestHandler } from './$types';
 import { requestHandler } from '$lib/server/handlers';
 import { EComplexity } from '$lib/types';
+import type { Payload } from 'altcha-lib/types';
+import type { RequestHandler } from './$types';
 
 const PostBody = compileSchema(
 	t.Object({
@@ -29,12 +29,13 @@ export const OPTIONS = requestHandler(async (event) => {
 		},
 		status: 204
 	});
+}, {
+	authorization: false,
 }) satisfies RequestHandler;
 
 export const GET = requestHandler(async (event) => {
 	await rateLimit('L1', event);
 	const apiKey = await findApiKey(event.params.apiKey);
-	// TODO: check referrer
 	const referrer = event.request.headers.get('referer');
 	if ((apiKey.referrer && !referrer) || (referrer && !checkReferrer(apiKey.referrer, referrer))) {
 		throw new ForbiddenError('Referrer does not match.');
@@ -56,6 +57,8 @@ export const GET = requestHandler(async (event) => {
 			}
 		}
 	);
+}, {
+	authorization: false,
 }) satisfies RequestHandler;
 
 export const POST = requestHandler(async (event) => {
@@ -82,6 +85,8 @@ export const POST = requestHandler(async (event) => {
 			}
 		}
 	);
+}, {
+	authorization: false,
 }) satisfies RequestHandler;
 
 async function findApiKey(apiKeyId: string) {

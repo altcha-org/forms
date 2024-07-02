@@ -8,7 +8,7 @@
 	</div>
 
 	{#if $$slots.actions}
-		<div>
+		<div class="flex gap-4">
 			<slot name="actions" />
 		</div>
 	{/if}

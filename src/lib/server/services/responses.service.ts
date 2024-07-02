@@ -1,5 +1,5 @@
 import {} from '@altcha/crypto';
-import { and, asc, count, desc, eq, or, inArray, sql, lt, type SQL } from 'drizzle-orm';
+import { and, asc, count, desc, eq, or, inArray, sql, lt, type SQL, gte, lte } from 'drizzle-orm';
 import { db } from '$lib/server/db';
 import { roundTime } from '$lib/server/helpers';
 import { accountsToUsers, files, forms, formsToUsers, notes, responses } from '$lib/server/db/schema';
@@ -107,7 +107,7 @@ export class ResponsesService {
 		return result[0].value;
 	}
 
-	async countResponsesForForm(formId: string) {
+	async countResponsesForForm(options: { dateEnd?: Date; dateStart?: Date; formId: string }) {
 		const result = await db
 			.select({
 				value: count(responses.id)
@@ -117,13 +117,17 @@ export class ResponsesService {
 				and(
 					eq(responses.deleted, false),
 					eq(responses.spam, false),
-					eq(responses.formId, formId),
+					eq(responses.formId, options.formId),
+					options.dateStart ? gte(responses.id, idgen.prefixed(EIdPrefix.RESPONSE, idgen.boundary(options.dateStart.getTime(), false))) : void 0,
+					options.dateEnd ? lte(responses.id, idgen.prefixed(EIdPrefix.RESPONSE, idgen.boundary(options.dateEnd.getTime(), true))) : void 0,
 				)
 			);
 		return result[0].value;
 	}
 
-	async countResponsesForAccountUser(accountId: string, userId: string, formId?: string) {
+	async countResponsesForAccountUser(
+		options: { accountId: string; dateEnd?: Date; dateStart?: Date; userId: string; }
+	) {
 		const result = await db
 			.select({
 				value: count(responses.id)
@@ -134,13 +138,15 @@ export class ResponsesService {
 			.leftJoin(accountsToUsers, eq(accountsToUsers.accountId, responses.accountId))
 			.where(
 				and(
-					eq(responses.accountId, accountId),
+					eq(responses.accountId, options.accountId),
 					eq(responses.deleted, false),
 					eq(responses.spam, false),
+					options.dateStart ? gte(responses.id, idgen.prefixed(EIdPrefix.RESPONSE, idgen.boundary(options.dateStart.getTime(), false))) : void 0,
+					options.dateEnd ? lte(responses.id, idgen.prefixed(EIdPrefix.RESPONSE, idgen.boundary(options.dateEnd.getTime(), true))) : void 0,
 					or(
 						eq(forms.restricted, false),
 						eq(accountsToUsers.role, 'admin'),
-						eq(formsToUsers.userId, userId)
+						eq(formsToUsers.userId, options.userId)
 					)
 				)
 			);
@@ -403,7 +409,7 @@ export class ResponsesService {
 	}
 
 	async listResponsesForAccountAndUser(
-		options: IPaginationOptions & IOrderByOptions & { accountId: string; formId?: string; responseIds?: string[]; userId: string }
+		options: IPaginationOptions & IOrderByOptions & { accountId: string; dateStart?: Date; dateEnd?: Date; formId?: string; responseIds?: string[]; userId: string }
 	) {
 		return db
 			.select({
@@ -439,6 +445,8 @@ export class ResponsesService {
 					eq(responses.spam, false),
 					options.formId ? eq(responses.formId, options.formId) : void 0,
 					options.responseIds ? inArray(responses.id, options.responseIds) : void 0,
+					options.dateStart ? gte(responses.id, idgen.prefixed(EIdPrefix.RESPONSE, idgen.boundary(options.dateStart.getTime(), false))) : void 0,
+					options.dateEnd ? lte(responses.id, idgen.prefixed(EIdPrefix.RESPONSE, idgen.boundary(options.dateEnd.getTime(), true))) : void 0,
 					or(
 						eq(forms.restricted, false),
 						eq(accountsToUsers.role, 'admin'),

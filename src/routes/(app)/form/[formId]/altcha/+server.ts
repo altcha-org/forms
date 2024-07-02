@@ -13,19 +13,14 @@ export const GET: RequestHandler = requestHandler(
 		if (!form) {
 			throw new ForbiddenError();
 		}
-		const { challenge, expire } = await createChallenge({
-			// TODO: get form complexity
-			complexity: EComplexity.MEDIUM,
+		const { challenge } = await createChallenge({
+			complexity: form.captchaComplexity as EComplexity,
 			hmacKey: createHmacKey(formId)
 		});
-		return new Response(JSON.stringify(challenge), {
-			headers: {
-				'content-type': 'application/json',
-				expires: new Date(expire).toISOString()
-			}
-		});
+		return challenge;
 	},
 	{
-		authorization: false
+		authorization: false,
+		rateLimit: 'L3',
 	}
 ) satisfies RequestHandler;

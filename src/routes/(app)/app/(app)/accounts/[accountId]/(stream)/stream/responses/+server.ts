@@ -1,3 +1,4 @@
+import { parseISO } from 'date-fns';
 import { Type as t } from '@sinclair/typebox';
 import { ForbiddenError } from '$lib/server/errors';
 import { requestHandler } from '$lib/server/handlers';
@@ -10,15 +11,26 @@ export const GET = requestHandler(
 		if (!account) {
 			throw new ForbiddenError();
 		}
-		const { formId, orderBy, orderDir, offset, limit } = searchParams;
+		const { dateEnd, dateStart, formId, orderBy, orderDir, offset, limit } = searchParams;
 		const responseIds = searchParams.responseIds?.split(',').filter((p) => !!p);
 		const total = responseIds?.length
 			? responseIds.length
 			: formId
-				? await responsesService.countResponsesForForm(formId)
-				: await responsesService.countResponsesForAccountUser(account.id, user.id);
+				? await responsesService.countResponsesForForm({
+					dateEnd: dateEnd ? parseISO(dateEnd) : void 0,
+					dateStart: dateStart ? parseISO(dateStart) : void 0,
+					formId,
+				})
+				: await responsesService.countResponsesForAccountUser({
+					accountId: account.id,
+					dateEnd: dateEnd ? parseISO(dateEnd) : void 0,
+					dateStart: dateStart ? parseISO(dateStart) : void 0,
+					userId: user.id,
+				});
 		const responses = await responsesService.listResponsesForAccountAndUser({
 			accountId: account.id,
+			dateEnd: dateEnd ? new Date(dateEnd) : void 0,
+			dateStart: dateStart ? new Date(dateStart) : void 0,
 			formId: searchParams.formId,
 			limit,
 			offset,
@@ -37,6 +49,12 @@ export const GET = requestHandler(
 	{
 		rateLimit: 'L1',
 		searchParams: t.Object({
+			dateEnd: t.Optional(t.String({
+				format: 'date-time',
+			})),
+			dateStart: t.Optional(t.String({
+				format: 'date-time',
+			})),
 			formId: t.Optional(t.String()),
 			limit: t.Integer({
 				default: 30,

@@ -16,6 +16,7 @@ export enum EIdPrefix {
 	LOG = 'log',
 	NOTE = 'note',
 	RESPONSE = 'res',
+	SESSION = 'ses',
 	USER = 'usr'
 }
 
@@ -30,12 +31,18 @@ export class IdGenerator {
 
 	constructor(readonly allowedPrefixes: string[] = Object.values(EIdPrefix)) {}
 
+	boundary(ts: number, upper: boolean = false) {
+		const time = Math.floor(ts / 1000)
+			.toString(32)
+			.slice(0, this.TIME_LEN);
+		return time + this.REGION + ''.padEnd(this.MIN_LEN - this.TIME_LEN - this.REGION_LEN, upper ? 'Z' : '0');
+	}
+
 	nanoid(len: number = this.MIN_LEN) {
-		const tlen = 7;
 		const time = Math.floor(Date.now() / 1000)
 			.toString(32)
-			.slice(0, tlen);
-		const rand = generateNanoId().slice(0, len - tlen - this.REGION_LEN);
+			.slice(0, this.TIME_LEN);
+		const rand = generateNanoId().slice(0, len - this.TIME_LEN - this.REGION_LEN);
 		return time + this.REGION + rand;
 	}
 

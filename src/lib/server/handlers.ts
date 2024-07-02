@@ -17,6 +17,7 @@ export interface ActionHandlerOptions<
 > {
 	authorization?: Authorization;
 	body?: ValidateFunction<BodySchema> | BodySchema;
+	jsonBody?: boolean;
 	searchParams?: ValidateFunction<SearchParamsSchema> | SearchParamsSchema;
 	rateLimit?: keyof typeof rateLimitLevels;
 	requiredRole?: 'admin';
@@ -164,7 +165,7 @@ export function requestHandler<
 		if (searchParamsSchema) {
 			searchParams = validateSchema(searchParamsSchema, searchParams);
 		}
-		let data: unknown = bodySchema ? await readBody(event) : void 0;
+		let data: unknown = bodySchema ? await readBody(event, options.jsonBody) : void 0;
 		if (bodySchema) {
 			data = validateSchema(bodySchema, data);
 		}
@@ -185,9 +186,9 @@ export function requestHandler<
 	};
 }
 
-export async function readBody(event: RequestEvent) {
+export async function readBody(event: RequestEvent, json: boolean = false) {
 	const contentType = event.request.headers.get('content-type');
-	if (contentType?.includes('application/json')) {
+	if (json || contentType?.includes('application/json')) {
 		return event.request.json();
 	} else if (contentType?.includes('application/x-www-form-urlencoded')) {
 		return Object.fromEntries(await event.request.formData());

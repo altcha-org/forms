@@ -154,5 +154,5 @@ export interface ILabel {
 
 export interface IBarChartItem {
 	label: string;
-	value: number;
+	value: number[];
 }

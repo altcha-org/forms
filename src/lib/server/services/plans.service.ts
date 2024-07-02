@@ -8,6 +8,7 @@ export class PlansService {
 	readonly columns = {
 		auditlogMaxRetention: true,
 		deprecated: true,
+		featureAnalytics: true,
 		featureAuditlog: true,
 		featureFiles: true,
 		featureForms: true,

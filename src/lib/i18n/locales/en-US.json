@@ -121,7 +121,10 @@
 		"stop": "Stop",
 		"copy_address": "Copy Address",
 		"export": "Export",
-		"export_responses": "Export Responses"
+		"export_responses": "Export Responses",
+		"analyze": "Analyse",
+		"show_demo": "Show demo",
+		"show_more": "Show more"
 	},
 	"complexity": {
 		"low": "Low",
@@ -208,6 +211,12 @@
 		"floating_captcha": "Displays the Captcha as a floating element upon form submission.",
 		"export_include_attachments": "Include files, attachments and signatures in the export.",
 		"export_individual_files": "Generate an individual file for each response."
+	},
+	"interval": {
+		"custom": "Custom",
+		"last_30_days": "Last 30 days",
+		"last_month": "Last month",
+		"this_month": "This month"
 	},
 	"label": {
 		"access": "Access",
@@ -421,7 +430,24 @@
 		"floating_captcha": "Floating UI",
 		"export_format": "Export format",
 		"export_include_attachments": "Include attachments",
-		"export_individual_files": "Export as individual files"
+		"export_individual_files": "Export as individual files",
+		"abandonment_rate": "Abandonment Rate",
+		"all_responses": "All Responses",
+		"analytics": "Analytics",
+		"completion_time": "Completion Time",
+		"correction_rate": "Correction Rate",
+		"countries": "Countries",
+		"desktop": "Desktop",
+		"end_date": "End Date",
+		"error_rate": "Error Rate",
+		"field_drop_off": "Field Drop-Off",
+		"mobile": "Mobile",
+		"no": "No",
+		"overview": "Overview",
+		"start_date": "Start Date",
+		"views": "Views",
+		"views_and_responses": "Views and Responses",
+		"yes": "Yes"
 	},
 	"limit": {
 		"api": "API requests",
@@ -626,7 +652,6 @@
 		"identities_info": "Identities are anonymized user IDs that enable you to quickly search for and delete data associated with a specific user.",
 		"identity_linked_to_responses": "This identity is linked to {count} response(s).",
 		"no_results": "No results found.",
-		"search_errors": "Errors were detected during the search, likely due to missing encryption keys.",
 		"search_found_forms": "Found {count} form(s)",
 		"search_found_responses": "Found {count} response(s)",
 		"search_scanned_forms": "{count} form(s)",
@@ -635,7 +660,15 @@
 		"export_all_responses": "Export all responses.",
 		"export_x_errors": "Failed to export {x} response(s) likely due to missing encryption keys.",
 		"export_x_responses": "Export {count} selected response(s).",
-		"x_out_of": "{x} / {of}"
+		"x_out_of": "{x} / {of}",
+		"analytics_not_enabled_for_plan": "Analytics are not available in your billing plan.",
+		"analytics_responses_select_fields": "Select fields you want to analyse and click the Analyse button.",
+		"date_range_invalid": "Invalid date range.",
+		"date_range_max_days": "The date range cannot exceed 31 days.",
+		"downloading_file_name": "Downloading {name}...",
+		"viewing_demo_data": "You're viewing randomly generated demo data.",
+		"x_responses": "{x} response(s)",
+		"response_stream_errors": "Errors were detected, likely due to missing encryption keys."
 	},
 	"title": {
 		"add_block": "Add Block",
@@ -678,7 +711,10 @@
 		"identities": "Identities",
 		"search_results": "Search results",
 		"search": "Search",
-		"export": "Export"
+		"export": "Export",
+		"analytics": "Analytics",
+		"custom_date": "Custom Date",
+		"select_fields": "Select Fields"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Copy",

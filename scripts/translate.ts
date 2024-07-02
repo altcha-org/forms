@@ -75,10 +75,10 @@ for (const section in sourceContents) {
 
 console.log('Done in', Math.round(performance.now() - start), 'ms');
 if (result) {
-	await writeFile(targetFile, JSON.stringify(result, null, '  '));
+	await writeFile(targetFile, JSON.stringify(result, null, '\t'));
 }
 
-function getMissingKeys(source: Record<string, string>, target: Record<string, string>) {
+function getMissingKeys(source: Record<string, string>, target: Record<string, string> = {}) {
 	return Object.entries(source).reduce((acc, [ key, value ]) => {
 		if (!target[key]) {
 			acc[key] = value;

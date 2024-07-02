@@ -7,7 +7,7 @@
 	import { decryptData } from '$lib/helpers';
 	import { encryptionKeys } from '$lib/stores';
 	import { formatDateTime, formatTimeShort } from '$lib/format';
-	import { ResponseStream } from '$lib/responseStream';
+	import { ResponseStream } from '$lib/response-stream';
 	import SearchIcon from '$lib/components/icons/Search.svelte';
 	import NoteIcon from '$lib/components/icons/Note.svelte';
 	import StarFillIcon from '$lib/components/icons/StarFill.svelte';
@@ -154,7 +154,7 @@
 		const primaryField = data[form.displayBlocks[0]];
 		const secondaryField = data[form.displayBlocks[1]];
 		const { emailField, otherFields } = entries.reduce((acc, [ key, value ]) => {
-			if (value && value.includes('@')) {
+			if (value && String(value).includes('@')) {
 				acc.emailField = value;
 			} else if (value?.length > 2 && key !== form.displayBlocks[0] && key !== form.displayBlocks[1]) {
 				acc.otherFields.push(value);
@@ -213,7 +213,7 @@
   {#if erroredResponses}
   <div>
     <Alert variant="warning">
-      {$_('text.search_errors')}
+      {$_('text.response_stream_errors')}
     </Alert>
   </div>
   {/if}

@@ -139,12 +139,6 @@ Navigate to `http://localhost:3000/app` and complete the registration to create 
 
 Configure `DATABASE_URL`, and `BASE_URL`. See [env.ts](/src/lib/server/env.ts) for all supported variables.
 
-## Roadmap
-
-Some parts of this project are under development. Future enhancements include:
-
-- Search and Analytics: Client-side, end-to-end encrypted search and analysis.
-
 ## Contributing
 
 Refer to our [Contributing Guide](https://github.com/altcha-org/altcha-forms/blob/main/CONTRIBUTING.md) and adhere to our [Code of Conduct](https://github.com/altcha-org/altcha-forms/blob/main/CODE_OF_CONDUCT.md).

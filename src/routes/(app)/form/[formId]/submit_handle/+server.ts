@@ -3,11 +3,12 @@ import { formsService } from '$lib/server/services/forms.service';
 import { identitiesService } from '$lib/server/services/identities.service';
 import { ForbiddenError } from '$lib/server/errors';
 import { createHmacKey, verifySolution } from '$lib/server/altcha';
-import { normalizeFormId, replaceVariables, shortenFormId } from '$lib/helpers';
+import { normalizeFormId, replaceVariables, shortenFormId, timeZoneToCountryCode } from '$lib/helpers';
 import { requestHandler } from '$lib/server/handlers';
 import { rateLimitByKey } from '$lib/server/ratelimiter';
 import type { RequestHandler } from './$types';
 import type { IIdentity, TResponseData } from '$lib/types';
+import { sessionsService } from '$lib/server/services/sessions.service';
 
 export const POST = requestHandler(
 	async (event) => {
@@ -18,6 +19,7 @@ export const POST = requestHandler(
 		) as TResponseData;
 		const altcha = formData.altcha;
 		const contextParams = new URLSearchParams(String(formData.__context || ''));
+		const sessionParams = new URLSearchParams(String(formData.__session || ''));
 		const referrer =
 			formData.__referrer === void 0 ? event.request.headers.get('referer') : formData.__referrer;
 		let externalId: string | null = (formData.__externalId as string) || null;
@@ -31,6 +33,7 @@ export const POST = requestHandler(
 		delete formData.__context;
 		delete formData.__externalId;
 		delete formData.__referrer;
+		delete formData.__session;
 		const ok = await verifySolution(String(altcha), createHmacKey(formId));
 		if (!ok) {
 			throw new ForbiddenError();
@@ -47,6 +50,9 @@ export const POST = requestHandler(
 			const context = formsService.createProcessorContext(form);
 			for (const [name, value] of contextParams) {
 				context.set(name, value);
+			}
+			if (context.get('timezone')) {
+				context.set('country', timeZoneToCountryCode(context.get('timezone') || ''));
 			}
 			if (form.contextInfo) {
 				context.set('ip-address', event.locals.remoteAddress);
@@ -107,6 +113,20 @@ export const POST = requestHandler(
 					responseId = response.id;
 					if (result) {
 						await responsesService.linkFiles(form, response.id, result.data);
+					}
+					if (form.account.plan?.featureAnalytics === true) {
+						await sessionsService.createSession({
+							abondoned: false,
+							country: context.get('country'),
+							error: sessionParams.get('error') === 'true',
+							fields: JSON.parse(sessionParams.get('fields') || '[]'),
+							fieldDropOff: null,
+							formId: form.id,
+							mobile: context.get('mobile') || false,
+							responseId,
+							startAt: new Date(parseInt(sessionParams.get('start') || '0', 10) || Date.now()),
+							submitAt: new Date(parseInt(sessionParams.get('submit') || '0', 10) || Date.now()),
+						});
 					}
 				}
 				await formsService.incrementReceivedResponses(form.id);
