@@ -10,7 +10,11 @@
 
 	let el: HTMLElement;
 
-	$: strings = JSON.stringify($json('altcha'));
+	$: stringsJson = $json('altcha') as Record<string, string>;
+	$: strings = JSON.stringify({
+		...stringsJson,
+		waitAlert: floating ? '' : stringsJson.waitAlert,
+	});
 
 	onDestroy(() => {
 		if (el) {

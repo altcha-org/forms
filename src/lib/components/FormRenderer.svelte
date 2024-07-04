@@ -209,7 +209,7 @@
 								disabled={loading || !browserLoaded}
 							>
 								<span class="grow">{form.submitLabel || $_('button.submit')}</span>
-								{#if loading}
+								{#if loading && !form.captchaFloating}
 									<span class="loading loading-spinner loading-sm"></span>
 								{:else}
 									<CheckIcon class="w-5 h-5" />

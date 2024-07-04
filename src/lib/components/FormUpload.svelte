@@ -14,6 +14,7 @@
 	$: progress = $uploadProgress.filter((item) => files.includes(item.file));
 	$: uploaded =
 		progress.length === files.length && progress.every(({ file, loaded }) => file.size <= loaded);
+	$: hasPendingFiles = progress.length < files.length;
 
 	onDestroy(() => {
 		elForm?.removeEventListener('submit', onFormSubmit);
@@ -32,7 +33,9 @@
 		if (files.length && submitUrl && !uploaded) {
 			ev.preventDefault();
 			ev.stopPropagation();
-			uploadPendingFiles();
+			if (hasPendingFiles) {
+				uploadPendingFiles();
+			}
 		}
 	}
 

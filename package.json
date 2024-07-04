@@ -88,7 +88,7 @@
 		"@tailwindcss/typography": "^0.5.13",
 		"ajv": "^8.14.0",
 		"ajv-formats": "^2.1.1",
-		"altcha": "^0.6.0",
+		"altcha": "^0.6.1",
 		"altcha-lib": "^0.3.0",
 		"argon2": "^0.40.3",
 		"aws4fetch": "^1.0.18",
