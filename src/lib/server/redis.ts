@@ -100,7 +100,7 @@ function reduceDays(date: Date, entries: [ string, string ][]) {
 		dayDate.setDate(i);
 		days.push({
 			date: dayDate.toISOString().split('T')[0],
-			requests: parseInt(entries.find(([ k ]) => k === String(i))?.[1] || '0', 10),
+			requests: parseInt(entries.find(([ k ]) => k === String(i).padStart(2, '0'))?.[1] || '0', 10),
 		});
 	}
 	return {
