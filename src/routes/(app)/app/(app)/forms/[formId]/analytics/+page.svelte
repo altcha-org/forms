@@ -6,12 +6,19 @@
 	import PHONE_CODES from '$lib/phone-codes';
 	import { formatDate, formatDuration, formatNumber } from '$lib/format';
 	import type { PageData } from './$types';
+	import type { IFormBlockPartial } from '$lib/types';
 
 	export let data: PageData;
 
+  $: blocks = data.form.steps.reduce((acc, step) => {
+    for (const block of step.blocks) {
+      acc.push(block);
+    }
+    return acc;
+  }, [] as IFormBlockPartial[]);
 	$: stats = data.stats;
 
-	$: abandonmentRate = Math.floor((1 - (stats.summary.submissions / stats.summary.views)) * 1000) / 10;
+	$: abandonmentRate = Math.floor((1 - (stats.summary.submissions / (stats.summary.views - stats.summary.errored))) * 1000) / 10;
 	$: correctionRate = stats.summary.submissions ? Math.floor((stats.summary.correctionRate || 0) * 1000) / 10 : null;
 	$: errorRate = Math.floor((stats.summary.errored / stats.summary.views) * 1000) / 10;
 	$: countries = Object.entries(stats.countries).map(([ code, value ]) => {
@@ -22,6 +29,13 @@
 			label: `${country?.emoji || ''} ${name} (${codeUppercase})`,
 			value: [value],
 		}
+	});
+	$: fieldDropOff = Object.entries(stats.fieldDropOff).map(([ name, value ]) => {
+		const block = blocks.find((b) => b.name === name);
+		return {
+			label: block?.label || name,
+			value: [value],
+		};
 	});
 	$: devices = stats.summary.views ? [{
 		label: $_('label.mobile'),
@@ -121,7 +135,7 @@
     <div class="flex flex-col gap-5">
       <div class="flex flex-col gap-3">
         <div class="font-bold">{$_('label.field_drop_off')}</div>
-        <BarChart items={stats.fieldDropOff} maxRows={10} />
+        <BarChart items={fieldDropOff} maxRows={10} />
       </div>
 
       <div class="flex flex-col gap-3">

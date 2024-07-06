@@ -110,7 +110,7 @@ export class SessionsService {
 		const views = results.reduce((acc, { count }) => acc + count, 0);
 		const mobile = results.reduce((acc, { count, mobile }) => acc + (mobile ? count : 0), 0);
 		const submissions = results.reduce(
-			(acc, { abondoned, count }) => acc + (abondoned ? 0 : count),
+			(acc, { abondoned, count, error }) => acc + (abondoned || error ? 0 : count),
 			0
 		);
 		const completionTime = results.reduce(

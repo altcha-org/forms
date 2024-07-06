@@ -114,9 +114,9 @@
         <div class="pt-0.5">
           <input type="checkbox" class="checkbox checkbox-xs" value={block.name} bind:group={selectedBlocks} />
         </div>
-        <div>
+        <div class="truncate">
           <div class="truncate" class:font-bold={selectedBlocks.includes(block.name)}>{block.label || block.name}</div>
-          <div class="text-xs opacity-60">{$_('block.' + block.type)} ({block.name})</div>
+          <div class="truncate text-xs opacity-60">{$_('block.' + block.type)} ({block.name})</div>
         </div>
       </label>
       {/each}
@@ -181,7 +181,7 @@
       <div class="border border-base-300 rounded-lg p-3">
         <div class="border-b border-base-300 pb-3 mb-3">
           <div class="font-bold">{block.label || block.name}</div>
-          <div class="text-sm opacity-60">{block.name}</div>
+          <div class="truncate max-w-xs text-sm opacity-60">{block.name}</div>
         </div>
         <div>
           {#if aggregations[block.name]}

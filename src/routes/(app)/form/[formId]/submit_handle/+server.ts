@@ -1,39 +1,40 @@
 import { responsesService } from '$lib/server/services/responses.service';
 import { formsService } from '$lib/server/services/forms.service';
 import { identitiesService } from '$lib/server/services/identities.service';
+import { sessionsService } from '$lib/server/services/sessions.service';
 import { ForbiddenError } from '$lib/server/errors';
 import { createHmacKey, verifySolution } from '$lib/server/altcha';
-import { normalizeFormId, replaceVariables, shortenFormId, timeZoneToCountryCode } from '$lib/helpers';
+import {
+	normalizeFormId,
+	replaceVariables,
+	shortenFormId,
+	timeZoneToCountryCode
+} from '$lib/helpers';
 import { requestHandler } from '$lib/server/handlers';
 import { rateLimitByKey } from '$lib/server/ratelimiter';
 import type { RequestHandler } from './$types';
 import type { IIdentity, TResponseData } from '$lib/types';
-import { sessionsService } from '$lib/server/services/sessions.service';
 
 export const POST = requestHandler(
 	async (event) => {
 		const formId = normalizeFormId(event.params.formId);
 		await rateLimitByKey('L3', formId);
-		const formData = Object.fromEntries(
-			(await event.request.formData()).entries()
-		) as TResponseData;
-		const altcha = formData.altcha;
-		const contextParams = new URLSearchParams(String(formData.__context || ''));
-		const sessionParams = new URLSearchParams(String(formData.__session || ''));
+		const rawFormData = await event.request.formData();
+		const formData = getFormData(rawFormData);
+		const altcha = rawFormData.get('altcha');
+		const contextParams = new URLSearchParams(String(rawFormData.get('__context') || ''));
+		const sessionParams = new URLSearchParams(String(rawFormData.get('__session') || ''));
 		const referrer =
-			formData.__referrer === void 0 ? event.request.headers.get('referer') : formData.__referrer;
-		let externalId: string | null = (formData.__externalId as string) || null;
+			rawFormData.get('__referrer') === null
+				? event.request.headers.get('referer')
+				: rawFormData.get('__referrer');
+		let externalId: string | null = String(rawFormData.get('__externalId') || '');
 		let dataEncrypted: string | null = null;
 		let encryptionKeyHash: string | null = null;
 		let identity: Pick<IIdentity, 'id'> | null | undefined = null;
 		if (!altcha) {
 			throw new ForbiddenError();
 		}
-		delete formData.altcha;
-		delete formData.__context;
-		delete formData.__externalId;
-		delete formData.__referrer;
-		delete formData.__session;
 		const ok = await verifySolution(String(altcha), createHmacKey(formId));
 		if (!ok) {
 			throw new ForbiddenError();
@@ -114,20 +115,26 @@ export const POST = requestHandler(
 					if (result) {
 						await responsesService.linkFiles(form, response.id, result.data);
 					}
-					if (form.account.plan?.featureAnalytics === true) {
-						await sessionsService.createSession({
-							abondoned: false,
-							country: context.get('country'),
-							error: sessionParams.get('error') === 'true',
-							fields: JSON.parse(sessionParams.get('fields') || '[]'),
-							fieldDropOff: null,
-							formId: form.id,
-							mobile: context.get('mobile') || false,
-							responseId,
-							startAt: new Date(parseInt(sessionParams.get('start') || '0', 10) || Date.now()),
-							submitAt: new Date(parseInt(sessionParams.get('submit') || '0', 10) || Date.now()),
-						});
+				}
+				if (form.account.plan?.featureAnalytics === true) {
+					let fields: [string, number, number, number][] = [];
+					try {
+						fields = JSON.parse(sessionParams.get('fields') || '[]');
+					} catch (err) {
+						// noop
 					}
+					await sessionsService.createSession({
+						abondoned: false,
+						country: context.get('country'),
+						error: error || sessionParams.get('error') === 'true',
+						fields,
+						fieldDropOff: null,
+						formId: form.id,
+						mobile: context.get('mobile') || false,
+						responseId,
+						startAt: new Date(parseInt(sessionParams.get('start') || '0', 10) || Date.now()),
+						submitAt: new Date(parseInt(sessionParams.get('submit') || '0', 10) || Date.now())
+					});
 				}
 				await formsService.incrementReceivedResponses(form.id);
 			}
@@ -155,3 +162,12 @@ export const POST = requestHandler(
 		authorization: false
 	}
 ) satisfies RequestHandler;
+
+function getFormData(rawFormData: FormData, removeProps: string[] = ['altcha']) {
+	return [...rawFormData.entries()].reduce((acc, [key, value]) => {
+		if (!removeProps.includes(key) && !key.startsWith('__')) {
+			acc[key] = value === '' ? null : value;
+		}
+		return acc;
+	}, {} as TResponseData);
+}

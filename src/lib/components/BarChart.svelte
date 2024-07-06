@@ -45,9 +45,9 @@
   <div class="flex flex-col gap-1">
     <div class="flex gap-3 text-sm">
       <div class="grow truncate">
-        <div class="max-w-sm truncate">{item.label}</div>
+        <div class="max-w-sm truncate" title={item.label}>{item.label}</div>
       </div>
-      <div>
+      <div class="whitespace-nowrap">
         <span>{formatNumber(item.value)}</span>
         <span class="opacity-20">|</span>
         <span class="opacity-60">{item.percent} %</span>
