@@ -15,16 +15,19 @@
 	import ClipboardIcon from '$lib/components/icons/Clipboard.svelte';
 	import DownloadIcon from '$lib/components/icons/Download.svelte';
 	import MoreIcon from '$lib/components/icons/More.svelte';
+	import QrCodeIcon from '$lib/components/icons/QrCode.svelte';
 	import Export from '$lib/components/Export.svelte';
 	import bubble from '$lib/bubble';
 	import { formatTimeAgo } from '$lib/format';
 	import { form, formExport, formExportResponses, formPreview } from '$lib/stores';
-	import { copyToClipboard, clone, shortenFormId } from '$lib/helpers';
+	import { copyToClipboard, clone, shortenFormId, forceDownload } from '$lib/helpers';
 	import type { LayoutData } from './$types';
 
 	export let data: LayoutData;
 
 	setContext('limitFileSize', data.limitFileSize);
+
+	let qrCodeModalOpen: boolean = false;
 
 	$: $form = clone(data.form);
 	$: isAdmin = data.accountRole === 'admin';
@@ -33,6 +36,16 @@
 		formLinkRelative,
 		browser ? location.origin : 'http://localhost'
 	).toString();
+
+	async function generateQR() {
+		if (browser) {
+			const QRCode = await import('qrcode');
+			return QRCode.toDataURL(formLink, {
+				width: 300,
+			});
+		}
+		return null;
+	}
 </script>
 
 <svelte:head>
@@ -134,6 +147,16 @@
 							<button
 								type="button"
 								class="justify-between"
+								on:click|preventDefault={() => qrCodeModalOpen = true}
+							>
+								<span>{$_('button.qr_code')}</span>
+								<QrCodeIcon class="w-4 h-4" />
+							</button>
+						</li>
+						<li>
+							<button
+								type="button"
+								class="justify-between"
 								on:click|preventDefault={() => ($formPreview = true)}
 							>
 								<span>{$_('button.preview')}</span>
@@ -214,4 +237,50 @@
 		on:finish={() => $formExport = false}
 	/>
 	{/if}
+</Modal>
+
+<Modal
+	action=""
+	hideButton
+	title={$_('title.qr_code')}
+	bind:open={qrCodeModalOpen}
+>
+	<div class="flex flex-col gap-3">
+
+		<div>
+			<div class="input input-bordered shadow-sm flex items-center">
+				<div class="grow truncate">{formLink}</div>
+				<div>
+					<button
+						type="button"
+						use:bubble={{
+							handler: () => copyToClipboard(formLink),
+							text: $_('text.copied')
+						}}
+					>
+						<ClipboardIcon class="w-4 h-4" />
+					</button>
+				</div>
+			</div>
+		</div>
+
+		{#await generateQR() then url}
+			{#if url}
+				<div class="flex items-center justify-center border input-bordered p-3 rounded shadow-sm">
+					<img src={url} alt="QR Code" width="200" />	
+				</div>
+
+				<div>
+					{#await fetch(url).then(r => r.arrayBuffer()) then ab}
+					<button
+						type="button"
+						class="link"
+						on:click|preventDefault={() => forceDownload(ab, 'qrcode.png')}
+					>{$_('button.download')}</button>
+					{/await}
+				</div>
+			{/if}
+		{/await}
+
+	</div>
 </Modal>

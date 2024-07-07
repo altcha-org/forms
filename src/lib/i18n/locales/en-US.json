@@ -124,7 +124,8 @@
 		"export_responses": "Export Responses",
 		"analyze": "Analyse",
 		"show_demo": "Show demo",
-		"show_more": "Show more"
+		"show_more": "Show more",
+		"qr_code": "QR Code"
 	},
 	"complexity": {
 		"low": "Low",
@@ -714,7 +715,8 @@
 		"export": "Export",
 		"analytics": "Analytics",
 		"custom_date": "Custom Date",
-		"select_fields": "Select Fields"
+		"select_fields": "Select Fields",
+		"qr_code": "QR Code"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Copy",

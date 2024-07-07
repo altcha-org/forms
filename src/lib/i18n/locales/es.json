@@ -124,7 +124,8 @@
 		"export_responses": "Exportar respuestas",
 		"analyze": "Analizar",
 		"show_demo": "Mostrar demo",
-		"show_more": "Mostrar más"
+		"show_more": "Mostrar más",
+		"qr_code": "Código QR"
 	},
 	"complexity": {
 		"low": "Bajo",
@@ -714,7 +715,8 @@
 		"export": "Exportar",
 		"analytics": "Analíticas",
 		"custom_date": "Fecha Personalizada",
-		"select_fields": "Seleccionar Campos"
+		"select_fields": "Seleccionar Campos",
+		"qr_code": "Código QR"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Copiar",
