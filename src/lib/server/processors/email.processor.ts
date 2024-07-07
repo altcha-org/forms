@@ -22,8 +22,9 @@ export class EmailProcessor extends BaseProcessor<{
 		} catch (err) {
 			throw new Error(`Too many requests.`);
 		}
+		const options = this.getOptions(ctx, data);
 		const attachments = [];
-		if (this.options.attachPdf) {
+		if (options.attachPdf) {
 			const pdf = new Pdf({
 				pageNumbers: true
 			});
@@ -38,7 +39,7 @@ export class EmailProcessor extends BaseProcessor<{
 				filename: `${ctx.responseId || 'response'}.pdf`
 			});
 		}
-		const recipients = this.options.recipient
+		const recipients = options.recipient
 			.split(/\,\s{0,}/)
 			.map((recipient) => {
 				recipient = recipient.trim();
@@ -62,12 +63,12 @@ export class EmailProcessor extends BaseProcessor<{
 			throw new Error('No recipients.');
 		}
 		await emailService.sendTemplate(
-			compileTemplate(this.options.body || ''),
+			compileTemplate(options.body || ''),
 			{
 				data
 			},
 			{
-				subject: this.options.subject,
+				subject: options.subject,
 				attachments,
 				to: recipients
 			}

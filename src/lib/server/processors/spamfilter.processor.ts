@@ -26,7 +26,7 @@ export class SpamfilterProcessor extends BaseProcessor<{
 		}
 		const body = {
 			email: emailBlocks.length ? data[emailBlocks[0]] : void 0,
-			ipAddress: context.get('ip-address'),
+			ipAddress: context.get('ip_address'),
 			text: textBlocks.map((name) => data[name] || '').join('\n'),
 			timeZone: context.get('timezone')
 		};

@@ -26,6 +26,7 @@ export class HttpProcessor extends BaseProcessor<{
 	url: string;
 }> {
 	async run(ctx: ProcessorContext, data: TResponseData): Promise<void> {
+		const options = this.getOptions(ctx, data);
 		if (ctx.form.account.plan?.featureProcessors !== true) {
 			throw new Error(`Not allowed for your billing plan.`);
 		}
@@ -34,16 +35,16 @@ export class HttpProcessor extends BaseProcessor<{
 		} catch (err) {
 			throw new Error(`Too many requests.`);
 		}
-		const url = new URL(this.options.url);
+		const url = new URL(options.url);
 		if (!isValidDomain(url.hostname)) {
 			throw new Error(`URL not allowed.`);
 		}
-		ctx.log(`${this.options.method} ${this.options.url.replace(/\?.*/, '?...')}`);
+		ctx.log(`${options.method} ${options.url.replace(/\?.*/, '?...')}`);
 		await makeRequest(ctx, data, {
-			method: this.options.method || 'POST',
+			method: options.method || 'POST',
 			headers: {
-				'content-type': this.options.contentType,
-				...parseHeaders(this.options.headers)
+				'content-type': options.contentType,
+				...parseHeaders(options.headers)
 			},
 			retry: true,
 			url

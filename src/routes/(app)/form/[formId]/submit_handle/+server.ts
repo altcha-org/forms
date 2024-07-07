@@ -56,9 +56,9 @@ export const POST = requestHandler(
 				context.set('country', timeZoneToCountryCode(context.get('timezone') || ''));
 			}
 			if (form.contextInfo) {
-				context.set('ip-address', event.locals.remoteAddress);
+				context.set('ip_address', event.locals.remoteAddress);
 				context.set('locale', event.locals.locale);
-				context.set('uset-agent', event.request.headers.get('user-agent'));
+				context.set('user_agent', event.request.headers.get('user-agent'));
 				context.set('referrer', referrer);
 			}
 			try {

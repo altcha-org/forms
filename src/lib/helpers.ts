@@ -5,9 +5,19 @@ import InlineAltchaWorker from 'altcha-lib/worker?worker&inline';
 import { cipher, rsa } from '@altcha/crypto';
 import { solveChallengeWorkers } from 'altcha-lib';
 import { encryptionKeys, uploadProgress } from '$lib/stores';
-import * as formats from '$lib/format';
-import type { IEncryptionPrivateKey, IFile, IFormBlock, IUploadProgress } from '$lib/types';
+import { formatBytes, formatDate, formatDateTime, formatNumber, formatPrice } from '$lib/format';
+import type { IEncryptionPrivateKey, IFile, IUploadProgress } from '$lib/types';
 import type { Payload as AltchaPayload, Challenge as AltchaChallenge } from 'altcha-lib/types';
+
+const replaceVariablesFormatters = {
+	bytes: (str: string | number, decimals?: number) => formatBytes(+str, decimals),
+	date: (str: string | number, tz?: string, locale?: string) => formatDate(str, tz, locale),
+	datetime: (str: string | number, tz?: string, locale?: string) => formatDateTime(str, tz, locale),
+	header: (str: string) => String(str).replace(/\r?\n/g, '').trim(), 
+	number: (str: string | number, locale?: string) => formatNumber(+str, locale),
+	price: (str: string | number, currency: string, locale?: string) => formatPrice(+str, currency, locale),
+	trim: (str: string) => String(str).trim(), 
+};
 
 export async function copyToClipboard(text: string) {
 	if ('clipboard' in navigator) {
@@ -449,14 +459,14 @@ export function matchesFileType(allowedTypes: string[] | string, file: File) {
 	return true;
 }
 
-export function replaceVariables(str: string, vars: Record<string, any>) {
+export function replaceVariables(str: string, vars: Record<string, any>, formatters: Record<string, (...args: any) => string> = replaceVariablesFormatters) {
 	return str.replace(/\{([^\}]+)\}/g, (match, expr: string) => {
 		let [variable, formatter, ...params] = expr.split(/[\s\|]+/) || [];
 		let result = match;
 		if (variable?.startsWith('$.')) {
 			result = resolveProp(vars, variable.slice(2));
 		}
-		if (formatter && formats[formatter as keyof typeof formats]) {
+		if (formatter && formatters[formatter as keyof typeof formatters]) {
 			if (params.length) {
 				params = params.map((param) => {
 					if (param.startsWith('$.')) {
@@ -467,7 +477,7 @@ export function replaceVariables(str: string, vars: Record<string, any>) {
 			}
 			try {
 				// @ts-ignore
-				result = formats[formatter as keyof typeof formats](result, ...params);
+				result = formatters[formatter as keyof typeof formatters](result, ...params);
 			} catch (err) {
 				// noop
 			}

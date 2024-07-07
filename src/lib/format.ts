@@ -73,7 +73,7 @@ export function formatDuration(duration: number): string {
 
 export function formatTimeAgo(date?: Date | number | string, locale?: string) {
 	if (!date) {
-		return date;
+		return '';
 	}
 	const diff = new Date(date).getTime() - new Date().getTime();
 	const relativeFormatter = new Intl.RelativeTimeFormat(locale, {
@@ -89,7 +89,7 @@ export function formatTimeAgo(date?: Date | number | string, locale?: string) {
 
 export function formatTimeShort(date?: Date | number | string, tz?: string, locale?: string) {
 	if (!date) {
-		return date;
+		return '';
 	}
 	date = new Date(date);
 	const today = new Date();
