@@ -11,6 +11,7 @@
 	import MultiSelectInput from '$lib/components/blocks/MultiSelectInput.svelte';
 	import MultiLineTextInput from '$lib/components/blocks/MultiLineTextInput.svelte';
 	import NumberInput from '$lib/components/blocks/NumberInput.svelte';
+	import PdfInput from '$lib/components/blocks/PdfInput.svelte';
 	import PhoneInput from '$lib/components/blocks/PhoneInput.svelte';
 	import RadioInput from '$lib/components/blocks/RadioInput.svelte';
 	import RatingInput from '$lib/components/blocks/RatingInput.svelte';
@@ -60,6 +61,8 @@
 				return MultiLineTextInput;
 			case 'NumberInput':
 				return NumberInput;
+			case 'PdfInput':
+				return PdfInput;
 			case 'PhoneInput':
 				return PhoneInput;
 			case 'RadioInput':

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
+	import { createEventDispatcher, onMount, onDestroy } from 'svelte';
 	import { page } from '$app/stores';
 	import { uploadFile } from '$lib/helpers';
 	import { uploadProgress } from '$lib/stores';
@@ -7,6 +7,8 @@
 	export let files: File[];
 	export let submitUrl: string = `${$page.url.pathname}/file`;
 	export let value: string[] = [];
+
+	const dispatch = createEventDispatcher();
 
 	let el: HTMLElement;
 	let elForm: HTMLFormElement | null = null;
@@ -50,6 +52,7 @@
 					}
 				}
 			}
+			dispatch('upload', { fileIds: value });
 			requestAnimationFrame(() => {
 				elForm?.requestSubmit();
 			});

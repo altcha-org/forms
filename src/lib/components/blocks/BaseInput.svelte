@@ -54,7 +54,7 @@
 		<slot />
 	</div>
 
-	{#if ($$slots.aside && !hideAside) || (block.help && hideLabel) || error}
+	{#if ($$slots.aside && !hideAside) || block.help || error}
 		<div class="label pb-0 gap-3 items-start">
 			<span class="label-text-alt inline-flex gap-2 formatted !pt-1">
 				{#if error}
@@ -65,7 +65,7 @@
 						</div>
 					</div>
 				{/if}
-				{#if block.help && hideLabel}
+				{#if block.help}
 					<span class="opacity-60">
 						{#if block.help.startsWith('$_')}
 							{$_(block.help.slice(2))}

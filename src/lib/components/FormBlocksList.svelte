@@ -7,16 +7,21 @@
 	import Modal from '$lib/components/Modal.svelte';
 	import List from '$lib/components/List.svelte';
 	import AddBlockIcon from '$lib/components/icons/AddBlock.svelte';
+	import PdfCanvas from '$lib/components/PdfCanvas.svelte';
 	import { clone } from '$lib/helpers';
-	import type { IFormBlock, IFormStep } from '$lib/types';
+	import type { IFormBlock, IPdfInputOptions } from '$lib/types';
 
 	export let blocks: IFormBlock[] = [];
 
 	let editBlock: [number, IFormBlock] | undefined = void 0;
+	let pdfBlock: [number, IFormBlock] | undefined = void 0;
 	let modalAddBlockOpen: boolean = false;
 	let modalOpen: boolean = false;
+	let modalPdfOpen: boolean = false;
+	let pdfOptions: IPdfInputOptions;
 
 	$: onEditBlockChange(editBlock);
+	$: onPdfBlockChange(pdfBlock);
 
 	function onMoveBefore(block: IFormBlock, sourceIdx: number) {
 		const targetIdx = blocks.indexOf(block);
@@ -39,6 +44,22 @@
 	function onEditBlockChange(_: typeof editBlock) {
 		modalOpen = !!editBlock;
 	}
+
+	function onPdfBlockChange(_: typeof editBlock) {
+		if (pdfBlock) {
+			pdfOptions = pdfBlock[1].options.pdf as IPdfInputOptions;
+		}
+		modalPdfOpen = !!pdfBlock;
+	}
+
+	function onPdfSubmit() {
+		if (pdfBlock) {
+			pdfBlock[1].options.pdf = pdfOptions;
+			blocks[pdfBlock[0]] = pdfBlock[1];
+			blocks = blocks;
+			pdfBlock = void 0;
+		}
+	}
 </script>
 
 <List
@@ -53,6 +74,7 @@
 		on:edit={() => (editBlock = [idx, clone(block)])}
 		on:movebefore={(ev) => onMoveBefore(block, ev.detail.idx)}
 		on:remove={() => onRemoveBlock(block)}
+		on:pdf={() => pdfBlock = [idx, clone(block)]}
 	/>
 
 	<div slot="end" class="border-t border-base-300 bg-base-200/50 p-3">
@@ -118,5 +140,22 @@
 >
 	{#if editBlock}
 		<FormBlockEdit blockOriginal={blocks[editBlock[0]]} bind:block={editBlock[1]} />
+	{/if}
+</Modal>
+
+<Modal
+	action=""
+	title={$_('title.pdf_document')}
+	buttonLabel={$_('button.apply')}
+	large
+	padding={false}
+	bind:open={modalPdfOpen}
+	on:submit={() => onPdfSubmit()}
+>
+	{#if modalPdfOpen}
+	<PdfCanvas
+		blocks={blocks.filter(({ type }) => type.endsWith('Input'))}
+		bind:options={pdfOptions}
+	/>	
 	{/if}
 </Modal>

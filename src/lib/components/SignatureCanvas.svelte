@@ -6,11 +6,12 @@
 	import StampIcon from '$lib/components/icons/Stamp.svelte';
 	import CheckIcon from '$lib/components/icons/Check.svelte';
 	import SignatureIcon from '$lib/components/icons/Signature.svelte';
-	import DownloadIcon from './icons/Download.svelte';
-	import FontIcon from './icons/Font.svelte';
+	import DownloadIcon from '$lib/components/icons/Download.svelte';
+	import FontIcon from '$lib/components/icons/Font.svelte';
 	import SignaturePad from 'signature_pad';
 
 	export let changed: boolean = false;
+	export let name: string = '';
 
 	const dispatch = createEventDispatcher();
 
@@ -76,19 +77,6 @@
 		}
 	}
 
-	function renderLine() {
-		const ctx = elCanvas.getContext('2d');
-		if (ctx) {
-			const offset = elCanvas.offsetHeight * 0.75;
-			ctx.setLineDash([5, 5]);
-			ctx.beginPath();
-			ctx.moveTo(0, offset);
-			ctx.lineTo(elCanvas.offsetWidth, offset);
-			ctx.strokeStyle = '#00000044';
-			ctx.stroke();
-		}
-	}
-
 	function renderImage(img: HTMLImageElement, scale: number = 0.8) {
 		const ctx = elCanvas.getContext('2d');
 		if (ctx) {
@@ -146,7 +134,6 @@
 		if (text) {
 			renderText(text);
 		}
-		renderLine();
 	}
 
 	export function getDimensions() {
@@ -154,6 +141,10 @@
 			height: elCanvas.offsetHeight,
 			width: elCanvas.offsetWidth
 		};
+	}
+
+	export function getName() {
+		return name;
 	}
 
 	export function toSVG() {
@@ -212,11 +203,16 @@
 		</div>
 	</div>
 
-	<div class="grow relative select-none rounded-b-md overflow-hidden">
-		<canvas bind:this={elCanvas} class="w-full h-full"></canvas>
+	<div class="grow relative select-none rounded-b-md overflow-hidden bg-white">
+		<div
+			class="border border-base-300 border-dashed absolute bottom-9 left-0 right-0 z-50"
+			class:hidden={changed}
+		></div>
+
+		<canvas bind:this={elCanvas} data-signature-canvas={name} class="w-full h-full relative z-40"></canvas>
 
 		{#if !changed}
-			<div class="absolute left-4 bottom-8">
+			<div class="absolute left-4 bottom-8 z-50">
 				<div
 					class="flex flex-col gap-2 items-center bg-error text-error-content rounded-t-md w-8 h-20 py-2"
 				>

@@ -485,7 +485,7 @@ export class ResponsesService {
 	async linkFiles(form: IForm, responseId: string, data: TResponseData) {
 		const fileBlocks = form.steps.reduce((acc, step) => {
 			for (const block of step.blocks) {
-				if (['FileInput', 'ImageInput', 'SignatureInput'].includes(block.type)) {
+				if (['FileInput', 'ImageInput', 'SignatureInput', 'PdfInput'].includes(block.type)) {
 					acc.push(block);
 				}
 			}

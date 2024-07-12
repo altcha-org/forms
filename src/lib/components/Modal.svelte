@@ -107,7 +107,7 @@
 			</div>
 		</div>
 
-		<div class="grow" class:p-5={padding}>
+		<div class="grow" data-modal-container class:p-5={padding}>
 			<Form
 				bind:this={form}
 				bind:loading
@@ -124,7 +124,7 @@
 		</div>
 
 		<div
-			class="modal-action justify-start sticky bottom-0 z-40 bg-base-200 border-t-2 border-base-300 px-5 py-3"
+			class="modal-action mt-0 justify-start sticky bottom-0 z-40 bg-base-200 border-t-2 border-base-300 px-5 py-3"
 			class:justify-center={fullscreen}
 		>
 		 	<div class="grow flex gap-3">

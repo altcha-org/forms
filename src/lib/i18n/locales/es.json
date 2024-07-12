@@ -32,7 +32,8 @@
 		"TextContent": "Texto",
 		"TextInput": "Texto",
 		"ToggleInput": "Palanca",
-		"UrlInput": "URL"
+		"UrlInput": "URL",
+		"PdfInput": "PDF"
 	},
 	"button": {
 		"accept": "Aceptar",
@@ -125,7 +126,18 @@
 		"analyze": "Analizar",
 		"show_demo": "Mostrar demo",
 		"show_more": "Mostrar más",
-		"qr_code": "Código QR"
+		"qr_code": "Código QR",
+		"fuente": "Fuente",
+		"pdf": "PDF",
+		"volver_a_cargar": "Volver a cargar",
+		"mostrar_todo": "Mostrar todo",
+		"mostrar_solo_firmas": "Mostrar solo firmas"
+	},
+	"color": {
+		"black": "Negro",
+		"blue": "Azul",
+		"green": "Verde",
+		"red": "Rojo"
 	},
 	"complexity": {
 		"low": "Bajo",
@@ -448,7 +460,16 @@
 		"start_date": "Fecha de inicio",
 		"views": "Vistas",
 		"views_and_responses": "Vistas y respuestas",
-		"yes": "Sí"
+		"yes": "Sí",
+		"computed": "Calculado",
+		"current_date": "Fecha actual",
+		"expanded": "Expandido",
+		"fields": "Campos",
+		"file_name": "Nombre de archivo",
+		"font": "Fuente",
+		"font_color": "Color de fuente",
+		"font_size": "Tamaño de fuente",
+		"page": "Página"
 	},
 	"limit": {
 		"api": "Solicitudes de API",
@@ -669,7 +690,9 @@
 		"downloading_file_name": "Descargando {name}...",
 		"viewing_demo_data": "Estás viendo datos de demostración generados aleatoriamente.",
 		"x_responses": "{x} respuesta(s)",
-		"response_stream_errors": "Se detectaron errores, probablemente debido a la falta de claves de encriptación."
+		"response_stream_errors": "Se detectaron errores, probablemente debido a la falta de claves de encriptación.",
+		"confirm_pdf_reupload": "¿Eliminar el archivo PDF actual?",
+		"drag_fields_to_pdf": "Arrastre y suelte campos en el PDF."
 	},
 	"title": {
 		"add_block": "Agregar Bloque",
@@ -716,7 +739,8 @@
 		"analytics": "Analíticas",
 		"custom_date": "Fecha Personalizada",
 		"select_fields": "Seleccionar Campos",
-		"qr_code": "Código QR"
+		"qr_code": "Código QR",
+		"pdf_document": "Documento PDF"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Copiar",

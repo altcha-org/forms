@@ -224,7 +224,7 @@ export function forceDownload(
 	a.click();
 }
 
-export function shortenFormId(formId: String) {
+export function shortenFormId(formId: string) {
 	return formId.replace('form_', '');
 }
 

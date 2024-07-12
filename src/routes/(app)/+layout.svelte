@@ -46,6 +46,6 @@
 	offset="20px"
 	position="top-center"
 	toastOptions={{
-		style: '!text-base'
+		style: '!text-base z-[10000]'
 	}}
 />

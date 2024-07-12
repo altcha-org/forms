@@ -7,8 +7,9 @@
 	import DraggableIcon from '$lib/components/icons/Draggable.svelte';
 	import DeleteBackIcon from '$lib/components/icons/DeleteBack.svelte';
 	import EditIcon from '$lib/components/icons/Edit.svelte';
+	import PdfIcon from '$lib/components/icons/Pdf.svelte';
 	import MoreHorizontalIcon from '$lib/components/icons/MoreHorizontal.svelte';
-	import type { IFormBlock } from '$lib/types';
+	import type { IFormBlock, IPdfInputOptions } from '$lib/types';
 
 	export let block: IFormBlock;
 	export let idx: number;
@@ -17,6 +18,7 @@
 
 	$: blockIcon = BLOCKS.find(({ type }) => type === block.type)?.icon;
 	$: isContent = block.type.endsWith('Content');
+	$: pdfOptions = block.options.pdf as IPdfInputOptions | undefined;
 
 	function onDragHandleMouseDown(ev: MouseEvent & { currentTarget: HTMLElement }) {
 		ev.currentTarget.closest('[data-block-idx]')?.setAttribute('draggable', 'true');
@@ -97,10 +99,30 @@
 				{/if}
 			</div>
 			<div class="text-sm opacity-60">{$_('block.' + block.type)}</div>
+		{:else if block.type === 'PdfInput'}
+			{#if pdfOptions?.fileName}
+			<div class="max-w-[12rem] lg:max-w-xs truncate">{pdfOptions?.fileName}</div>
+			{:else}
+			<div class="italic opacity-60">{$_('placeholder.select_file')}</div>
+			{/if}
+			<div class="text-sm opacity-60">{$_('block.' + block.type)}</div>
 		{:else}
 			<div class="opacity-60">{$_('block.' + block.type)}</div>
 		{/if}
 	</div>
+
+	{#if block.type === 'PdfInput'}
+	<div>
+		<button
+			type="button"
+			class="btn btn-sm btn-ghost hidden lg:flex"
+			on:click={() => dispatch('pdf')}
+		>
+			<PdfIcon class="w-5 h-5" />
+			<span>{$_('button.pdf')}</span>
+		</button>
+	</div>
+	{/if}
 
 	<div class="flex gap-1 items-center">
 		<div class="dropdown dropdown-end">
@@ -120,6 +142,18 @@
 							<EditIcon class="w-4 h-4" />
 						</button>
 					</li>
+					{#if block.type === 'PdfInput'}
+					<li class="hidden lg:flex">
+						<button
+							type="button"
+							class="flex grow justify-start items-center gap-3"
+							on:click|preventDefault={() => dispatch('pdf')}
+						>
+							<span class="grow text-left">{$_('button.pdf')}</span>
+							<PdfIcon class="w-4 h-4" />
+						</button>
+					</li>
+					{/if}
 					<li>
 						<button
 							type="button"

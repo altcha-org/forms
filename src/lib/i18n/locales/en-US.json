@@ -32,7 +32,8 @@
 		"TextContent": "Text",
 		"TextInput": "Text",
 		"ToggleInput": "Toggle",
-		"UrlInput": "URL"
+		"UrlInput": "URL",
+		"PdfInput": "PDF"
 	},
 	"button": {
 		"accept": "Accept",
@@ -125,7 +126,18 @@
 		"analyze": "Analyse",
 		"show_demo": "Show demo",
 		"show_more": "Show more",
-		"qr_code": "QR Code"
+		"qr_code": "QR Code",
+		"font": "Font",
+		"pdf": "PDF",
+		"reupload": "Reupload",
+		"show_all": "Show all",
+		"show_only_signatures": "Show only signatures"
+	},
+	"color": {
+		"black": "Black",
+		"blue": "Blue",
+		"green": "Green",
+		"red": "Red"
 	},
 	"complexity": {
 		"low": "Low",
@@ -448,7 +460,16 @@
 		"start_date": "Start Date",
 		"views": "Views",
 		"views_and_responses": "Views and Responses",
-		"yes": "Yes"
+		"yes": "Yes",
+		"computed": "Computed",
+		"current_date": "Current date",
+		"expanded": "Expanded",
+		"fields": "Fields",
+		"file_name": "File Name",
+		"font": "Font",
+		"font_color": "Font Colour",
+		"font_size": "Font Size",
+		"page": "Page"
 	},
 	"limit": {
 		"api": "API requests",
@@ -669,7 +690,9 @@
 		"downloading_file_name": "Downloading {name}...",
 		"viewing_demo_data": "You're viewing randomly generated demo data.",
 		"x_responses": "{x} response(s)",
-		"response_stream_errors": "Errors were detected, likely due to missing encryption keys."
+		"response_stream_errors": "Errors were detected, likely due to missing encryption keys.",
+		"confirm_pdf_reupload": "Remove the current PDF file?",
+		"drag_fields_to_pdf": "Drag and drop fields to the PDF."
 	},
 	"title": {
 		"add_block": "Add Block",
@@ -716,7 +739,8 @@
 		"analytics": "Analytics",
 		"custom_date": "Custom Date",
 		"select_fields": "Select Fields",
-		"qr_code": "QR Code"
+		"qr_code": "QR Code",
+		"pdf_document": "PDF Document"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Copy",

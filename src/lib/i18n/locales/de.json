@@ -32,7 +32,8 @@
 		"TextContent": "Text",
 		"TextInput": "Text",
 		"ToggleInput": "Umschalter",
-		"UrlInput": "URL"
+		"UrlInput": "URL",
+		"PdfInput": "PDF-Datei"
 	},
 	"button": {
 		"accept": "Akzeptieren",
@@ -125,7 +126,18 @@
 		"analyze": "Analyse",
 		"show_demo": "Demo anzeigen",
 		"show_more": "Mehr anzeigen",
-		"qr_code": "QR-Code"
+		"qr_code": "QR-Code",
+		"font": "Schrift",
+		"pdf": "PDF",
+		"reupload": "Erneut hochladen",
+		"show_all": "Alle anzeigen",
+		"show_only_signatures": "Nur Signaturen anzeigen"
+	},
+	"color": {
+		"black": "Schwarz",
+		"blue": "Blau",
+		"green": "Grün",
+		"red": "Rot"
 	},
 	"complexity": {
 		"low": "Niedrig",
@@ -448,7 +460,16 @@
 		"start_date": "Startdatum",
 		"views": "Ansichten",
 		"views_and_responses": "Ansichten und Antworten",
-		"yes": "Ja"
+		"yes": "Ja",
+		"computed": "Berechnet",
+		"current_date": "Aktuelles Datum",
+		"expanded": "Erweitert",
+		"fields": "Felder",
+		"file_name": "Dateiname",
+		"font": "Schriftart",
+		"font_color": "Schriftfarbe",
+		"font_size": "Schriftgröße",
+		"page": "Seite"
 	},
 	"limit": {
 		"api": "API-Anfragen",
@@ -669,7 +690,9 @@
 		"downloading_file_name": "{name} wird heruntergeladen...",
 		"viewing_demo_data": "Sie sehen zufällig generierte Demo-Daten.",
 		"x_responses": "{x} Antwort(en)",
-		"response_stream_errors": "Fehler wurden festgestellt, wahrscheinlich aufgrund fehlender Verschlüsselungsschlüssel."
+		"response_stream_errors": "Fehler wurden festgestellt, wahrscheinlich aufgrund fehlender Verschlüsselungsschlüssel.",
+		"confirm_pdf_reupload": "Aktuelle PDF-Datei entfernen?",
+		"drag_fields_to_pdf": "Ziehen Sie Felder in die PDF-Datei."
 	},
 	"title": {
 		"add_block": "Block hinzufügen",
@@ -716,7 +739,8 @@
 		"analytics": "Analytik",
 		"custom_date": "Benutzerdefiniertes Datum",
 		"select_fields": "Felder auswählen",
-		"qr_code": "QR-Code"
+		"qr_code": "QR-Code",
+		"pdf_document": "PDF-Dokument"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Kopieren",

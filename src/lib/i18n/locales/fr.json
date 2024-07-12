@@ -32,7 +32,8 @@
 		"TextContent": "Texte",
 		"TextInput": "Texte",
 		"ToggleInput": "Interrupteur",
-		"UrlInput": "URL"
+		"UrlInput": "URL",
+		"PdfInput": "PDF"
 	},
 	"button": {
 		"accept": "Accepter",
@@ -125,7 +126,18 @@
 		"analyze": "Analyse",
 		"show_demo": "Afficher la démo",
 		"show_more": "Afficher plus",
-		"qr_code": "Code QR"
+		"qr_code": "Code QR",
+		"font": "Police de caractères",
+		"pdf": "PDF",
+		"reupload": "Re-télécharger",
+		"show_all": "Afficher tout",
+		"show_only_signatures": "Afficher uniquement les signatures"
+	},
+	"color": {
+		"black": "Noir",
+		"blue": "Bleu",
+		"green": "Vert",
+		"red": "Rouge"
 	},
 	"complexity": {
 		"low": "Faible",
@@ -448,7 +460,16 @@
 		"start_date": "Date de début",
 		"views": "Vues",
 		"views_and_responses": "Vues et réponses",
-		"yes": "Oui"
+		"yes": "Oui",
+		"computed": "Calculé",
+		"current_date": "Date actuelle",
+		"expanded": "Développé",
+		"fields": "Champs",
+		"file_name": "Nom de fichier",
+		"font": "Police",
+		"font_color": "Couleur de police",
+		"font_size": "Taille de police",
+		"page": "Page"
 	},
 	"limit": {
 		"api": "Demandes d'API",
@@ -669,7 +690,9 @@
 		"downloading_file_name": "Téléchargement de {name}...",
 		"viewing_demo_data": "Vous consultez des données de démonstration générées aléatoirement.",
 		"x_responses": "{x} réponse(s)",
-		"response_stream_errors": "Des erreurs ont été détectées, probablement dues à des clés de chiffrement manquantes."
+		"response_stream_errors": "Des erreurs ont été détectées, probablement dues à des clés de chiffrement manquantes.",
+		"confirm_pdf_reupload": "Supprimer le fichier PDF actuel ?",
+		"drag_fields_to_pdf": "Faites glisser et déposez les champs sur le PDF."
 	},
 	"title": {
 		"add_block": "Ajouter un bloc",
@@ -716,7 +739,8 @@
 		"analytics": "Analytique",
 		"custom_date": "Date personnalisée",
 		"select_fields": "Sélectionner les champs",
-		"qr_code": "Code QR"
+		"qr_code": "Code QR",
+		"pdf_document": "Document PDF"
 	},
 	"tooltip": {
 		"copy_to_clipboard": "Copier",

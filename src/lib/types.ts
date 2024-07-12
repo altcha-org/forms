@@ -1,7 +1,6 @@
 import type { ComponentType } from 'svelte';
 import type { IForm } from '$lib/server/services/forms.service';
 import type { AuthenticatorDevice } from '@simplewebauthn/types';
-import type { AnyColumn } from 'drizzle-orm/column';
 
 export type { IAccount } from '$lib/server/services/accounts.service';
 export type { IDevice } from '$lib/server/services/devices.service';
@@ -29,14 +28,14 @@ export enum EComplexity {
 	HIGH = 'high'
 }
 
-export interface IFormBlock {
+export interface IFormBlock<TOptions extends Record<string, unknown> = Record<string, unknown>> {
 	default?: string;
 	help?: string;
 	hidden?: boolean;
 	if?: string;
 	label?: string;
 	name: string;
-	options: Record<string, any>;
+	options: TOptions;
 	placeholder?: string;
 	readonly?: boolean;
 	required?: boolean;
@@ -44,8 +43,8 @@ export interface IFormBlock {
 	type: string;
 }
 
-export type IFormBlockPartial = Omit<IFormBlock, 'options' | 'type'> &
-	Partial<Pick<IFormBlock, 'options' | 'type'>>;
+export type IFormBlockPartial<TOptions extends Record<string, unknown> = Record<string, unknown>> = Omit<IFormBlock, 'options' | 'type'> &
+	Partial<Pick<IFormBlock<TOptions>, 'options' | 'type'>>;
 
 export interface IFormStep {
 	blocks: IFormBlock[];
@@ -53,7 +52,7 @@ export interface IFormStep {
 	title?: string;
 }
 
-export interface IFormProcessor<Config = any> {
+export interface IFormProcessor<Config = unknown> {
 	config: Config;
 	description?: string;
 	enabled: boolean;
@@ -113,7 +112,7 @@ export interface IReponseLogEntry {
 	text: string;
 }
 
-export type TResponseData = Record<string, any>;
+export type TResponseData = Record<string, unknown>;
 
 export type WebAuthnAuthenticator = Omit<
 	AuthenticatorDevice,
@@ -155,4 +154,26 @@ export interface ILabel {
 export interface IBarChartItem {
 	label: string;
 	value: number[];
+}
+
+export interface IPdfInputOptions {
+	elements: IPdfInputElement[];
+	fileId: string | null;
+	fileName: string | null;
+	fontColor: string;
+	fontFamily: string;
+	fontSize: string;
+}
+
+export interface IPdfInputElement {
+	computed?: string;
+	height: number;
+  id: string;
+	name?: string;
+	page: number;
+	pageHeight: number;
+	pageWidth: number;
+	x: number;
+	y: number;
+	width: number;
 }

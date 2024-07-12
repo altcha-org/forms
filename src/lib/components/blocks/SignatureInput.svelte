@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import BaseInput from '$lib/components/blocks/BaseInput.svelte';
 	import SignatureCanvas from '$lib/components/SignatureCanvas.svelte';
@@ -25,6 +25,7 @@
 	let signatureCanvas: SignatureCanvas | null = null;
 
 	$: kind = block.options?.kind || 'drawn';
+	$: hasPdfInput = form?.steps.some(({ blocks }) => blocks.some(({ type }) => type === 'PdfInput'));
 
 	onMount(() => {
 		elForm = elInput.closest('form');
@@ -64,7 +65,7 @@
 	}
 
 	async function onFormSubmit(ev: SubmitEvent) {
-		if (form && !preview && !value && changed) {
+		if (form && !preview && !value && changed && !hasPdfInput) {
 			ev.preventDefault();
 			ev.stopPropagation();
 			if (!file) {
@@ -108,6 +109,7 @@
 		{:else}
 			<SignatureCanvas
 				class="h-52"
+				name={block.name}
 				bind:changed
 				bind:this={signatureCanvas}
 				on:download={() => onDownload()}

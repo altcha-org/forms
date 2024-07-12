@@ -25,7 +25,7 @@
 			{/if}
 		</div>
 		<div class="whitespace-pre-wrap">
-			{#if ['FileInput', 'ImageInput', 'SignatureInput'].includes(block.type)}
+			{#if ['FileInput', 'ImageInput', 'SignatureInput', 'PdfInput'].includes(block.type)}
 				{@const fileIds =
 					String(value || '')
 						.split(',')
@@ -40,7 +40,9 @@
 							{#each fileIds as fileId}
 								{@const file = _files.find(({ id }) => id === fileId)}
 								{#if file}
-									<FileRenderer {file} signature={block.type === 'SignatureInput'} />
+									<FileRenderer {file} signature={['SignatureInput'].includes(block.type)} />
+								{:else}
+									<span>{fileIds} {file}</span>
 								{/if}
 							{/each}
 						{/if}
