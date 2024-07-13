@@ -693,7 +693,8 @@
 		"x_responses": "{x} risposta(e)",
 		"response_stream_errors": "Sono stati rilevati errori, probabilmente dovuti a chiavi di crittografia mancanti.",
 		"confirm_pdf_reupload": "Rimuovere il file PDF attuale?",
-		"drag_fields_to_pdf": "Trascina e rilascia i campi nel PDF."
+		"drag_fields_to_pdf": "Trascina e rilascia i campi nel PDF.",
+		"select_pdf_file": "Seleziona il file PDF."
 	},
 	"title": {
 		"add_block": "Aggiungi Blocco",

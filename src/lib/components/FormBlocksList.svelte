@@ -25,9 +25,14 @@
 	$: onPdfBlockChange(pdfBlock);
 
 	function getUniqueName(name: string): string {
-		const existing = $form.steps.reduce((acc, { blocks }) => {
-			return [...acc, ...blocks.filter((block) => block.name.startsWith(name)).map((block) => block.name)];
-		}, [] as string[]).sort();
+		const existing = $form.steps
+			.reduce((acc, { blocks }) => {
+				return [
+					...acc,
+					...blocks.filter((block) => block.name.startsWith(name)).map((block) => block.name)
+				];
+			}, [] as string[])
+			.sort();
 		const num = parseInt(existing[existing.length - 1]?.match(/(\d+)$/)?.[1] || '0', 10) + 1;
 		return existing.includes(name) ? getUniqueName(name + `_${num}`) : name;
 	}
@@ -111,13 +116,15 @@
 			...blocks,
 			{
 				label: label || 'New block',
-				name: getUniqueName(label
-					? slugify(label, {
-							lower: true,
-							replacement: '_',
-							trim: true
-						})
-					: type.replace(/Input|Layout/, '').toLowerCase()),
+				name: getUniqueName(
+					label
+						? slugify(label, {
+								lower: true,
+								replacement: '_',
+								trim: true
+							})
+						: type.replace(/Input|Layout/, '').toLowerCase()
+				),
 				options: {},
 				required: false,
 				type: type || 'TextInput'

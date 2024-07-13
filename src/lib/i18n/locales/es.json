@@ -131,7 +131,11 @@
 		"pdf": "PDF",
 		"volver_a_cargar": "Volver a cargar",
 		"mostrar_todo": "Mostrar todo",
-		"mostrar_solo_firmas": "Mostrar solo firmas"
+		"mostrar_solo_firmas": "Mostrar solo firmas",
+		"font": "Fuente",
+		"reupload": "Volver a subir",
+		"show_all": "Mostrar todo",
+		"show_only_signatures": "Mostrar solo firmas"
 	},
 	"color": {
 		"black": "Negro",
@@ -692,7 +696,8 @@
 		"x_responses": "{x} respuesta(s)",
 		"response_stream_errors": "Se detectaron errores, probablemente debido a la falta de claves de encriptación.",
 		"confirm_pdf_reupload": "¿Eliminar el archivo PDF actual?",
-		"drag_fields_to_pdf": "Arrastre y suelte campos en el PDF."
+		"drag_fields_to_pdf": "Arrastre y suelte campos en el PDF.",
+		"select_pdf_file": "Seleccionar archivo PDF."
 	},
 	"title": {
 		"add_block": "Agregar Bloque",

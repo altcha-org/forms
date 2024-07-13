@@ -692,7 +692,8 @@
 		"x_responses": "{x} Antwort(en)",
 		"response_stream_errors": "Fehler wurden festgestellt, wahrscheinlich aufgrund fehlender Verschlüsselungsschlüssel.",
 		"confirm_pdf_reupload": "Aktuelle PDF-Datei entfernen?",
-		"drag_fields_to_pdf": "Ziehen Sie Felder in die PDF-Datei."
+		"drag_fields_to_pdf": "Ziehen Sie Felder in die PDF-Datei.",
+		"select_pdf_file": "Wählen Sie die PDF-Datei aus."
 	},
 	"title": {
 		"add_block": "Block hinzufügen",

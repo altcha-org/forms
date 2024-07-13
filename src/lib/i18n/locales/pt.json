@@ -692,7 +692,8 @@
 		"x_responses": "{x} resposta(s)",
 		"response_stream_errors": "Foram detetados erros, provavelmente devido à falta de chaves de encriptação.",
 		"confirm_pdf_reupload": "Remover o arquivo PDF atual?",
-		"drag_fields_to_pdf": "Arraste e solte os campos no PDF."
+		"drag_fields_to_pdf": "Arraste e solte os campos no PDF.",
+		"select_pdf_file": "Selecionar arquivo PDF."
 	},
 	"title": {
 		"add_block": "Adicionar Bloco",

@@ -667,6 +667,7 @@
 		"search_scanned_responses": "{count} response(s)",
 		"searching": "Searching...",
 		"security_check": "Please complete the security check to submit the form.",
+		"select_pdf_file": "Select PDF file.",
 		"select_region_to_register": "Select a different region to authenticate or register.",
 		"share_encryption_key": "Share the downloaded private key with your team-mates who need access to the app. Otherwise, they won't be able to read the encrypted data. They can import keys in their profile.",
 		"sign": "Sign",

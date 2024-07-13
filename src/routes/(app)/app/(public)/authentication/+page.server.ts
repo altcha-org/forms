@@ -40,7 +40,10 @@ export const actions = {
 				if (env.REGISTRATIONS_EMAIL_DNS_CHECK_DISABLED === '0') {
 					const validEmail = await verifyEmailMxDns(data.email);
 					if (!validEmail) {
-						throw new FieldValidationError('email', event.locals.i18n('error.invalid_email_domain'));
+						throw new FieldValidationError(
+							'email',
+							event.locals.i18n('error.invalid_email_domain')
+						);
 					}
 				}
 				return {
@@ -72,7 +75,10 @@ export const actions = {
 				if (env.REGISTRATIONS_EMAIL_DNS_CHECK_DISABLED === '0') {
 					const validEmail = await verifyEmailMxDns(data.email);
 					if (!validEmail) {
-						throw new FieldValidationError('email', event.locals.i18n('error.invalid_email_domain'));
+						throw new FieldValidationError(
+							'email',
+							event.locals.i18n('error.invalid_email_domain')
+						);
 					}
 				}
 				return register(event, data.email);

@@ -27,13 +27,7 @@
 		render: (options: unknown) => { promise: Promise<unknown> };
 	}
 
-	export let blocks: IFormBlockPartial[] = [
-		{
-			name: '',
-			label: 'Signature',
-			type: 'SignatureInput'
-		}
-	];
+	export let blocks: IFormBlockPartial[] = [];
 	export let maxFileSize: number = 1024 * 1024;
 	export let submitUrl: string = `/app/forms/${$form.id}/file`;
 	export let options: IPdfInputOptions = {

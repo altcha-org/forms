@@ -98,9 +98,9 @@
 </div>
 
 {#if plansWithPrices.length === 0}
-<div>
-	<p class="italic opacity-60">{$_('text.no_records')}</p>
-</div>
+	<div>
+		<p class="italic opacity-60">{$_('text.no_records')}</p>
+	</div>
 {/if}
 
 {#each Object.entries(groupedPrices) as [group, plans]}

@@ -539,7 +539,11 @@ export class ResponsesService {
 			.where(and(eq(responses.identityId, options.identityId), eq(responses.deleted, false)));
 	}
 
-	async linkFiles(form: IForm, response: Pick<IResponse, 'accountId' | 'formId' | 'id'>, data: TResponseData) {
+	async linkFiles(
+		form: IForm,
+		response: Pick<IResponse, 'accountId' | 'formId' | 'id'>,
+		data: TResponseData
+	) {
 		const fileBlocks = form.steps.reduce((acc, step) => {
 			for (const block of step.blocks) {
 				if (['FileInput', 'ImageInput', 'SignatureInput', 'PdfInput'].includes(block.type)) {
@@ -563,7 +567,7 @@ export class ResponsesService {
 							await filesService.updateFile(file.id, {
 								expiresAt: null,
 								persistent: true,
-								responseId: response.id,
+								responseId: response.id
 							});
 						}
 					}
