@@ -122,6 +122,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 		} else if (typeof err === 'object' && err && 'status' in err) {
 			throw err;
 		}
+		logger.error(err, 'Internal Server Error %o', {
+			pathname: event.url.pathname,
+			routeId: event.route.id,
+		});
 		throw error(500, 'Internal Server Error');
 	}
 	if (requestId && startTime) {
