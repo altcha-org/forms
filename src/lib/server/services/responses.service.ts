@@ -539,7 +539,7 @@ export class ResponsesService {
 			.where(and(eq(responses.identityId, options.identityId), eq(responses.deleted, false)));
 	}
 
-	async linkFiles(form: IForm, responseId: string, data: TResponseData) {
+	async linkFiles(form: IForm, response: Pick<IResponse, 'accountId' | 'formId' | 'id'>, data: TResponseData) {
 		const fileBlocks = form.steps.reduce((acc, step) => {
 			for (const block of step.blocks) {
 				if (['FileInput', 'ImageInput', 'SignatureInput', 'PdfInput'].includes(block.type)) {
@@ -555,15 +555,17 @@ export class ResponsesService {
 				if (fileIds.length) {
 					const files = await filesService.findFilesBulk(fileIds);
 					for (const file of files) {
-						await filesService.storage.move(
-							filesService.storage.getFilePath(file),
-							filesService.storage.getFilePath({ ...file, persistent: true })
-						);
-						await filesService.updateFile(file.id, {
-							expiresAt: null,
-							persistent: true,
-							responseId
-						});
+						if (file.accountId === response.accountId && file.formId === response.formId) {
+							await filesService.storage.move(
+								filesService.storage.getFilePath(file),
+								filesService.storage.getFilePath({ ...file, persistent: true })
+							);
+							await filesService.updateFile(file.id, {
+								expiresAt: null,
+								persistent: true,
+								responseId: response.id,
+							});
+						}
 					}
 				}
 			}

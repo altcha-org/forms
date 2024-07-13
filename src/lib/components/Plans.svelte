@@ -97,6 +97,12 @@
 	{/if}
 </div>
 
+{#if plansWithPrices.length === 0}
+<div>
+	<p class="italic opacity-60">{$_('text.no_records')}</p>
+</div>
+{/if}
+
 {#each Object.entries(groupedPrices) as [group, plans]}
 	<div class="mb-6">
 		<div class="text-lg font-bold mb-3">{$_('text.plan_group_' + group)}</div>

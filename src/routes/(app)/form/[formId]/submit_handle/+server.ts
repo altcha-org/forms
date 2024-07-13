@@ -113,7 +113,7 @@ export const POST = requestHandler(
 					);
 					responseId = response.id;
 					if (result) {
-						await responsesService.linkFiles(form, response.id, result.data);
+						await responsesService.linkFiles(form, response, result.data);
 					}
 				}
 				if (form.account.plan?.featureAnalytics === true) {
