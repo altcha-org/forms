@@ -9,6 +9,7 @@
 	import AddBlockIcon from '$lib/components/icons/AddBlock.svelte';
 	import PdfCanvas from '$lib/components/PdfCanvas.svelte';
 	import { clone } from '$lib/helpers';
+	import { form } from '$lib/stores';
 	import type { IFormBlock, IPdfInputOptions } from '$lib/types';
 
 	export let blocks: IFormBlock[] = [];
@@ -22,6 +23,14 @@
 
 	$: onEditBlockChange(editBlock);
 	$: onPdfBlockChange(pdfBlock);
+
+	function getUniqueName(name: string): string {
+		const existing = $form.steps.reduce((acc, { blocks }) => {
+			return [...acc, ...blocks.filter((block) => block.name.startsWith(name)).map((block) => block.name)];
+		}, [] as string[]).sort();
+		const num = parseInt(existing[existing.length - 1]?.match(/(\d+)$/)?.[1] || '0', 10) + 1;
+		return existing.includes(name) ? getUniqueName(name + `_${num}`) : name;
+	}
 
 	function onMoveBefore(block: IFormBlock, sourceIdx: number) {
 		const targetIdx = blocks.indexOf(block);
@@ -102,13 +111,13 @@
 			...blocks,
 			{
 				label: label || 'New block',
-				name: label
+				name: getUniqueName(label
 					? slugify(label, {
 							lower: true,
 							replacement: '_',
 							trim: true
 						})
-					: type.replace(/Input|Layout/, '').toLowerCase(),
+					: type.replace(/Input|Layout/, '').toLowerCase()),
 				options: {},
 				required: false,
 				type: type || 'TextInput'
