@@ -15,9 +15,9 @@ import deviceMiddleware from '$lib/server/middleware/device.middleware';
 import domainMiddleware from '$lib/server/middleware/domain.middleware';
 import ipMiddleware from '$lib/server/middleware/ip.middleware';
 import localeMiddleware from '$lib/server/middleware/locale.middleware';
+import usageMiddleware from '$lib/server/middleware/usage.middleware';
 import { BaseError, RateLimitError } from '$lib/server/errors';
 import '$lib/server/jobs';
-import usageMiddleware from '$lib/server/middleware/usage.middleware';
 
 if (env.LICENSE) {
 	await license.load(env.LICENSE);
@@ -37,7 +37,15 @@ const afterMiddlewares: ((event: RequestEvent) => Promise<Response | void> | Res
 	usageMiddleware()
 ];
 
+let requestId: number = 0;
+
 export const handle: Handle = async ({ event, resolve }) => {
+	let startTime: DOMHighResTimeStamp | null = null;
+	if (logger.level === 'trace') {
+		startTime = performance.now();
+		requestId = (requestId + 1) % Number.MAX_SAFE_INTEGER;
+		logger.trace('(%i) request %s %s', requestId, event.request.method, event.request.url);
+	}
 	if (license.data?.id) {
 		event.setHeaders({
 			'x-license-id': license.data?.id || ''
@@ -115,6 +123,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 			throw err;
 		}
 		throw error(500, 'Internal Server Error');
+	}
+	if (requestId && startTime) {
+		const duration = Math.floor(performance.now() - startTime);
+		logger.trace('(%i) response %i, %fms', requestId, response?.status || 0, duration);
 	}
 	return response!;
 };

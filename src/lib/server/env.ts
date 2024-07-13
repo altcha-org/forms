@@ -25,6 +25,13 @@ export const schema = t.Object({
 		format: 'uri'
 	}),
 	/**
+	 * Application log level (default: info, levels: debug|fatal|error|info|silent|trace|warn)
+	 */
+	LOG_LEVEL: t.String({
+		default: 'info',
+		pattern: '^debug|fatal|error|info|silent|trace|warn$'
+	}),
+	/**
 	 * URL for privacy policy
 	 */
 	PRIVACY_POLICY_URL: t.String({
