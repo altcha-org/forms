@@ -228,6 +228,13 @@ export const schema = t.Object({
 		pattern: '^1|0$'
 	}),
 	/**
+	 * Flag to disable DNS verification of email addresses, disabled by default (1: disabled, 0: enabled)
+	 */
+	REGISTRATIONS_EMAIL_DNS_CHECK_DISABLED: t.String({
+		default: '1',
+		pattern: '^1|0$'
+	}),
+	/**
 	 * Flag to disable new registrations (1: disabled, 0: enabled)
 	 */
 	REGISTRATIONS_DISABLED: t.String({

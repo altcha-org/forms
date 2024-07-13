@@ -37,9 +37,11 @@ export const actions = {
 					event.locals.i18n('error.user_registered_without_passkey')
 				);
 			} else if (!user) {
-				const validEmail = await verifyEmailMxDns(data.email);
-				if (!validEmail) {
-					throw new FieldValidationError('email', event.locals.i18n('error.invalid_email_domain'));
+				if (env.REGISTRATIONS_EMAIL_DNS_CHECK_DISABLED === '0') {
+					const validEmail = await verifyEmailMxDns(data.email);
+					if (!validEmail) {
+						throw new FieldValidationError('email', event.locals.i18n('error.invalid_email_domain'));
+					}
 				}
 				return {
 					email: data.email,
@@ -67,9 +69,11 @@ export const actions = {
 					event.locals.i18n('error.user_registered_without_passkey')
 				);
 			} else {
-				const validEmail = await verifyEmailMxDns(data.email);
-				if (!validEmail) {
-					throw new FieldValidationError('email', event.locals.i18n('error.invalid_email_domain'));
+				if (env.REGISTRATIONS_EMAIL_DNS_CHECK_DISABLED === '0') {
+					const validEmail = await verifyEmailMxDns(data.email);
+					if (!validEmail) {
+						throw new FieldValidationError('email', event.locals.i18n('error.invalid_email_domain'));
+					}
 				}
 				return register(event, data.email);
 			}
