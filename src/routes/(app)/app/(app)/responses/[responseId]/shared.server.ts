@@ -15,7 +15,11 @@ export async function responseMiddleware(event: RequestEvent<{ responseId: strin
 	const role = event.locals.user.accountsToUsers.find(
 		({ account }) => account.id === response.form.accountId
 	)?.role;
-	if (response.form.restricted && role !== 'admin' && !response.form.formsToUsers.some(({ userId }) => userId === event.locals.user?.id)) {
+	if (
+		response.form.restricted &&
+		role !== 'admin' &&
+		!response.form.formsToUsers.some(({ userId }) => userId === event.locals.user?.id)
+	) {
 		throw new ForbiddenError();
 	}
 	return {

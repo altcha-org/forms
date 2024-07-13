@@ -11,7 +11,7 @@
 
 	export let block: IFormBlock;
 	export let files: Promise<IFileWithoutAccount[]>;
-	export let value: any;
+	export let value: string | null | undefined;
 
 	const disptach = createEventDispatcher();
 </script>
@@ -80,7 +80,7 @@
 				<ul class="menu gap-1">
 					<li class="menu-title">{$_('label.actions')}</li>
 					<li>
-						<button type="button" on:click|preventDefault={() => copyToClipboard(value)}
+						<button type="button" on:click|preventDefault={() => copyToClipboard(value || '')}
 							>{$_('button.copy_to_clipboard')}</button
 						>
 					</li>

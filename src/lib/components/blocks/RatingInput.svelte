@@ -8,7 +8,7 @@
 	export let error: string | undefined = void 0;
 	export let disabled: boolean = false;
 	export let preview: boolean = false;
-	export let value: number | null | undefined = block.default ? +block.default : void 0;
+	export let value: string | number | null | undefined = block.default ? +block.default : void 0;
 	export let visible: boolean = true;
 
 	const emoji = ['🙁', '😬', '🙂', '😊', '🤩'];

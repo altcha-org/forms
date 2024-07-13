@@ -28,7 +28,9 @@
 		type: string;
 	}
 
-	export let block: IFormBlockPartial;
+	export let block: IFormBlockPartial<{
+		allowedCountries?: string;
+	}>;
 	export let error: string | undefined = void 0;
 	export let preview: boolean = false;
 	export let value: string | null | undefined = void 0;
@@ -48,7 +50,7 @@
 	let suggestions: ISuggestion[] = [];
 
 	$: allowedCountries = block.options?.allowedCountries
-		?.split(/\r?\n|[\,\;]/)
+		?.split(/\r?\n|[,;]/)
 		.filter((item: string) => !!item)
 		.map((item: string) => item.trim().toLowerCase());
 	$: countries = (

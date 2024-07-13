@@ -37,7 +37,7 @@ export const POST = requestHandler(
 				expectedRPID: HOSTNAME,
 				requireUserVerification: true
 			});
-		} catch (err: any) {
+		} catch (err) {
 			logger.error(err, 'WebAuthn Registration Error');
 			throw new ForbiddenError(i18n('error.something_went_wrong'));
 		}

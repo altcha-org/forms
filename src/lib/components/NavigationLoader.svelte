@@ -2,7 +2,7 @@
 	import { onDestroy, onMount } from 'svelte';
 
 	let el: HTMLElement;
-	let timeout: Timer;
+	let timeout: ReturnType<typeof setTimeout>;
 
 	onDestroy(() => {
 		if (timeout) {

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { browser } from '$app/environment';
 	import Form from '$lib/components/Form.svelte';
 	import Head from '$lib/components/Head.svelte';
 	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
@@ -15,11 +14,9 @@
 	import { form } from '$lib/stores';
 	import { clone, stringifyBlockValue } from '$lib/helpers';
 	import type { LayoutData } from './$types';
-	import type { IFormBlock, TResponseData } from '$lib/types';
+	import type { IFormBlock } from '$lib/types';
 
 	export let data: LayoutData;
-
-	let displayValues: any[] = [];
 
 	$: $form = clone(data.response?.form);
 	$: badges = getBadges(data);
@@ -39,11 +36,6 @@
 			);
 		})
 		.filter((b) => !!b) as IFormBlock[];
-	$: updateDisplayValues(data.response.data || {});
-
-	function updateDisplayValues(formData: TResponseData) {
-		displayValues = $form.displayBlocks.map((name) => formData?.[name]).filter((s) => !!s);
-	}
 
 	function getBadges(_: typeof data) {
 		const badges: string[] = [];
@@ -130,7 +122,7 @@
 						</div>
 
 						{#if responseData}
-							{#each displayBlocks.slice(1) as block, i}
+							{#each displayBlocks.slice(1) as block}
 								<div class="max-w-md truncate">{stringifyBlockValue(responseData[block.name])}</div>
 							{/each}
 						{/if}

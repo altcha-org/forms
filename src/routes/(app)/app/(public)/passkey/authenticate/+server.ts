@@ -29,7 +29,7 @@ export const POST = requestHandler(
 			throw new ForbiddenError(i18n('error.user_not_found'));
 		}
 		const authenticator = user.webauthnAuthenticators.find(
-			(auth: any) => auth.credentialID === data.authentication.id
+			(auth) => auth.credentialID === data.authentication.id
 		);
 		if (!authenticator) {
 			throw new ForbiddenError(i18n('error.passkey_not_found'));
@@ -51,7 +51,7 @@ export const POST = requestHandler(
 				},
 				requireUserVerification: true
 			});
-		} catch (err: any) {
+		} catch (err) {
 			logger.error(err, 'WebAuthn Authentication Error');
 			throw new ForbiddenError(i18n('error.something_went_wrong'));
 		}

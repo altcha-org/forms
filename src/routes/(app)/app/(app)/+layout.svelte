@@ -8,7 +8,7 @@
 
 	export let data: LayoutData;
 
-	let sessionTimeout: Timer | null = null;
+	let sessionTimeout: ReturnType<typeof setTimeout> | null = null;
 
 	afterNavigate(() => {
 		if (sessionTimeout) {

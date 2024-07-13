@@ -1,5 +1,5 @@
 export interface BubbleOptions {
-	handler: () => Promise<any> | any;
+	handler: () => Promise<unknown> | unknown;
 	text: string;
 }
 

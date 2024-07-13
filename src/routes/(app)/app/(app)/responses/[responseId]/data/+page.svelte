@@ -8,7 +8,6 @@
 	import ShieldIcon from '$lib/components/icons/Shield.svelte';
 	import CheckIcon from '$lib/components/icons/Check.svelte';
 	import CloseIcon from '$lib/components/icons/Close.svelte';
-	import ArrowDownIcon from '$lib/components/icons/ArrowDown.svelte';
 	import LockIcon from '$lib/components/icons/Lock.svelte';
 	import DeleteIcon from '$lib/components/icons/Delete.svelte';
 	import TrashIcon from '$lib/components/icons/Trash.svelte';
@@ -27,7 +26,7 @@
 
 	let editModalOpen = false;
 	let editBlock: IFormBlock | undefined = void 0;
-	let editValue: any = void 0;
+	let editValue: string | undefined = void 0;
 
 	$: hasEncryptionKey =
 		data.response.encrypted &&
@@ -43,7 +42,7 @@
 		$formExport = true;
 	}
 
-	function onEdit(block: IFormBlock, value?: any) {
+	function onEdit(block: IFormBlock, value?: string) {
 		editBlock = block;
 		editValue = value;
 		editModalOpen = true;
@@ -142,7 +141,7 @@
 						{#await data.files}
 							...
 						{:then formFiles}
-							{@const files = formFiles.filter((file) => editValue.includes(file.id))}
+							{@const files = formFiles.filter((file) => editValue?.includes(file.id))}
 
 							<input type="hidden" name="value" value={editValue} />
 
@@ -151,7 +150,7 @@
 							{/if}
 
 							{#each files as file}
-								{@const removed = !editValue.includes(file.id)}
+								{@const removed = !editValue?.includes(file.id)}
 								<div class="flex items-center gap-3">
 									<div class="grow">
 										<div class="max-w-xs truncate" class:line-through={removed}>{file.name}</div>
@@ -205,11 +204,7 @@
 	</div>
 
 	<div class="flex gap-3">
-		<button
-			type="button"
-			class="btn btn-sm"
-			on:click|preventDefault={() => onDownload()}
-		>
+		<button type="button" class="btn btn-sm" on:click|preventDefault={() => onDownload()}>
 			<span>{$_('button.download')}</span>
 		</button>
 
@@ -234,11 +229,11 @@
 	bind:open={$formExport}
 >
 	{#if $formExport}
-	<Export
-		form={$form}
-		singleResponse={true}
-		responseIds={[data.response.id]}
-		on:finish={() => $formExport = false}
-	/>
+		<Export
+			form={$form}
+			singleResponse={true}
+			responseIds={[data.response.id]}
+			on:finish={() => ($formExport = false)}
+		/>
 	{/if}
 </Modal>

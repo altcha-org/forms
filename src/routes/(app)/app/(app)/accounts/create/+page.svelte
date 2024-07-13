@@ -19,13 +19,7 @@
 			<p>{$_('text.create_account')}</p>
 		</div>
 
-		<Form
-			class="flex flex-col gap-12"
-			discardUnsaved
-			let:changed
-			let:loading
-			on:reset={() => goto('/app/accounts')}
-		>
+		<Form class="flex flex-col gap-12" discardUnsaved on:reset={() => goto('/app/accounts')}>
 			<input type="hidden" name="plan" value={plan} />
 
 			<div class="max-w-lg">
@@ -40,7 +34,7 @@
 				/>
 			</div>
 
-			<StickyButtons buttonLabel={$_('button.next')} {loading} />
+			<StickyButtons buttonLabel={$_('button.next')} />
 		</Form>
 	</div>
 </Page>

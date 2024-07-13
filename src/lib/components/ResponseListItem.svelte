@@ -73,7 +73,7 @@
 								{/if}
 							</div>
 
-							{#each form.displayBlocks.slice(1) as block, i}
+							{#each form.displayBlocks.slice(1) as block}
 								<div class="max-w-md truncate text-sm opacity-60">
 									{stringifyBlockValue(responseData[block])}
 								</div>

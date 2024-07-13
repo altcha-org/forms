@@ -4,33 +4,36 @@ import { identitiesService } from '$lib/server/services/identities.service';
 import { ForbiddenError } from '$lib/server/errors';
 import type { Actions, PageServerLoad } from './$types';
 
-export const load = loadHandler(async ({ locals, parent, url }) => {
-  const { account } = await parent();
-  const totalIdentitiesPromise = identitiesService.countIdentitiesForAccount(account.id);
-  return {
-    totalIdentitiesPromise,
-  };
+export const load = loadHandler(async ({ parent }) => {
+	const { account } = await parent();
+	const totalIdentitiesPromise = identitiesService.countIdentitiesForAccount(account.id);
+	return {
+		totalIdentitiesPromise
+	};
 }) satisfies PageServerLoad;
 
 export const actions = {
-	search: actionHandler(async (event, data) => {
-    const { account } =  event.locals;
-    if (!account) {
-      throw new ForbiddenError();
-    }
-    const identity = await identitiesService.searchIdentity({
-      accountId: account.id,
-      query: data.query,
-    });
-    return {
-      identities: identity ? [identity] : [],
-    };
-	}, {
-    body: t.Object({
-      query: t.String({
-        maxLength: 256,
-        minLength: 1,
-      }),
-    }),
-  }),
+	search: actionHandler(
+		async (event, data) => {
+			const { account } = event.locals;
+			if (!account) {
+				throw new ForbiddenError();
+			}
+			const identity = await identitiesService.searchIdentity({
+				accountId: account.id,
+				query: data.query
+			});
+			return {
+				identities: identity ? [identity] : []
+			};
+		},
+		{
+			body: t.Object({
+				query: t.String({
+					maxLength: 256,
+					minLength: 1
+				})
+			})
+		}
+	)
 } satisfies Actions;

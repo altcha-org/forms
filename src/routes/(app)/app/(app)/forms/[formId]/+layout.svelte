@@ -41,7 +41,7 @@
 		if (browser) {
 			const QRCode = await import('qrcode');
 			return QRCode.toDataURL(formLink, {
-				width: 300,
+				width: 300
 			});
 		}
 		return null;
@@ -105,7 +105,6 @@
 		</div>
 
 		<div class="flex gap-2">
-
 			{#if $form.status === 'draft'}
 				<Form action="/app/forms/{$form.id}/settings?/publishForm" let:loading>
 					<button class="btn btn-sm btn-primary" disabled={loading}>
@@ -147,7 +146,7 @@
 							<button
 								type="button"
 								class="justify-between"
-								on:click|preventDefault={() => qrCodeModalOpen = true}
+								on:click|preventDefault={() => (qrCodeModalOpen = true)}
 							>
 								<span>{$_('button.qr_code')}</span>
 								<QrCodeIcon class="w-4 h-4" />
@@ -228,25 +227,19 @@
 	title={$_('title.export')}
 	hideButton
 	bind:open={$formExport}
-	on:close={() => $formExportResponses = []}
+	on:close={() => ($formExportResponses = [])}
 >
 	{#if $formExport}
-	<Export
-		form={data.form}
-		responseIds={$formExportResponses.length ? $formExportResponses : null}
-		on:finish={() => $formExport = false}
-	/>
+		<Export
+			form={data.form}
+			responseIds={$formExportResponses.length ? $formExportResponses : null}
+			on:finish={() => ($formExport = false)}
+		/>
 	{/if}
 </Modal>
 
-<Modal
-	action=""
-	hideButton
-	title={$_('title.qr_code')}
-	bind:open={qrCodeModalOpen}
->
+<Modal action="" hideButton title={$_('title.qr_code')} bind:open={qrCodeModalOpen}>
 	<div class="flex flex-col gap-3">
-
 		<div>
 			<div class="input input-bordered shadow-sm flex items-center">
 				<div class="grow truncate">{formLink}</div>
@@ -267,20 +260,20 @@
 		{#await generateQR() then url}
 			{#if url}
 				<div class="flex items-center justify-center border input-bordered p-3 rounded shadow-sm">
-					<img src={url} alt="QR Code" width="200" />	
+					<img src={url} alt="QR Code" width="200" />
 				</div>
 
 				<div>
-					{#await fetch(url).then(r => r.arrayBuffer()) then ab}
-					<button
-						type="button"
-						class="link"
-						on:click|preventDefault={() => forceDownload(ab, 'qrcode.png')}
-					>{$_('button.download')}</button>
+					{#await fetch(url).then((r) => r.arrayBuffer()) then ab}
+						<button
+							type="button"
+							class="link"
+							on:click|preventDefault={() => forceDownload(ab, 'qrcode.png')}
+							>{$_('button.download')}</button
+						>
 					{/await}
 				</div>
 			{/if}
 		{/await}
-
 	</div>
 </Modal>

@@ -23,7 +23,7 @@ if (env.LICENSE) {
 	await license.load(env.LICENSE);
 }
 
-const beforeMiddlewares: ((event: RequestEvent) => Promise<void> | void)[] = [
+const beforeMiddlewares: ((event: RequestEvent) => Promise<Response | void> | Response | void)[] = [
 	corsMiddleware(),
 	domainMiddleware(),
 	ipMiddleware(),
@@ -33,8 +33,8 @@ const beforeMiddlewares: ((event: RequestEvent) => Promise<void> | void)[] = [
 	deviceMiddleware()
 ];
 
-const afterMiddlewares: ((event: RequestEvent) => Promise<void> | void)[] = [
-	usageMiddleware(),
+const afterMiddlewares: ((event: RequestEvent) => Promise<Response | void> | Response | void)[] = [
+	usageMiddleware()
 ];
 
 export const handle: Handle = async ({ event, resolve }) => {
@@ -43,7 +43,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			'x-license-id': license.data?.id || ''
 		});
 	}
-	let response: any = null;
+	let response: Response | null | void = null;
 	try {
 		for (const middleware of beforeMiddlewares) {
 			response = await middleware(event);
@@ -57,7 +57,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		for (const middleware of afterMiddlewares) {
 			await middleware(event);
 		}
-	} catch (err: any) {
+	} catch (err) {
 		event.locals.error = err;
 	}
 	if (event.locals.error) {
@@ -72,14 +72,33 @@ export const handle: Handle = async ({ event, resolve }) => {
 				'X-Rate-Limit-Reset': String(err.info.reset)
 			});
 		}
-		if ((!err.status || err.status >= 500) && (!err.statusCode || err.statusCode >= 500)) {
+		if (
+			typeof err === 'object' &&
+			err &&
+			'status' in err &&
+			typeof err.status === 'number' &&
+			(!err.status || err.status >= 500)
+		) {
 			logger.error(err, 'Server Error %o', {
 				pathname: event.url.pathname,
-				routeId: event.route.id
+				routeId: event.route.id,
+				status: err.status
+			});
+		} else if (
+			typeof err === 'object' &&
+			err &&
+			'statusCode' in err &&
+			typeof err.statusCode === 'number' &&
+			(!err.statusCode || err.statusCode >= 500)
+		) {
+			logger.error(err, 'Server Error %o', {
+				pathname: event.url.pathname,
+				routeId: event.route.id,
+				status: err.statusCode
 			});
 		}
 		if (err instanceof BaseError) {
-			const headers = response ? Object.fromEntries(response.headers) : {};
+			const headers = response ? Object.fromEntries(response.headers || {}) : {};
 			delete headers['content-length'];
 			if (event.isDataRequest) {
 				throw error(err.statusCode, err.message);
@@ -92,12 +111,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 					status: err.statusCode
 				});
 			}
-		} else if (err.status) {
+		} else if (typeof err === 'object' && err && 'status' in err) {
 			throw err;
 		}
 		throw error(500, 'Internal Server Error');
 	}
-	return response;
+	return response!;
 };
 
 export const handleError: HandleServerError = async ({ error, event }) => {

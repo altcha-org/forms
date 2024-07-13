@@ -5,7 +5,7 @@
 	import { page } from '$app/stores';
 	import { goto, invalidateAll } from '$app/navigation';
 	import { browserSupportsWebAuthn } from '@simplewebauthn/browser';
-	import {  debounce } from '$lib/helpers';
+	import { debounce } from '$lib/helpers';
 	import EmailInput from '$lib/components/blocks/EmailInput.svelte';
 	import Alert from '$lib/components/Alert.svelte';
 	import Form from '$lib/components/Form.svelte';
@@ -19,6 +19,10 @@
 	import { device } from '$lib/stores';
 	import { initPasskeyAuthentication, initPasskeyRegistration } from '../shared';
 	import type { PageData } from './$types';
+	import type {
+		PublicKeyCredentialCreationOptionsJSON,
+		PublicKeyCredentialDescriptorJSON
+	} from '@simplewebauthn/types';
 
 	export let data: PageData;
 
@@ -77,8 +81,8 @@
 				email?: string;
 				userId: string;
 				requestRegistration?: boolean;
-				authentication?: any;
-				registration?: any;
+				authentication?: PublicKeyCredentialDescriptorJSON;
+				registration?: PublicKeyCredentialCreationOptionsJSON;
 			};
 		};
 	}) {
@@ -95,7 +99,8 @@
 				data.result.data.userId,
 				data.result.data.registration
 			).then(onAuth);
-		} else {
+		} else if (data.result.data.authentication) {
+			// @ts-expect-error ts error
 			const { allowCredentials } = data.result.data.authentication;
 			initPasskeyAuthentication(
 				$page.url.hostname,

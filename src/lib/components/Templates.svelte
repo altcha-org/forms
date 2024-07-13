@@ -15,10 +15,17 @@
 
 	const dispatch = createEventDispatcher();
 
-	let loading: boolean = false;
 	let previewForm: Pick<
 		IForm,
-		'captchaAuto' | 'captchaInvisible' | 'contextInfo' | 'id' | 'name' | 'steps' | 'submitLabel'
+		| 'captchaAuto'
+		| 'captchaFloating'
+		| 'captchaInvisible'
+		| 'contextInfo'
+		| 'hidePoweredBy'
+		| 'id'
+		| 'name'
+		| 'steps'
+		| 'submitLabel'
 	> | null = null;
 	let selectedCategory: string | null = null;
 
@@ -35,21 +42,16 @@
 	});
 
 	async function load() {
-		loading = true;
-		try {
-			const resp = await fetch($page.url.pathname + `/templates?locale=${$locale}`);
-			const data = await resp.json();
-			templates = (data?.templates || []).sort((a: IFormTemplate, b: IFormTemplate) => {
-				if (a.premium && !b.premium) {
-					return 1;
-				}
-				return (a.sort !== void 0 ? a.sort : 100) > (b.sort !== void 0 ? b.sort : 100) ? 1 : -1;
-			});
-			if (templates[0]?.id) {
-				onSelect(templates[0]);
+		const resp = await fetch($page.url.pathname + `/templates?locale=${$locale}`);
+		const data = await resp.json();
+		templates = (data?.templates || []).sort((a: IFormTemplate, b: IFormTemplate) => {
+			if (a.premium && !b.premium) {
+				return 1;
 			}
-		} finally {
-			loading = false;
+			return (a.sort !== void 0 ? a.sort : 100) > (b.sort !== void 0 ? b.sort : 100) ? 1 : -1;
+		});
+		if (templates[0]?.id) {
+			onSelect(templates[0]);
 		}
 	}
 
@@ -80,7 +82,9 @@
 		previewForm = {
 			captchaAuto: false,
 			captchaInvisible: true,
+			captchaFloating: false,
 			contextInfo: false,
+			hidePoweredBy: false,
 			submitLabel: null,
 			id: '',
 			name: template.name || '',

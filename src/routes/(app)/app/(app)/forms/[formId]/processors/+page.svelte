@@ -12,10 +12,10 @@
 	import PlusIcon from '$lib/components/icons/Plus.svelte';
 	import EditIcon from '$lib/components/icons/Edit.svelte';
 	import MoreHorizontalIcon from '$lib/components/icons/MoreHorizontal.svelte';
-	import { clone } from '$lib/helpers';
-	import type { PageData } from './$types';
 	import List from '$lib/components/List.svelte';
 	import TextInput from '$lib/components/blocks/TextInput.svelte';
+	import { clone } from '$lib/helpers';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 
@@ -68,7 +68,7 @@
 						}
 						return acc;
 					},
-					{} as Record<string, any>
+					{} as Record<string, unknown>
 				);
 			}
 			processors = processors;
@@ -93,7 +93,6 @@
 	{changed}
 	on:reset={() => onReset()}
 	on:submit={() => (processors = clone(data.form.processors))}
-	let:loading
 >
 	<input type="hidden" name="processors" value={JSON.stringify(processors)} />
 

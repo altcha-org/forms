@@ -1,9 +1,8 @@
 import { Type as t } from '@sinclair/typebox';
 import { actionHandler, loadHandler } from '$lib/server/handlers';
 import { ForbiddenError } from '$lib/server/errors';
-import { devicesService } from '$lib/server/services/devices.service';
-import type { Actions } from './$types';
 import { usersService } from '$lib/server/services/users.service';
+import type { Actions } from './$types';
 
 export const load = loadHandler(async (event) => {
 	const user = await usersService.findUserForWebauthn(event.locals.user.id);

@@ -10,40 +10,50 @@
 
 	export let data: PageData;
 
-  $: blocks = data.form.steps.reduce((acc, step) => {
-    for (const block of step.blocks) {
-      acc.push(block);
-    }
-    return acc;
-  }, [] as IFormBlockPartial[]);
+	$: blocks = data.form.steps.reduce((acc, step) => {
+		for (const block of step.blocks) {
+			acc.push(block);
+		}
+		return acc;
+	}, [] as IFormBlockPartial[]);
 	$: stats = data.stats;
 
-	$: abandonmentRate = Math.floor((1 - (stats.summary.submissions / (stats.summary.views - stats.summary.errored))) * 1000) / 10;
-	$: correctionRate = stats.summary.submissions ? Math.floor((stats.summary.correctionRate || 0) * 1000) / 10 : null;
+	$: abandonmentRate =
+		Math.floor(
+			(1 - stats.summary.submissions / (stats.summary.views - stats.summary.errored)) * 1000
+		) / 10;
+	$: correctionRate = stats.summary.submissions
+		? Math.floor((stats.summary.correctionRate || 0) * 1000) / 10
+		: null;
 	$: errorRate = Math.floor((stats.summary.errored / stats.summary.views) * 1000) / 10;
-	$: countries = Object.entries(stats.countries).map(([ code, value ]) => {
+	$: countries = Object.entries(stats.countries).map(([code, value]) => {
 		const codeUppercase = code.toUpperCase();
 		const country = PHONE_CODES.find((c) => c.code.toLowerCase() === code);
 		const name = country?.name || codeUppercase;
 		return {
 			label: `${country?.emoji || ''} ${name} (${codeUppercase})`,
-			value: [value],
-		}
+			value: [value]
+		};
 	});
-	$: fieldDropOff = Object.entries(stats.fieldDropOff).map(([ name, value ]) => {
+	$: fieldDropOff = Object.entries(stats.fieldDropOff).map(([name, value]) => {
 		const block = blocks.find((b) => b.name === name);
 		return {
 			label: block?.label || name,
-			value: [value],
+			value: [value]
 		};
 	});
-	$: devices = stats.summary.views ? [{
-		label: $_('label.mobile'),
-		value: [stats.summary.mobile],
-	}, {
-		label: $_('label.desktop'),
-		value: [stats.summary.views - stats.summary.mobile],
-	}] : [];
+	$: devices = stats.summary.views
+		? [
+				{
+					label: $_('label.mobile'),
+					value: [stats.summary.mobile]
+				},
+				{
+					label: $_('label.desktop'),
+					value: [stats.summary.views - stats.summary.mobile]
+				}
+			]
+		: [];
 	$: views = stats.views.map(({ label, value }) => ({ label: formatDate(parseISO(label)), value }));
 </script>
 
@@ -119,11 +129,7 @@
 
 	<div class="flex flex-col gap-3">
 		<div class="font-bold">{$_('label.views_and_responses')}</div>
-		<BarChartVertical
-      items={views}
-      legend={[$_('label.views'), $_('label.responses')]}
-      wide
-    />
+		<BarChartVertical items={views} legend={[$_('label.views'), $_('label.responses')]} wide />
 	</div>
 
 	<div class="grid lg:grid-cols-2 gap-6 lg:gap-12">
@@ -132,17 +138,16 @@
 			<BarChart items={countries} maxRows={10} />
 		</div>
 
-    <div class="flex flex-col gap-5">
-      <div class="flex flex-col gap-3">
-        <div class="font-bold">{$_('label.field_drop_off')}</div>
-        <BarChart items={fieldDropOff} maxRows={10} />
-      </div>
+		<div class="flex flex-col gap-5">
+			<div class="flex flex-col gap-3">
+				<div class="font-bold">{$_('label.field_drop_off')}</div>
+				<BarChart items={fieldDropOff} maxRows={10} />
+			</div>
 
-      <div class="flex flex-col gap-3">
-        <div class="font-bold">{$_('label.devices')}</div>
-        <BarChart items={devices} />
-      </div>
-    </div>
-
+			<div class="flex flex-col gap-3">
+				<div class="font-bold">{$_('label.devices')}</div>
+				<BarChart items={devices} />
+			</div>
+		</div>
 	</div>
 </div>

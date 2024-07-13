@@ -11,21 +11,27 @@ export const GET = requestHandler(
 			throw new ForbiddenError();
 		}
 		const response = await responsesService.findResponse(event.params.responseId);
-    if (response?.accountId !== account.id) {
+		if (response?.accountId !== account.id) {
 			throw new ForbiddenError();
-    }
-    const role = event.locals.user.accountsToUsers.find(
-      ({ account }) => account.id === response.form.accountId
-    )?.role;
-    if (response.form.restricted && role !== 'admin' && !response.form.formsToUsers.some(({ userId }) => userId === event.locals.user?.id)) {
-      throw new ForbiddenError();
-    }
-    const files = response.files.map(({ id }) => id);
-    return {
-      files: files.length ? await filesService.findFilesBulk(files).catch(() => []) : Promise.resolve([]),
-    };
+		}
+		const role = event.locals.user.accountsToUsers.find(
+			({ account }) => account.id === response.form.accountId
+		)?.role;
+		if (
+			response.form.restricted &&
+			role !== 'admin' &&
+			!response.form.formsToUsers.some(({ userId }) => userId === event.locals.user?.id)
+		) {
+			throw new ForbiddenError();
+		}
+		const files = response.files.map(({ id }) => id);
+		return {
+			files: files.length
+				? await filesService.findFilesBulk(files).catch(() => [])
+				: Promise.resolve([])
+		};
 	},
 	{
-		rateLimit: 'L1',
+		rateLimit: 'L1'
 	}
 ) satisfies RequestHandler;

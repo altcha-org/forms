@@ -87,7 +87,6 @@
 	}}
 	on:reset={() => onReset()}
 	let:changed={formChanged}
-	let:loading
 >
 	<div class="flex flex-col gap-12">
 		{#if uploadBanner}

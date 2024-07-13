@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
 	import { createEventDispatcher } from 'svelte';
-	import { forceDownload } from '$lib/helpers';
 	import { Pdf } from '$lib/pdf';
 	import DownloadIcon from '$lib/components/icons/Download.svelte';
 	import AlertIcon from '$lib/components/icons/Alert.svelte';

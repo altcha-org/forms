@@ -1,6 +1,5 @@
 // See https://kit.svelte.dev/docs/types#app
 
-import type { BaseError } from '$lib/server/errors';
 import type { IAccount } from '$lib/server/services/accounts.service';
 import type { IApiKey } from '$lib/server/services/apiKeys.service';
 import type { IDevice } from '$lib/server/services/devices.service';
@@ -19,8 +18,8 @@ declare global {
 			apiKeyReferrer?: string;
 			device?: IDevice;
 			deviceId?: string;
-			error?: any;
-			i18n: (key: string, params?: { values: any }) => string;
+			error?: unknown;
+			i18n: (key: string, params?: { values: unknown }) => string;
 			locale: string;
 			remoteAddress: string;
 			user?: IUser;

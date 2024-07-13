@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
 	import { createEventDispatcher } from 'svelte';
-  import colors from '$lib/consts/colors';
+	import colors from '$lib/consts/colors';
 	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
 	import DeleteBackIcon from '$lib/components/icons/DeleteBack.svelte';
 	import PlusIcon from '$lib/components/icons/Plus.svelte';
@@ -10,10 +10,7 @@
 	export let labels: ILabel[] | null = [];
 
 	const disptach = createEventDispatcher();
-	const labelColors = [
-		'#dddddd',
-		...colors,
-	];
+	const labelColors = ['#dddddd', ...colors];
 
 	function onLabelsChange() {
 		disptach('change', { labels });

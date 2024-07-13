@@ -23,17 +23,25 @@
 	import UrlInput from '$lib/components/blocks/UrlInput.svelte';
 	import type { IForm, IFormBlock } from '$lib/types';
 
-	export let block: IFormBlock;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	export let block: IFormBlock<any>;
 	export let encrypted: boolean = false;
-	export let form: Pick<IForm, 'steps'> | undefined = void 0;
+	export let form: IForm | undefined = void 0;
 	export let preview: boolean = false;
-	export let value: any = void 0;
+	export let value: string | null | undefined = void 0;
 	export let visible: boolean = true;
 
-	let cmp: any;
+	let cmp: ReturnType<typeof getComponent>;
 
 	$: cmp = getComponent(block.type);
 	$: onTypeChange(block.type);
+	$: props = {
+		block,
+		encrypted,
+		form,
+		preview,
+		visible
+	};
 
 	function getComponent(type: string) {
 		switch (type) {
@@ -93,14 +101,4 @@
 	}
 </script>
 
-<svelte:component
-	this={cmp}
-	{block}
-	{encrypted}
-	{form}
-	{preview}
-	{visible}
-	{...$$restProps}
-	bind:value
-	on:change
-></svelte:component>
+<svelte:component this={cmp} {...props} {...$$restProps} bind:value on:change></svelte:component>

@@ -6,7 +6,7 @@
 	export let encryptedData: string;
 	export let encryptionKeyHash: string;
 
-	let decrypted: any = null;
+	let decrypted: unknown = null;
 
 	$: $responseDataPromise = browser
 		? decryptData(encryptedData, encryptionKeyHash, $encryptionKeys).then(

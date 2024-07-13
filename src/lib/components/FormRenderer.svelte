@@ -21,7 +21,14 @@
 	export let encrypted: boolean = false;
 	export let form: Pick<
 		IForm,
-		'captchaAuto' | 'captchaFloating' | 'captchaInvisible' | 'contextInfo' | 'hidePoweredBy' | 'id' | 'steps' | 'submitLabel'
+		| 'captchaAuto'
+		| 'captchaFloating'
+		| 'captchaInvisible'
+		| 'contextInfo'
+		| 'hidePoweredBy'
+		| 'id'
+		| 'steps'
+		| 'submitLabel'
 	>;
 	export let preview: boolean = false;
 
@@ -54,7 +61,7 @@
 			if (!preview && analytics) {
 				session = new Session({
 					form: cmpForm.getElement(),
-					beaconUrl: `/form/${shortenFormId(form.id)}/beacon`,
+					beaconUrl: `/form/${shortenFormId(form.id)}/beacon`
 				});
 			}
 		}
@@ -122,7 +129,7 @@
 			allowSubmit={!preview}
 			data={{
 				__context,
-				__session,
+				__session
 			}}
 			successToast={false}
 			bind:this={cmpForm}

@@ -41,14 +41,12 @@
 
 	function onSearchModalClose() {
 		if (document.activeElement && 'blur' in document.activeElement) {
-			// @ts-ignore
-			document.activeElement.blur();
+			(document.activeElement as HTMLInputElement).blur();
 		}
 	}
-
 </script>
 
-<svelte:document on:keydown={onKeyDown}></svelte:document>
+<svelte:document on:keydown={onKeyDown} />
 
 <div class="sticky top-0 z-50 bg-base-100">
 	<div
@@ -72,16 +70,21 @@
 					<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 					<label
 						class="input input-secondary bg-secondary !outline-none flex items-center gap-4 w-full"
-						on:click={() => searchModalOpen = true}
+						on:click={() => (searchModalOpen = true)}
 					>
 						<SearchIcon class="w-4 h-4 shrink-0" />
-						<input type="text" class="grow hidden lg:block" readonly placeholder={$_('placeholder.search')} />
+						<input
+							type="text"
+							class="grow hidden lg:block"
+							readonly
+							placeholder={$_('placeholder.search')}
+						/>
 						<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 						<kbd
 							class="shrink-0 hidden lg:inline-flex kbd kbd-sm bg-secondary border-secondary-content/30 !outline-none focus:border-secondary-content/60"
 							tabindex="0"
-							bind:this={elSearchKbd}
-							>/</kbd>
+							bind:this={elSearchKbd}>/</kbd
+						>
 					</label>
 				</div>
 			{/if}
@@ -166,36 +169,40 @@
 <Modal
 	title={$_('title.search')}
 	hideButton
-	
 	bind:open={searchModalOpen}
 	on:close={() => onSearchModalClose()}
 >
 	{#if searchModalOpen}
-	<Search
-		bind:this={search}
-		bind:loading={searchLoading}
-		bind:totalForms={totalScannedForms}
-		bind:totalResponses={totalScannedResponses}
-		bind:erroredResponses={totalErroredResponses}
-		on:click={() => searchModalOpen = false}
-	/>
+		<Search
+			bind:this={search}
+			bind:loading={searchLoading}
+			bind:totalForms={totalScannedForms}
+			bind:totalResponses={totalScannedResponses}
+			bind:erroredResponses={totalErroredResponses}
+			on:click={() => (searchModalOpen = false)}
+		/>
 	{/if}
 
 	<svelte:fragment slot="actions_cancel">
 		{#if searchLoading}
-		<button type="button" class="btn btn-ghost" on:click|preventDefault={() => search?.stopSearch()}>{$_('button.stop')}</button>
+			<button
+				type="button"
+				class="btn btn-ghost"
+				on:click|preventDefault={() => search?.stopSearch()}>{$_('button.stop')}</button
+			>
 		{/if}
 	</svelte:fragment>
 
 	<div slot="actions" class="self-center flex gap-2 text-sm">
 		{#if totalScannedForms && totalScannedResponses}
-		<span class="opacity-60">
-			{$_('text.search_scanned_forms', { values: { count: totalScannedForms } })}
-		</span>
-		<span class="opacity-20">|</span>
-		<span class="opacity-60">
-			{$_('text.search_scanned_responses', { values: { count: totalScannedResponses } })}
-		</span>
+			<span class="opacity-60">
+				{$_('text.search_scanned_forms', { values: { count: totalScannedForms } })}
+			</span>
+			<span class="opacity-20">|</span>
+			<span class="opacity-60">
+				{$_('text.search_scanned_responses', { values: { count: totalScannedResponses } })}
+			</span>
 		{/if}
-	<div>
-</Modal>
+		<div></div>
+	</div></Modal
+>

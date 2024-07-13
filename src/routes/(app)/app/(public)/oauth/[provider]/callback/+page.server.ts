@@ -1,7 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 import { Type as t } from '@sinclair/typebox';
 import { env } from '$lib/server/env';
-import { usersService, type IUser } from '$lib/server/services/users.service';
+import { usersService } from '$lib/server/services/users.service';
 import { actionHandler } from '$lib/server/handlers';
 import { ForbiddenError } from '$lib/server/errors';
 import { getOAuthProvider } from '$lib/server/oauth';

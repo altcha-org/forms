@@ -17,7 +17,7 @@
 	$: auditlogAllowed = account.plan?.featureAuditlog === true;
 </script>
 
-<Form action="?/updateAccount" class="flex flex-col gap-12" let:changed let:loading let:error>
+<Form action="?/updateAccount" class="flex flex-col gap-12" let:changed let:error>
 	<div class="flex flex-col gap-12 max-w-lg">
 		<TextInput
 			block={{
@@ -138,7 +138,6 @@
 				}}
 				successToast={$_('notification.connection_successful')}
 				let:loading
-				let:error
 			>
 				<button type="submit" class="btn btn-sm" disabled={loading || !customSmtp}
 					>{$_('button.test_smtp')}</button
@@ -147,5 +146,5 @@
 		</div>
 	</div>
 
-	<StickyButtons disabled={!changed} {loading} />
+	<StickyButtons disabled={!changed} />
 </Form>

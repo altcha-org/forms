@@ -76,7 +76,10 @@ export const apiKeys = pgTable(
 				onDelete: 'cascade'
 			}),
 		deleted: boolean('deleted').default(false),
-		features: customJson('features').notNull().default('[]').$type<Array<'forms_api' | 'antispam_api'>>(),
+		features: customJson('features')
+			.notNull()
+			.default('[]')
+			.$type<Array<'forms_api' | 'antispam_api'>>(),
 		name: varchar('name', { length: 64 }).notNull(),
 		referrer: varchar('referrer', { length: 1024 }).notNull(),
 		secret: varchar('secret', { length: 64 }).notNull(),
@@ -292,7 +295,7 @@ export const identities = pgTable(
 		encrypted: boolean('encrypted').notNull().default(false),
 		encryptionKeyHash: varchar('encryption_key_hash'),
 		externalId: varchar('external_id', { length: 256 }).notNull(),
-		metadata: customJson('metadata').$type<Record<string, any>>(),
+		metadata: customJson('metadata').$type<Record<string, unknown>>(),
 		metadataEncrypted: text('metadata_encrypted'),
 		createdAt: timestamp('created_at').notNull().defaultNow(),
 		lastUsedAt: timestamp('last_used_at').notNull().defaultNow(),
@@ -413,7 +416,7 @@ export const subscriptions = pgTable('subscriptions', {
 	}),
 	auto: boolean('auto').default(true).notNull(),
 	cancelUrl: varchar('cancel_url', { length: 1024 }),
-	eventPayload: customJson('event_payload').$type<any>(),
+	eventPayload: customJson('event_payload').$type<Record<string, unknown>>(),
 	status: varchar('status', { length: 64 }).notNull(),
 	createdAt: timestamp('created_at').notNull().defaultNow(),
 	lastEventAt: timestamp('last_event_at'),
@@ -424,30 +427,27 @@ export const subscriptions = pgTable('subscriptions', {
 	updatedAt: timestamp('updated_at').notNull().defaultNow()
 });
 
-export const sessions = pgTable(
-	'sessions',
-	{
-		id: varchar('id', { length: 32 }).primaryKey(),
-		formId: varchar('form_id', { length: 32 })
-			.notNull()
-			.references(() => forms.id, {
-				onDelete: 'cascade'
-			}),
-		responseId: varchar('response_id', { length: 32 }).references(() => responses.id, {
+export const sessions = pgTable('sessions', {
+	id: varchar('id', { length: 32 }).primaryKey(),
+	formId: varchar('form_id', { length: 32 })
+		.notNull()
+		.references(() => forms.id, {
 			onDelete: 'cascade'
 		}),
-		abondoned: boolean('abondoned').notNull().default(false),
-		completionTime: integer('completion_time'),
-		country: varchar('country', { length: 2 }),
-		correction: integer('correction').notNull().default(0),
-		error: boolean('error'),
-		fieldDropOff: varchar('field_drop_off', { length: 120 }),
-		fields: customJson('fields').$type<[ string, number, number, number ][]>(),
-		mobile: boolean('mobile').notNull().default(false),
-		startAt: timestamp('start_at').notNull().defaultNow(),
-		submitAt: timestamp('submit_at'),
-	},
-);
+	responseId: varchar('response_id', { length: 32 }).references(() => responses.id, {
+		onDelete: 'cascade'
+	}),
+	abondoned: boolean('abondoned').notNull().default(false),
+	completionTime: integer('completion_time'),
+	country: varchar('country', { length: 2 }),
+	correction: integer('correction').notNull().default(0),
+	error: boolean('error'),
+	fieldDropOff: varchar('field_drop_off', { length: 120 }),
+	fields: customJson('fields').$type<[string, number, number, number][]>(),
+	mobile: boolean('mobile').notNull().default(false),
+	startAt: timestamp('start_at').notNull().defaultNow(),
+	submitAt: timestamp('submit_at')
+});
 
 export const auditlog = pgTable(
 	'audit_log',
@@ -470,7 +470,7 @@ export const auditlog = pgTable(
 		userId: varchar('user_id', { length: 32 }).references(() => users.id, {
 			onDelete: 'cascade'
 		}),
-		data: customJson('data').$type<any>(),
+		data: customJson('data').$type<Record<string, unknown>>(),
 		dataEncrypted: text('data_encrypted'),
 		description: varchar('description', { length: 250 }),
 		encrypted: boolean('encrypted').notNull().default(false),
@@ -615,7 +615,7 @@ export const identitiesRelations = relations(identities, ({ one, many }) => ({
 		fields: [identities.accountId],
 		references: [accounts.id]
 	}),
-	response: many(responses),
+	response: many(responses)
 }));
 
 export const notesRelations = relations(notes, ({ one }) => ({

@@ -7,15 +7,15 @@ import type { RequestHandler } from './$types';
 
 export const POST = requestHandler(
 	async (event, data) => {
-    logger.error('Passkey error %o', data);
+		logger.error('Passkey error %o', data);
 	},
 	{
 		authorization: false,
 		body: t.Object({
-      deviceName: t.String(),
-      kind: t.String(),
-      userId: t.String(),
-      error: t.String(),
-		}),
+			deviceName: t.String(),
+			kind: t.String(),
+			userId: t.String(),
+			error: t.String()
+		})
 	}
 ) satisfies RequestHandler;

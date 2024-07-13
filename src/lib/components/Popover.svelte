@@ -27,7 +27,7 @@
 	let elArrow: HTMLElement;
 	let elParent: HTMLElement;
 	let elTooltip: HTMLElement;
-	let mouseEnterTimeout: Timer | null = null;
+	let mouseEnterTimeout: ReturnType<typeof setTimeout> | null = null;
 
 	$: onOpenChange(open);
 

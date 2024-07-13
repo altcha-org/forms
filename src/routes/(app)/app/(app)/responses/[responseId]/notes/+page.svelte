@@ -123,8 +123,8 @@
 					<div class="opacity-60 italic">{$_('label.encrypted')}</div>
 				{:else}
 					<!-- re-assign note.text to decrypted to make update work -->
-					{@const _t = note.text = text}
-					<MarkdownRenderer value={text || ''} />
+					{@const decrtypredText = note.text = text}
+					<MarkdownRenderer value={decrtypredText || ''} />
 				{/if}
 			{/await}
 		{:else if note.text}

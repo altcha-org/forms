@@ -1,6 +1,6 @@
 import fsp from 'node:fs/promises';
 import path from 'node:path';
-import { and, asc, count, desc, eq, sql, inArray, or, type AnyColumn } from 'drizzle-orm';
+import { and, asc, count, desc, eq, sql, inArray, or } from 'drizzle-orm';
 import { EmailProcessor } from '$lib/server/processors/email.processor';
 import { HttpProcessor } from '$lib/server/processors/http.processor';
 import { SpamfilterProcessor } from '$lib/server/processors/spamfilter.processor';
@@ -196,7 +196,9 @@ export class FormsService {
 			.where(eq(forms.id, formId));
 	}
 
-	async listFormsForUser(options: Partial<IPaginationOptions & IOrderByOptions> & { accountId: string, userId: string }) {
+	async listFormsForUser(
+		options: Partial<IPaginationOptions & IOrderByOptions> & { accountId: string; userId: string }
+	) {
 		return db
 			.selectDistinctOn([forms.id, forms.name], {
 				contextInfo: forms.contextInfo,
@@ -285,7 +287,7 @@ export class FormsService {
 		);
 		for (const processor of processors) {
 			const startTime = performance.now();
-			let error: any = null;
+			let error: unknown = null;
 			context.log(`(${processor.type}) Start`);
 			try {
 				const inst = this.createProcessorInstance(processor);
@@ -299,7 +301,11 @@ export class FormsService {
 			} finally {
 				const duration = Math.floor((performance.now() - startTime) * 100) / 100;
 				if (error) {
-					context.log(`(${processor.type}) ${error.message}`, void 0, true);
+					context.log(
+						`(${processor.type}) ${typeof error === 'object' && 'message' in error ? error.message : ''}`,
+						void 0,
+						true
+					);
 				}
 				context.log(
 					`(${processor.type}) ${error ? 'Failure' : 'Success'}, ${duration}ms`,
@@ -308,6 +314,7 @@ export class FormsService {
 				);
 				if (context.terminate) {
 					context.log(`(${processor.type}) Forcefully terminating data processing`);
+					// eslint-disable-next-line no-unsafe-finally
 					break;
 				}
 			}
@@ -500,13 +507,21 @@ export class FormsService {
 	protected createProcessorInstance(processor: IFormProcessor) {
 		switch (processor.type) {
 			case 'email':
-				return new EmailProcessor(processor.config);
+				return new EmailProcessor(
+					processor.config as ConstructorParameters<typeof EmailProcessor>[0]
+				);
 			case 'http':
-				return new HttpProcessor(processor.config);
+				return new HttpProcessor(
+					processor.config as ConstructorParameters<typeof HttpProcessor>[0]
+				);
 			case 'spamfilter':
-				return new SpamfilterProcessor(processor.config);
+				return new SpamfilterProcessor(
+					processor.config as ConstructorParameters<typeof SpamfilterProcessor>[0]
+				);
 			case 'store':
-				return new StoreProcessor(processor.config);
+				return new StoreProcessor(
+					processor.config as ConstructorParameters<typeof StoreProcessor>[0]
+				);
 			default:
 				throw new Error(`Unkwnon processor type ${processor.type}.`);
 		}

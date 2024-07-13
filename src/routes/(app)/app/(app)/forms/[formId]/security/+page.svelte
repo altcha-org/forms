@@ -25,7 +25,7 @@
 	}
 </script>
 
-<Form action="?/updateSecurity" on:reset={() => onReset()} let:changed let:loading>
+<Form action="?/updateSecurity" on:reset={() => onReset()} let:changed>
 	<div class="flex flex-col gap-12">
 		<div>
 			<ToggleInput

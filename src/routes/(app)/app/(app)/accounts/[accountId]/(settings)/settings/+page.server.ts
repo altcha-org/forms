@@ -88,9 +88,12 @@ export const actions = {
 			try {
 				validateSmtpUrl(data.smtpUrl);
 				await emailService.sendTestEmail(data.smtpUrl, data.smtpSender, event.locals.user.email);
-			} catch (err: any) {
+			} catch (err) {
 				return fail(400, {
-					error: String(err.message)
+					error:
+						typeof err === 'object' && err && 'message' in err
+							? String(err.message)
+							: 'Unknown error'
 				});
 			}
 		},

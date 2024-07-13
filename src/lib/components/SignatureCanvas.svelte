@@ -55,17 +55,20 @@
 		input.type = 'file';
 		input.click();
 		input.addEventListener('change', (ev) => {
-			const file = (ev.target as any).files[0] as File;
-			reader.readAsDataURL(file);
-			reader.addEventListener('load', (_ev) => {
-				const img = new Image();
-				img.addEventListener('load', () => {
-					stamp = img;
-					changed = true;
-					redraw();
+			const target = ev.target as HTMLInputElement;
+			const file = target.files?.[0];
+			if (file) {
+				reader.readAsDataURL(file);
+				reader.addEventListener('load', () => {
+					const img = new Image();
+					img.addEventListener('load', () => {
+						stamp = img;
+						changed = true;
+						redraw();
+					});
+					img.src = reader.result as string;
 				});
-				img.src = (_ev.target as any).result;
-			});
+			}
 		});
 	}
 
@@ -209,7 +212,8 @@
 			class:hidden={changed}
 		></div>
 
-		<canvas bind:this={elCanvas} data-signature-canvas={name} class="w-full h-full relative z-40"></canvas>
+		<canvas bind:this={elCanvas} data-signature-canvas={name} class="w-full h-full relative z-40"
+		></canvas>
 
 		{#if !changed}
 			<div class="absolute left-4 bottom-8 z-50">

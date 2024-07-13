@@ -10,10 +10,13 @@
 	export let total: number | Promise<number>;
 
 	let reloading: boolean = false;
-	let reloadTimeout: Timer | null = null;
+	let reloadTimeout: ReturnType<typeof setTimeout> | null = null;
 
 	function onReload() {
 		reloading = true;
+		if (reloadTimeout) {
+			clearTimeout(reloadTimeout);
+		}
 		reloadTimeout = setTimeout(() => {
 			reloading = false;
 		}, 500);

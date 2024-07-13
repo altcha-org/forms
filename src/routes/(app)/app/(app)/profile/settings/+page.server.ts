@@ -1,4 +1,3 @@
-import argon2 from 'argon2';
 import { Type as t } from '@sinclair/typebox';
 import { actionHandler, loadHandler } from '$lib/server/handlers';
 import { usersService } from '$lib/server/services/users.service';
@@ -41,7 +40,7 @@ export const actions = {
 			})
 		}
 	),
-	removeRecoveryPassphrase: actionHandler(async (event, data) => {
+	removeRecoveryPassphrase: actionHandler(async (event) => {
 		await usersService.updateUser(event.locals.user.id, {
 			recoveryPassphrase: null,
 			recoveryPassphraseHint: null

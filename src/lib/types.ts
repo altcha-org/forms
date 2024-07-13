@@ -43,8 +43,8 @@ export interface IFormBlock<TOptions extends Record<string, unknown> = Record<st
 	type: string;
 }
 
-export type IFormBlockPartial<TOptions extends Record<string, unknown> = Record<string, unknown>> = Omit<IFormBlock, 'options' | 'type'> &
-	Partial<Pick<IFormBlock<TOptions>, 'options' | 'type'>>;
+export type IFormBlockPartial<TOptions extends Record<string, unknown> = Record<string, unknown>> =
+	Omit<IFormBlock, 'options' | 'type'> & Partial<Pick<IFormBlock<TOptions>, 'options' | 'type'>>;
 
 export interface IFormStep {
 	blocks: IFormBlock[];
@@ -52,7 +52,7 @@ export interface IFormStep {
 	title?: string;
 }
 
-export interface IFormProcessor<Config = unknown> {
+export interface IFormProcessor<Config extends Record<string, unknown> = Record<string, unknown>> {
 	config: Config;
 	description?: string;
 	enabled: boolean;
@@ -168,7 +168,7 @@ export interface IPdfInputOptions {
 export interface IPdfInputElement {
 	computed?: string;
 	height: number;
-  id: string;
+	id: string;
 	name?: string;
 	page: number;
 	pageHeight: number;

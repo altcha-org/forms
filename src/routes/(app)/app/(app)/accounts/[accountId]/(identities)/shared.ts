@@ -25,7 +25,7 @@ export async function identityMiddleware(
 	}
 	checkUserAccountAccess(event.locals.user, identity.accountId, options.requiredRole);
 	return {
-    account,
-		identity,
+		account,
+		identity
 	};
 }

@@ -2,13 +2,12 @@ import { and, count, eq } from 'drizzle-orm';
 import { cipher, rsa } from '@altcha/crypto';
 import { base64Encode } from '@altcha/crypto/encoding';
 import { db } from '$lib/server/db';
-import { accounts, accountsToUsers, forms, invites, users } from '$lib/server/db/schema';
+import { accounts, accountsToUsers, invites, users } from '$lib/server/db/schema';
 import { EIdPrefix, idgen } from '$lib/server/id';
 import { encryptionKeysService } from '$lib/server/services/encryptionKeys.service';
 import { subscriptionsService } from '$lib/server/services/subscriptions.service';
 import { paddleService } from '$lib/server/services/paddle.service';
 import { plansService } from '$lib/server/services/plans.service';
-import { usersService } from './users.service';
 
 export type IAccount = NonNullable<Awaited<ReturnType<AccountsService['findAccount']>>>;
 
@@ -76,7 +75,7 @@ export class AccountsService {
 			.where(and(eq(accountsToUsers.accountId, accountId), eq(accountsToUsers.userId, userId)));
 	}
 
-	async encryptData(accountId: string, data: any, encryptionKeyHash?: string | null) {
+	async encryptData(accountId: string, data: unknown, encryptionKeyHash?: string | null) {
 		const encyptionKey = await encryptionKeysService.findEncryptionKeyForAccount(
 			accountId,
 			encryptionKeyHash
@@ -193,6 +192,7 @@ export class AccountsService {
 		const subscriptions = await subscriptionsService.listSubscriptionsForAccount(accountId);
 		const activeSubscription = subscriptions.find(({ status }) => status === 'active');
 		if (activeSubscription) {
+			// TODO:
 		} else {
 			// TODO: switch to free plan
 		}

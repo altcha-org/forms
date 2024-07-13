@@ -3,7 +3,7 @@ import fm from 'front-matter';
 import DOMPurify from 'isomorphic-dompurify';
 import { replaceVariables } from './helpers';
 
-export type TemplateChunk = Function | string;
+export type TemplateChunk = ((vars: Record<string, unknown>) => string) | string;
 
 export type Template = {
 	attributes: Record<string, TemplateChunk[]>;
@@ -64,7 +64,7 @@ function renderTemplateChunks(chunks: TemplateChunk[], vars: Record<string, unkn
 }
 
 function stringToTemplateChunks(str: string) {
-	const matches = str.matchAll(/\{[^\}]+\}/g);
+	const matches = str.matchAll(/\{[^}]+\}/g);
 	const template: TemplateChunk[] = [];
 	let pos = 0;
 	for (const match of matches) {
@@ -81,8 +81,4 @@ function stringToTemplateChunks(str: string) {
 	}
 	template.push(str.slice(pos));
 	return template;
-}
-
-function htmlEncodeEntities(str: string) {
-	return str.replace(/[\u00A0-\u9999<>\&]/g, (i) => '&#' + i.charCodeAt(0) + ';');
 }

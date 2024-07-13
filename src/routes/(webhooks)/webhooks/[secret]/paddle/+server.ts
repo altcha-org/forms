@@ -34,14 +34,14 @@ export const POST = requestHandler(
 			let eventData: EventEntity | null = null;
 			try {
 				eventData = paddle.webhooks.unmarshal(body, env.PADDLE_WEBHOOK_SECRET_KEY, signature);
-			} catch (err: any) {
+			} catch (err) {
 				return {
-					error: err.message,
+					error: typeof err === 'object' && err && 'message' in err ? err.message : err,
 					ok: false
 				};
 			}
 			if (eventData) {
-				// @ts-expect-error
+				// @ts-expect-error ts error
 				const { account_id } = (eventData.data.customData || {}) as { account_id?: string };
 				if (account_id) {
 					const { region } = idgen.decode(account_id);

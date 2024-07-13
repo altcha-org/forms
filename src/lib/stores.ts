@@ -14,9 +14,9 @@ type IDevicePartial = Pick<IDevice, 'id' | 'name' | 'encryptionKey'>;
 
 const PERSISTENT_STORE_PREFIX = 'persistent_store';
 
-const persistentStoreWritables: Record<string, Writable<any>> = {};
+const persistentStoreWritables: Record<string, Writable<unknown>> = {};
 
-let persistentStoreData: Record<string, any> = {};
+let persistentStoreData: Record<string, unknown> = {};
 let persistentStoreLoaded: boolean = false;
 let persistentStoreDeviceId: string | null = null;
 let persistentStoreKey: CryptoKey | null = null;
@@ -96,7 +96,7 @@ uploadProgress.subscribe((value) => {
 				})
 			);
 		}
-	} else if (!!promise) {
+	} else if (promise) {
 		uploadPromise.set(void 0);
 	}
 });
@@ -142,7 +142,7 @@ async function writePeristentStore() {
 }
 
 function persistentWritable<T>(name: string, defaultValue?: T) {
-	const store = writable<T>(persistentStoreData[name] || defaultValue);
+	const store = writable<T>((persistentStoreData[name] || defaultValue) as T);
 	let loaded = false;
 	store.subscribe((value) => {
 		if (loaded) {

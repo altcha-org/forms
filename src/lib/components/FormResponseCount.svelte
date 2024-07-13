@@ -9,7 +9,6 @@
 	export let received: number;
 
 	$: entries = count.filter(({ id }) => id === formId);
-	$: total = entries.reduce((acc, { count }) => acc + count, 0);
 	$: unreadSpam = entries
 		.filter(({ read, spam }) => !!spam && !read)
 		.reduce((acc, { count }) => acc + count, 0);

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
 	import { createEventDispatcher } from 'svelte';
+	import DOMPurify from 'isomorphic-dompurify';
 	import BLOCKS from '$lib/consts/blocks';
 	import DropdownMenu from './DropdownMenu.svelte';
 	import AsteriskIcon from '$lib/components/icons/Asterisk.svelte';
@@ -86,7 +87,8 @@
 
 	<div>
 		<div class="w-5 h-5 opacity-60">
-			{@html blockIcon}
+			<!-- eslint-disable svelte/no-at-html-tags -->
+			{@html DOMPurify.sanitize(blockIcon || '')}
 		</div>
 	</div>
 
@@ -101,9 +103,9 @@
 			<div class="text-sm opacity-60">{$_('block.' + block.type)}</div>
 		{:else if block.type === 'PdfInput'}
 			{#if pdfOptions?.fileName}
-			<div class="max-w-[12rem] lg:max-w-xs truncate">{pdfOptions?.fileName}</div>
+				<div class="max-w-[12rem] lg:max-w-xs truncate">{pdfOptions?.fileName}</div>
 			{:else}
-			<div class="italic opacity-60">{$_('placeholder.select_file')}</div>
+				<div class="italic opacity-60">{$_('placeholder.select_file')}</div>
 			{/if}
 			<div class="text-sm opacity-60">{$_('block.' + block.type)}</div>
 		{:else}
@@ -112,16 +114,16 @@
 	</div>
 
 	{#if block.type === 'PdfInput'}
-	<div>
-		<button
-			type="button"
-			class="btn btn-sm btn-ghost hidden lg:flex"
-			on:click={() => dispatch('pdf')}
-		>
-			<PdfIcon class="w-5 h-5" />
-			<span>{$_('button.pdf')}</span>
-		</button>
-	</div>
+		<div>
+			<button
+				type="button"
+				class="btn btn-sm btn-ghost hidden lg:flex"
+				on:click={() => dispatch('pdf')}
+			>
+				<PdfIcon class="w-5 h-5" />
+				<span>{$_('button.pdf')}</span>
+			</button>
+		</div>
 	{/if}
 
 	<div class="flex gap-1 items-center">
@@ -143,16 +145,16 @@
 						</button>
 					</li>
 					{#if block.type === 'PdfInput'}
-					<li class="hidden lg:flex">
-						<button
-							type="button"
-							class="flex grow justify-start items-center gap-3"
-							on:click|preventDefault={() => dispatch('pdf')}
-						>
-							<span class="grow text-left">{$_('button.pdf')}</span>
-							<PdfIcon class="w-4 h-4" />
-						</button>
-					</li>
+						<li class="hidden lg:flex">
+							<button
+								type="button"
+								class="flex grow justify-start items-center gap-3"
+								on:click|preventDefault={() => dispatch('pdf')}
+							>
+								<span class="grow text-left">{$_('button.pdf')}</span>
+								<PdfIcon class="w-4 h-4" />
+							</button>
+						</li>
 					{/if}
 					<li>
 						<button

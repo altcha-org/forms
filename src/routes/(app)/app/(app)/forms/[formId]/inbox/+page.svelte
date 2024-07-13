@@ -142,11 +142,7 @@
 		</div>
 
 		{#if selected.length}
-			<ResponseListBulkActions
-				form={data.form}
-				bind:selected
-				on:export={() => onExport()}
-			/>
+			<ResponseListBulkActions form={data.form} bind:selected on:export={() => onExport()} />
 		{/if}
 	</div>
 </div>

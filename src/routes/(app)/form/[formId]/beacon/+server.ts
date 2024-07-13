@@ -9,7 +9,7 @@ import type { RequestHandler } from './$types';
 
 const formLruCache = new LRUCache<string, boolean>({
 	max: 2000,
-	ttl: 1000 * 60 * 10,
+	ttl: 1000 * 60 * 10
 });
 
 export const POST: RequestHandler = requestHandler(
@@ -20,7 +20,7 @@ export const POST: RequestHandler = requestHandler(
 		await checkForm(formId);
 		await sessionsService.createSession({
 			abondoned: data.submit ? false : true,
-			country: tz && timeZoneToCountryCode(tz) || null,
+			country: (tz && timeZoneToCountryCode(tz)) || null,
 			mobile,
 			fieldDropOff: data.submit ? null : data.fields[data.fields.length - 1]?.[0],
 			error: data.error || null,
@@ -28,27 +28,35 @@ export const POST: RequestHandler = requestHandler(
 			formId,
 			responseId: null,
 			startAt: new Date(data.start || Date.now()),
-			submitAt: data.submit ? new Date(data.submit) : null,
+			submitAt: data.submit ? new Date(data.submit) : null
 		});
 	},
 	{
 		authorization: false,
 		body: t.Object({
 			error: t.Optional(t.Boolean()),
-			fields: t.Array(t.Tuple([t.String({
-				maxLength: 120,
-			}), t.Integer(), t.Integer(), t.Integer()]), {
-				maxItems: 200,
-			}),
+			fields: t.Array(
+				t.Tuple([
+					t.String({
+						maxLength: 120
+					}),
+					t.Integer(),
+					t.Integer(),
+					t.Integer()
+				]),
+				{
+					maxItems: 200
+				}
+			),
 			start: t.Integer({
-				minimum: 0,
+				minimum: 0
 			}),
 			submit: t.Integer({
-				minimum: 0,
-			}),
+				minimum: 0
+			})
 		}),
 		jsonBody: true,
-		rateLimit: 'L3',
+		rateLimit: 'L3'
 	}
 ) satisfies RequestHandler;
 

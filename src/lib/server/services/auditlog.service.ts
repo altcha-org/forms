@@ -1,4 +1,4 @@
-import { and, asc, count, desc, eq } from 'drizzle-orm';
+import { and, count, desc, eq } from 'drizzle-orm';
 import { db } from '$lib/server/db';
 import { env } from '$lib/server/env';
 import { auditlog } from '$lib/server/db/schema';
@@ -30,11 +30,11 @@ export class AuditlogService {
 		return ttl ? roundTime(Date.now() + ttl) : null;
 	}
 
-	getChanges(oldData: Record<string, any>, newData: Record<string, any>) {
+	getChanges(oldData: Record<string, unknown>, newData: Record<string, unknown>) {
 		const getChanges = (
-			a: Record<string, any>,
-			b: Record<string, any>,
-			result: [Array<string | number>, any, any][] = [],
+			a: Record<string, unknown>,
+			b: Record<string, unknown>,
+			result: [Array<string | number>, unknown, unknown][] = [],
 			path: Array<string | number> = []
 		) => {
 			const keys = [...new Set([...Object.keys(b), ...(path.length === 0 ? [] : Object.keys(a))])];
@@ -42,7 +42,12 @@ export class AuditlogService {
 				const value = b[key];
 				const oldValue = a[key];
 				if (value && typeof value === 'object') {
-					getChanges(oldValue || {}, value, result, [...path, key]);
+					getChanges(
+						(oldValue || {}) as Record<string, unknown>,
+						value as Record<string, unknown>,
+						result,
+						[...path, key]
+					);
 				} else if (String(oldValue) !== String(value)) {
 					acc.push([[...path, key], oldValue, value]);
 				}

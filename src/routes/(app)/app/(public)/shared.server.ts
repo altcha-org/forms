@@ -119,7 +119,7 @@ export async function login(
 		challenge,
 		rpID: HOSTNAME,
 		allowCredentials:
-			user?.webauthnAuthenticators.map((passkey, i) => {
+			user?.webauthnAuthenticators.map((passkey) => {
 				return {
 					id: passkey.credentialID,
 					transports: passkey.transports,

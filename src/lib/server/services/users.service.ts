@@ -1,6 +1,6 @@
 import { randomBytes } from 'node:crypto';
 import argon2 from 'argon2';
-import { count, eq } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import jwt from 'jsonwebtoken';
 import duration from 'parse-duration';
 import { db } from '$lib/server/db';
@@ -67,7 +67,7 @@ export class UsersService {
 		role?: 'admin' | 'member'
 	) {
 		const t = await i18n(data.locale);
-		const name = data.name || data.email?.split(/[\@\+]/)[0] || '';
+		const name = data.name || data.email?.split(/[@+]/)[0] || '';
 		const plan = await plansService.getDefaultPlan();
 		let user: IUserSchema | undefined = void 0;
 		try {
@@ -92,8 +92,13 @@ export class UsersService {
 				})
 				.returning();
 			user = result[0];
-		} catch (err: any) {
-			if (err.constraint_name === 'users_email_unique') {
+		} catch (err) {
+			if (
+				typeof err === 'object' &&
+				err &&
+				'constraint_name' in err &&
+				err.constraint_name === 'users_email_unique'
+			) {
 				throw new ValidationError(void 0, [
 					{
 						instancePath: '/email',

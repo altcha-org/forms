@@ -81,12 +81,12 @@
 		{/if}
 
 		<List items={identityMetadata}>
-      <svelte:fragment let:item>
-        <div class="text-sm opacity-60">{item[0]}</div>
-        <div>
-          <MarkdownRenderer value={item[1]} />
-        </div>
-      </svelte:fragment>
+			<svelte:fragment let:item>
+				<div class="text-sm opacity-60">{item[0]}</div>
+				<div>
+					<MarkdownRenderer value={item[1]} />
+				</div>
+			</svelte:fragment>
 
 			<svelte:fragment slot="actions" let:item>
 				<div class="dropdown dropdown-end dropdown-bottom pt-1.5">
@@ -97,16 +97,24 @@
 						<ul class="menu gap-1">
 							<li class="menu-title">{$_('label.actions')}</li>
 							<li>
-								<button type="button" class="flex grow" on:click|preventDefault={() => copyToClipboard(item[1])}>
-                  <span class="grow text-left">{$_('button.copy_to_clipboard')}</span>
-                  <ClipboardIcon class="w-4 h-4" />
-                </button>	
+								<button
+									type="button"
+									class="flex grow"
+									on:click|preventDefault={() => copyToClipboard(item[1])}
+								>
+									<span class="grow text-left">{$_('button.copy_to_clipboard')}</span>
+									<ClipboardIcon class="w-4 h-4" />
+								</button>
 							</li>
 							<li>
-								<button type="button" class="grow flex" on:click|preventDefault={() => onEdit(item[0], item[1])}>
-                  <span class="grow text-left">{$_('button.edit')}</span>
-                  <EditIcon class="w-4 h-4" />
-                </button>
+								<button
+									type="button"
+									class="grow flex"
+									on:click|preventDefault={() => onEdit(item[0], item[1])}
+								>
+									<span class="grow text-left">{$_('button.edit')}</span>
+									<EditIcon class="w-4 h-4" />
+								</button>
 							</li>
 							<li>
 								<Form

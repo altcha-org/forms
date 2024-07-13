@@ -19,7 +19,7 @@ export const GET = requestHandler(
 ) satisfies RequestHandler;
 
 export const DELETE = requestHandler(
-	async (event, data) => {
+	async (event) => {
 		const { response } = await middleware(event);
 		await responsesService.deleteResponses([response.id]);
 	},

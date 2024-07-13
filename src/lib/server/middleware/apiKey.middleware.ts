@@ -23,7 +23,10 @@ export default () => {
 					throw new ForbiddenError('Wrong referrer.');
 				}
 				const host = new URL(referrer, 'http://unknowndomain').host;
-				const referrers = apiKey.referrer?.split(/[\n;,]/).map((p: string) => p.trim()).filter((p: string) => !!p);
+				const referrers = apiKey.referrer
+					?.split(/[\n;,]/)
+					.map((p: string) => p.trim())
+					.filter((p: string) => !!p);
 				if (!referrers.includes(host)) {
 					throw new ForbiddenError('Wrong referrer.');
 				}

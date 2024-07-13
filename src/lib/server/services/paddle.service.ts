@@ -46,7 +46,7 @@ export class PaddleService {
 		return this.request('GET', `/subscriptions/${subscriptionId}`);
 	}
 
-	async request(method: string, uri: string, data?: any) {
+	async request(method: string, uri: string, data?: unknown) {
 		const headers: Record<string, string> = {
 			authorization: 'Bearer ' + env.PADDLE_API_KEY
 		};

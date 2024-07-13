@@ -40,7 +40,7 @@ export class EmailProcessor extends BaseProcessor<{
 			});
 		}
 		const recipients = options.recipient
-			.split(/\,\s{0,}/)
+			.split(/,\s{0,}/)
 			.map((recipient) => {
 				recipient = recipient.trim();
 				if (recipient.startsWith('$.')) {

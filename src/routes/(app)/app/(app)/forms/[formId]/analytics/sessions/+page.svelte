@@ -1,3 +1,1 @@
-<div>
-  Coming soon.
-</div>
+<div>Coming soon.</div>

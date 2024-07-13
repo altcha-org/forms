@@ -1,6 +1,5 @@
 import { and, asc, eq, inArray } from 'drizzle-orm';
 import { db } from '$lib/server/db';
-import { getAppBaseUrl } from '$lib/server/env';
 import { accountsToUsers, invites } from '$lib/server/db/schema';
 import { EIdPrefix, idgen } from '$lib/server/id';
 import { EEvents, eventsService } from '$lib/server/services/events.service';

@@ -5,13 +5,9 @@
 	import List from '$lib/components/List.svelte';
 	import DeleteIcon from '$lib/components/icons/Delete.svelte';
 	import MoreHorizontalIcon from '$lib/components/icons/MoreHorizontal.svelte';
-	import { formatTimeAgo } from '$lib/format';
 	import type { PageData } from './$types';
-	import { device } from '$lib/stores';
 
 	export let data: PageData;
-
-	$: currentDeviceId = data.device?.id;
 </script>
 
 <List items={data.passkeys} let:item={passkey}>
@@ -39,7 +35,6 @@
 								confirmText={$_('text.confirm_remove', { values: { name: passkey.credentialID } })}
 								class="grow flex"
 								data={{ passkeyId: passkey.credentialID }}
-								let:loading
 							>
 								<button type="submit" class="grow flex">
 									<span class="grow text-left">{$_('button.delete')}</span>

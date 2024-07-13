@@ -7,7 +7,8 @@
 		initializePaddle,
 		type Paddle,
 		type CheckoutEventsTotals,
-		type CheckoutEventsItem
+		type CheckoutEventsItem,
+		type Environments
 	} from '@paddle/paddle-js';
 	import { formatPrice } from '$lib/format';
 	import LockIcon from '$lib/components/icons/Lock.svelte';
@@ -22,14 +23,12 @@
 	let loading: boolean = false;
 	let paddle: Paddle | null = null;
 	let totals: CheckoutEventsTotals | null = null;
-	let updatePaymentMethod: boolean = false;
 
 	onMount(() => {
 		loading = true;
 		error = null;
 		initializePaddle({
-			// @ts-ignore
-			environment: data.paddleEnv,
+			environment: data.paddleEnv as Environments,
 			token: data.paddleClientToken,
 			checkout: {
 				settings: {
@@ -55,10 +54,9 @@
 						}
 						break;
 					case 'checkout.loaded':
-						loading = false;
 					default:
+						loading = false;
 						if (ev.data?.status && ev.data?.totals) {
-							updatePaymentMethod = ev.data.status === 'ready';
 							currency = ev.data.currency_code;
 							items = ev.data.items;
 							totals = ev.data.totals;

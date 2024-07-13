@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { onDestroy, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import BaseInput from '$lib/components/blocks/BaseInput.svelte';
 	import SignatureCanvas from '$lib/components/SignatureCanvas.svelte';
@@ -35,7 +35,7 @@
 	});
 
 	function generatePdf() {
-		const data = Object.fromEntries(new FormData(elForm!)) as Record<string, any>;
+		const data = Object.fromEntries(new FormData(elForm!)) as Record<string, unknown>;
 		const pdf = new Pdf({
 			pageNumbers: true
 		});

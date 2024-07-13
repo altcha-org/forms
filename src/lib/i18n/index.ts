@@ -28,11 +28,11 @@ export const availableLocales = {
 
 export async function i18n(
 	l: string = defaultLocale
-): Promise<(key: string, params?: { values: any }) => string> {
+): Promise<(key: string, params?: Parameters<typeof _t>[1]) => string> {
 	if (get(locale) !== l) {
 		await waitLocale(l);
 	}
-	return (key: string, params?: { values: any }) => {
+	return (key: string, params?: Parameters<typeof _t>[1]) => {
 		if (get(locale) !== l) {
 			locale.set(l);
 		}

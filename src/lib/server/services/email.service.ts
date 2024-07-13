@@ -87,7 +87,7 @@ export class EmailService {
 		if (!transport) {
 			return false;
 		}
-		// @ts-expect-error
+		// @ts-expect-error ts error
 		const defaultFrom = transport._defaults.from;
 		const headers: Record<string, string> = {};
 		if (options.accountId) {

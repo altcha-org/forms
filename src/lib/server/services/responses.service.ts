@@ -2,7 +2,14 @@ import {} from '@altcha/crypto';
 import { and, asc, count, desc, eq, or, inArray, sql, lt, type SQL, gte, lte } from 'drizzle-orm';
 import { db } from '$lib/server/db';
 import { roundTime } from '$lib/server/helpers';
-import { accountsToUsers, files, forms, formsToUsers, notes, responses } from '$lib/server/db/schema';
+import {
+	accountsToUsers,
+	files,
+	forms,
+	formsToUsers,
+	notes,
+	responses
+} from '$lib/server/db/schema';
 import { filesService } from '$lib/server/services/files.service';
 import { accountsService } from '$lib/server/services/accounts.service';
 import { plansService } from '$lib/server/services/plans.service';
@@ -118,16 +125,32 @@ export class ResponsesService {
 					eq(responses.deleted, false),
 					eq(responses.spam, false),
 					eq(responses.formId, options.formId),
-					options.dateStart ? gte(responses.id, idgen.prefixed(EIdPrefix.RESPONSE, idgen.boundary(options.dateStart.getTime(), false))) : void 0,
-					options.dateEnd ? lte(responses.id, idgen.prefixed(EIdPrefix.RESPONSE, idgen.boundary(options.dateEnd.getTime(), true))) : void 0,
+					options.dateStart
+						? gte(
+								responses.id,
+								idgen.prefixed(
+									EIdPrefix.RESPONSE,
+									idgen.boundary(options.dateStart.getTime(), false)
+								)
+							)
+						: void 0,
+					options.dateEnd
+						? lte(
+								responses.id,
+								idgen.prefixed(EIdPrefix.RESPONSE, idgen.boundary(options.dateEnd.getTime(), true))
+							)
+						: void 0
 				)
 			);
 		return result[0].value;
 	}
 
-	async countResponsesForAccountUser(
-		options: { accountId: string; dateEnd?: Date; dateStart?: Date; userId: string; }
-	) {
+	async countResponsesForAccountUser(options: {
+		accountId: string;
+		dateEnd?: Date;
+		dateStart?: Date;
+		userId: string;
+	}) {
 		const result = await db
 			.select({
 				value: count(responses.id)
@@ -141,8 +164,21 @@ export class ResponsesService {
 					eq(responses.accountId, options.accountId),
 					eq(responses.deleted, false),
 					eq(responses.spam, false),
-					options.dateStart ? gte(responses.id, idgen.prefixed(EIdPrefix.RESPONSE, idgen.boundary(options.dateStart.getTime(), false))) : void 0,
-					options.dateEnd ? lte(responses.id, idgen.prefixed(EIdPrefix.RESPONSE, idgen.boundary(options.dateEnd.getTime(), true))) : void 0,
+					options.dateStart
+						? gte(
+								responses.id,
+								idgen.prefixed(
+									EIdPrefix.RESPONSE,
+									idgen.boundary(options.dateStart.getTime(), false)
+								)
+							)
+						: void 0,
+					options.dateEnd
+						? lte(
+								responses.id,
+								idgen.prefixed(EIdPrefix.RESPONSE, idgen.boundary(options.dateEnd.getTime(), true))
+							)
+						: void 0,
 					or(
 						eq(forms.restricted, false),
 						eq(accountsToUsers.role, 'admin'),
@@ -409,7 +445,15 @@ export class ResponsesService {
 	}
 
 	async listResponsesForAccountAndUser(
-		options: IPaginationOptions & IOrderByOptions & { accountId: string; dateStart?: Date; dateEnd?: Date; formId?: string; responseIds?: string[]; userId: string }
+		options: IPaginationOptions &
+			IOrderByOptions & {
+				accountId: string;
+				dateStart?: Date;
+				dateEnd?: Date;
+				formId?: string;
+				responseIds?: string[];
+				userId: string;
+			}
 	) {
 		return db
 			.select({
@@ -445,8 +489,21 @@ export class ResponsesService {
 					eq(responses.spam, false),
 					options.formId ? eq(responses.formId, options.formId) : void 0,
 					options.responseIds ? inArray(responses.id, options.responseIds) : void 0,
-					options.dateStart ? gte(responses.id, idgen.prefixed(EIdPrefix.RESPONSE, idgen.boundary(options.dateStart.getTime(), false))) : void 0,
-					options.dateEnd ? lte(responses.id, idgen.prefixed(EIdPrefix.RESPONSE, idgen.boundary(options.dateEnd.getTime(), true))) : void 0,
+					options.dateStart
+						? gte(
+								responses.id,
+								idgen.prefixed(
+									EIdPrefix.RESPONSE,
+									idgen.boundary(options.dateStart.getTime(), false)
+								)
+							)
+						: void 0,
+					options.dateEnd
+						? lte(
+								responses.id,
+								idgen.prefixed(EIdPrefix.RESPONSE, idgen.boundary(options.dateEnd.getTime(), true))
+							)
+						: void 0,
 					or(
 						eq(forms.restricted, false),
 						eq(accountsToUsers.role, 'admin'),

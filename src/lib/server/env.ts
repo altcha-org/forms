@@ -293,9 +293,11 @@ export const schema = t.Object({
 	/**
 	 * Redis server URL
 	 */
-	REDIS_URL: t.Optional(t.String({
-		format: 'uri'
-	})),
+	REDIS_URL: t.Optional(
+		t.String({
+			format: 'uri'
+		})
+	),
 
 	// User access recovery settings
 	/**
@@ -322,14 +324,21 @@ export const schema = t.Object({
 	)
 });
 
-export let env: Static<typeof schema> = !building ? assertEnv(schema) : ({} as any);
+export const env: Static<typeof schema> = !building
+	? assertEnv(schema)
+	: ({} as Static<typeof schema>);
 
 export function assertEnv<T extends TSchema>(schema: T): Static<T> {
 	let result: Record<string, string | undefined> = {};
 	try {
 		result = validateSchema(compileSchema(schema), { ...process.env }) as typeof env;
-	} catch (err: any) {
-		throw new ValidationError('Env: ' + err, err.details);
+	} catch (err) {
+		throw new ValidationError(
+			'Env: ' + err,
+			typeof err === 'object' && err && 'details' in err && Array.isArray(err.details)
+				? err.details
+				: []
+		);
 	}
 	return result;
 }

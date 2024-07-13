@@ -2,7 +2,6 @@
 	import { _ } from 'svelte-i18n';
 	import { formatDateTime } from '$lib/format';
 	import AlertIcon from '$lib/components/icons/Alert.svelte';
-	import CheckIcon from '$lib/components/icons/Check.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -19,7 +18,7 @@
 
 	<div class="p-3">
 		<ul class="timeline timeline-snap-icon timeline-compact timeline-vertical">
-			{#each records as { data, error, text, time }, i}
+			{#each records as { error, text, time }, i}
 				<li class="">
 					{#if i > 0}
 						<hr />

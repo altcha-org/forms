@@ -17,7 +17,7 @@ export const load = loadHandler(async ({ locals, params, parent }) => {
 		count: formsService.countResponsesForForms(params.accountId),
 		forms: await formsService.listFormsForUser({
 			accountId,
-			userId: user.id,
+			userId: user.id
 		}),
 		responses: await responsesService.listResponsesForAccountAndUser({
 			accountId,
@@ -25,7 +25,7 @@ export const load = loadHandler(async ({ locals, params, parent }) => {
 			offset: 0,
 			orderBy: 'id',
 			orderDir: 'desc',
-			userId: user.id,
+			userId: user.id
 		})
 	};
 }) satisfies PageServerLoad;

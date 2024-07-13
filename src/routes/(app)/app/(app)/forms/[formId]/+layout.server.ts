@@ -1,4 +1,3 @@
-import { env } from '$lib/server/env';
 import { loadHandler } from '$lib/server/handlers';
 import { license } from '$lib/server/license';
 import { formMiddleware } from './shared';

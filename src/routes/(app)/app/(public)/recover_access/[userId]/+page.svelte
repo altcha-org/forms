@@ -5,23 +5,23 @@
 	import { goto } from '$app/navigation';
 	import Form from '$lib/components/Form.svelte';
 	import PasswordInput from '$lib/components/blocks/PasswordInput.svelte';
-	import { formatDuration } from '$lib/format';
-	import { initPasskeyRegistration } from '../../shared';
-	import type { PageData } from './$types';
 	import MarkdownRenderer from '$lib/components/MarkdownRenderer.svelte';
 	import Alert from '$lib/components/Alert.svelte';
+	import { formatDuration } from '$lib/format';
+	import { initPasskeyRegistration } from '../../shared';
+	import type { PublicKeyCredentialCreationOptionsJSON } from '@simplewebauthn/types';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 
-	let authError: string | undefined = void 0;
 	let timeLoaded = Date.now();
 	let timeLeft: number = data.timeLeft;
 	let timeLeftFormatted: string = '';
-	let timeLeftFormattedInterval: Timer | null = null;
+	let timeLeftFormattedInterval: ReturnType<typeof setInterval> | null = null;
 	let recoveryPassphrase: string = '';
 
 	$: enabled = timeLeft === 0;
-	$: recoveryToken = browser ? location.hash.match(/\?token\=(.*)/)?.[1] : null;
+	$: recoveryToken = browser ? location.hash.match(/\?token=(.*)/)?.[1] : null;
 
 	onDestroy(() => {
 		if (timeLeftFormattedInterval) {
@@ -38,15 +38,20 @@
 	});
 
 	function onSubmit(data: {
-		result: { data: { challenge: string; userId: string; registration?: any } };
+		result: {
+			data: {
+				challenge: string;
+				userId: string;
+				registration?: PublicKeyCredentialCreationOptionsJSON;
+			};
+		};
 	}) {
 		if (data.result.data.registration) {
 			initPasskeyRegistration(
 				data.result.data.challenge,
 				data.result.data.userId,
 				data.result.data.registration
-			).then(({ error, success }) => {
-				authError = error?.startsWith('error.') ? $_(error) : error;
+			).then(({ success }) => {
 				if (success) {
 					goto('/app', {
 						invalidateAll: true

@@ -26,7 +26,7 @@ export const load = loadHandler(
 		};
 	},
 	{
-		requiredRole: 'admin',
+		requiredRole: 'admin'
 	}
 ) satisfies PageServerLoad;
 
@@ -43,8 +43,8 @@ export const actions = {
 			requiredRole: 'admin',
 			body: t.Object({
 				apiKeyId: t.String(),
-				month: t.Optional(t.String()),
+				month: t.Optional(t.String())
 			})
 		}
-	),
+	)
 } satisfies Actions;

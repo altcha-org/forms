@@ -10,18 +10,20 @@ export const POST = requestHandler(
 		if (!file || file.finalized) {
 			throw new ForbiddenError();
 		}
-    await filesService.updateFile(file.id, {
-      encryptedSize: file.encrypted ? body.encryptedSize : void 0,
-      expiresAt: null,
-      finalized: true,
-    });
+		await filesService.updateFile(file.id, {
+			encryptedSize: file.encrypted ? body.encryptedSize : void 0,
+			expiresAt: null,
+			finalized: true
+		});
 	},
 	{
 		authorization: false,
 		body: t.Object({
-			encryptedSize: t.Optional(t.Integer({
-				minimum: 0,
-			})),
+			encryptedSize: t.Optional(
+				t.Integer({
+					minimum: 0
+				})
+			)
 		}),
 		rateLimit: 'L3'
 	}

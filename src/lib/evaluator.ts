@@ -1,4 +1,4 @@
-export function evalExpression(expression: string, input: Record<string, any>): boolean | null {
+export function evalExpression(expression: string, input: Record<string, unknown>): boolean | null {
 	if (expression.includes('&&')) {
 		return evalLogicalOperator(expression.split('&&'), input, true);
 	}
@@ -20,7 +20,7 @@ export function evalExpression(expression: string, input: Record<string, any>): 
 	return match[1] === '!' ? !result : result;
 }
 
-function evalLogicalOperator(expressions: string[], input: Record<string, any>, and: boolean) {
+function evalLogicalOperator(expressions: string[], input: Record<string, unknown>, and: boolean) {
 	return expressions.reduce(
 		(acc, sub, i) => {
 			if (acc !== null) {
@@ -36,11 +36,11 @@ function evalLogicalOperator(expressions: string[], input: Record<string, any>, 
 	);
 }
 
-function evalVariable(name: string, input: Record<string, any>) {
+function evalVariable(name: string, input: Record<string, unknown>) {
 	return input[name.slice(2)];
 }
 
-function evalComparator(op: string, left: any, right: any): boolean {
+function evalComparator(op: string, left: unknown, right: unknown): boolean {
 	switch (op) {
 		case '===':
 		case '==':
@@ -48,13 +48,13 @@ function evalComparator(op: string, left: any, right: any): boolean {
 		case '!=':
 			return left != right;
 		case '>':
-			return left > right;
+			return String(left) > String(right);
 		case '>=':
-			return left >= right;
+			return String(left) >= String(right);
 		case '<':
-			return left < right;
+			return String(left) < String(right);
 		case '<=':
-			return left <= right;
+			return String(left) <= String(right);
 		case 'includes':
 			return String(left).includes(String(right));
 		case 'startsWith':

@@ -19,6 +19,19 @@ module.exports = {
 		es2017: true,
 		node: true
 	},
+	globals: {
+		$$Generic: 'readonly'
+	},
+	rules: {
+		'no-constant-condition': ['off'],
+		'@typescript-eslint/no-unused-vars': [
+			'error',
+			{
+				varsIgnorePattern: '^_',
+				argsIgnorePattern: '^_'
+			}
+		]
+	},
 	overrides: [
 		{
 			files: ['*.svelte'],

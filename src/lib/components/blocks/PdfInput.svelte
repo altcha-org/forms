@@ -9,13 +9,13 @@
 	import DownloadIcon from '$lib/components/icons/Download.svelte';
 	import MarkdownRenderer from '$lib/components/MarkdownRenderer.svelte';
 	import { getTimeZone, solveAltcha, uploadFile } from '$lib/helpers';
-	import type { Payload as AltchaPayload, Challenge as AltchaChallenge } from 'altcha-lib/types';
+	import type { Payload as AltchaPayload } from 'altcha-lib/types';
 	import type { IForm, IFormBlock, IPdfInputOptions } from '$lib/types';
 
 	export let block: IFormBlock<{
 		expanded?: boolean;
 		fileName?: string;
-		pdf: IPdfInputOptions
+		pdf: IPdfInputOptions;
 		text?: string;
 	}>;
 	export let form: IForm | undefined = void 0;
@@ -33,9 +33,11 @@
 	$: fileName = block.options.fileName || block.options?.pdf?.fileName || '';
 	$: text = block.options?.text || '';
 	$: collapsed = !block.options?.expanded;
-	$: pdfBlocks = form ? form.steps.reduce((acc, { blocks }) => {
-		return [...acc, ...blocks.filter(({ type }) => type === 'PdfInput')];
-	}, [] as IFormBlock[]) : [] as IFormBlock[];
+	$: pdfBlocks = form
+		? form.steps.reduce((acc, { blocks }) => {
+				return [...acc, ...blocks.filter(({ type }) => type === 'PdfInput')];
+			}, [] as IFormBlock[])
+		: ([] as IFormBlock[]);
 	$: index = pdfBlocks.indexOf(block);
 	$: pdfLink = `/storage/${pdfFileId}`;
 
@@ -47,11 +49,16 @@
 	});
 
 	function getSignatureData() {
-		const canvases = [...elForm?.querySelectorAll('[data-signature-canvas]') || []] as HTMLCanvasElement[];
-		return canvases.reduce((acc, canvas) => {
-			acc[canvas.getAttribute('data-signature-canvas')!] = canvas.toDataURL('image/jpeg', 0.85);
-			return acc;
-		}, {} as Record<string, string>);
+		const canvases = [
+			...(elForm?.querySelectorAll('[data-signature-canvas]') || [])
+		] as HTMLCanvasElement[];
+		return canvases.reduce(
+			(acc, canvas) => {
+				acc[canvas.getAttribute('data-signature-canvas')!] = canvas.toDataURL('image/jpeg', 0.85);
+				return acc;
+			},
+			{} as Record<string, string>
+		);
 	}
 
 	function normalizeFileName(name: string) {
@@ -59,7 +66,7 @@
 		return name.endsWith('.pdf') ? name : name + '.pdf';
 	}
 
-	async function generatePdfFetch(data: Record<string, string | FormDataEntryValue>, altcha?: AltchaPayload) {
+	async function generatePdfFetch(data: Record<string, string>, altcha?: AltchaPayload) {
 		const headers: Record<string, string> = {
 			'content-type': 'application/json'
 		};
@@ -71,11 +78,11 @@
 				data,
 				index,
 				locale: form?.locale,
-				tz: getTimeZone(),
+				tz: getTimeZone()
 			}),
 			headers,
-			method: 'POST',
-		});	
+			method: 'POST'
+		});
 		if (resp.status === 401 && !altcha) {
 			const auth = resp.headers.get('www-authenticate');
 			if (auth && !altcha) {
@@ -92,14 +99,14 @@
 	async function generatePdf() {
 		const data = {
 			...(elForm ? Object.fromEntries(new FormData(elForm)) : {}),
-			...getSignatureData(),
+			...getSignatureData()
 		};
-		const resp = await generatePdfFetch(data);
+		const resp = await generatePdfFetch(data as Record<string, string>);
 		if (resp.status !== 200) {
 			throw new Error(`Server responded with ${resp.status}`);
 		}
 		return new File([await resp.blob()], normalizeFileName(fileName) || 'file.pdf', {
-			type: 'application/pdf',
+			type: 'application/pdf'
 		});
 	}
 
@@ -121,7 +128,6 @@
 			}
 		}
 	}
-
 </script>
 
 <BaseInput {block}>
@@ -132,15 +138,11 @@
 
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<div
-			class="flex items-center gap-3 --max-w-full h-12 px-3"
-		>
-			<div
-				class="grow truncate"
-			>
+		<div class="flex items-center gap-3 --max-w-full h-12 px-3">
+			<div class="grow truncate">
 				<div
 					class="flex gap-3 items-center cursor-pointer"
-					on:click|preventDefault={() => collapsed = !collapsed}
+					on:click|preventDefault={() => (collapsed = !collapsed)}
 				>
 					<PdfIcon class="w-7 h-7" />
 					<div class="font-bold truncate">{fileName}</div>
@@ -148,37 +150,34 @@
 			</div>
 
 			<div class="shrink-0 flex gap-2">
-				<a href={pdfLink + '?download=1'}
-					type="button"
-					class="btn btn-sm btn-ghost"
-				>
-					<DownloadIcon class="w-4 h-5" />	
+				<a href={pdfLink + '?download=1'} type="button" class="btn btn-sm btn-ghost">
+					<DownloadIcon class="w-4 h-5" />
 					<span>{$_('button.download')}</span>
-				</a>	
+				</a>
 				<button
 					type="button"
 					class="btn btn-sm btn-square btn-ghost"
-					on:click|preventDefault={() => collapsed = !collapsed}
+					on:click|preventDefault={() => (collapsed = !collapsed)}
 				>
 					{#if collapsed}
-					<ArrowDownIcon class="w-5 h-5" />
+						<ArrowDownIcon class="w-5 h-5" />
 					{:else}
-					<ArrowUpIcon class="w-5 h-5" />
+						<ArrowUpIcon class="w-5 h-5" />
 					{/if}
-				</button>	
+				</button>
 			</div>
 		</div>
 
 		{#if text}
-		<div class="prose max-w-full text-sm opacity-70 px-3 pb-2">
-			<MarkdownRenderer value={text} />
-		</div>
+			<div class="prose max-w-full text-sm opacity-70 px-3 pb-2">
+				<MarkdownRenderer value={text} />
+			</div>
 		{/if}
 
 		{#if !collapsed}
-		<div class="mx-3 mb-3 bg-base-300">
-			<iframe src={pdfLink} title="PDF" class="w-full min-h-80"></iframe>
-		</div>
+			<div class="mx-3 mb-3 bg-base-300">
+				<iframe src={pdfLink} title="PDF" class="w-full min-h-80"></iframe>
+			</div>
 		{/if}
 	</div>
 </BaseInput>

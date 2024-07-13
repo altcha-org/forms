@@ -10,7 +10,7 @@
 	export let error: string | null | undefined = void 0;
 	export let hideAside: boolean = false;
 	export let hideLabel: boolean = false;
-	export let value: any = void 0;
+	export let value: string | null | undefined = void 0;
 
 	const dispatch = createEventDispatcher();
 

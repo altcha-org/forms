@@ -17,16 +17,16 @@ export const GET = requestHandler(
 			? responseIds.length
 			: formId
 				? await responsesService.countResponsesForForm({
-					dateEnd: dateEnd ? parseISO(dateEnd) : void 0,
-					dateStart: dateStart ? parseISO(dateStart) : void 0,
-					formId,
-				})
+						dateEnd: dateEnd ? parseISO(dateEnd) : void 0,
+						dateStart: dateStart ? parseISO(dateStart) : void 0,
+						formId
+					})
 				: await responsesService.countResponsesForAccountUser({
-					accountId: account.id,
-					dateEnd: dateEnd ? parseISO(dateEnd) : void 0,
-					dateStart: dateStart ? parseISO(dateStart) : void 0,
-					userId: user.id,
-				});
+						accountId: account.id,
+						dateEnd: dateEnd ? parseISO(dateEnd) : void 0,
+						dateStart: dateStart ? parseISO(dateStart) : void 0,
+						userId: user.id
+					});
 		const responses = await responsesService.listResponsesForAccountAndUser({
 			accountId: account.id,
 			dateEnd: dateEnd ? new Date(dateEnd) : void 0,
@@ -49,12 +49,16 @@ export const GET = requestHandler(
 	{
 		rateLimit: 'L1',
 		searchParams: t.Object({
-			dateEnd: t.Optional(t.String({
-				format: 'date-time',
-			})),
-			dateStart: t.Optional(t.String({
-				format: 'date-time',
-			})),
+			dateEnd: t.Optional(
+				t.String({
+					format: 'date-time'
+				})
+			),
+			dateStart: t.Optional(
+				t.String({
+					format: 'date-time'
+				})
+			),
 			formId: t.Optional(t.String()),
 			limit: t.Integer({
 				default: 30,

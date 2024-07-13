@@ -110,25 +110,31 @@ export class IdentitiesService {
 		const columns = {
 			createdAt: true,
 			externalId: true,
-			id: true,
+			id: true
 		} as const satisfies Partial<Record<keyof IIdentitySchema, boolean>>;
 		if (idgen.isValid(options.query, EIdPrefix.IDENTITY)) {
 			// id
 			return db.query.identities.findFirst({
 				columns,
-				where: and(eq(identities.accountId, options.accountId), eq(identities.id, options.query)),
+				where: and(eq(identities.accountId, options.accountId), eq(identities.id, options.query))
 			});
 		} else if (options.query.includes('@')) {
 			// email
 			return db.query.identities.findFirst({
 				columns,
-				where: and(eq(identities.accountId, options.accountId), eq(identities.externalId, this.hashEmail(options.query))),
+				where: and(
+					eq(identities.accountId, options.accountId),
+					eq(identities.externalId, this.hashEmail(options.query))
+				)
 			});
 		}
 		// external id
 		return db.query.identities.findFirst({
 			columns,
-			where: and(eq(identities.accountId, options.accountId), eq(identities.externalId, options.query)),
+			where: and(
+				eq(identities.accountId, options.accountId),
+				eq(identities.externalId, options.query)
+			)
 		});
 	}
 
@@ -137,7 +143,7 @@ export class IdentitiesService {
 			account: event.locals.account,
 			data: {
 				identityId: identity.id,
-				externalId: identity.externalId,
+				externalId: identity.externalId
 			},
 			event: EEvents.IDENTITIES_DELETE,
 			ipAddress: event.locals.remoteAddress,

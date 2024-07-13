@@ -14,7 +14,7 @@ export const load = loadHandler(async ({ locals, params }) => {
 		count: formsService.countResponsesForForms(params.accountId),
 		forms: await formsService.listFormsForUser({
 			accountId: params.accountId,
-			userId: user.id,
+			userId: user.id
 		})
 	};
 }) satisfies PageServerLoad;

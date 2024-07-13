@@ -21,6 +21,6 @@ export const GET: RequestHandler = requestHandler(
 	},
 	{
 		authorization: false,
-		rateLimit: 'L3',
+		rateLimit: 'L3'
 	}
 ) satisfies RequestHandler;

@@ -10,25 +10,25 @@ export const GET = requestHandler(
 		if (!account) {
 			throw new ForbiddenError();
 		}
-    const { limit, offset, orderBy, orderDir } = searchParams;
+		const { limit, offset, orderBy, orderDir } = searchParams;
 		const forms = await formsService.listFormsForUser({
-      accountId: account.id,
-      limit,
-      offset,
-      orderBy,
-      orderDir,
-      userId: user.id,
-    });
+			accountId: account.id,
+			limit,
+			offset,
+			orderBy,
+			orderDir,
+			userId: user.id
+		});
 		const responseCount = await formsService.countResponsesForForms(account.id);
 		return {
 			forms,
 			offset,
 			limit,
-			responseCount,
+			responseCount
 		};
 	},
 	{
 		rateLimit: 'L1',
-		searchParams: apiParamsSchema,
+		searchParams: apiParamsSchema
 	}
 ) satisfies RequestHandler;

@@ -1,4 +1,4 @@
-import { createHash, randomBytes } from 'node:crypto';
+import { createHash } from 'node:crypto';
 import duration from 'parse-duration';
 import * as lib from 'altcha-lib';
 import { env } from '$lib/server/env';
@@ -39,11 +39,11 @@ export async function createChallenge(options: ICreateChanllengeOptions) {
 		hmacKey: options.hmacKey,
 		maxNumber:
 			options.maxnumber || getMaxNumberForComplexity(options.complexity || EComplexity.MEDIUM),
-		expires: new Date(Date.now() + expire),
+		expires: new Date(Date.now() + expire)
 	});
 	return {
 		challenge,
-		expire,
+		expire
 	};
 }
 

@@ -4,8 +4,6 @@
 	import EmailInput from '$lib/components/blocks/EmailInput.svelte';
 	import PasswordInput from '$lib/components/blocks/PasswordInput.svelte';
 	import { getDeviceName, getTimeZone } from '$lib/helpers';
-
-	let submitted = false;
 </script>
 
 <div class="bg-base-100 p-5 md:rounded-xl md:shadow-lg w-full md:max-w-sm">
@@ -15,7 +13,6 @@
 			deviceName: getDeviceName(),
 			deviceTimezone: getTimeZone()
 		}}
-		on:submit={() => (submitted = true)}
 		let:loading
 	>
 		<div class="flex flex-col gap-6">

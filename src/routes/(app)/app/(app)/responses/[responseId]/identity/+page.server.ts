@@ -1,11 +1,8 @@
-import { Type as t } from '@sinclair/typebox';
-import { actionHandler, loadHandler } from '$lib/server/handlers';
-import { notesService } from '$lib/server/services/notes.service';
-import { accountsService } from '$lib/server/services/accounts.service';
+import { loadHandler } from '$lib/server/handlers';
 import { identitiesService } from '$lib/server/services/identities.service';
 import { ForbiddenError } from '$lib/server/errors';
-import type { Actions, PageServerLoad } from './$types';
 import { responsesService } from '$lib/server/services/responses.service';
+import type { PageServerLoad } from './$types';
 
 export const load = loadHandler(async ({ parent }) => {
 	const { response } = await parent();
@@ -20,12 +17,6 @@ export const load = loadHandler(async ({ parent }) => {
 		: 0;
 	return {
 		identity,
-		totalResponses,
+		totalResponses
 	};
 }) satisfies PageServerLoad;
-
-export const actions = {
-	updateNote: actionHandler(async (event, data) => {}, {
-		body: t.Object({})
-	})
-} satisfies Actions;

@@ -63,7 +63,7 @@ export const actions = {
 		});
 	}),
 
-	undelete: actionHandler(async (event, data) => {
+	undelete: actionHandler(async (event) => {
 		const { response } = await responseMiddleware(event);
 		if (response?.deleted) {
 			await responsesService.undeleteResponses([response.id]);

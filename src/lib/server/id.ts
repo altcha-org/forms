@@ -35,7 +35,11 @@ export class IdGenerator {
 		const time = Math.floor(ts / 1000)
 			.toString(32)
 			.slice(0, this.TIME_LEN);
-		return time + this.REGION + ''.padEnd(this.MIN_LEN - this.TIME_LEN - this.REGION_LEN, upper ? 'Z' : '0');
+		return (
+			time +
+			this.REGION +
+			''.padEnd(this.MIN_LEN - this.TIME_LEN - this.REGION_LEN, upper ? 'Z' : '0')
+		);
 	}
 
 	nanoid(len: number = this.MIN_LEN) {

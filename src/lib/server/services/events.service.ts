@@ -24,7 +24,7 @@ export enum EEvents {
 	USERS_REQUEST_EMAIL_VERIFICATION = 'users.request_email_verification'
 }
 
-export interface IEventContext<Data = any> {
+export interface IEventContext<Data = unknown> {
 	account?: Pick<IAccount, 'auditlog' | 'auditlogRetention' | 'id' | 'name' | 'plan'>;
 	data?: Data;
 	description?: string;
@@ -39,19 +39,21 @@ export class EventsService {
 	async trackEvent(ctx: IEventContext) {
 		switch (ctx.event) {
 			case EEvents.DEVICES_CREATE:
-				await this.onDevicesCreated(ctx);
+				await this.onDevicesCreated(ctx as Parameters<typeof this.onDevicesCreated>[0]);
 				break;
 			case EEvents.EMERGENCY_ACCESS:
-				await this.onEmergencyAccess(ctx);
+				await this.onEmergencyAccess(ctx as Parameters<typeof this.onEmergencyAccess>[0]);
 				break;
 			case EEvents.USERS_INVITE:
-				await this.onUsersInvite(ctx);
+				await this.onUsersInvite(ctx as Parameters<typeof this.onUsersInvite>[0]);
 				break;
 			case EEvents.USERS_REQUEST_EMAIL_VERIFICATION:
-				await this.onUsersRequestEmailVerification(ctx);
+				await this.onUsersRequestEmailVerification(
+					ctx as Parameters<typeof this.onUsersRequestEmailVerification>[0]
+				);
 				break;
 			case EEvents.USERS_REQUEST_RECOVERY:
-				await this.onUsersRequestRecovery(ctx);
+				await this.onUsersRequestRecovery(ctx as Parameters<typeof this.onUsersRequestRecovery>[0]);
 				break;
 			default:
 			// noop

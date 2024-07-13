@@ -11,7 +11,10 @@
 	import type { IFormBlockPartial } from '$lib/types';
 
 	export let autocomplete: string | undefined = void 0;
-	export let block: IFormBlockPartial;
+	export let block: IFormBlockPartial<{
+		maxLength?: string;
+		minLength?: string;
+	}>;
 	export let copy: boolean = false;
 	export let disabled: boolean = false;
 	export let error: string | undefined = void 0;
@@ -44,8 +47,8 @@
 				/[a-zA-Z0-9]/,
 				/\d/,
 				/[a-zA-Z0-9]/,
-				/[\#\%\&\+\.]/,
-				/[a-zA-Z0-9\#\%\&\+\.]/
+				/[#%&+.]/,
+				/[a-zA-Z0-9#%&+.]/
 			]);
 		} else if (generate === 'token') {
 			value = generatePassword(24, [/[a-f0-9]/]);
@@ -59,8 +62,8 @@
 		{#if visible}
 			<input
 				type="text"
-				maxlength={maxLength}
-				minlength={minLength}
+				maxlength={maxLength ? parseInt(maxLength, 10) : null}
+				minlength={minLength ? parseInt(minLength, 10) : null}
 				name={block.name}
 				placeholder={block.placeholder}
 				readonly={block.readonly}
@@ -73,8 +76,8 @@
 		{:else}
 			<input
 				type="password"
-				maxlength={maxLength}
-				minlength={minLength}
+				maxlength={maxLength ? parseInt(maxLength, 10) : null}
+				minlength={minLength ? parseInt(minLength, 10) : null}
 				name={block.name}
 				placeholder={block.placeholder}
 				readonly={block.readonly}

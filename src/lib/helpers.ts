@@ -13,10 +13,11 @@ const replaceVariablesFormatters = {
 	bytes: (str: string | number, decimals?: number) => formatBytes(+str, decimals),
 	date: (str: string | number, tz?: string, locale?: string) => formatDate(str, tz, locale),
 	datetime: (str: string | number, tz?: string, locale?: string) => formatDateTime(str, tz, locale),
-	header: (str: string) => String(str).replace(/\r?\n/g, '').trim(), 
+	header: (str: string) => String(str).replace(/\r?\n/g, '').trim(),
 	number: (str: string | number, locale?: string) => formatNumber(+str, locale),
-	price: (str: string | number, currency: string, locale?: string) => formatPrice(+str, currency, locale),
-	trim: (str: string) => String(str).trim(), 
+	price: (str: string | number, currency: string, locale?: string) =>
+		formatPrice(+str, currency, locale),
+	trim: (str: string) => String(str).trim()
 };
 
 export async function copyToClipboard(text: string) {
@@ -61,7 +62,7 @@ export function generatePassword(len: number, patterns: RegExp[] = [/[a-zA-Z0-9]
 
 export function isMobile(): boolean {
 	return (
-		// @ts-expect-error
+		// @ts-expect-error mobile not defined
 		('userAgentData' in navigator && navigator.userAgentData?.mobile) || window.innerWidth < 1000
 	);
 }
@@ -97,7 +98,7 @@ export function parseInputOptions(
 	}
 	if (typeof options === 'string') {
 		options = options
-			.split(/(?<!\\)\,|\r?\n/)
+			.split(/(?<!\\),|\r?\n/)
 			.map((item) => item.trim())
 			.filter((item) => !!item)
 			.map((item) => item.replace(/\\,/, ','));
@@ -193,13 +194,15 @@ export function isValidPrivateKey(publicKey: string) {
 export function getDeviceName() {
 	try {
 		if ('userAgentData' in navigator) {
-			// @ts-ignore
+			// @ts-expect-error userAgentData unknown
 			const mobile = !!navigator.userAgentData.mobile;
-			// @ts-ignore
+			// @ts-expect-error userAgentData unknown
 			const platform = navigator.userAgentData.platform;
-			// @ts-ignore
+			// @ts-expect-error userAgentData unknown
 			const brands: { brand: string }[] = navigator.userAgentData.brands || [];
-			const model = brands.find(({ brand }) => !['Not A)Brand', 'Not/A)Brand', 'Not A;Brand'].includes(brand))?.brand;
+			const model = brands.find(
+				({ brand }) => !['Not A)Brand', 'Not/A)Brand', 'Not A;Brand'].includes(brand)
+			)?.brand;
 			if (platform) {
 				return [platform, model, mobile ? '(mobile)' : ''].filter((p) => !!p).join(' ');
 			}
@@ -232,7 +235,7 @@ export function normalizeFormId(formId: string) {
 	return formId.startsWith('form_') ? formId : 'form_' + formId;
 }
 
-export function stringifyBlockValue(value: any) {
+export function stringifyBlockValue(value: unknown) {
 	if (value && typeof value === 'object') {
 		return '—';
 	}
@@ -324,7 +327,7 @@ export async function uploadFile(
 			});
 			xhr.addEventListener('load', () => {
 				finalizeFileUpload(json.fileId, {
-					encryptedSize: json.encrypted && body instanceof Uint8Array ? body.length : void 0,
+					encryptedSize: json.encrypted && body instanceof Uint8Array ? body.length : void 0
 				}).then(() => {
 					resolve(json?.fileId || null);
 				}, reject);
@@ -337,21 +340,27 @@ export async function uploadFile(
 	return null;
 }
 
-export async function finalizeFileUpload(fileId: string, data: Partial<Pick<IFile, 'encryptedSize'>> = {}) {
+export async function finalizeFileUpload(
+	fileId: string,
+	data: Partial<Pick<IFile, 'encryptedSize'>> = {}
+) {
 	const resp = await fetch(`/storage/${fileId}/finalize`, {
 		body: JSON.stringify(data),
 		headers: {
-			'content-type': 'application/json',
+			'content-type': 'application/json'
 		},
 		method: 'POST'
 	});
 	if (resp.status > 204) {
-		throw new Error(`Server responded with ${resp.status}.`);		
+		throw new Error(`Server responded with ${resp.status}.`);
 	}
 	return true;
 }
 
-export async function downloadFile(file: Pick<IFile, 'id' | 'encrypted' | 'encryptionKeyHash'>, onProgress?: (bytesLoaded: number, totalBytes: number) => void) {
+export async function downloadFile(
+	file: Pick<IFile, 'id' | 'encrypted' | 'encryptionKeyHash'>,
+	onProgress?: (bytesLoaded: number, totalBytes: number) => void
+) {
 	const downloadUrl = `/storage/${file.id}?download=1`;
 	const resp = await fetch(downloadUrl);
 	const contentLength = resp.headers.get('content-length');
@@ -409,28 +418,28 @@ export async function solveAltcha(header: string) {
 	}
 }
 
-export function debounce(fn: (...args: any[]) => void, delay: number) {
+export function debounce<T extends (...args: never[]) => unknown>(fn: T, delay: number) {
 	let timer: Timer | null = null;
-	return (...args: any[]) => {
+	return ((...args: never[]) => {
 		if (timer) {
 			clearTimeout(timer);
 		}
 		timer = setTimeout(() => {
 			fn(...args);
 		}, delay);
-	};
+	}) as T;
 }
 
-export function throttle(fn: (...args: any[]) => void, delay: number) {
+export function throttle<T extends (...args: never[]) => unknown>(fn: T, delay: number) {
 	let timer: Timer | null = null;
-	return (...args: any[]) => {
+	return ((...args: never[]) => {
 		if (timer === null) {
 			fn(...args);
 			timer = setTimeout(() => {
 				timer = null;
 			}, delay);
 		}
-	};
+	}) as T;
 }
 
 export function camelToSnakeCase(str: string) {
@@ -459,9 +468,14 @@ export function matchesFileType(allowedTypes: string[] | string, file: File) {
 	return true;
 }
 
-export function replaceVariables(str: string, vars: Record<string, any>, formatters: Record<string, (...args: any) => string> = replaceVariablesFormatters) {
-	return str.replace(/\{([^\}]+)\}/g, (match, expr: string) => {
-		let [variable, formatter, ...params] = expr.split(/[\s\|]+/) || [];
+export function replaceVariables(
+	str: string,
+	vars: Record<string, unknown>,
+	formatters = replaceVariablesFormatters
+) {
+	return str.replace(/\{([^}]+)\}/g, (match, expr: string) => {
+		const [variable, formatter, ...rest] = expr.split(/[\s|]+/) || [];
+		let params = rest;
 		let result = match;
 		if (variable?.startsWith('$.')) {
 			result = resolveProp(vars, variable.slice(2));
@@ -476,7 +490,7 @@ export function replaceVariables(str: string, vars: Record<string, any>, formatt
 				});
 			}
 			try {
-				// @ts-ignore
+				// @ts-expect-error formatters parameters
 				result = formatters[formatter as keyof typeof formatters](result, ...params);
 			} catch (err) {
 				// noop
@@ -489,12 +503,12 @@ export function replaceVariables(str: string, vars: Record<string, any>, formatt
 export function resolveProp(
 	vars: Record<string, unknown>,
 	prop: string,
-	formatter: (value: any) => string = (str) => String(str)
+	formatter: (value: unknown) => string = (str) => String(str)
 ) {
 	const keys = prop.split('.');
-	let tmp: any = vars;
+	let tmp: Record<string, unknown> | unknown = vars;
 	for (let i = 0; i < keys.length; i++) {
-		tmp = tmp[keys[i]];
+		tmp = typeof tmp === 'object' && tmp ? tmp[keys[i] as keyof typeof tmp] : void 0;
 		if (tmp === void 0 || typeof tmp === 'string') {
 			break;
 		}

@@ -73,8 +73,12 @@
 			const result = await cipher.decrypt(privateKey, new Uint8Array(buffer));
 			forceDownload(result.buffer, file.name);
 			downloadModalOpen = false;
-		} catch (err: any) {
-			error = String(err.message);
+		} catch (err) {
+			error = String(
+				typeof err === 'object' && err && 'message' in err && err.message
+					? err.message
+					: 'Unknown error'
+			);
 		} finally {
 			downloading = false;
 			fetching = false;

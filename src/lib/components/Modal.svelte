@@ -8,7 +8,7 @@
 	export let autocomplete: string | undefined = void 0;
 	export let buttonLabel: string = $_('button.save');
 	export let cancelable: boolean = true;
-	export let data: Record<string, any> | undefined = void 0;
+	export let data: Record<string, unknown> | undefined = void 0;
 	export let disabled: boolean = false;
 	export let fullscreen: boolean = false;
 	export let hideButton: boolean = false;
@@ -127,7 +127,7 @@
 			class="modal-action mt-0 justify-start sticky bottom-0 z-40 bg-base-200 border-t-2 border-base-300 px-5 py-3"
 			class:justify-center={fullscreen}
 		>
-		 	<div class="grow flex gap-3">
+			<div class="grow flex gap-3">
 				{#if !hideButton}
 					<button
 						type="button"

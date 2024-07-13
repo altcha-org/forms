@@ -73,7 +73,7 @@ export class Pdf {
 		this.doc.setDocumentProperties({
 			author: '',
 			creator: 'Altcha'
-		} as any);
+		});
 	}
 
 	get lineHeight() {
@@ -153,7 +153,7 @@ export class Pdf {
 		};
 	}
 
-	form(form: IForm, data: Record<string, any>, options: IPdfFormOptions = {}) {
+	form(form: IForm, data: Record<string, unknown>, options: IPdfFormOptions = {}) {
 		for (const step of form.steps) {
 			if (step.title) {
 				this.heading(step.title, 2);
@@ -172,8 +172,20 @@ export class Pdf {
 					if (block.type === 'SignatureInput' && options.signature) {
 						if (block.options.kind === 'certificate') {
 							this.signature();
-						} else if (!['certificate', 'other'].includes(block.options.kind) && value?.image) {
-							this.image(value.image, value.format, value.width, value.height);
+						} else if (
+							!['certificate', 'other'].includes(block.options.kind as string) &&
+							typeof value === 'object' &&
+							value &&
+							'image' in value &&
+							value.image
+						) {
+							const { format, height, image, width } = value as {
+								image: string;
+								format: string;
+								height: number;
+								width: number;
+							};
+							this.image(image, format, width, height);
 						} else {
 							this.lineBreak(25);
 						}
@@ -325,9 +337,9 @@ export class Pdf {
 
 	signature(text?: string, width: number = this.maxX / 2, height: number = 35) {
 		const field = new AcroFormTextField();
-		// @ts-ignore
+		// @ts-expect-error ts error
 		field.FT = '/Sig';
-		// @ts-ignore
+		// @ts-expect-error ts error
 		field.Ff = 2;
 		field.fieldName = 'signature';
 		field.x = this.x;

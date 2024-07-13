@@ -178,12 +178,11 @@
 	<div class="flex flex-col gap-6">
 		{#if updateApiKey}
 			{#if updateApiKey.id}
-			<div>
-				<Alert variant="warning">
-					{$_('text.api_key_update_delay')}
-				</Alert>
-			</div>
-
+				<div>
+					<Alert variant="warning">
+						{$_('text.api_key_update_delay')}
+					</Alert>
+				</div>
 			{/if}
 			<TextInput
 				autocomplete="off"

@@ -161,11 +161,11 @@
 
 			<div class="bg-base-200/50">
 				{#if createModalOpen}
-				<Templates
-					filter={templatesFilter}
-					bind:value={createTemplateId}
-					on:select={(ev) => (name = ev.detail.name)}
-				/>
+					<Templates
+						filter={templatesFilter}
+						bind:value={createTemplateId}
+						on:select={(ev) => (name = ev.detail.name)}
+					/>
 				{/if}
 			</div>
 		</div>

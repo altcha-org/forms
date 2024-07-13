@@ -7,7 +7,7 @@
 	import AlertIcon from '$lib/components/icons/Alert.svelte';
 	import type { SubmitFunction } from '@sveltejs/kit';
 
-	interface FormError {
+	interface IFormError {
 		error: string;
 		fields?: Record<string, string>;
 	}
@@ -17,7 +17,7 @@
 	export let beforeSubmit: (() => boolean) | undefined = void 0;
 	export let confirmText: string | undefined = void 0;
 	export let changed: boolean = false;
-	export let data: Record<string, any> | undefined = void 0;
+	export let data: Record<string, unknown> | undefined = void 0;
 	export let discardUnsaved: boolean = false;
 	export let loading: boolean = false;
 	export let invalidateOnSubmit: boolean = true;
@@ -28,8 +28,8 @@
 	const dispatch = createEventDispatcher();
 
 	let elForm: HTMLFormElement;
-	let error: FormError | undefined;
-	let formData: Record<string, any> = {};
+	let error: IFormError | undefined;
+	let formData: Record<string, unknown> = {};
 
 	beforeNavigate(({ cancel }) => {
 		if (changed && !discardUnsaved) {
@@ -78,8 +78,13 @@
 					dispatch('submit', { data: getData(), result });
 				} else {
 					console.error(result);
-					// @ts-ignore
-					error = result.data || { error: result.message || `Server error` };
+					if ('data' in result && typeof result.data === 'object') {
+						error = result.data as IFormError;
+					} else if ('message' in result && typeof result.message === 'string') {
+						error = { error: result.message };
+					} else {
+						error = { error: 'Server error' };
+					}
 					dispatch('error', { error });
 				}
 				// calling update() resets the input values -> call  applyAction() instead

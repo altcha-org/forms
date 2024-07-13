@@ -10,10 +10,9 @@
 	import FormResponseCount from '$lib/components/FormResponseCount.svelte';
 	import ChevronLeftIcon from '$lib/components/icons/ChevronLeft.svelte';
 	import ChevronRightIcon from '$lib/components/icons/ChevronRight.svelte';
-	import AlertIcon from '$lib/components/icons/Alert.svelte';
 	import PlusIcon from '$lib/components/icons/Plus.svelte';
-	import type { PageData } from './$types';
 	import Form from '$lib/components/Form.svelte';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 
@@ -108,7 +107,7 @@
 							</div>
 						{/if}
 
-						{#each groupedResponses as { form, responses }, i}
+						{#each groupedResponses as { form, responses }}
 							<div class="flex px-5 py-2 bg-base-200/50">
 								<div class="grow">
 									<a href={`/app/forms/${form.id}/inbox`}>

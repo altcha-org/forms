@@ -1,171 +1,177 @@
 import { debounce, getTimeZone, isMobile } from '$lib/helpers';
 
 export interface ISessionOptions {
-  form: HTMLFormElement;
-  beaconUrl?: string;
-  onBeforeSubmit?: () => void;
+	form: HTMLFormElement;
+	beaconUrl?: string;
+	onBeforeSubmit?: () => void;
 }
 
 export class Session {
-  currentFieldName: string | null = null;
+	currentFieldName: string | null = null;
 
-  error: string | null = null;
+	error: string | null = null;
 
-  readonly fields: Record<string, {
-    duration: number;
-    changes: number;
-    startTime: number;
-  }> = {};
+	readonly fields: Record<
+		string,
+		{
+			duration: number;
+			changes: number;
+			startTime: number;
+		}
+	> = {};
 
-  readonly loadTime: number = Date.now();
+	readonly loadTime: number = Date.now();
 
-  submitTime: number | null = null;
+	submitTime: number | null = null;
 
-  startTime: number | null = null;
-  
-  readonly viewThresholdMs: number = 3000;
+	startTime: number | null = null;
 
-  readonly _onFormChange = this.onFormChange.bind(this);
+	readonly viewThresholdMs: number = 3000;
 
-  readonly _onFormFocus = debounce(this.onFormFocus.bind(this), 250);
+	readonly _onFormChange = this.onFormChange.bind(this);
 
-  readonly _onFormSubmit = this.onFormSubmit.bind(this);
+	readonly _onFormFocus = debounce(this.onFormFocus.bind(this), 250);
 
-  readonly _onUnload = this.onUnload.bind(this);
+	readonly _onFormSubmit = this.onFormSubmit.bind(this);
 
-  constructor(
-    readonly options: ISessionOptions,
-  ) {
-    window.addEventListener('unload', this._onUnload);
-    this.options.form.addEventListener('change', this._onFormChange);
-    this.options.form.addEventListener('focusin', this._onFormFocus);
-    this.options.form.addEventListener('submit', this._onFormSubmit);
-  }
+	readonly _onUnload = this.onUnload.bind(this);
 
-  data() {
-    return {
-      error: !!this.error,
-      fields: Object.entries(this.fields).map(([ name, { changes, duration, startTime }]) => {
-        return [name, startTime, duration, changes];
-      }),
-      start: this.startTime,
-      submit: this.submitTime,
-    };
-  }
+	constructor(readonly options: ISessionOptions) {
+		window.addEventListener('unload', this._onUnload);
+		this.options.form.addEventListener('change', this._onFormChange);
+		this.options.form.addEventListener('focusin', this._onFormFocus);
+		this.options.form.addEventListener('submit', this._onFormSubmit);
+	}
 
-  dataToUrlString() {
-    const data = this.data();
-    return new URLSearchParams({
-      error: String(data.error),
-      fields: JSON.stringify(data.fields),
-      start: String(data.start || ''),
-      submit: String(data.submit || ''),
-    }).toString();
-  }
+	data() {
+		return {
+			error: !!this.error,
+			fields: Object.entries(this.fields).map(([name, { changes, duration, startTime }]) => {
+				return [name, startTime, duration, changes];
+			}),
+			start: this.startTime,
+			submit: this.submitTime
+		};
+	}
 
-  destroy() {
-    window.removeEventListener('unload', this._onUnload);
-    this.options.form.removeEventListener('change', this._onFormChange);
-    this.options.form.removeEventListener('focusin', this._onFormFocus);
-    this.options.form.removeEventListener('submit', this._onFormSubmit);
-  }
+	dataToUrlString() {
+		const data = this.data();
+		return new URLSearchParams({
+			error: String(data.error),
+			fields: JSON.stringify(data.fields),
+			start: String(data.start || ''),
+			submit: String(data.submit || '')
+		}).toString();
+	}
 
-  end() {
-    this.submitTime = Date.now();
-    this.sendData();
-  }
+	destroy() {
+		window.removeEventListener('unload', this._onUnload);
+		this.options.form.removeEventListener('change', this._onFormChange);
+		this.options.form.removeEventListener('focusin', this._onFormFocus);
+		this.options.form.removeEventListener('submit', this._onFormSubmit);
+	}
 
-  isInput(el: HTMLElement) {
-    return ['INPUT', 'SELECT', 'TEXTAREA'].includes(el.tagName);
-  }
+	end() {
+		this.submitTime = Date.now();
+		this.sendData();
+	}
 
-  onFormFieldChange(el: HTMLInputElement) {
-    const name = el.getAttribute('name');
-    if (name) {
-      this.trackFieldChange(name);
-    }
-  }
+	isInput(el: HTMLElement) {
+		return ['INPUT', 'SELECT', 'TEXTAREA'].includes(el.tagName);
+	}
 
-  onFormFieldFocus(el: HTMLInputElement) {
-    const name = el.getAttribute('name');
-    if (name) {
-      if (this.currentFieldName && this.currentFieldName !== name) {
-        this.trackFieldBlur(this.currentFieldName);
-      }
-      this.currentFieldName = name;
-      this.trackFieldFocus(name);
-      const onBlur = () => {
-        this.trackFieldBlur(name);
-        el.removeEventListener('blur', onBlur);
-      };
-      requestAnimationFrame(() => {
-        el.addEventListener('blur', onBlur);
-      });
-    }
-  }
+	onFormFieldChange(el: HTMLInputElement) {
+		const name = el.getAttribute('name');
+		if (name) {
+			this.trackFieldChange(name);
+		}
+	}
 
-  onFormChange(ev: Event) {
-    const target = ev.target as HTMLInputElement | null;
-    if (target && this.isInput(target)) {
-      this.onFormFieldChange(target);
-    }
-  }
+	onFormFieldFocus(el: HTMLInputElement) {
+		const name = el.getAttribute('name');
+		if (name) {
+			if (this.currentFieldName && this.currentFieldName !== name) {
+				this.trackFieldBlur(this.currentFieldName);
+			}
+			this.currentFieldName = name;
+			this.trackFieldFocus(name);
+			const onBlur = () => {
+				this.trackFieldBlur(name);
+				el.removeEventListener('blur', onBlur);
+			};
+			requestAnimationFrame(() => {
+				el.addEventListener('blur', onBlur);
+			});
+		}
+	}
 
-  onFormFocus(ev: FocusEvent) {
-    const target = ev.target as HTMLInputElement | null;
-    if (!this.startTime) {
-      this.start();
-    }
-    if (target && this.isInput(target)) {
-      this.onFormFieldFocus(target);
-    }
-  }
+	onFormChange(ev: Event) {
+		const target = ev.target as HTMLInputElement | null;
+		if (target && this.isInput(target)) {
+			this.onFormFieldChange(target);
+		}
+	}
 
-  onFormSubmit() {
-    this.end();
-    this.options.onBeforeSubmit?.();
-  }
+	onFormFocus(ev: FocusEvent) {
+		const target = ev.target as HTMLInputElement | null;
+		if (!this.startTime) {
+			this.start();
+		}
+		if (target && this.isInput(target)) {
+			this.onFormFieldFocus(target);
+		}
+	}
 
-  onUnload() {
-    this.sendData();
-  }
+	onFormSubmit() {
+		this.end();
+		this.options.onBeforeSubmit?.();
+	}
 
-  async sendData() {
-    if (this.loadTime <= (Date.now() - this.viewThresholdMs) && !this.submitTime && this.options.beaconUrl && 'sendBeacon' in navigator) {
-      const url = new URL(this.options.beaconUrl, location.origin);
-      url.searchParams.set('tz', getTimeZone() || '');
-      url.searchParams.set('mobile', isMobile() ? '1' : '0');
-      navigator.sendBeacon(url, JSON.stringify(this.data()));
-    }
-  }
+	onUnload() {
+		this.sendData();
+	}
 
-  start() {
-    this.startTime = Date.now();
-  }
+	async sendData() {
+		if (
+			this.loadTime <= Date.now() - this.viewThresholdMs &&
+			!this.submitTime &&
+			this.options.beaconUrl &&
+			'sendBeacon' in navigator
+		) {
+			const url = new URL(this.options.beaconUrl, location.origin);
+			url.searchParams.set('tz', getTimeZone() || '');
+			url.searchParams.set('mobile', isMobile() ? '1' : '0');
+			navigator.sendBeacon(url, JSON.stringify(this.data()));
+		}
+	}
 
-  trackError(err: string) {
-    this.error = String(err);
-  }
+	start() {
+		this.startTime = Date.now();
+	}
 
-  trackFieldBlur(name: string) {
-    if (this.fields[name] && !this.fields[name].duration) {
-      this.fields[name].duration = Date.now() - this.fields[name].startTime;
-    }
-  }
+	trackError(err: string) {
+		this.error = String(err);
+	}
 
-  trackFieldFocus(name: string) {
-    if (!this.fields[name]) {
-      this.fields[name] = {
-        duration: 0,
-        changes: 0,
-        startTime: Date.now(),
-      };
-    }
-  }
+	trackFieldBlur(name: string) {
+		if (this.fields[name] && !this.fields[name].duration) {
+			this.fields[name].duration = Date.now() - this.fields[name].startTime;
+		}
+	}
 
-  trackFieldChange(name: string) {
-    if (this.fields[name]) {
-      this.fields[name].changes += 1;
-    }
-  }
+	trackFieldFocus(name: string) {
+		if (!this.fields[name]) {
+			this.fields[name] = {
+				duration: 0,
+				changes: 0,
+				startTime: Date.now()
+			};
+		}
+	}
+
+	trackFieldChange(name: string) {
+		if (this.fields[name]) {
+			this.fields[name].changes += 1;
+		}
+	}
 }

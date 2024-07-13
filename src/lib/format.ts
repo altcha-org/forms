@@ -28,7 +28,7 @@ export function formatPrice(num: number, currency: string, locale?: string) {
 		style: 'currency'
 	})
 		.format(num)
-		.replace(/[\,\.]00$/, '');
+		.replace(/[,.]00$/, '');
 }
 
 export function formatDate(
@@ -81,7 +81,10 @@ export function formatTimeAgo(date?: Date | number | string, locale?: string) {
 	});
 	for (const unit in timeUnits) {
 		if (Math.abs(diff) > timeUnits[unit] || unit == 'second') {
-			return relativeFormatter.format(Math.round(diff / timeUnits[unit]), unit as any);
+			return relativeFormatter.format(
+				Math.round(diff / timeUnits[unit]),
+				unit as Intl.RelativeTimeFormatUnit
+			);
 		}
 	}
 	return new Date(date).toLocaleTimeString();

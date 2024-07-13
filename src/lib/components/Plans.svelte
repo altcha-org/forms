@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { _, t } from 'svelte-i18n';
+	import { _ } from 'svelte-i18n';
 	import { onMount } from 'svelte';
 	import { formatBytes, formatPrice } from '$lib/format';
 	import { formatNumber } from '$lib/format';
+	import { camelToSnakeCase, getTimeZone } from '$lib/helpers';
 	import type { IPlan } from '$lib/types';
 	import type { Record } from '@sinclair/typebox';
-	import { camelToSnakeCase, getTimeZone } from '$lib/helpers';
 
 	export let billingCycle: 'month' | 'year' = 'year';
 	export let plans: IPlan[];

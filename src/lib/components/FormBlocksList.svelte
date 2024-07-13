@@ -74,7 +74,7 @@
 		on:edit={() => (editBlock = [idx, clone(block)])}
 		on:movebefore={(ev) => onMoveBefore(block, ev.detail.idx)}
 		on:remove={() => onRemoveBlock(block)}
-		on:pdf={() => pdfBlock = [idx, clone(block)]}
+		on:pdf={() => (pdfBlock = [idx, clone(block)])}
 	/>
 
 	<div slot="end" class="border-t border-base-300 bg-base-200/50 p-3">
@@ -153,9 +153,9 @@
 	on:submit={() => onPdfSubmit()}
 >
 	{#if modalPdfOpen}
-	<PdfCanvas
-		blocks={blocks.filter(({ type }) => type.endsWith('Input'))}
-		bind:options={pdfOptions}
-	/>	
+		<PdfCanvas
+			blocks={blocks.filter(({ type }) => type.endsWith('Input'))}
+			bind:options={pdfOptions}
+		/>
 	{/if}
 </Modal>

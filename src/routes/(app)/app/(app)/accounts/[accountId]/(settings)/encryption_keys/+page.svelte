@@ -10,11 +10,11 @@
 	import DeleteIcon from '$lib/components/icons/Delete.svelte';
 	import DownloadIcon from '$lib/components/icons/Download.svelte';
 	import MoreHorizontalIcon from '$lib/components/icons/MoreHorizontal.svelte';
-	import { rsa } from '@altcha/crypto';
-	import { importPrivateKey } from '$lib/helpers';
 	import MarkdownRenderer from '$lib/components/MarkdownRenderer.svelte';
 	import Alert from '$lib/components/Alert.svelte';
 	import CheckIcon from '$lib/components/icons/Check.svelte';
+	import { rsa } from '@altcha/crypto';
+	import { importPrivateKey } from '$lib/helpers';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -146,7 +146,6 @@
 	on:close={() => onModalClose()}
 	on:open={() => onModalOpen()}
 	on:submit={() => onModalSubmit()}
-	let:error
 >
 	<div class="flex flex-col gap-6">
 		<div>

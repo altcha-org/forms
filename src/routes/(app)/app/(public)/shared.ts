@@ -35,7 +35,7 @@ export async function initPasskeyRegistration(
 		} else if (resp.status >= 400) {
 			return resp.json();
 		}
-	} catch (err: any) {
+	} catch (err) {
 		console.error('Passkey sever error', err);
 		reportAuthError(err, userId, 'register');
 	}
@@ -61,14 +61,14 @@ export async function initPasskeyAuthentication(
 			},
 			allowCredentials === void 0
 		);
-	} catch (err: any) {
+	} catch (err) {
 		console.log('Passkey error:', err);
-		if (err?.name === 'NotAllowedError') {
+		if (err instanceof Error && err?.name === 'NotAllowedError') {
 			// canceled by user
 			return {
 				error: 'error.authentication_canceled'
 			};
-		} else if (err?.name === ' AbortError') {
+		} else if (err instanceof Error && err?.name === ' AbortError') {
 			// timeout or re-init
 			// noop
 		} else {
@@ -98,7 +98,7 @@ export async function initPasskeyAuthentication(
 			} else if (resp.status >= 400) {
 				return resp.json();
 			}
-		} catch (err: any) {
+		} catch (err) {
 			console.error('Passkey server error', err);
 			reportAuthError(err, 'auth');
 		}
@@ -108,12 +108,12 @@ export async function initPasskeyAuthentication(
 	};
 }
 
-async function reportAuthError(error: any, kind: string, userId?: string) {
+async function reportAuthError(error: unknown, kind: string, userId?: string) {
 	await fetch('/app/passkey/debug', {
 		body: JSON.stringify({
 			deviceName: getDeviceName() || '',
 			kind,
-			userId:  userId || '',
+			userId: userId || '',
 			error: String(error)
 		}),
 		headers: {

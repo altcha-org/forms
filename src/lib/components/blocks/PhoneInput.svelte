@@ -6,7 +6,9 @@
 	import { getTimeZone, timeZoneToCountryCode } from '$lib/helpers';
 	import type { IFormBlockPartial } from '$lib/types';
 
-	export let block: IFormBlockPartial;
+	export let block: IFormBlockPartial<{
+		allowedCountries: string;
+	}>;
 	export let error: string | undefined = void 0;
 	export let preview: boolean = false;
 	export let value: string | null = block.default || null;
@@ -19,7 +21,7 @@
 	let phone: string = '';
 
 	$: allowedCountries = block.options?.allowedCountries
-		?.split(/\r?\n|[\,\;]/)
+		?.split(/\r?\n|[,;]/)
 		.filter((item: string) => !!item)
 		.map((item: string) => item.trim().toLowerCase());
 	$: phoneCodes = (

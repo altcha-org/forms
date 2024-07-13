@@ -7,7 +7,6 @@
 	import MoreHorizontalIcon from '$lib/components/icons/MoreHorizontal.svelte';
 	import { formatTimeAgo } from '$lib/format';
 	import type { PageData } from './$types';
-	import { device } from '$lib/stores';
 
 	export let data: PageData;
 
@@ -43,7 +42,6 @@
 								confirmText={$_('text.confirm_remove', { values: { name: device.name } })}
 								class="grow flex"
 								data={{ deviceId: device.id }}
-								let:loading
 							>
 								<button type="submit" class="grow flex">
 									<span class="grow text-left">{$_('button.delete')}</span>

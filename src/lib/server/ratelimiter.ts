@@ -3,9 +3,11 @@ import { RateLimiterRedis, RateLimiterMemory, type RateLimiterRes } from 'rate-l
 import { env } from '$lib/server/env';
 import type { RequestEvent } from '@sveltejs/kit';
 
-const client = env.REDIS_URL ? new Redis(env.REDIS_URL, {
-	lazyConnect: true
-}) : null;
+const client = env.REDIS_URL
+	? new Redis(env.REDIS_URL, {
+			lazyConnect: true
+		})
+	: null;
 
 export const LEVELS = ['L1', 'L2', 'L3'] as const;
 
@@ -16,16 +18,18 @@ export const rateLimitLevels = LEVELS.reduce(
 		const [points, duration] = env[`RATE_LIMIT_${level}` as keyof typeof env]?.split('/') || [];
 		return {
 			...acc,
-			[level]: client ? new RateLimiterRedis({
-				storeClient: client,
-				duration: +duration,
-				inMemoryBlockOnConsumed: +points,
-				points: +points,
-				keyPrefix: keyPrefix + level
-			}) : new RateLimiterMemory({
-				duration: +duration,
-				points: +points,
-			}),
+			[level]: client
+				? new RateLimiterRedis({
+						storeClient: client,
+						duration: +duration,
+						inMemoryBlockOnConsumed: +points,
+						points: +points,
+						keyPrefix: keyPrefix + level
+					})
+				: new RateLimiterMemory({
+						duration: +duration,
+						points: +points
+					})
 		};
 	},
 	{} as Record<(typeof LEVELS)[number], RateLimiterRedis>
@@ -42,11 +46,11 @@ export async function rateLimit<T extends RequestEvent = RequestEvent>(
 	key: string = event.locals.apiKey?.id || event.locals.remoteAddress
 ) {
 	const limiter = rateLimitLevels[level];
-	let res: RateLimiterRes | null = null;
+	let res: RateLimiterRes | Record<'msBeforeNext' | 'remainingPoints', unknown> | null = null;
 	try {
 		res = await limiter.consume(key);
-	} catch (err: any) {
-		if ('msBeforeNext' in err) {
+	} catch (err) {
+		if (typeof err === 'object' && err && 'msBeforeNext' in err && 'remainingPoints' in err) {
 			res = err;
 		} else {
 			throw err;

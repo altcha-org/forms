@@ -63,8 +63,17 @@ export function actionHandler<
 				data = validateSchema(bodySchema, data);
 			}
 			return await fn(event as HandlerEvent, data as Static<BodySchema>);
-		} catch (err: any) {
-			if (err?.status && err.status >= 300 && err.status < 400 && err?.location) {
+		} catch (err) {
+			if (
+				typeof err === 'object' &&
+				err &&
+				'status' in err &&
+				'location' in err &&
+				typeof err.status === 'number' &&
+				err.status >= 300 &&
+				err.status < 400 &&
+				err?.location
+			) {
 				// redirect
 				throw err;
 			}
@@ -86,11 +95,13 @@ export function actionHandler<
 					});
 				}
 			}
-			console.error(err);
-			const statusCode = err.statusCode || 400;
+			const statusCode =
+				typeof err === 'object' && err && 'statusCode' in err && typeof err.statusCode === 'number'
+					? err.statusCode
+					: 400;
 			return fail(
 				statusCode,
-				err && typeof err.toJSON === 'function'
+				typeof err === 'object' && err && 'toJSON' in err && typeof err.toJSON === 'function'
 					? err.toJSON()
 					: { error: 'Server error', statusCode }
 			);
@@ -154,7 +165,10 @@ export function requestHandler<
 			if (!apiKey) {
 				throw new UnauthorizedError();
 			}
-			if (options.apiKeyFeatures?.length && !options.apiKeyFeatures.every((feature) => apiKey.features.includes(feature))) {
+			if (
+				options.apiKeyFeatures?.length &&
+				!options.apiKeyFeatures.every((feature) => apiKey.features.includes(feature))
+			) {
 				throw new ForbiddenError();
 			}
 		} else if (options.authorization !== false && !user) {

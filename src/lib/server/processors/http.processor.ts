@@ -68,7 +68,7 @@ async function makeRequest(
 	try {
 		const { body, headers } = encodeBody(data, options.headers['content-type']);
 		resp = await fetch(options.url, {
-			// @ts-ignore
+			// @ts-expect-error ts error
 			duplex: 'half',
 			body,
 			headers: {
@@ -79,8 +79,12 @@ async function makeRequest(
 			method: options.method,
 			signal: controller.signal
 		});
-	} catch (err: any) {
-		ctx.log(`(http) Error: ${err.message} ${err.cause?.code || ''}]`, void 0, true);
+	} catch (err) {
+		ctx.log(
+			`(http) Error: ${typeof err === 'object' && err && 'message' in err ? err.message : ''} ${typeof err === 'object' && err && 'cause' in err && err.cause && typeof err.cause === 'object' && 'code' in err.cause ? err.cause?.code : ''}]`,
+			void 0,
+			true
+		);
 	}
 	clearTimeout(tm);
 	if (resp) {
@@ -106,6 +110,8 @@ function encodeBody(
 	contentType: string = 'application/x-www-form-urlencoded'
 ) {
 	const type = contentType.split(';')[0];
+	let formData: FormData;
+	let req: Request;
 	switch (type) {
 		case 'application/json':
 			return {
@@ -122,12 +128,12 @@ function encodeBody(
 				}
 			};
 		case 'multipart/form-data':
-			const formData = new FormData();
+			formData = new FormData();
 			for (const name in data) {
 				formData.append(name, String(data[name]));
 			}
-			const req = new Request('http://localhost', {
-				// @ts-ignore
+			req = new Request('http://localhost', {
+				// @ts-expect-error ts error
 				duplex: 'half',
 				body: formData,
 				method: 'POST'

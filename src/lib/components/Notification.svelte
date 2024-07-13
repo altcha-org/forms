@@ -10,7 +10,7 @@
 
 	const dispatch = createEventDispatcher();
 
-	let timeout: Timer;
+	let timeout: ReturnType<typeof setTimeout>;
 	let showDelayed: boolean = false;
 
 	$: onShowChange(show);

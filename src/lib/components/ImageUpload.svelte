@@ -125,7 +125,6 @@
 <input bind:this={elInput} type="hidden" {name} {value} />
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
 	class="grow flex flex-col relative"
 	on:drop={onDrop}

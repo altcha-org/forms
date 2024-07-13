@@ -47,16 +47,13 @@ for (const section in sourceContents) {
 	if (targetContents) {
 		const missing = getMissingKeys(sourceContents[section], targetContents[section]);
 		if (Object.keys(missing).length) {
-			const sectionResult = await translate(
-				JSON.stringify(missing, null, '  '),
-				targetLangCode
-			);
+			const sectionResult = await translate(JSON.stringify(missing, null, '  '), targetLangCode);
 			if (!sectionResult) {
 				throw new Error('Unexpected result');
 			}
 			result[section] = {
 				...targetContents[section],
-				...JSON.parse(sectionResult),
+				...JSON.parse(sectionResult)
 			};
 		} else {
 			result[section] = targetContents[section];
@@ -79,7 +76,7 @@ if (result) {
 }
 
 function getMissingKeys(source: Record<string, string>, target: Record<string, string> = {}) {
-	return Object.entries(source).reduce((acc, [ key, value ]) => {
+	return Object.entries(source).reduce((acc, [key, value]) => {
 		if (!target[key]) {
 			acc[key] = value;
 		}

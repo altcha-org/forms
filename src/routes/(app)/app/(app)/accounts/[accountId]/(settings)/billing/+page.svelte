@@ -5,14 +5,23 @@
 	import List from '$lib/components/List.svelte';
 	import Plans from '$lib/components/Plans.svelte';
 	import Form from '$lib/components/Form.svelte';
-	import ExternalIcon from '$lib/components/icons/External.svelte';
 	import CheckIcon from '$lib/components/icons/Check.svelte';
 	import { formatDate, formatPrice } from '$lib/format';
 	import type { PageData } from './$types';
 
+	type TTransaction = Record<string, unknown> & {
+		created_at: string;
+		details: {
+			totals: {
+				currency_code: string;
+				total: string;
+			};
+		};
+	};
+
 	export let data: PageData;
 
-	let transactions: any[] | null = null;
+	let transactions: TTransaction[] | null = null;
 
 	$: subscriptionCreated = $page.url.searchParams.get('subscription_created') === '1';
 	$: activeSubscription = data.subscriptions.find(({ status }) => status !== 'canceled');
@@ -26,7 +35,7 @@
 		a.click();
 	}
 
-	function onLoadInvoices(data: { transactions: any[] }) {
+	function onLoadInvoices(data: { transactions: TTransaction[] }) {
 		transactions = data?.transactions || [];
 	}
 </script>
@@ -93,12 +102,14 @@
 					<div class="grow flex flex-col gap-1">
 						<div class="font-bold">{transaction.invoice_number}</div>
 						<div class="flex gap-2 text-sm">
-							<span
-								>{formatPrice(
-									parseFloat(transaction.details.totals.total) / 100,
-									transaction.details.totals.currency_code
-								)}</span
-							>
+							{#if transaction.details?.totals}
+								<span
+									>{formatPrice(
+										parseFloat(transaction.details.totals.total) / 100,
+										transaction.details.totals.currency_code
+									)}</span
+								>
+							{/if}
 							<span>{formatDate(transaction.created_at)}</span>
 						</div>
 					</div>

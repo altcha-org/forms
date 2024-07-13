@@ -1,9 +1,11 @@
 import { Redis } from 'ioredis';
 import { env } from './env.js';
 
-const client = env.REDIS_URL ? new Redis(env.REDIS_URL, {
-	lazyConnect: true
-}) : null;
+const client = env.REDIS_URL
+	? new Redis(env.REDIS_URL, {
+			lazyConnect: true
+		})
+	: null;
 
 const TTL = 86400 * 90;
 const ACCOUNT_KEY_PREFIX = 'account_usage:';
@@ -18,7 +20,7 @@ export async function getAccountUsage(accountId: string, month?: string) {
 	}
 	const date = new Date(month + '-01T00:00:00');
 	const value = await client.hgetall(ACCOUNT_KEY_PREFIX + accountId + ':' + month);
-	const entries = Object.entries(value || {} as object);
+	const entries = Object.entries(value || ({} as object));
 	return reduceDays(date, entries);
 }
 
@@ -31,33 +33,43 @@ export async function getApiKeyUsage(apiKeyId: string, month?: string) {
 	}
 	const date = new Date(month + '-01T00:00:00');
 	const value = await client.hgetall(API_KEY_PREFIX + apiKeyId + ':' + month);
-	const entries = Object.entries(value || {} as object);
-	const requests = entries.reduce((acc, [ k, n ]) => acc + (k.startsWith('_') ? 0 : +n), 0);
-	const classifications = entries.reduce((acc, [ k, n ]) => {
-		if (k.startsWith('_c:')) {
-			acc[k.slice(3)] = +n;
-		}
-		return acc;
-	}, {
-		BAD: 0,
-		GOOD: 0,
-		NEUTRAL: 0,
-	} as Record<string, number>);
-	const referrers = entries.reduce((acc, [ k, n ]) => {
-		if (k.startsWith('_r:')) {
-			acc[k.slice(3)] = +n;
-		}
-		return acc;
-	}, {} as Record<string, number>);
+	const entries = Object.entries(value || ({} as object));
+	const requests = entries.reduce((acc, [k, n]) => acc + (k.startsWith('_') ? 0 : +n), 0);
+	const classifications = entries.reduce(
+		(acc, [k, n]) => {
+			if (k.startsWith('_c:')) {
+				acc[k.slice(3)] = +n;
+			}
+			return acc;
+		},
+		{
+			BAD: 0,
+			GOOD: 0,
+			NEUTRAL: 0
+		} as Record<string, number>
+	);
+	const referrers = entries.reduce(
+		(acc, [k, n]) => {
+			if (k.startsWith('_r:')) {
+				acc[k.slice(3)] = +n;
+			}
+			return acc;
+		},
+		{} as Record<string, number>
+	);
 	return {
 		classifications,
 		referrers,
 		requests,
-		...reduceDays(date, entries),
+		...reduceDays(date, entries)
 	};
 }
 
-export async function incrementAccountUsage(accountId: string, apiKeyId: string, referrer?: string) {
+export async function incrementAccountUsage(
+	accountId: string,
+	apiKeyId: string,
+	referrer?: string
+) {
 	if (!client) {
 		return 0;
 	}
@@ -74,14 +86,13 @@ export async function incrementAccountUsage(accountId: string, apiKeyId: string,
 		.expire(apiKeyKey, TTL, 'NX')
 		.hgetall(accountKey);
 	if (referrer) {
-		multi = multi
-			.hincrby(apiKeyKey, '_r:' + referrer, 1);
+		multi = multi.hincrby(apiKeyKey, '_r:' + referrer, 1);
 	}
 	const result = await multi.exec();
 	if (result) {
 		const [_, hash] = result.pop() || [];
 		if (hash) {
-			return Object.entries(hash).reduce((acc, [ k, n ]) => acc + (k.startsWith('_') ? 0 : +n), 0);
+			return Object.entries(hash).reduce((acc, [k, n]) => acc + (k.startsWith('_') ? 0 : +n), 0);
 		}
 	}
 	return 0;
@@ -92,19 +103,19 @@ function getCurrentMonth() {
 	return date.slice(0, -3);
 }
 
-function reduceDays(date: Date, entries: [ string, string ][]) {
+function reduceDays(date: Date, entries: [string, string][]) {
 	const monthDays = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 	const days: { date: string; requests: number }[] = [];
-	for (let i = 1; i <= monthDays; i ++) {
+	for (let i = 1; i <= monthDays; i++) {
 		const dayDate = new Date(date);
 		dayDate.setDate(i);
 		days.push({
 			date: dayDate.toISOString().split('T')[0],
-			requests: parseInt(entries.find(([ k ]) => k === String(i).padStart(2, '0'))?.[1] || '0', 10),
+			requests: parseInt(entries.find(([k]) => k === String(i).padStart(2, '0'))?.[1] || '0', 10)
 		});
 	}
 	return {
 		days,
-		sum: entries.reduce((acc, [ k, n ]) => acc + (k.startsWith('_') ? 0 : +n), 0),
+		sum: entries.reduce((acc, [k, n]) => acc + (k.startsWith('_') ? 0 : +n), 0)
 	};
 }

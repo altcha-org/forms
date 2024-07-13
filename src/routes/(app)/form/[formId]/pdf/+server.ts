@@ -35,7 +35,7 @@ export const POST = requestHandler(
 		if (!block || !block.options?.pdf) {
 			throw new BadRequestError();
 		}
-    const pdfOptions = block.options.pdf as IPdfInputOptions;
+		const pdfOptions = block.options.pdf as IPdfInputOptions;
 		const fileId = pdfOptions.fileId;
 		if (!fileId) {
 			throw new BadRequestError();
@@ -60,8 +60,8 @@ export const POST = requestHandler(
 				fontColor: pdfOptions.fontColor,
 				fontSize: +pdfOptions.fontSize,
 				block: blocks.find(({ name }) => name === element.name),
-        locale: data.locale,
-        tz: data.tz,
+				locale: data.locale,
+				tz: data.tz,
 				value: element.name ? data.data[element.name] : void 0
 			});
 		}
@@ -79,8 +79,8 @@ export const POST = requestHandler(
 				minimum: 0,
 				maximum: 100
 			}),
-      locale: t.Optional(t.String()),
-      tz: t.Optional(t.String()),
+			locale: t.Optional(t.String()),
+			tz: t.Optional(t.String())
 		}),
 		rateLimit: 'L3'
 	}
@@ -92,9 +92,9 @@ async function renderElement(options: {
 	font: PDFFont;
 	fontColor: string;
 	fontSize: number;
-  locale?: string;
+	locale?: string;
 	pdf: PDFDocument;
-  tz?: string;
+	tz?: string;
 	value?: string;
 }) {
 	const { block, element, font, fontColor, fontSize, locale, pdf, tz, value } = options;
@@ -129,7 +129,7 @@ async function renderElement(options: {
 					font,
 					lineHeight,
 					x: element.x * widthScale,
-					y: (height - element.y * heightScale) - (elHeight / 2) - (fontSize / 2.5),
+					y: height - element.y * heightScale - elHeight / 2 - fontSize / 2.5,
 					size: fontSize
 				});
 			}

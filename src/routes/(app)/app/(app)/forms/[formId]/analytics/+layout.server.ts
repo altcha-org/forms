@@ -18,7 +18,7 @@ export const load = loadHandler(async (event) => {
 	return {
 		analyticsEnabled: account.plan?.featureAnalytics === true,
 		end,
-		start,
+		start
 	};
 }) satisfies LayoutServerLoad;
 
@@ -26,6 +26,9 @@ function generateUrlForLast30Days(formId: string, origin: string) {
 	const now = new Date();
 	const url = new URL(`/app/forms/${formId}/analytics`, origin);
 	url.searchParams.set('end', endOfDay(now).toISOString());
-	url.searchParams.set('start', startOfDay(new Date(now.getFullYear(), now.getMonth(), now.getDate() - 30)).toISOString());
+	url.searchParams.set(
+		'start',
+		startOfDay(new Date(now.getFullYear(), now.getMonth(), now.getDate() - 30)).toISOString()
+	);
 	return url;
 }

@@ -29,24 +29,24 @@
 	$: plan = data.account.plan;
 	$: limits = Object.entries(plan || {})
 		.filter(([key]) => key.startsWith('limit'))
-		.filter((item) => data.usage[item[0]] !== void 0) as [ string, number ][];
+		.filter((item) => data.usage[item[0]] !== void 0) as [string, number][];
 	$: monthOptions = months.map((date) => {
 		return {
 			label: formatDate(date, void 0, void 0, {
 				month: 'long',
-				year: 'numeric',
+				year: 'numeric'
 			}),
-			value: dateToMonthString(date),
+			value: dateToMonthString(date)
 		};
 	});
-	
+
 	function getMonths() {
 		const now = new Date();
 		now.setDate(1);
 		return [
 			now,
 			getDateForMonth(now.getFullYear(), now.getMonth() - 1),
-			getDateForMonth(now.getFullYear(), now.getMonth() - 2),
+			getDateForMonth(now.getFullYear(), now.getMonth() - 2)
 		];
 	}
 
@@ -87,7 +87,7 @@
 				block={{
 					name: 'month',
 					options: {
-						options: monthOptions,
+						options: monthOptions
 					},
 					size: 'sm'
 				}}
@@ -120,11 +120,11 @@
 					{/if}
 
 					{#if item[0] === 'limitApi'}
-					<div class="mt-3">
-						<BarChartVertical
-							items={data.days.map(({ date, requests }) => ({ label: date, value: [requests] }))}
-						/>
-					</div>
+						<div class="mt-3">
+							<BarChartVertical
+								items={data.days.map(({ date, requests }) => ({ label: date, value: [requests] }))}
+							/>
+						</div>
 					{/if}
 				</List>
 			</div>
@@ -136,7 +136,7 @@
 					<Form
 						action="?/loadApiKeyUsage"
 						data={{
-							month,
+							month
 						}}
 						successToast={false}
 						on:submit={(ev) => onLoadApiKeyUsageSubmit(ev.detail)}
@@ -152,9 +152,9 @@
 										options: data.apiKeys.map((apiKey) => {
 											return {
 												label: apiKey.name,
-												value: apiKey.id,
+												value: apiKey.id
 											};
-										}),
+										})
 									},
 									size: 'md'
 								}}
@@ -162,50 +162,47 @@
 							/>
 
 							<div>
-								<button type="submit" class="btn btn-sm btn-primary" disabled={loading}>{$_('button.show_usage')}</button>
+								<button type="submit" class="btn btn-sm btn-primary" disabled={loading}
+									>{$_('button.show_usage')}</button
+								>
 							</div>
 						</div>
 					</Form>
 
 					{#if apiKeyUsage?.requests !== void 0}
-					<div class="border border-base-300 rounded-md p-4">
-						<div class="flex gap-3 mb-3 text-sm">
-							<div class="grow">{$_('limit.api')}</div>
-							<div>{formatNumber(apiKeyUsage.requests)}</div>
+						<div class="border border-base-300 rounded-md p-4">
+							<div class="flex gap-3 mb-3 text-sm">
+								<div class="grow">{$_('limit.api')}</div>
+								<div>{formatNumber(apiKeyUsage.requests)}</div>
+							</div>
+							{#if apiKeyUsage?.days}
+								<BarChartVertical
+									items={apiKeyUsage.days.map(({ date, requests }) => ({
+										label: date,
+										value: [requests]
+									}))}
+								/>
+							{/if}
 						</div>
-						{#if apiKeyUsage?.days}
-						<BarChartVertical
-							items={apiKeyUsage.days.map(({ date, requests }) => ({ label: date, value: [requests] }))}
-						/>
-						{/if}
-					</div>
 					{/if}
 
-
 					{#if apiKeyUsage?.referrers}
-					<div class="border border-base-300 rounded-md p-4">
-						<div class="mb-2 text-sm">{$_('label.referrers')}</div>
-						<BarChart
-							items={apiKeyUsage.referrers}
-						/>
-					</div>
+						<div class="border border-base-300 rounded-md p-4">
+							<div class="mb-2 text-sm">{$_('label.referrers')}</div>
+							<BarChart items={apiKeyUsage.referrers} />
+						</div>
 					{/if}
 
 					{#if apiKeyUsage?.classifications}
-					<div class="border border-base-300 rounded-md p-4">
-						<div class="mb-2 text-sm">{$_('label.classifications')}</div>
-						<BarChart
-							items={apiKeyUsage?.requests > 0 ? apiKeyUsage.classifications : {}}
-						/>
-					</div>
+						<div class="border border-base-300 rounded-md p-4">
+							<div class="mb-2 text-sm">{$_('label.classifications')}</div>
+							<BarChart items={apiKeyUsage?.requests > 0 ? apiKeyUsage.classifications : {}} />
+						</div>
 					{/if}
-
 				</div>
 			</div>
-
 		</div>
 	</div>
 
-	<div class="flex flex-col gap-2">
-	</div>
+	<div class="flex flex-col gap-2"></div>
 </div>

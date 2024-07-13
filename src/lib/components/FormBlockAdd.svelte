@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
 	import { page } from '$app/stores';
+	import DOMPurify from 'isomorphic-dompurify';
 	import BLOCKS from '$lib/consts/blocks';
 	import FormBlock from '$lib/components/blocks/FormBlock.svelte';
 	import TextInput from '$lib/components/blocks/TextInput.svelte';
@@ -68,7 +69,8 @@
 									class:opacity-60={allowed && !active}
 									class:opacity-20={!allowed}
 								>
-									{@html inputBlock.icon}
+									<!-- eslint-disable svelte/no-at-html-tags -->
+									{@html DOMPurify.sanitize(inputBlock.icon || '')}
 								</div>
 							</div>
 							<div class="text-sm text-center" class:opacity-60={!allowed}>
@@ -97,7 +99,8 @@
 						>
 							<div class="flex-1 flex justify-center items-center">
 								<div class="w-6 h-6">
-									{@html layoutBlock.icon}
+									<!-- eslint-disable svelte/no-at-html-tags -->
+									{@html DOMPurify.sanitize(layoutBlock.icon || '')}
 								</div>
 							</div>
 							<div class="text-sm text-center">{$_('block.' + layoutBlock.type)}</div>
