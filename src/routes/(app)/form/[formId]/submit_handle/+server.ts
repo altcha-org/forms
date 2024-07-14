@@ -74,70 +74,70 @@ export const POST = requestHandler(
 					}
 				}
 			} catch (err) {
+				console.log('>>E1', err)
 				error = true;
 				result?.context.log(String(err));
-			} finally {
-				if (context.store) {
-					if (!externalId && context.emailBlockName) {
-						const email = result?.data[context.emailBlockName];
-						if (email) {
-							externalId = identitiesService.hashEmail(String(email));
-						}
-					}
-					if (externalId?.length) {
-						identity = await identitiesService.upsertIdentity({
-							accountId: form.account.id,
-							externalId
-						});
-					}
-					const response = await responsesService.createResponse(
-						{
-							accountId: form.account.id,
-							context: result
-								? (Object.fromEntries(result.context.metadata.entries()) as Record<string, unknown>)
-								: {},
-							data: context.store && !dataEncrypted ? result?.data || null : null,
-							dataEncrypted,
-							encrypted: !!dataEncrypted,
-							encryptionKeyHash,
-							error,
-							formId,
-							id: context.responseId,
-							identityId: identity?.id || null,
-							logs: result?.context.logs || [],
-							spam: !!result?.context.spam
-						},
-						{
-							retention: context.retention
-						}
-					);
-					responseId = response.id;
-					if (result) {
-						await responsesService.linkFiles(form, response, result.data);
+			}
+			if (context.store) {
+				if (!externalId && context.emailBlockName) {
+					const email = result?.data[context.emailBlockName];
+					if (email) {
+						externalId = identitiesService.hashEmail(String(email));
 					}
 				}
-				if (form.account.plan?.featureAnalytics === true) {
-					let fields: [string, number, number, number][] = [];
-					try {
-						fields = JSON.parse(sessionParams.get('fields') || '[]');
-					} catch (err) {
-						// noop
-					}
-					await sessionsService.createSession({
-						abondoned: false,
-						country: context.get('country'),
-						error: error || sessionParams.get('error') === 'true',
-						fields,
-						fieldDropOff: null,
-						formId: form.id,
-						mobile: context.get('mobile') || false,
-						responseId,
-						startAt: new Date(parseInt(sessionParams.get('start') || '0', 10) || Date.now()),
-						submitAt: new Date(parseInt(sessionParams.get('submit') || '0', 10) || Date.now())
+				if (externalId?.length) {
+					identity = await identitiesService.upsertIdentity({
+						accountId: form.account.id,
+						externalId
 					});
 				}
-				await formsService.incrementReceivedResponses(form.id);
+				const response = await responsesService.createResponse(
+					{
+						accountId: form.account.id,
+						context: result
+							? (Object.fromEntries(result.context.metadata.entries()) as Record<string, unknown>)
+							: {},
+						data: context.store && !dataEncrypted ? result?.data || null : null,
+						dataEncrypted,
+						encrypted: !!dataEncrypted,
+						encryptionKeyHash,
+						error,
+						formId,
+						id: context.responseId,
+						identityId: identity?.id || null,
+						logs: result?.context.logs || [],
+						spam: !!result?.context.spam
+					},
+					{
+						retention: context.retention
+					}
+				);
+				responseId = response.id;
+				if (result) {
+					await responsesService.linkFiles(form, response, result.data);
+				}
 			}
+			if (form.account.plan?.featureAnalytics === true) {
+				let fields: [string, number, number, number][] = [];
+				try {
+					fields = JSON.parse(sessionParams.get('fields') || '[]');
+				} catch (err) {
+					// noop
+				}
+				await sessionsService.createSession({
+					abondoned: false,
+					country: context.get('country'),
+					error: error || sessionParams.get('error') === 'true',
+					fields,
+					fieldDropOff: null,
+					formId: form.id,
+					mobile: context.get('mobile') || false,
+					responseId,
+					startAt: new Date(parseInt(sessionParams.get('start') || '0', 10) || Date.now()),
+					submitAt: new Date(parseInt(sessionParams.get('submit') || '0', 10) || Date.now())
+				});
+			}
+			await formsService.incrementReceivedResponses(form.id);
 		}
 		if (!error && form.successRedirect) {
 			return {

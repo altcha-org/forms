@@ -55,7 +55,7 @@ export class SessionsService {
 		>
 	) {
 		const correction =
-			!data.abondoned && data.fields
+			!data.abondoned && data.fields?.length
 				? Math.floor(
 						(data.fields.reduce((acc, field) => {
 							return acc + Math.max(0, field[3] - 1);
