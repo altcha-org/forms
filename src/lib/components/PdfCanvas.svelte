@@ -42,7 +42,7 @@
 	const computedFields = [
 		{
 			label: $_('label.current_date'),
-			name: 'date'
+			name: 'current_date'
 		}
 	];
 
@@ -54,6 +54,7 @@
 	let elViewport: HTMLElement;
 	let elWrap: HTMLElement;
 	let error: string | null = null;
+	let file: File | null = null;
 	let files: FileList;
 	let loading: boolean = false;
 	let pages: number = 0;
@@ -64,7 +65,7 @@
 	let view: 'font' | null = null;
 	let zoom: number = 1;
 
-	$: file = files?.[0];
+	$: file = files?.[0] || null;
 	$: filteredBlocks = showAllFields
 		? blocks
 		: blocks.filter(({ type }) => type && ['SignatureInput'].includes(type));
@@ -115,6 +116,10 @@
 		if (confirm($_('text.confirm_pdf_reupload'))) {
 			options.fileId = null;
 			options.fileName = null;
+			if (elFileInput) {
+				elFileInput.value = '';
+			}
+			file = null;
 		}
 	}
 
@@ -427,7 +432,7 @@
 		</div>
 
 		<div class="grow bg-gray-300 overflow-auto">
-			{#if files?.length || options.fileId}
+			{#if file || options.fileId}
 				{#if error}
 					<div class="flex flex-col justify-center items-center h-20">
 						<div>
@@ -485,7 +490,7 @@
 							}}
 						>
 							{#if element.computed}
-								{$_('text.computed_name', { values: { name: element.computed } })}
+								{$_('label.' + element.computed)}
 							{:else}
 								{block?.label || block?.name}
 							{/if}

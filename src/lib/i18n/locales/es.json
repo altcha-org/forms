@@ -698,8 +698,7 @@
 		"response_stream_errors": "Se detectaron errores, probablemente debido a la falta de claves de encriptación.",
 		"confirm_pdf_reupload": "¿Eliminar el archivo PDF actual?",
 		"drag_fields_to_pdf": "Arrastre y suelte campos en el PDF.",
-		"select_pdf_file": "Seleccionar archivo PDF.",
-		"computed_name": "Calculado: {name}"
+		"select_pdf_file": "Seleccionar archivo PDF."
 	},
 	"title": {
 		"add_block": "Agregar Bloque",

@@ -694,8 +694,7 @@
 		"response_stream_errors": "Des erreurs ont été détectées, probablement dues à des clés de chiffrement manquantes.",
 		"confirm_pdf_reupload": "Supprimer le fichier PDF actuel ?",
 		"drag_fields_to_pdf": "Faites glisser et déposez les champs sur le PDF.",
-		"select_pdf_file": "Sélectionnez le fichier PDF.",
-		"computed_name": "Calculé: {name}"
+		"select_pdf_file": "Sélectionnez le fichier PDF."
 	},
 	"title": {
 		"add_block": "Ajouter un bloc",

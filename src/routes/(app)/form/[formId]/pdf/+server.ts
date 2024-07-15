@@ -145,7 +145,7 @@ function parseColor(color: string) {
 
 function getComputedValue(computed: string, locale?: string, tz?: string) {
 	switch (computed) {
-		case 'date':
+		case 'current_date':
 			return formatDate(new Date(), tz, locale);
 	}
 	return '';
