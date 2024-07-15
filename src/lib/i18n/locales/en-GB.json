@@ -492,6 +492,7 @@
 		"search": "Search...",
 		"select": "Select...",
 		"select_country": "Select country...",
+		"select_file": "Select file...",
 		"upload_banner": "Upload banner...",
 		"upload_logo": "Upload logo..."
 	},
@@ -568,6 +569,7 @@
 		"cannot_be_edited": "This field cannot be changed.",
 		"checkout_vat_info": "Our payment partner, Paddle.com, manages invoicing and taxes. VAT or sales tax will be added to your purchase based on your country's regulations. You can enter your VAT number during checkout to receive a tax-compliant invoice, subject to regional availability.",
 		"checkout_security_info": "This page is secured with encryption. Your data will be processed by our billing partner, Paddle.com. All transactions are handled securely, ensuring your personal information is protected.",
+		"computed_name": "Computed: {name}",
 		"confirm_change_block_type": "Changing the type will remove configured options. Continue?",
 		"confirm_delete_account": "Are you sure? Data will be lost.",
 		"confirm_delete_form": "Are you sure? Data will be lost.",
