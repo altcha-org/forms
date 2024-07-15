@@ -25,11 +25,12 @@ export interface EmailServiceSendOptions {
 }
 
 export class EmailService {
+	readonly DEFAULT_CONNECTION_TIMEOUT = 10000;
+	
+	readonly DEFAULT_GREETING_TIMEOUT = 6000;
+
 	readonly defaultTransport = env.SMTP_URL
-		? nodemailer.createTransport(env.SMTP_URL, {
-				greetingTimeout: 6000,
-				from: env.SMTP_SENDER
-			})
+		? this.createTransport(env.SMTP_URL, env.SMTP_SENDER)
 		: null;
 
 	readonly templates = new Map<string, Map<string, Template>>();
@@ -46,15 +47,34 @@ export class EmailService {
 		}
 		const account = await accountsService.findAccountWithCredentials(accountId);
 		if (account?.smtpUrl) {
-			transport = nodemailer.createTransport(account.smtpUrl, {
-				greetingTimeout: 6000,
-				from: account.smtpSender || void 0
-			});
+			transport = this.createTransport(account.smtpUrl, account.smtpSender || void 0);
 		} else if (this.defaultTransport) {
 			transport = this.defaultTransport;
 		}
 		this.transports.set(accountId, transport);
 		return transport;
+	}
+
+	createTransport(connectionString: string, from?: string) {
+		const url = new URL(connectionString);
+		const secure = url.searchParams.get('secure') === 'true';
+		const ignoreTLS = url.searchParams.get('ignoreTLS') === 'true';
+		const requireTLS = url.searchParams.get('requireTLS') === 'true';
+		const rejectUnauthorized = url.searchParams.get('rejectUnauthorized') !== 'false';
+		url.search = '';
+		return nodemailer.createTransport(url.toString(), {
+			connectionTimeout: this.DEFAULT_CONNECTION_TIMEOUT,
+			disableFileAccess: true,
+			disableUrlAccess: true,
+			greetingTimeout: this.DEFAULT_GREETING_TIMEOUT,
+			from,
+			ignoreTLS,
+			requireTLS,
+			secure,
+			tls: {
+				rejectUnauthorized: rejectUnauthorized,
+			},
+		});
 	}
 
 	getTemplate(name: string, locale: string) {
