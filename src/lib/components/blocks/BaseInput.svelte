@@ -65,7 +65,7 @@
 						</div>
 					</div>
 				{/if}
-				{#if block.help}
+				{#if block.help && hideLabel}
 					<span class="opacity-60">
 						{#if block.help.startsWith('$_')}
 							{$_(block.help.slice(2))}

@@ -494,7 +494,8 @@
 		"select_country": "Land auswählen...",
 		"upload_banner": "Banner hochladen...",
 		"upload_logo": "Logo hochladen...",
-		"select": "Auswählen..."
+		"select": "Auswählen...",
+		"select_file": "Datei auswählen..."
 	},
 	"processor": {
 		"description": {
@@ -693,7 +694,8 @@
 		"response_stream_errors": "Fehler wurden festgestellt, wahrscheinlich aufgrund fehlender Verschlüsselungsschlüssel.",
 		"confirm_pdf_reupload": "Aktuelle PDF-Datei entfernen?",
 		"drag_fields_to_pdf": "Ziehen Sie Felder in die PDF-Datei.",
-		"select_pdf_file": "Wählen Sie die PDF-Datei aus."
+		"select_pdf_file": "Wählen Sie die PDF-Datei aus.",
+		"computed_name": "Berechnet: {name}"
 	},
 	"title": {
 		"add_block": "Block hinzufügen",

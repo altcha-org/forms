@@ -498,7 +498,8 @@
 		"select_country": "Seleccionar país...",
 		"upload_banner": "Subir banner...",
 		"upload_logo": "Subir logo...",
-		"select": "Seleccionar..."
+		"select": "Seleccionar...",
+		"select_file": "Seleccionar archivo..."
 	},
 	"processor": {
 		"description": {
@@ -697,7 +698,8 @@
 		"response_stream_errors": "Se detectaron errores, probablemente debido a la falta de claves de encriptación.",
 		"confirm_pdf_reupload": "¿Eliminar el archivo PDF actual?",
 		"drag_fields_to_pdf": "Arrastre y suelte campos en el PDF.",
-		"select_pdf_file": "Seleccionar archivo PDF."
+		"select_pdf_file": "Seleccionar archivo PDF.",
+		"computed_name": "Calculado: {name}"
 	},
 	"title": {
 		"add_block": "Agregar Bloque",
