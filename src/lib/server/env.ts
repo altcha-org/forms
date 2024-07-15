@@ -274,7 +274,8 @@ export const schema = t.Object({
 	 * Storage provider (e.g., 'fs', 's3')
 	 */
 	STORAGE_PROVIDER: t.String({
-		default: 'fs'
+		default: 'fs',
+		pattern: '^fs|s3$'
 	}),
 	/**
 	 * Directory path for file system storage
