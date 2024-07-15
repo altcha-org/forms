@@ -3,6 +3,7 @@ import { compileSchema, validateSchema, type ValidateFunction } from '$lib/serve
 import { BaseError, ForbiddenError, UnauthorizedError, ValidationError } from '$lib/server/errors';
 import { checkUserAccountAccess } from '$lib/server/helpers';
 import { rateLimit, rateLimitLevels } from './ratelimiter';
+import { logger } from '$lib/server/logger';
 import type { TSchema, Static } from '@sinclair/typebox';
 import type { RequestEvent } from '@sveltejs/kit';
 import type { IUser } from '$lib/server/services/users.service';
@@ -77,28 +78,33 @@ export function actionHandler<
 				// redirect
 				throw err;
 			}
-			if (err instanceof BaseError) {
-				if (err instanceof ValidationError) {
-					const statusCode = err.statusCode || 400;
-					return fail(statusCode, {
-						error: i18n('error.validation_error'),
-						fields: err.details.reduce(
-							(acc, item) => {
-								if (item.instancePath) {
-									acc[item.instancePath.slice(1).replace(/\//g, '.')] = item.message || '';
-								}
-								return acc;
-							},
-							{} as Record<string, string>
-						),
-						statusCode
-					});
-				}
+			if (err instanceof ValidationError) {
+				const statusCode = err.statusCode || 400;
+				return fail(statusCode, {
+					error: i18n('error.validation_error'),
+					fields: err.details.reduce(
+						(acc, item) => {
+							if (item.instancePath) {
+								acc[item.instancePath.slice(1).replace(/\//g, '.')] = item.message || '';
+							}
+							return acc;
+						},
+						{} as Record<string, string>
+					),
+					statusCode
+				});
 			}
 			const statusCode =
 				typeof err === 'object' && err && 'statusCode' in err && typeof err.statusCode === 'number'
 					? err.statusCode
 					: 400;
+			if (!(err instanceof BaseError) || statusCode >= 500) {
+				logger.error(err, 'Action Error %o', {
+					pathname: event.url.pathname,
+					routeId: event.route.id,
+					status: statusCode,
+				});
+			}
 			return fail(
 				statusCode,
 				typeof err === 'object' && err && 'toJSON' in err && typeof err.toJSON === 'function'

@@ -8,7 +8,7 @@
 </script>
 
 <div class="bg-base-100 p-5 md:rounded-xl md:shadow-lg w-full md:max-w-sm">
-	<Form discardUnsaved on:submit={() => (submitted = true)} let:loading>
+	<Form discardUnsaved successToast={false} on:submit={() => (submitted = true)} let:loading>
 		<div class="flex flex-col gap-6">
 			<div class="text-xl font-light">{$_('title.recover_access')}</div>
 
