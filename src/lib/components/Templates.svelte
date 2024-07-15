@@ -23,6 +23,7 @@
 		| 'contextInfo'
 		| 'hidePoweredBy'
 		| 'id'
+		| 'locale'
 		| 'name'
 		| 'steps'
 		| 'submitLabel'
@@ -87,6 +88,7 @@
 			hidePoweredBy: false,
 			submitLabel: null,
 			id: '',
+			locale: 'en',
 			name: template.name || '',
 			steps: template.steps || []
 		};

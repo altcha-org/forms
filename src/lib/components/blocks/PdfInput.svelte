@@ -18,7 +18,7 @@
 		pdf: IPdfInputOptions;
 		text?: string;
 	}>;
-	export let form: IForm | undefined = void 0;
+	export let form: Pick<IForm, 'locale' | 'steps'> | undefined = void 0;
 	export let preview: boolean = false;
 	export let generatePdfUrl: string = `${$page.url.pathname}/pdf`;
 	export let submitUrl: string = `${$page.url.pathname}/file`;

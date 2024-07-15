@@ -4,20 +4,22 @@
 	import List from '$lib/components/List.svelte';
 	import type { IFileWithoutAccount, IForm, TResponseData } from '$lib/types';
 
-	export let data: TResponseData;
+	export let data: TResponseData<string | null | undefined>;
 	export let files: Promise<IFileWithoutAccount[]>;
 	export let form: Partial<IForm>;
 
 	$: steps =
 		form.steps?.map((step) => {
 			return {
-				blocks: step.blocks.map((block) => {
-					const field = data[block.name];
-					return {
-						block,
-						field
-					};
-				}),
+				blocks: step.blocks
+					.map((block) => {
+						const field = data[block.name];
+						return {
+							block,
+							field
+						};
+					})
+					.filter(({ block }) => !block.type.endsWith('Content')),
 				title: step.title
 			};
 		}) || [];

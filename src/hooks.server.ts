@@ -124,7 +124,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}
 		logger.error(err, 'Internal Server Error %o', {
 			pathname: event.url.pathname,
-			routeId: event.route.id,
+			routeId: event.route.id
 		});
 		throw error(500, 'Internal Server Error');
 	}

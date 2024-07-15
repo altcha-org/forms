@@ -61,7 +61,9 @@
 			<div class="overflow-hidden bg-primary/5">
 				<div
 					class="h-2 border-r border-base-100"
-					style="background-color:{item.color};width:{item.percent}%;min-width:{item.percent ? '2px' : '0px'}"
+					style="background-color:{item.color};width:{item.percent}%;min-width:{item.percent
+						? '2px'
+						: '0px'}"
 				></div>
 			</div>
 		</div>

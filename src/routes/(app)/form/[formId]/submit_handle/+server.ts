@@ -74,7 +74,6 @@ export const POST = requestHandler(
 					}
 				}
 			} catch (err) {
-				console.log('>>E1', err)
 				error = true;
 				result?.context.log(String(err));
 			}
@@ -166,7 +165,7 @@ export const POST = requestHandler(
 function getFormData(rawFormData: FormData, removeProps: string[] = ['altcha']) {
 	return [...rawFormData.entries()].reduce((acc, [key, value]) => {
 		if (!removeProps.includes(key) && !key.startsWith('__')) {
-			acc[key] = value === '' ? null : value;
+			acc[key] = value === '' || value === null ? null : String(value);
 		}
 		return acc;
 	}, {} as TResponseData);

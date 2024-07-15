@@ -27,6 +27,7 @@
 		| 'contextInfo'
 		| 'hidePoweredBy'
 		| 'id'
+		| 'locale'
 		| 'steps'
 		| 'submitLabel'
 	>;
