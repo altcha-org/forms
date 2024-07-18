@@ -102,7 +102,7 @@ export function actionHandler<
 				logger.error(err, 'Action Error %o', {
 					pathname: event.url.pathname,
 					routeId: event.route.id,
-					status: statusCode,
+					status: statusCode
 				});
 			}
 			return fail(

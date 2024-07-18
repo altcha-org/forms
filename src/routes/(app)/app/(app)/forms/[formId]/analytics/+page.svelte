@@ -17,44 +17,72 @@
 		return acc;
 	}, [] as IFormBlockPartial[]);
 	$: stats = data.stats;
-
+	$: summary = {
+		completionTime: Math.floor(
+			stats.reduce((acc, { values }) => acc + (values.completionTime || 0), 0) /
+				stats.filter(({ values }) => !!values.completionTime).length
+		),
+		correctionRate:
+			stats.reduce((acc, { values }) => {
+				return acc + values.correctionRate;
+			}, 0) / stats.length,
+		errored: stats.reduce((acc, { values }) => {
+			return acc + values.errored;
+		}, 0),
+		mobile: stats.reduce((acc, { values }) => {
+			return acc + values.mobile;
+		}, 0),
+		submissions: stats.reduce((acc, { values }) => acc + values.submissions, 0),
+		views: stats.reduce((acc, { values }) => acc + values.views, 0)
+	};
 	$: abandonmentRate =
-		Math.floor(
-			(1 - stats.summary.submissions / (stats.summary.views - stats.summary.errored)) * 1000
-		) / 10;
-	$: correctionRate = stats.summary.submissions
-		? Math.floor((stats.summary.correctionRate || 0) * 1000) / 10
+		Math.floor((1 - summary.submissions / (summary.views - summary.errored)) * 1000) / 10;
+	$: correctionRate = summary.submissions
+		? Math.floor((summary.correctionRate || 0) * 1000) / 10
 		: null;
-	$: errorRate = Math.floor((stats.summary.errored / stats.summary.views) * 1000) / 10;
-	$: countries = Object.entries(stats.countries).map(([code, value]) => {
-		const codeUppercase = code.toUpperCase();
-		const country = PHONE_CODES.find((c) => c.code.toLowerCase() === code);
-		const name = country?.name || codeUppercase;
-		return {
-			label: `${country?.emoji || ''} ${name} (${codeUppercase})`,
-			value: [value]
-		};
-	});
-	$: fieldDropOff = Object.entries(stats.fieldDropOff).map(([name, value]) => {
-		const block = blocks.find((b) => b.name === name);
-		return {
-			label: block?.label || name,
-			value: [value]
-		};
-	});
-	$: devices = stats.summary.views
+	$: errorRate = Math.floor((summary.errored / summary.views) * 1000) / 10;
+	$: countries = stats.reduce(
+		(acc, { values }) => {
+			for (const code in values.countries) {
+				const codeUppercase = code.toUpperCase();
+				const country = PHONE_CODES.find((c) => c.code.toLowerCase() === code);
+				const name = country?.name || codeUppercase;
+				const label = `${country?.emoji || ''} ${name} (${codeUppercase})`;
+				acc[label] = (acc[label] || 0) + values.countries[code];
+			}
+			return acc;
+		},
+		{} as Record<string, number>
+	);
+	$: fieldDropOff = stats.reduce(
+		(acc, { values }) => {
+			if (values.fieldDropOff) {
+				for (const name in values.fieldDropOff) {
+					const block = blocks.find((b) => b.name === name);
+					const blockLabel = block?.label || name;
+					acc[blockLabel] = (acc[blockLabel] || 0) + values.fieldDropOff[name];
+				}
+			}
+			return acc;
+		},
+		{} as Record<string, number>
+	);
+	$: devices = summary.views
 		? [
 				{
 					label: $_('label.mobile'),
-					value: [stats.summary.mobile]
+					value: [summary.mobile]
 				},
 				{
 					label: $_('label.desktop'),
-					value: [stats.summary.views - stats.summary.mobile]
+					value: [summary.views - summary.mobile]
 				}
 			]
 		: [];
-	$: views = stats.views.map(({ label, value }) => ({ label: formatDate(parseISO(label)), value }));
+	$: views = stats.map(({ label, values }) => ({
+		label: formatDate(parseISO(label)),
+		value: [values.views, values.submissions]
+	}));
 </script>
 
 <div class="flex flex-col gap-8">
@@ -62,14 +90,14 @@
 		<div class="border border-base-300 rounded-lg p-3 shadow-sm">
 			<div>{$_('label.views')}</div>
 			<div>
-				<span class="font-bold text-xl">{formatNumber(stats.summary.views)}</span>
+				<span class="font-bold text-xl">{formatNumber(summary.views)}</span>
 			</div>
 		</div>
 
 		<div class="border border-base-300 rounded-lg p-3 shadow-sm">
 			<div>{$_('label.responses')}</div>
 			<div>
-				<span class="font-bold text-xl">{formatNumber(stats.summary.submissions)}</span>
+				<span class="font-bold text-xl">{formatNumber(summary.submissions)}</span>
 			</div>
 		</div>
 
@@ -77,8 +105,8 @@
 			<div>{$_('label.completion_time')}</div>
 			<div>
 				<span class="font-bold text-xl">
-					{#if stats.summary.completionTime > 0}
-						{@const time = formatDuration(stats.summary.completionTime)}
+					{#if summary.completionTime > 0}
+						{@const time = formatDuration(summary.completionTime)}
 						{time.startsWith('00:') ? time.slice(3) : time}
 					{:else}
 						&mdash;

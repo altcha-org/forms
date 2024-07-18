@@ -5,9 +5,10 @@
 	import ToggleInput from '$lib/components/blocks/ToggleInput.svelte';
 	import PasswordInput from '$lib/components/blocks/PasswordInput.svelte';
 	import StickyButtons from '$lib/components/StickyButtons.svelte';
-	import type { PageData } from './$types';
 	import SelectInput from '$lib/components/blocks/SelectInput.svelte';
 	import NumberInput from '$lib/components/blocks/NumberInput.svelte';
+	import timezones from '$lib/timezones';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 
@@ -15,6 +16,7 @@
 
 	$: account = data.accountWithCredentials;
 	$: auditlogAllowed = account.plan?.featureAuditlog === true;
+	$: timeZoneOptions = timezones.map(([_, tz]) => tz).sort();
 </script>
 
 <Form action="?/updateAccount" class="flex flex-col gap-12" let:changed let:error>
@@ -27,6 +29,18 @@
 			}}
 			error={error?.fields?.name}
 			bind:value={account.name}
+		/>
+
+		<SelectInput
+			block={{
+				label: $_('label.timezone'),
+				help: $_('help.account_timezone'),
+				name: 'timeZone',
+				options: {
+					options: timeZoneOptions
+				}
+			}}
+			bind:value={account.timeZone}
 		/>
 
 		<ToggleInput

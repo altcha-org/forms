@@ -227,7 +227,8 @@
 		"identities_search": "Buscar identidades utilizando el ID, el ID externo o la dirección de correo electrónico del usuario.",
 		"floating_captcha": "Muestra el Captcha como un elemento flotante al enviar el formulario.",
 		"export_include_attachments": "Incluir archivos, adjuntos y firmas en la exportación.",
-		"export_individual_files": "Generar un archivo individual para cada respuesta."
+		"export_individual_files": "Generar un archivo individual para cada respuesta.",
+		"account_timezone": "Seleccione la zona horaria para esta cuenta."
 	},
 	"interval": {
 		"custom": "Personalizado",

@@ -100,10 +100,11 @@ export function setUserCookies(
 
 export async function createUser(
 	data: Parameters<(typeof usersService)['createUser']>[0],
-	inviteId?: string | null
+	inviteId?: string | null,
+	timeZone?: string | null
 ) {
 	const invite = inviteId ? await invitesService.findInvite(inviteId) : void 0;
-	const user = await usersService.createUser(data, invite?.account?.id, invite?.role);
+	const user = await usersService.createUser(data, invite?.account?.id, invite?.role, timeZone);
 	if (invite && invite.email == data.email) {
 		await invitesService.acceptInvite(user, invite.id);
 	}
@@ -134,14 +135,15 @@ export async function login(
 	};
 }
 
-export async function register(event: RequestEvent, email: string) {
+export async function register(event: RequestEvent, email: string, timeZone?: string) {
 	const inviteId = event.url.searchParams.get('invite');
 	const user = await createUser(
 		{
 			email,
 			locale: event.locals.locale
 		},
-		inviteId
+		inviteId,
+		timeZone
 	);
 	return generatePasskeyRegistration(user);
 }

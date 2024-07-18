@@ -26,7 +26,7 @@ export interface EmailServiceSendOptions {
 
 export class EmailService {
 	readonly DEFAULT_CONNECTION_TIMEOUT = 10000;
-	
+
 	readonly DEFAULT_GREETING_TIMEOUT = 6000;
 
 	readonly defaultTransport = env.SMTP_URL
@@ -72,8 +72,8 @@ export class EmailService {
 			requireTLS,
 			secure,
 			tls: {
-				rejectUnauthorized: rejectUnauthorized,
-			},
+				rejectUnauthorized: rejectUnauthorized
+			}
 		});
 	}
 

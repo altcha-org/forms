@@ -223,7 +223,8 @@
 		"identities_search": "Search for identities using the ID, external ID, or the user's email address.",
 		"floating_captcha": "Displays the Captcha as a floating element upon form submission.",
 		"export_include_attachments": "Include files, attachments and signatures in the export.",
-		"export_individual_files": "Generate an individual file for each response."
+		"export_individual_files": "Generate an individual file for each response.",
+		"account_timezone": "Select the time zone for this account."
 	},
 	"interval": {
 		"custom": "Custom",

@@ -64,7 +64,8 @@ export class UsersService {
 				>
 			>,
 		accountId?: string,
-		role?: 'admin' | 'member'
+		role?: 'admin' | 'member',
+		timeZone?: string | null
 	) {
 		const t = await i18n(data.locale);
 		const name = data.name || data.email?.split(/[@+]/)[0] || '';
@@ -111,7 +112,8 @@ export class UsersService {
 		if (!accountId) {
 			const account = await accountsService.createAccount({
 				name: t('text.users_account_name', { values: { name } }),
-				planId: plan?.id
+				planId: plan?.id,
+				timeZone
 			});
 			accountId = account.id;
 		}

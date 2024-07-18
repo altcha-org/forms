@@ -62,6 +62,7 @@ export const accounts = pgTable('accounts', {
 	name: varchar('name', { length: 256 }).notNull(),
 	smtpUrl: varchar('smtp_url', { length: 256 }),
 	smtpSender: varchar('smtp_sender', { length: 64 }),
+	timeZone: varchar('time_zone', { length: 64 }),
 	createdAt: timestamp('created_at').notNull().defaultNow(),
 	updatedAt: timestamp('updated_at').notNull().defaultNow()
 });
@@ -448,6 +449,24 @@ export const sessions = pgTable('sessions', {
 	startAt: timestamp('start_at').notNull().defaultNow(),
 	submitAt: timestamp('submit_at')
 });
+
+export const sessionsCompacted = pgTable(
+	'sessions_compacted',
+	{
+		formId: varchar('form_id', { length: 32 })
+			.notNull()
+			.references(() => forms.id, {
+				onDelete: 'cascade'
+			}),
+		date: timestamp('date').notNull(),
+		data: customJson('data').notNull().$type<unknown[]>()
+	},
+	(t) => ({
+		pk: primaryKey({
+			columns: [t.formId, t.date]
+		})
+	})
+);
 
 export const auditlog = pgTable(
 	'audit_log',

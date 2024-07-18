@@ -78,7 +78,8 @@ export const actions = {
 						locale: event.locals.locale
 					},
 					event.params.accountId,
-					'admin'
+					'admin',
+					data.tz
 				);
 			} else {
 				await invitesService.createInvite({
@@ -103,7 +104,8 @@ export const actions = {
 						minLength: 8
 					})
 				),
-				role: t.Enum(EUserRole)
+				role: t.Enum(EUserRole),
+				tz: t.String()
 			}),
 			requiredRole: 'admin'
 		}

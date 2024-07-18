@@ -18,7 +18,9 @@ export const load = loadHandler(async (event) => {
 	const stats = await sessionsService.stats({
 		dateEnd,
 		dateStart,
-		formId: form.id
+		formId: form.id,
+		includeCompacted: true,
+		timeZone: form.account.timeZone
 	});
 	return {
 		stats
@@ -27,37 +29,32 @@ export const load = loadHandler(async (event) => {
 
 function generateDemoData() {
 	const startDate = new Date(Date.now() - 86400000 * 30);
-	const totalViews = Math.round(Math.random() * 1000) + 1000;
-	const views = [...Array(30)].map((_, i) => {
-		const value = Math.round(Math.random() * 1000);
+	return [...Array(30)].map((_, i) => {
+		const views = Math.round(Math.random() * 1000);
 		return {
 			label: new Date(startDate.getTime() + 86400000 * i).toISOString().split('T')[0],
-			value: [value, Math.round(value * 0.7)]
+			values: {
+				completionTime: 12560,
+				correctionRate: 0.12,
+				countries: ['us', 'gb', 'de', 'es', 'it', 'nl', 'fr', 'se'].reduce(
+					(acc, code) => {
+						acc[code] = Math.round(Math.random() * 1000);
+						return acc;
+					},
+					{} as Record<string, number>
+				),
+				errored: 0,
+				fieldDropOff: ['Address', 'Phone', 'Message', 'Email', 'Name'].reduce(
+					(acc, name) => {
+						acc[name] = Math.round(Math.random() * 200);
+						return acc;
+					},
+					{} as Record<string, number>
+				),
+				mobile: Math.floor(views * 0.34),
+				submissions: Math.round(views * 0.7),
+				views
+			}
 		};
 	});
-	return {
-		countries: ['us', 'gb', 'de', 'es', 'it', 'nl', 'fr', 'se'].reduce(
-			(acc, code) => {
-				acc[code] = Math.round(Math.random() * 1000);
-				return acc;
-			},
-			{} as Record<string, number>
-		),
-		fieldDropOff: ['Address', 'Phone', 'Message', 'Email', 'Name'].reduce(
-			(acc, name) => {
-				acc[name] = Math.round(Math.random() * 200);
-				return acc;
-			},
-			{} as Record<string, number>
-		),
-		summary: {
-			completionTime: 12560,
-			correctionRate: 0.12,
-			errored: 0,
-			mobile: Math.floor(totalViews * 0.34),
-			submissions: Math.floor(totalViews * 0.7),
-			views: totalViews
-		},
-		views
-	};
 }

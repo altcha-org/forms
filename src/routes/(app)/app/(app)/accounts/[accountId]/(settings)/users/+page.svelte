@@ -14,9 +14,10 @@
 	import LimitReached from '$lib/components/LimitReached.svelte';
 	import List from '$lib/components/List.svelte';
 	import DropdownMenu from '$lib/components/DropdownMenu.svelte';
-	import type { PageData } from './$types';
 	import ToggleInput from '$lib/components/blocks/ToggleInput.svelte';
 	import PasswordInput from '$lib/components/blocks/PasswordInput.svelte';
+	import { getTimeZone } from '$lib/helpers';
+	import type { PageData } from './$types';
 
 	type User = (typeof data.users)[number];
 	type Invite = (typeof data.invites)[number];
@@ -181,6 +182,8 @@
 {/if}
 
 <Modal action="?/inviteUser" title={$_('title.invite_user')} bind:open={inviteModalOpen}>
+	<input type="hidden" name="tz" value={getTimeZone()} />
+
 	{#if inviteModalOpen}
 		<div class="flex flex-col gap-6">
 			<TextInput

@@ -3,6 +3,7 @@ import { env } from '$lib/server/env';
 import { responsesService } from '$lib/server/services/responses.service';
 import { filesService } from '$lib/server/services/files.service';
 import { devicesService } from '$lib/server/services/devices.service';
+import { sessionsService } from './services/sessions.service';
 
 const AUTO_START = env.JOBS_DISABLED !== '1';
 
@@ -31,6 +32,16 @@ export const removeExpiredFiles = env.JOBS_DELETE_EXPIRED_FILES
 			cronTime: env.JOBS_DELETE_EXPIRED_FILES,
 			onTick: async () => {
 				await filesService.deleteExpiredFiles();
+			},
+			start: AUTO_START
+		})
+	: null;
+
+export const compactSessions = env.JOBS_COMPACT_SESSIONS
+	? CronJob.from({
+			cronTime: env.JOBS_COMPACT_SESSIONS,
+			onTick: async () => {
+				await sessionsService.compactSessions();
 			},
 			start: AUTO_START
 		})
