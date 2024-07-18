@@ -8,6 +8,7 @@ import { AVAILABLE_OAUTH_PROVIDERS } from '$lib/server/oauth';
 import { generateWebAuthnChallenge, login, register } from '../shared.server';
 import { verifyEmailMxDns } from '$lib/server/helpers';
 import type { Actions, PageServerLoad } from './$types';
+import { timeZoneToCountryCode } from '$lib/helpers';
 
 export const load = loadHandler(
 	(event) => {
@@ -81,7 +82,8 @@ export const actions = {
 						);
 					}
 				}
-				return register(event, data.email);
+				const country = data.tz ? timeZoneToCountryCode(data.tz) : null;
+				return register(event, data.email, country ? data.tz : void 0);
 			}
 		},
 		{
@@ -89,7 +91,12 @@ export const actions = {
 			body: t.Object({
 				email: t.String({
 					format: 'email'
-				})
+				}),
+				tz: t.Optional(
+					t.String({
+						maxLength: 64
+					})
+				)
 			}),
 			rateLimit: 'L3'
 		}

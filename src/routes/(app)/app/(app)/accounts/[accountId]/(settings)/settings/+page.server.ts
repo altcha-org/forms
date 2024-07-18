@@ -47,7 +47,8 @@ export const actions = {
 				encryptionEnabled: data.encryptionEnabled,
 				name: data.name,
 				smtpSender: data.smtpSender,
-				smtpUrl: data.smtpUrl
+				smtpUrl: data.smtpUrl,
+				timeZone: data.timeZone
 			});
 			await eventsService.trackEvent({
 				account,
@@ -72,6 +73,11 @@ export const actions = {
 				smtpUrl: t.Optional(
 					t.String({
 						format: 'uri'
+					})
+				),
+				timeZone: t.Optional(
+					t.String({
+						maxLength: 64
 					})
 				)
 			}),

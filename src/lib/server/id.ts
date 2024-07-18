@@ -42,8 +42,8 @@ export class IdGenerator {
 		);
 	}
 
-	nanoid(len: number = this.MIN_LEN) {
-		const time = Math.floor(Date.now() / 1000)
+	nanoid(date: Date = new Date(), len: number = this.MIN_LEN) {
+		const time = Math.floor(date.getTime() / 1000)
 			.toString(32)
 			.slice(0, this.TIME_LEN);
 		const rand = generateNanoId().slice(0, len - this.TIME_LEN - this.REGION_LEN);

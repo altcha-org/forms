@@ -31,6 +31,7 @@ export class AccountsService {
 		id: true,
 		name: true,
 		planId: true,
+		timeZone: true,
 		updatedAt: true
 	} as const satisfies Partial<Record<keyof IAccountSchema, boolean>>;
 
@@ -38,13 +39,16 @@ export class AccountsService {
 		return idgen.prefixed(EIdPrefix.ACCOUNT);
 	}
 
-	async createAccount(data: Pick<IAccount, 'name'> & Partial<Pick<IAccount, 'planId'>>) {
+	async createAccount(
+		data: Pick<IAccount, 'name'> & Partial<Pick<IAccount, 'planId' | 'timeZone'>>
+	) {
 		const [result] = await db
 			.insert(accounts)
 			.values({
 				name: data.name,
 				id: this.generateId(),
-				planId: data.planId
+				planId: data.planId,
+				timeZone: data.timeZone
 			})
 			.returning();
 		return result;
@@ -169,6 +173,7 @@ export class AccountsService {
 				| 'planId'
 				| 'smtpSender'
 				| 'smtpUrl'
+				| 'timeZone'
 			>
 		>
 	) {
@@ -183,6 +188,7 @@ export class AccountsService {
 				planId: data.planId,
 				smtpSender: data.smtpSender,
 				smtpUrl: data.smtpUrl,
+				timeZone: data.timeZone,
 				updatedAt: new Date()
 			})
 			.where(eq(accounts.id, accountId));

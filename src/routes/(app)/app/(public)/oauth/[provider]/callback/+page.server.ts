@@ -7,6 +7,7 @@ import { ForbiddenError } from '$lib/server/errors';
 import { getOAuthProvider } from '$lib/server/oauth';
 import { createUser, setUserCookies, upsertDevice } from '../../../shared.server';
 import type { Actions } from './$types';
+import { timeZoneToCountryCode } from '$lib/helpers';
 
 export const actions = {
 	default: actionHandler(
@@ -24,6 +25,7 @@ export const actions = {
 				if (env.REGISTRATIONS_DISABLED === '1') {
 					throw new ForbiddenError();
 				}
+				const country = data.deviceTimezone ? timeZoneToCountryCode(data.deviceTimezone) : null;
 				const { id } = await createUser(
 					{
 						email: profile.email,
@@ -34,7 +36,8 @@ export const actions = {
 						oauthAccessToken: accessToken,
 						oauthProfile: profile
 					},
-					state.get('invite')
+					state.get('invite'),
+					country ? data.deviceTimezone : null
 				);
 				user = await usersService.findUserForWebauthn(id);
 				if (!user) {
@@ -67,8 +70,12 @@ export const actions = {
 		{
 			authorization: false,
 			body: t.Object({
-				deviceName: t.String(),
-				deviceTimezone: t.String()
+				deviceName: t.String({
+					maxLength: 64
+				}),
+				deviceTimezone: t.String({
+					maxLength: 64
+				})
 			})
 		}
 	)

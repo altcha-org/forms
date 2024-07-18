@@ -168,6 +168,7 @@
 	},
 	"help": {
 		"account_name": "Enter the name of the account.",
+		"account_timezone": "Select the time zone for this account.",
 		"add_response_note": "Add a note or a comment to this response. Notes are visible only to users with access to this response.",
 		"allowed_countries": "Enter ISO country codes (2 characters) of allowed countries separated by a new line or comma. An empty list means all countries are allowed.",
 		"api_key_features": "Select features enabled for this API key.",

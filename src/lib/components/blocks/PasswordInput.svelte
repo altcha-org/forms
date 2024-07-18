@@ -12,8 +12,8 @@
 
 	export let autocomplete: string | undefined = void 0;
 	export let block: IFormBlockPartial<{
-		maxLength?: string;
-		minLength?: string;
+		maxLength?: string | number;
+		minLength?: string | number;
 	}>;
 	export let copy: boolean = false;
 	export let disabled: boolean = false;
@@ -62,8 +62,8 @@
 		{#if visible}
 			<input
 				type="text"
-				maxlength={maxLength ? parseInt(maxLength, 10) : null}
-				minlength={minLength ? parseInt(minLength, 10) : null}
+				maxlength={maxLength ? parseInt(String(maxLength), 10) : null}
+				minlength={minLength ? parseInt(String(minLength), 10) : null}
 				name={block.name}
 				placeholder={block.placeholder}
 				readonly={block.readonly}
@@ -76,8 +76,8 @@
 		{:else}
 			<input
 				type="password"
-				maxlength={maxLength ? parseInt(maxLength, 10) : null}
-				minlength={minLength ? parseInt(minLength, 10) : null}
+				maxlength={maxLength ? parseInt(String(maxLength), 10) : null}
+				minlength={minLength ? parseInt(String(minLength), 10) : null}
 				name={block.name}
 				placeholder={block.placeholder}
 				readonly={block.readonly}

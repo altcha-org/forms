@@ -5,6 +5,7 @@
 	import Page from '$lib/components/Page.svelte';
 	import TextInput from '$lib/components/blocks/TextInput.svelte';
 	import StickyButtons from '$lib/components/StickyButtons.svelte';
+	import { getTimeZone } from '$lib/helpers';
 
 	let plan: string = 'team';
 </script>
@@ -21,6 +22,7 @@
 
 		<Form class="flex flex-col gap-12" discardUnsaved on:reset={() => goto('/app/accounts')}>
 			<input type="hidden" name="plan" value={plan} />
+			<input type="hidden" name="tz" value={getTimeZone()} />
 
 			<div class="max-w-lg">
 				<TextInput

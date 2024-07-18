@@ -195,7 +195,8 @@
 	title={$_('title.register')}
 	subtitle={region ? $_('region.' + region) : void 0}
 	data={{
-		email: registerEmail
+		email: registerEmail,
+		tz: getTimeZone()
 	}}
 	successToast={false}
 	bind:open={registerModalOpen}

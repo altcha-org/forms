@@ -101,6 +101,12 @@ export const schema = t.Object({
 
 	// Job scheduling configurations
 	/**
+	 * Cron expression for compacting analytics sessions
+	 */
+	JOBS_COMPACT_SESSIONS: t.String({
+		default: '0 1 * * *'
+	}),
+	/**
 	 * Cron expression for deleting expired devices
 	 */
 	JOBS_DELETE_EXPIRED_DEVICED: t.String({
