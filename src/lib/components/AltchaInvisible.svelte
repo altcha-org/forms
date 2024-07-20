@@ -3,6 +3,7 @@
 	import { solveChallengeWorkers } from 'altcha-lib';
 	import InlineAltchaWorker from 'altcha-lib/worker?worker&inline';
 
+	export let delay: number = 1500;
 	export let challengeurl: string;
 	export let loading: boolean = false;
 	export let name: string = 'altcha';
@@ -35,6 +36,7 @@
 		loading = true;
 		verified = false;
 		payload = '';
+		await new Promise((resolve) => setTimeout(resolve, delay));
 		try {
 			const resp = await fetch(challengeurl);
 			if (resp.status !== 200) {
