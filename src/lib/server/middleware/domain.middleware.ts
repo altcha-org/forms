@@ -6,7 +6,7 @@ const HOSTNAME = new URL(getAppBaseUrl(), 'http://localhost').host;
 
 export default () => {
 	return (event: RequestEvent) => {
-		if (HOSTNAME !== event.request.headers.get('host')) {
+		if (HOSTNAME !== event.url.host) {
 			throw new ForbiddenError('Hostname not allowed.');
 		}
 	};
