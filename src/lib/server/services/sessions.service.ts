@@ -318,8 +318,11 @@ export class SessionsService {
 		});
 		const results = await db
 			.select({
-				date: sql<string>`date_trunc('week', ${sessions.startAt} at time zone ${accounts.timeZone})`.as(
+				date: sql<string>`date_trunc('week', ${sessions.startAt})`.as(
 					'date'
+				),
+				dateZoned: sql<string | null>`date_trunc('week', ${sessions.startAt} at time zone ${accounts.timeZone})`.as(
+					'date_zoned'
 				),
 				formId: sessions.formId,
 				timeZone: accounts.timeZone
@@ -327,7 +330,7 @@ export class SessionsService {
 			.from(sessions)
 			.leftJoin(forms, eq(forms.id, sessions.formId))
 			.leftJoin(accounts, eq(accounts.id, forms.accountId))
-			.groupBy(sessions.formId, accounts.timeZone, sql`date`)
+			.groupBy(sessions.formId, accounts.timeZone, sql`date`, sql`date_zoned`)
 			.where(
 				and(
 					lt(
@@ -337,8 +340,8 @@ export class SessionsService {
 				)
 			)
 			.limit(limit);
-		for (const { date, formId, timeZone } of results) {
-			const dateIso = date.split(' ')[0];
+		for (const { date, dateZoned, formId, timeZone } of results) {
+			const dateIso = String(dateZoned || date).split(' ')[0];
 			// get dates for previous week
 			const dateStart = startOfWeek(timeZone ? toZonedTime(dateIso, timeZone) : dateIso, {
 				weekStartsOn: 1
