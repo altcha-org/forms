@@ -75,10 +75,10 @@
 			}
 			const fileId = await uploadFile(file, uploadUrl);
 			if (fileId) {
+				value = fileId;
 				requestAnimationFrame(() => {
 					elForm?.requestSubmit();
 				});
-				value = fileId;
 			} else {
 				// TODO: error
 			}

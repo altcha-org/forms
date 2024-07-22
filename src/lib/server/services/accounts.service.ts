@@ -1,4 +1,4 @@
-import { and, count, eq } from 'drizzle-orm';
+import { and, count, eq, inArray, lte, sql } from 'drizzle-orm';
 import { cipher, rsa } from '@altcha/crypto';
 import { base64Encode } from '@altcha/crypto/encoding';
 import { db } from '$lib/server/db';
@@ -7,7 +7,9 @@ import { EIdPrefix, idgen } from '$lib/server/id';
 import { encryptionKeysService } from '$lib/server/services/encryptionKeys.service';
 import { subscriptionsService } from '$lib/server/services/subscriptions.service';
 import { paddleService } from '$lib/server/services/paddle.service';
-import { plansService } from '$lib/server/services/plans.service';
+import { plansService, type IPlan } from '$lib/server/services/plans.service';
+import { roundTime } from '../helpers';
+import { EEvents, eventsService } from './events.service';
 
 export type IAccount = NonNullable<Awaited<ReturnType<AccountsService['findAccount']>>>;
 
@@ -26,29 +28,55 @@ export class AccountsService {
 		auditlog: true,
 		auditlogRetention: true,
 		billingCycle: true,
+		canSendEmails: true,
 		createdAt: true,
 		encryptionEnabled: true,
 		id: true,
 		name: true,
 		planId: true,
+		responses: true,
 		timeZone: true,
-		updatedAt: true
+		trialExpiresAt: true,
+		suspended: true,
+		updatedAt: true,
+		uploads: true,
 	} as const satisfies Partial<Record<keyof IAccountSchema, boolean>>;
 
 	generateId() {
 		return idgen.prefixed(EIdPrefix.ACCOUNT);
 	}
 
+	async countAccountUsersAndInvites(accountId: string) {
+		const invitesCount = await db
+			.select({
+				value: count()
+			})
+			.from(invites)
+			.where(eq(invites.accountId, accountId));
+		const usersCount = await db
+			.select({
+				value: count()
+			})
+			.from(accountsToUsers)
+			.where(eq(accountsToUsers.accountId, accountId));
+		return invitesCount[0].value + usersCount[0].value;
+	}
+
 	async createAccount(
-		data: Pick<IAccount, 'name'> & Partial<Pick<IAccount, 'planId' | 'timeZone'>>
+		data: Pick<IAccount, 'name'> &
+			Partial<Pick<IAccount, 'planId' | 'timeZone'> & { plan?: Pick<IPlan, 'id' | 'premium' | 'trialDays'> }>
 	) {
 		const [result] = await db
 			.insert(accounts)
 			.values({
-				name: data.name,
+				canSendEmails: data.plan ? (data.plan.premium ? true : false) : void 0,
 				id: this.generateId(),
-				planId: data.planId,
-				timeZone: data.timeZone
+				name: data.name,
+				planId: data.plan?.id || data.planId,
+				timeZone: data.timeZone,
+				trialExpiresAt: data.plan?.trialDays
+					? roundTime(Date.now() + data.plan.trialDays * 86400000)
+					: void 0
 			})
 			.returning();
 		return result;
@@ -128,20 +156,22 @@ export class AccountsService {
 		});
 	}
 
-	async countAccountUsersAndInvites(accountId: string) {
-		const invitesCount = await db
-			.select({
-				value: count()
+	async incrementResponses(accountId: string) {
+		await db
+			.update(accounts)
+			.set({
+				responses: sql`${accounts.responses} + 1`
 			})
-			.from(invites)
-			.where(eq(invites.accountId, accountId));
-		const usersCount = await db
-			.select({
-				value: count()
+			.where(eq(accounts.id, accountId));
+	}
+
+	async incrementUploads(accountId: string) {
+		await db
+			.update(accounts)
+			.set({
+				uploads: sql`${accounts.uploads} + 1`
 			})
-			.from(accountsToUsers)
-			.where(eq(accountsToUsers.accountId, accountId));
-		return invitesCount[0].value + usersCount[0].value;
+			.where(eq(accounts.id, accountId));
 	}
 
 	async listAccountUsers(accountId: string) {
@@ -153,10 +183,44 @@ export class AccountsService {
 						id: true,
 						email: true,
 						emergency: true,
+						locale: true,
 						name: true
 					}
 				}
 			}
+		});
+	}
+
+	async suspendAccount(accountId: string, suspended: IAccount['suspended']) {
+		await db.update(accounts).set({
+			suspended,
+			trialExpiresAt: null,
+		})
+		.where(eq(accounts.id, accountId));
+	}
+
+	async suspendExpiredTrials(limit: number = 100) {
+		const expired = await db.query.accounts.findMany({
+			columns: {
+				id: true,
+			},
+			limit,
+			where: lte(accounts.trialExpiresAt, new Date()),
+		});
+		await db.update(accounts).set({
+			suspended: 'trial_expired',
+			trialExpiresAt: null,
+		})
+		.where(inArray(accounts.id, expired.map(({ id }) => id)));
+	}
+
+	async trackSuspendEvent(account: IAccount, data: Pick<IAccountSchema, 'suspended'>) {
+		await eventsService.trackEvent({
+			account,
+			data: {
+				suspended: data.suspended,
+			},
+			event: EEvents.ACCOUNTS_SUSPEND,
 		});
 	}
 
@@ -174,7 +238,7 @@ export class AccountsService {
 				| 'smtpSender'
 				| 'smtpUrl'
 				| 'timeZone'
-			>
+			> & { plan?: Pick<IPlan, 'id' | 'premium' | 'trialDays'> }
 		>
 	) {
 		await db
@@ -183,12 +247,18 @@ export class AccountsService {
 				auditlog: data.auditlog,
 				auditlogRetention: data.auditlogRetention,
 				billingCycle: data.billingCycle,
+				canSendEmails: data.plan ? (data.plan.premium ? true : false) : void 0,
 				encryptionEnabled: data.encryptionEnabled,
 				name: data.name,
-				planId: data.planId,
+				planId: data.planId || data.plan?.id,
 				smtpSender: data.smtpSender,
 				smtpUrl: data.smtpUrl,
 				timeZone: data.timeZone,
+				trialExpiresAt: data.plan?.trialDays
+					? roundTime(Date.now() + data.plan.trialDays * 86400000)
+					: data.plan
+						? null
+						: void 0,
 				updatedAt: new Date()
 			})
 			.where(eq(accounts.id, accountId));

@@ -125,6 +125,12 @@ export const schema = t.Object({
 		default: '0 4 * * *'
 	}),
 	/**
+	 * Cron expression for suspending expired trial accounts
+	 */
+	JOBS_SUSPEND_EXPIRED_TRIALS: t.String({
+		default: '0 5 * * *'
+	}),
+	/**
 	 * Flag to disable job scheduling (1: disabled, 0: enabled)
 	 */
 	JOBS_DISABLED: t.String({

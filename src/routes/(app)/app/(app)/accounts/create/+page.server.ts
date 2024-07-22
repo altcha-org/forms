@@ -22,8 +22,8 @@ export const actions = {
 			const plan = await plansService.getDefaultPlan();
 			const account = await accountsService.createAccount({
 				name: data.name,
-				planId: plan?.id,
-				timeZone: data.tz
+				plan,
+				timeZone: data.tz,
 			});
 			await accountsService.createAccountUser({
 				accountId: account.id,

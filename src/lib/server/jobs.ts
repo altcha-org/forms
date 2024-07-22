@@ -5,6 +5,7 @@ import { responsesService } from '$lib/server/services/responses.service';
 import { filesService } from '$lib/server/services/files.service';
 import { devicesService } from '$lib/server/services/devices.service';
 import { sessionsService } from './services/sessions.service';
+import { accountsService } from './services/accounts.service';
 
 const AUTO_START = env.JOBS_DISABLED !== '1';
 
@@ -62,6 +63,21 @@ export const compactSessions = env.JOBS_COMPACT_SESSIONS
 					await sessionsService.compactSessions();
 				} catch (err) {
 					logger.error(err, 'Job compactSessions failed.');
+				}
+			},
+			start: AUTO_START
+		})
+	: null;
+
+export const suspendExpiredTrialsAccounts = env.JOBS_SUSPEND_EXPIRED_TRIALS
+	? CronJob.from({
+			cronTime: env.JOBS_SUSPEND_EXPIRED_TRIALS,
+			onTick: async () => {
+				logger.debug('Executing job suspendExpiredTrialsAccounts');
+				try {
+					await accountsService.suspendExpiredTrials();
+				} catch (err) {
+					logger.error(err, 'Job suspendExpiredTrialsAccounts failed.');
 				}
 			},
 			start: AUTO_START

@@ -131,7 +131,8 @@
 		"pdf": "PDF",
 		"reupload": "Erneut hochladen",
 		"show_all": "Alle anzeigen",
-		"show_only_signatures": "Nur Signaturen anzeigen"
+		"show_only_signatures": "Nur Signaturen anzeigen",
+		"billing": "Abrechnung"
 	},
 	"color": {
 		"black": "Schwarz",
@@ -695,7 +696,10 @@
 		"response_stream_errors": "Fehler wurden festgestellt, wahrscheinlich aufgrund fehlender Verschlüsselungsschlüssel.",
 		"confirm_pdf_reupload": "Aktuelle PDF-Datei entfernen?",
 		"drag_fields_to_pdf": "Ziehen Sie Felder in die PDF-Datei.",
-		"select_pdf_file": "Wählen Sie die PDF-Datei aus."
+		"select_pdf_file": "Wählen Sie die PDF-Datei aus.",
+		"account_trial_expired": "Ihr Testzeitraum ist abgelaufen. Bitte wechseln Sie zu einem kostenpflichtigen Plan.",
+		"account_trial_expires_in_days": "Ihr Testzeitraum läuft in {days} Tagen ab.",
+		"account_suspended": "Ihr Konto wurde gesperrt (Grund: {reason})."
 	},
 	"title": {
 		"add_block": "Block hinzufügen",

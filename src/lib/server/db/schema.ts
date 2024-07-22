@@ -36,6 +36,14 @@ export const auditlogEnum = pgEnum('auditlog', ['changes', 'access']);
 
 export const billingCycleEnum = pgEnum('billing_cycle', ['month', 'year']);
 
+export const suspendedEnum = pgEnum('suspended', [
+	'trial_expired',
+	'subscription_expired',
+	'billing_problem',
+	'terms_violation',
+	'other'
+]);
+
 // https://github.com/drizzle-team/drizzle-orm/pull/666#issuecomment-1809339114
 export const customJson = <TData>(name: string) =>
 	customType<{ data: TData; driverData: TData }>({
@@ -55,16 +63,25 @@ export const accounts = pgTable('accounts', {
 	planId: varchar('plan_id', { length: 32 }).references(() => plans.id, {
 		onDelete: 'set null'
 	}),
-	billingCycle: billingCycleEnum('billing_cycle').default('year'),
 	auditlog: auditlogEnum('auditlog'),
 	auditlogRetention: integer('auditlog_retention'),
+	billingCycle: billingCycleEnum('billing_cycle').default('year'),
+	canSendEmails: boolean('can_send_emails').default(true),
 	encryptionEnabled: boolean('encryption_enabled').notNull().default(true),
 	name: varchar('name', { length: 256 }).notNull(),
 	smtpUrl: varchar('smtp_url', { length: 256 }),
 	smtpSender: varchar('smtp_sender', { length: 64 }),
+	suspended: suspendedEnum('suspended'),
 	timeZone: varchar('time_zone', { length: 64 }),
+	trialExpiresAt: timestamp('trial_expires_at'),
+	responses: integer('responses').notNull().default(0),
+	uploads: integer('uploads').notNull().default(0),
 	createdAt: timestamp('created_at').notNull().defaultNow(),
 	updatedAt: timestamp('updated_at').notNull().defaultNow()
+}, (table) => {
+	return {
+		trialExpiresAtIdx: index('accounts_trial_expires_at_idx').on(table.trialExpiresAt)
+	};
 });
 
 export const apiKeys = pgTable(
@@ -392,15 +409,19 @@ export const plans = pgTable('plans', {
 	featureNotes: boolean('feature_notes').default(true).notNull(),
 	featureProcessors: boolean('feature_processors').default(true).notNull(),
 	group: varchar('group', { length: 64 }),
-	name: varchar('name', { length: 32 }).notNull(),
+	hidden: boolean('hidden').notNull().default(false),
 	limitApi: integer('limit_api').notNull().default(100000),
 	limitApiKeys: integer('limit_api_keys').notNull().default(10),
 	limitEncryptionKeys: integer('limit_encryption_keys').notNull().default(10),
 	limitFileSize: integer('limit_file_size').notNull().default(10),
 	limitForms: integer('limit_forms').notNull().default(10),
+	limitResponses: integer('limit_responses'),
+	limitUploads: integer('limit_uploads'),
 	limitUsers: integer('limit_users').notNull().default(10),
+	name: varchar('name', { length: 32 }).notNull(),
 	premium: boolean('premium').default(true).notNull(),
 	prices: customJson('prices').notNull().$type<IPlanPrice[]>(),
+	trialDays: integer('trial_days'),
 	createdAt: timestamp('created_at').notNull().defaultNow(),
 	updatedAt: timestamp('updated_at').notNull().defaultNow()
 });

@@ -50,6 +50,7 @@
 		"audit_log": "Audit Log",
 		"authenticate": "Authenticate",
 		"back": "Back",
+		"billing": "Billing",
 		"bulk_action": "Bulk Action ({count})",
 		"cancel": "Cancel",
 		"cancel_request": "Cancel Request",
@@ -555,6 +556,9 @@
 		"suspended": "Suspended"
 	},
 	"text": {
+		"account_trial_expired": "Your trial has expired. Please upgrade to a paid plan.",
+		"account_trial_expires_in_days": "Your trial will expire in {days} days.",
+		"account_suspended": "Your account has been suspended (reason: {reason}).",
 		"account_usage": "The limits are defined by your billing plan. Upgrade to a higher plan to increase the limits.",
 		"accept_terms": "I have read and accept the Terms of Service.",
 		"add_steps": "Convert this form into a multi-step form by adding a new step.",

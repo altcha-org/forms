@@ -66,7 +66,7 @@ export class FilesService {
 		return idgen.prefixed(EIdPrefix.FILE);
 	}
 
-	generateUploadToken(file: IFile) {
+	generateUploadToken(file: Pick<IFile, 'id' | 'size' | 'type'>) {
 		return hmac([file.id, file.type, file.size].join(';'));
 	}
 
@@ -74,7 +74,7 @@ export class FilesService {
 		return roundTime(Date.now() + ttl);
 	}
 
-	async getUploadUrl(file: IFile) {
+	async getUploadUrl(file: Pick<IFile, 'accountId' | 'id' | 'name' | 'persistent' | 'size' | 'type'>) {
 		return this.storage.getUploadUrl(file);
 	}
 

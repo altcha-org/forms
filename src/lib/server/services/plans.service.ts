@@ -21,10 +21,14 @@ export class PlansService {
 		limitEncryptionKeys: true,
 		limitFileSize: true,
 		limitForms: true,
+		limitResponses: true,
+		limitUploads: true,
 		limitUsers: true,
+		hidden: true,
 		name: true,
 		premium: true,
-		prices: true
+		prices: true,
+		trialDays: true,
 	} as const satisfies Partial<Record<keyof typeof plans.$inferSelect, boolean>>;
 
 	async getDefaultPlan() {
@@ -65,7 +69,8 @@ export class PlansService {
 
 	async listPlans() {
 		return db.query.plans.findMany({
-			columns: this.columns
+			columns: this.columns,
+			where: eq(plans.hidden, false),
 		});
 	}
 }

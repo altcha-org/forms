@@ -1,7 +1,7 @@
 import { getAppBaseUrl, env } from '$lib/server/env';
 import { auditlogService } from '$lib/server/services/auditlog.service';
 import { emailService } from '$lib/server/services/email.service';
-import type { IAccount } from '$lib/server/services/accounts.service';
+import { accountsService, type IAccount } from '$lib/server/services/accounts.service';
 import type { IUser } from '$lib/server/services/users.service';
 import type { IInvite } from './invites.service';
 import type { IDevice } from './devices.service';
@@ -9,6 +9,7 @@ import type { IResponse } from './responses.service';
 import type { IForm } from './forms.service';
 
 export enum EEvents {
+	ACCOUNTS_SUSPEND = 'accounts.suspend',
 	ACCOUNTS_UPDATE = 'accounts.update',
 	DEVICES_CREATE = 'devices.create',
 	EMERGENCY_ACCESS = 'emergency.access',
@@ -38,6 +39,9 @@ export interface IEventContext<Data = unknown> {
 export class EventsService {
 	async trackEvent(ctx: IEventContext) {
 		switch (ctx.event) {
+			case EEvents.ACCOUNTS_SUSPEND:
+				await this.onAccountSuspended(ctx as Parameters<typeof this.onAccountSuspended>[0]);
+				break;
 			case EEvents.DEVICES_CREATE:
 				await this.onDevicesCreated(ctx as Parameters<typeof this.onDevicesCreated>[0]);
 				break;
@@ -59,6 +63,34 @@ export class EventsService {
 			// noop
 		}
 		await auditlogService.trackEvent(ctx);
+	}
+
+	private async onAccountSuspended(
+		ctx: IEventContext<{
+			suspended: IAccount['suspended'];
+		}>
+	) {
+		const { account, data } = ctx;
+		if (account) {
+			const users = await accountsService.listAccountUsers(account.id);
+			const admins = users.filter(({ role }) => role === 'admin');
+			for (const admin of admins) {
+				const { user } = admin;
+				if (user.email) {
+					await emailService.sendTemplate(
+						emailService.getTemplate(data?.suspended === 'trial_expired' ? 'trial-expired' : 'account-suspended', user.locale),
+						{
+							accountName: account.name,
+							reason: data?.suspended || 'n/a',
+						},
+						{
+							accountId: ctx.account?.id,
+							to: user.email
+						}
+					);
+				}
+			}
+		}
 	}
 
 	private async onDevicesCreated(

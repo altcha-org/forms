@@ -41,6 +41,8 @@
 		[] as { form: (typeof data.forms)[number]; responses: (typeof data.responses)[number][] }[]
 	);
 	$: userEmailVerified = !!data.user?.emailVerified;
+	$: accountSuspended = data.account.suspended;
+	$: trialDays = data.account.trialExpiresAt ? Math.floor((data.account.trialExpiresAt.getTime() - Date.now()) / 86400000) : null;
 </script>
 
 <svelte:document on:visibilitychange={() => _onVisibilityChange()} />
@@ -51,35 +53,68 @@
 		<div class="text-2xl">{$_('title.welcome_back', { values: { name: data.user?.name } })}</div>
 	</div>
 
-	{#if !userEmailVerified}
-		<Alert variant="warning">
-			{$_('text.email_not_verified')}
+	<div class="flex flex-col gap-2">
+
+		{#if trialDays !== null && trialDays >= 0 && !accountSuspended}
+		<Alert variant="primary">
+			{$_('text.account_trial_expires_in_days', { values: { days: trialDays } })}
 
 			<svelte:fragment slot="actions">
-				<Form action="?/resendEmailVerification" let:loading>
-					{#if loading}
-						<span class="loading loading-spinner loading-xs"></span>
-					{:else}
-						<button type="submit" class="link">{$_('button.resend_email_verification')}</button>
-					{/if}
-				</Form>
+				<a href="/app/accounts/{data.account.id}/billing" class="link">
+					{$_('button.upgrade')}
+				</a>
 			</svelte:fragment>
 		</Alert>
-	{/if}
+		{/if}
 
-	{#await data.encryptionKeys then keys}
-		{#if data.account.encryptionEnabled && keys === 0}
+		{#if accountSuspended}
 			<Alert variant="warning">
-				{$_('text.warning_no_encryption_keys')}
+				{#if accountSuspended === 'trial_expired'}
+					{$_('text.account_trial_expired')}
+				{:else}
+					{$_('text.account_suspended', { values: { reason: accountSuspended } })}
+				{/if}
 
 				<svelte:fragment slot="actions">
-					<a href="/app/accounts/{data.account.id}/encryption_keys" class="link"
-						>{$_('button.create')}</a
-					>
+					{#if ['trial_expired', 'subscription_expired', 'billing_problem'].includes(accountSuspended)}
+					<a href="/app/accounts/{data.account.id}/billing" class="link">
+						{$_('button.billing')}
+					</a>
+					{/if}
 				</svelte:fragment>
 			</Alert>
 		{/if}
-	{/await}
+
+		{#if !userEmailVerified}
+			<Alert variant="warning">
+				{$_('text.email_not_verified')}
+
+				<svelte:fragment slot="actions">
+					<Form action="?/resendEmailVerification" let:loading>
+						{#if loading}
+							<span class="loading loading-spinner loading-xs"></span>
+						{:else}
+							<button type="submit" class="link">{$_('button.resend_email_verification')}</button>
+						{/if}
+					</Form>
+				</svelte:fragment>
+			</Alert>
+		{/if}
+
+		{#await data.encryptionKeys then keys}
+			{#if data.account.encryptionEnabled && keys === 0}
+				<Alert variant="warning">
+					{$_('text.warning_no_encryption_keys')}
+
+					<svelte:fragment slot="actions">
+						<a href="/app/accounts/{data.account.id}/encryption_keys" class="link"
+							>{$_('button.create')}</a
+						>
+					</svelte:fragment>
+				</Alert>
+			{/if}
+		{/await}
+	</div>
 
 	<div class="flex flex-wrap lg:flex-nowrap gap-8">
 		<div class="grow flex flex-col gap-6">

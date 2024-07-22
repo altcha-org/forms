@@ -131,7 +131,8 @@
 		"pdf": "PDF",
 		"reupload": "Reupload",
 		"show_all": "Show all",
-		"show_only_signatures": "Show only signatures"
+		"show_only_signatures": "Show only signatures",
+		"billing": "Billing"
 	},
 	"color": {
 		"black": "Black",
@@ -695,7 +696,10 @@
 		"response_stream_errors": "Errors were detected, likely due to missing encryption keys.",
 		"confirm_pdf_reupload": "Remove the current PDF file?",
 		"drag_fields_to_pdf": "Drag and drop fields to the PDF.",
-		"select_pdf_file": "Select PDF file."
+		"select_pdf_file": "Select PDF file.",
+		"account_trial_expired": "Your trial has expired. Please upgrade to a paid plan.",
+		"account_trial_expires_in_days": "Your trial will expire in {days} days.",
+		"account_suspended": "Your account has been suspended (reason: {reason})."
 	},
 	"title": {
 		"add_block": "Add Block",

@@ -111,7 +111,7 @@ async function createSubscription(accountId: string, event: SubscriptionCreatedE
 		if (data.planId) {
 			await accountsService.updateAccount(accountId, {
 				billingCycle: getBillingCycle(event),
-				planId: data.planId
+				plan: subscription.plan,
 			});
 		}
 	}
@@ -141,7 +141,7 @@ async function getSubscriptionDataFromEvent(
 	const plan = plans.find(({ prices }) => prices.some(({ priceId }) => priceId === price?.id));
 	return {
 		auto: data.data.collectionMode === 'automatic',
-		eventPayload: data,
+		eventPayload: data as unknown as Record<string, unknown>,
 		expiresAt:
 			data.data.scheduledChange?.action === 'cancel'
 				? new Date(data.data.scheduledChange.effectiveAt)

@@ -135,7 +135,8 @@
 		"font": "Fuente",
 		"reupload": "Volver a subir",
 		"show_all": "Mostrar todo",
-		"show_only_signatures": "Mostrar solo firmas"
+		"show_only_signatures": "Mostrar solo firmas",
+		"billing": "Facturación"
 	},
 	"color": {
 		"black": "Negro",
@@ -699,7 +700,10 @@
 		"response_stream_errors": "Se detectaron errores, probablemente debido a la falta de claves de encriptación.",
 		"confirm_pdf_reupload": "¿Eliminar el archivo PDF actual?",
 		"drag_fields_to_pdf": "Arrastre y suelte campos en el PDF.",
-		"select_pdf_file": "Seleccionar archivo PDF."
+		"select_pdf_file": "Seleccionar archivo PDF.",
+		"account_trial_expired": "Tu prueba ha expirado. Por favor, actualiza a un plan de pago.",
+		"account_trial_expires_in_days": "Tu prueba expirará en {days} días.",
+		"account_suspended": "Tu cuenta ha sido suspendida (razón: {reason})."
 	},
 	"title": {
 		"add_block": "Agregar Bloque",

@@ -131,7 +131,8 @@
 		"pdf": "PDF",
 		"reupload": "Carica nuovamente",
 		"show_all": "Mostra tutto",
-		"show_only_signatures": "Mostra solo le firme"
+		"show_only_signatures": "Mostra solo le firme",
+		"billing": "Fatturazione"
 	},
 	"color": {
 		"black": "Nero",
@@ -696,7 +697,10 @@
 		"response_stream_errors": "Sono stati rilevati errori, probabilmente dovuti a chiavi di crittografia mancanti.",
 		"confirm_pdf_reupload": "Rimuovere il file PDF attuale?",
 		"drag_fields_to_pdf": "Trascina e rilascia i campi nel PDF.",
-		"select_pdf_file": "Seleziona il file PDF."
+		"select_pdf_file": "Seleziona il file PDF.",
+		"account_trial_expired": "Il tuo periodo di prova è scaduto. Si prega di passare a un piano a pagamento.",
+		"account_trial_expires_in_days": "Il tuo periodo di prova scadrà tra {days} giorni.",
+		"account_suspended": "Il tuo account è stato sospeso (motivo: {reason})."
 	},
 	"title": {
 		"add_block": "Aggiungi Blocco",

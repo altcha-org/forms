@@ -6,6 +6,7 @@ import { rateLimitByKey } from '$lib/server/ratelimiter';
 import type { ProcessorContext } from '$lib/server/services/forms.service';
 import type { TResponseData } from '$lib/types';
 import { resolveProp } from '$lib/helpers';
+import { accountsService } from '../services/accounts.service';
 
 export class EmailProcessor extends BaseProcessor<{
 	attachPdf: boolean;
@@ -39,7 +40,7 @@ export class EmailProcessor extends BaseProcessor<{
 				filename: `${ctx.responseId || 'response'}.pdf`
 			});
 		}
-		const recipients = options.recipient
+		let recipients = options.recipient
 			.split(/,\s{0,}/)
 			.map((recipient) => {
 				recipient = recipient.trim();
@@ -58,7 +59,12 @@ export class EmailProcessor extends BaseProcessor<{
 				return recipient;
 			})
 			.filter((recipient) => !!recipient)
-			.slice(0, 5);
+			.slice(0, 10);
+		if (!ctx.form.account.canSendEmails) {
+			const users = await accountsService.listAccountUsers(ctx.form.accountId);
+			recipients = recipients.filter((email) => !!users.find((user) => user.user.email === email));
+			ctx.log('Email restricted to account users only.')
+		}
 		if (!recipients.length) {
 			throw new Error('No recipients.');
 		}

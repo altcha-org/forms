@@ -32,7 +32,7 @@ export class S3Storage extends BaseStorage {
 		}
 	}
 
-	async getUploadUrl(file: IFile): Promise<string> {
+	async getUploadUrl(file: Pick<IFile, 'accountId' | 'id' | 'name' | 'persistent' | 'size' | 'type'>): Promise<string> {
 		const url = new URL(this.options.endpoint);
 		url.pathname = url.pathname.replace(/\/$/, '') + this.getFilePath(file);
 		url.searchParams.set('x-amz-expires', '3600');

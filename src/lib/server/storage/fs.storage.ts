@@ -35,7 +35,7 @@ export class FsStorage extends BaseStorage {
 		return join(this.options.dir, randomBytes(12).toString('hex'));
 	}
 
-	async getUploadUrl(file: IFile): Promise<string> {
+	async getUploadUrl(file: Pick<IFile, 'accountId' | 'id' | 'name' | 'persistent' | 'size' | 'type'>): Promise<string> {
 		return `/storage/${file.id}`;
 	}
 

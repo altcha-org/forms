@@ -1,6 +1,7 @@
 import { responsesService } from '$lib/server/services/responses.service';
 import { formsService } from '$lib/server/services/forms.service';
 import { identitiesService } from '$lib/server/services/identities.service';
+import { accountsService } from '$lib/server/services/accounts.service';
 import { sessionsService } from '$lib/server/services/sessions.service';
 import { ForbiddenError } from '$lib/server/errors';
 import { createHmacKey, verifySolution } from '$lib/server/altcha';
@@ -46,6 +47,15 @@ export const POST = requestHandler(
 		let result: Awaited<ReturnType<(typeof formsService)['processData']>> | undefined = void 0;
 		let error: boolean = false;
 		let responseId: string | null = null;
+		if (form.account.suspended) {
+			throw new ForbiddenError('Account suspended.');
+		}
+		if (
+			form.account.plan?.limitResponses &&
+			form.account.plan?.limitResponses <= form.account.responses
+		) {
+			throw new ForbiddenError('You have reached the submission limit for your current plan.');
+		}
 		// don't process demo forms
 		if (!form.demo) {
 			const context = formsService.createProcessorContext(form);
@@ -114,6 +124,18 @@ export const POST = requestHandler(
 				responseId = response.id;
 				if (result) {
 					await responsesService.linkFiles(form, response, result.data);
+				}
+				await accountsService.incrementResponses(form.account.id);
+				if (
+					form.account.plan?.limitResponses &&
+					form.account.plan?.trialDays &&
+					form.account.plan?.limitResponses <= form.account.responses + 1
+				) {
+					// trial account
+					await accountsService.suspendAccount(form.account.id, 'trial_expired');
+					await accountsService.trackSuspendEvent(form.account, {
+						suspended: 'trial_expired'
+					});
 				}
 			}
 			if (form.account.plan?.featureAnalytics === true) {

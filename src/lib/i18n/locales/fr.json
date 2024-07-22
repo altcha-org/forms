@@ -131,7 +131,8 @@
 		"pdf": "PDF",
 		"reupload": "Re-télécharger",
 		"show_all": "Afficher tout",
-		"show_only_signatures": "Afficher uniquement les signatures"
+		"show_only_signatures": "Afficher uniquement les signatures",
+		"billing": "Facturation"
 	},
 	"color": {
 		"black": "Noir",
@@ -695,7 +696,10 @@
 		"response_stream_errors": "Des erreurs ont été détectées, probablement dues à des clés de chiffrement manquantes.",
 		"confirm_pdf_reupload": "Supprimer le fichier PDF actuel ?",
 		"drag_fields_to_pdf": "Faites glisser et déposez les champs sur le PDF.",
-		"select_pdf_file": "Sélectionnez le fichier PDF."
+		"select_pdf_file": "Sélectionnez le fichier PDF.",
+		"account_trial_expired": "Votre essai a expiré. Veuillez passer à un plan payant.",
+		"account_trial_expires_in_days": "Votre essai expirera dans {days} jours.",
+		"account_suspended": "Votre compte a été suspendu (raison: {reason})."
 	},
 	"title": {
 		"add_block": "Ajouter un bloc",

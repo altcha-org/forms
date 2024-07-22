@@ -5,7 +5,7 @@
  */
 
 import assert from 'node:assert';
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, exists } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { glob } from 'glob';
 import OpenAI from 'openai';
@@ -42,16 +42,18 @@ async function translate(text: string, lang: string) {
 }
 
 for (const file of files) {
-	const start = performance.now();
-	console.log('Translating', file);
-	const contents = await readFile(file, 'utf8');
 	const targetFile = file.replaceAll('en-GB', targetLangCode);
-	const result = await translate(contents, targetLangCode);
-	console.log('Done in', Math.round(performance.now() - start), 'ms');
-	if (result) {
-		await mkdir(dirname(targetFile), {
-			recursive: true
-		});
-		await writeFile(targetFile, result);
+	if (!await exists(targetFile)) {
+		const start = performance.now();
+		console.log('Translating', file);
+		const contents = await readFile(file, 'utf8');
+		const result = await translate(contents, targetLangCode);
+		console.log('Done in', Math.round(performance.now() - start), 'ms');
+		if (result) {
+			await mkdir(dirname(targetFile), {
+				recursive: true
+			});
+			await writeFile(targetFile, result);
+		}
 	}
 }

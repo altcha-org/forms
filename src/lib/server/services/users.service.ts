@@ -112,8 +112,8 @@ export class UsersService {
 		if (!accountId) {
 			const account = await accountsService.createAccount({
 				name: t('text.users_account_name', { values: { name } }),
-				planId: plan?.id,
-				timeZone
+				plan,
+				timeZone,
 			});
 			accountId = account.id;
 		}
@@ -157,6 +157,8 @@ export class UsersService {
 				emailVerificationToken: null,
 				emergencyPassword: null,
 				name: unsetPersonalData ? 'User' : void 0,
+				oauthAccessToken: null,
+				oauthProfile: null,
 				recoveryPassphrase: null,
 				recoveryRequestedAt: null,
 				recoveryToken: null,
