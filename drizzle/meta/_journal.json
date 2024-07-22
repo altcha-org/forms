@@ -29,6 +29,13 @@
       "when": 1721335112254,
       "tag": "0003_v0.7.0",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1721665141639,
+      "tag": "0004_v0.8.0",
+      "breakpoints": true
     }
   ]
 }
