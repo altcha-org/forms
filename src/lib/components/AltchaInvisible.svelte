@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { solveChallengeWorkers } from 'altcha-lib';
 	import InlineAltchaWorker from 'altcha-lib/worker?worker&inline';
 
@@ -13,6 +13,10 @@
 	let elForm: HTMLFormElement | null = null;
 	let payload: string = '';
 
+	onDestroy(() => {
+		elForm?.removeEventListener('submit', onFormSubmit);
+	});
+
 	onMount(() => {
 		elForm = elInput.closest('form');
 		elForm?.addEventListener('submit', onFormSubmit, {
@@ -24,11 +28,13 @@
 		if (elForm && !verified) {
 			ev.preventDefault();
 			ev.stopPropagation();
-			verify().then(() => {
-				requestAnimationFrame(() => {
-					elForm?.requestSubmit();
+			if (!loading) {
+				return verify().then(() => {
+					requestAnimationFrame(() => {
+						elForm?.requestSubmit();
+					});
 				});
-			});
+			}
 		}
 	}
 
