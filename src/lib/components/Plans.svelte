@@ -11,6 +11,8 @@
 	export let plans: IPlan[];
 	export let value: string | undefined = void 0;
 
+	const ignoreLimits = ['limitResponses', 'limitUploads'];
+
 	let currency: string = '';
 
 	$: plansWithPrices = plans
@@ -137,7 +139,7 @@
 					<div class="grow">
 						<div class="text-sm opacity-60">{$_('label.limits')}</div>
 						{#each Object.keys(plan) as key}
-							{#if key.startsWith('limit')}
+							{#if !ignoreLimits.includes(key) && key.startsWith('limit')}
 								{@const limitValue = plan[key]}
 								{@const limitFormatted = formatLimit(limitValue, key)}
 								<div class="text-sm">
