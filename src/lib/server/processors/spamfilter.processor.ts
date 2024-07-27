@@ -30,18 +30,7 @@ export class SpamfilterProcessor extends BaseProcessor<{
 			text: textBlocks.map((name) => data[name] || '').join('\n'),
 			timeZone: context.get('timezone')
 		};
-		const resp = await fetch(env.SPAM_FILTER_URL, {
-			body: JSON.stringify(body),
-			method: 'POST',
-			headers: {
-				...SPAM_FILTER_HEADERS,
-				'content-type': 'application/json'
-			}
-		});
-		if (resp.status !== 200) {
-			throw new Error('Unexpected server response ' + resp.status);
-		}
-		const json = await resp.json();
+		const json = await makeRequest(env.SPAM_FILTER_URL, body);
 		const { classification, reasons, score } = json;
 		context.log(`(spamfilter) Classification: ${classification}, score: ${score}`);
 		context.log(`(spamfilter) Reasons: ${reasons?.join(', ') || '-'}`);
@@ -54,4 +43,45 @@ export class SpamfilterProcessor extends BaseProcessor<{
 			}
 		}
 	}
+}
+
+async function makeRequest(
+	url: string,
+	body: unknown,
+	timeout: number = 10000,
+	retry: boolean = true
+) {
+	const controller = new AbortController();
+	const tm = setTimeout(() => {
+		controller.abort();
+	}, timeout);
+	const delay = async () => await new Promise((r) => setTimeout(r, 1000));
+	let resp: Response | null = null;
+	try {
+		resp = await fetch(url, {
+			body: JSON.stringify(body),
+			method: 'POST',
+			headers: {
+				...SPAM_FILTER_HEADERS,
+				'content-type': 'application/json'
+			},
+			signal: controller.signal
+		});
+	} catch (err) {
+		console.error(err);
+		if (retry) {
+			await delay();
+			return makeRequest(url, body, timeout, false);
+		}
+		throw err;
+	}
+	clearTimeout(tm);
+	if (resp?.status && resp.status >= 500 && retry) {
+		await delay();
+		return makeRequest(url, body, timeout, false);
+	}
+	if (resp?.status && resp.status !== 200) {
+		throw new Error('Unexpected server response ' + resp.status);
+	}
+	return resp?.json() || null;
 }
