@@ -11,6 +11,7 @@
 	}>;
 	export let error: string | undefined = void 0;
 	export let preview: boolean = false;
+	export let readonly: boolean = false;
 	export let value: string | null = block.default || null;
 	export let visible: boolean = true;
 
@@ -81,7 +82,7 @@
 				maxlength="15"
 				pattern={'[0-9]{5,15}'}
 				placeholder={block.placeholder}
-				readonly={block.readonly}
+				readonly={readonly || block.readonly}
 				{required}
 				bind:value={phone}
 				on:change={onChange}

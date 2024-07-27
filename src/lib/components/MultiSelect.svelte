@@ -7,8 +7,9 @@
 	export let allowCustomOptions: boolean = false;
 	export let maxItems: number = 0;
 	export let placeholder: string = '';
+	export let readonly: boolean = false;
 	export let value: string[] = [];
-	export let options: { label: string; value: string }[] = [];
+	export let options: { label: string; value: string | null }[] = [];
 
 	let elFilter: HTMLInputElement;
 	let elMenu: HTMLElement;
@@ -96,7 +97,8 @@
 		<div class="grow flex flex-wrap items-center gap-1">
 			{#if value}
 				{#each value as v}
-					<Tag value={v} removable on:remove={() => onRemoveOption(v)} />
+					{@const option = options.find((opt) => opt.value === v)}
+					<Tag value={option?.label || v} removable on:remove={() => onRemoveOption(v)} />
 				{/each}
 			{/if}
 
@@ -104,6 +106,7 @@
 				bind:this={elFilter}
 				type="text"
 				class="grow shrink border-none outline-none min-h-[2rem] min-w-[8rem] pl-2"
+				{readonly}
 				{placeholder}
 				data-popover-input
 				bind:value={filter}
@@ -125,13 +128,14 @@
 		{#if filteredOptions.length}
 			<ul class="menu gap-1 p-1">
 				{#each filteredOptions as option}
-					{@const checked = value.includes(option.value)}
+					{@const checked = option.value !== null && value.includes(option.value)}
 					<li>
 						<button
 							type="button"
 							class="justify-between"
 							class:font-bold={checked}
-							on:click|preventDefault={() => onSelectOption(option.value)}
+							on:click|preventDefault={() =>
+								option.value !== null ? onSelectOption(option.value) : void 0}
 						>
 							<span>{option.label}</span>
 							{#if checked}

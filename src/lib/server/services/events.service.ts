@@ -78,10 +78,13 @@ export class EventsService {
 				const { user } = admin;
 				if (user.email) {
 					await emailService.sendTemplate(
-						emailService.getTemplate(data?.suspended === 'trial_expired' ? 'trial-expired' : 'account-suspended', user.locale),
+						emailService.getTemplate(
+							data?.suspended === 'trial_expired' ? 'trial-expired' : 'account-suspended',
+							user.locale
+						),
 						{
 							accountName: account.name,
-							reason: data?.suspended || 'n/a',
+							reason: data?.suspended || 'n/a'
 						},
 						{
 							accountId: ctx.account?.id,

@@ -318,10 +318,10 @@ export class SessionsService {
 		});
 		const results = await db
 			.select({
-				date: sql<string>`date_trunc('week', ${sessions.startAt})`.as(
-					'date'
-				),
-				dateZoned: sql<string | null>`date_trunc('week', ${sessions.startAt} at time zone ${accounts.timeZone})`.as(
+				date: sql<string>`date_trunc('week', ${sessions.startAt})`.as('date'),
+				dateZoned: sql<
+					string | null
+				>`date_trunc('week', ${sessions.startAt} at time zone ${accounts.timeZone})`.as(
 					'date_zoned'
 				),
 				formId: sessions.formId,

@@ -39,7 +39,7 @@ export class AccountsService {
 		trialExpiresAt: true,
 		suspended: true,
 		updatedAt: true,
-		uploads: true,
+		uploads: true
 	} as const satisfies Partial<Record<keyof IAccountSchema, boolean>>;
 
 	generateId() {
@@ -64,7 +64,11 @@ export class AccountsService {
 
 	async createAccount(
 		data: Pick<IAccount, 'name'> &
-			Partial<Pick<IAccount, 'planId' | 'timeZone'> & { plan?: Pick<IPlan, 'id' | 'premium' | 'trialDays'> }>
+			Partial<
+				Pick<IAccount, 'planId' | 'timeZone'> & {
+					plan?: Pick<IPlan, 'id' | 'premium' | 'trialDays'>;
+				}
+			>
 	) {
 		const [result] = await db
 			.insert(accounts)
@@ -192,35 +196,44 @@ export class AccountsService {
 	}
 
 	async suspendAccount(accountId: string, suspended: IAccount['suspended']) {
-		await db.update(accounts).set({
-			suspended,
-			trialExpiresAt: null,
-		})
-		.where(eq(accounts.id, accountId));
+		await db
+			.update(accounts)
+			.set({
+				suspended,
+				trialExpiresAt: null
+			})
+			.where(eq(accounts.id, accountId));
 	}
 
 	async suspendExpiredTrials(limit: number = 100) {
 		const expired = await db.query.accounts.findMany({
 			columns: {
-				id: true,
+				id: true
 			},
 			limit,
-			where: lte(accounts.trialExpiresAt, new Date()),
+			where: lte(accounts.trialExpiresAt, new Date())
 		});
-		await db.update(accounts).set({
-			suspended: 'trial_expired',
-			trialExpiresAt: null,
-		})
-		.where(inArray(accounts.id, expired.map(({ id }) => id)));
+		await db
+			.update(accounts)
+			.set({
+				suspended: 'trial_expired',
+				trialExpiresAt: null
+			})
+			.where(
+				inArray(
+					accounts.id,
+					expired.map(({ id }) => id)
+				)
+			);
 	}
 
 	async trackSuspendEvent(account: IAccount, data: Pick<IAccountSchema, 'suspended'>) {
 		await eventsService.trackEvent({
 			account,
 			data: {
-				suspended: data.suspended,
+				suspended: data.suspended
 			},
-			event: EEvents.ACCOUNTS_SUSPEND,
+			event: EEvents.ACCOUNTS_SUSPEND
 		});
 	}
 

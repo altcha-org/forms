@@ -176,7 +176,14 @@
 					{#each step.blocks as block}
 						{@const show = !block.if || evalExpression(block.if, formData)}
 						{#if show}
-							<FormBlock {block} {encrypted} {form} {preview} visible={activeStepIdx === i} />
+							<FormBlock
+								{block}
+								{encrypted}
+								{form}
+								{preview}
+								readonly={loading}
+								visible={activeStepIdx === i}
+							/>
 						{/if}
 					{/each}
 

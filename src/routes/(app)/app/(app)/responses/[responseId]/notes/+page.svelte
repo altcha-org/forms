@@ -170,7 +170,7 @@
 							name: 'sendToEmailToggle'
 						}}
 						disabled={!email || !!updateNote}
-						bind:value={sendToEmail}
+						bind:checked={sendToEmail}
 					/>
 
 					{#if sendToEmail && email}

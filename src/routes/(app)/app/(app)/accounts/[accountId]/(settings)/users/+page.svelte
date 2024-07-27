@@ -217,7 +217,7 @@
 						help: $_('help.emergency_user'),
 						name: 'emergency'
 					}}
-					bind:value={emergencyUser}
+					bind:checked={emergencyUser}
 				/>
 
 				{#if emergencyUser}

@@ -53,7 +53,7 @@
 	}
 </script>
 
-<Form action="?/updateForm" on:reset={() => onReset()} bind:changed let:error let:loading>
+<Form action="?/updateForm" on:reset={() => onReset()} bind:changed let:error>
 	<div class="flex flex-col gap-6">
 		<div class="flex flex-col gap-6 max-w-md">
 			<TextInput
@@ -147,7 +147,7 @@
 						maxItems: 3
 					}
 				}}
-				bind:value={$form.displayBlocks}
+				bind:selected={$form.displayBlocks}
 			/>
 
 			<BaseInput
@@ -214,7 +214,7 @@
 					name: 'confetti'
 				}}
 				error={error?.fields?.confetti}
-				bind:value={$form.confetti}
+				bind:checked={$form.confetti}
 			/>
 
 			<MultiCheckboxInput
@@ -227,7 +227,7 @@
 						options: badges
 					}
 				}}
-				bind:value={$form.badges}
+				bind:selected={$form.badges}
 			/>
 
 			<ToggleInput
@@ -238,10 +238,10 @@
 				}}
 				disabled={!data.licensed}
 				error={error?.fields?.hidePoweredBy}
-				bind:value={$form.hidePoweredBy}
+				bind:checked={$form.hidePoweredBy}
 			/>
 		</div>
 
-		<StickyButtons disabled={!changed} {loading} />
+		<StickyButtons disabled={!changed} />
 	</div>
 </Form>

@@ -208,15 +208,15 @@
 
 	<div class="grow relative select-none rounded-b-md overflow-hidden bg-white">
 		<div
-			class="border border-base-300 border-dashed absolute bottom-9 left-0 right-0 z-50"
+			class="border border-base-300 border-dashed absolute bottom-9 left-0 right-0 z-40"
 			class:hidden={changed}
 		></div>
 
-		<canvas bind:this={elCanvas} data-signature-canvas={name} class="w-full h-full relative z-40"
+		<canvas bind:this={elCanvas} data-signature-canvas={name} class="w-full h-full relative z-30"
 		></canvas>
 
 		{#if !changed}
-			<div class="absolute left-4 bottom-8 z-50">
+			<div class="absolute left-4 bottom-8 z-40">
 				<div
 					class="flex flex-col gap-2 items-center bg-error text-error-content rounded-t-md w-8 h-20 py-2"
 				>

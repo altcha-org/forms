@@ -11,7 +11,7 @@
 	import type { IFormBlock } from '$lib/types';
 	import SelectInput from './blocks/SelectInput.svelte';
 
-	export let block: IFormBlock;
+	export let block: IFormBlock<Record<string, string | undefined>>;
 	export let blockOriginal: IFormBlock;
 
 	$: options = BLOCKS.find(({ type }) => type === block.type)?.options || [];
@@ -70,7 +70,7 @@
 							name: 'required',
 							required: false
 						}}
-						bind:value={block.required}
+						bind:checked={block.required}
 					/>
 				</div>
 			{/if}
@@ -157,7 +157,7 @@
 							name: 'readonly',
 							required: false
 						}}
-						bind:value={block.readonly}
+						bind:checked={block.readonly}
 					/>
 
 					<ToggleInput
@@ -167,7 +167,7 @@
 							name: 'hidden',
 							required: false
 						}}
-						bind:value={block.hidden}
+						bind:checked={block.hidden}
 					/>
 				</div>
 			{/if}

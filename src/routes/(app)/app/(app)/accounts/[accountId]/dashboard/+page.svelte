@@ -42,7 +42,9 @@
 	);
 	$: userEmailVerified = !!data.user?.emailVerified;
 	$: accountSuspended = data.account.suspended;
-	$: trialDays = data.account.trialExpiresAt ? Math.floor((data.account.trialExpiresAt.getTime() - Date.now()) / 86400000) : null;
+	$: trialDays = data.account.trialExpiresAt
+		? Math.floor((data.account.trialExpiresAt.getTime() - Date.now()) / 86400000)
+		: null;
 </script>
 
 <svelte:document on:visibilitychange={() => _onVisibilityChange()} />
@@ -54,17 +56,16 @@
 	</div>
 
 	<div class="flex flex-col gap-2">
-
 		{#if trialDays !== null && trialDays >= 0 && !accountSuspended}
-		<Alert variant="primary">
-			{$_('text.account_trial_expires_in_days', { values: { days: trialDays } })}
+			<Alert variant="primary">
+				{$_('text.account_trial_expires_in_days', { values: { days: trialDays } })}
 
-			<svelte:fragment slot="actions">
-				<a href="/app/accounts/{data.account.id}/billing" class="link">
-					{$_('button.upgrade')}
-				</a>
-			</svelte:fragment>
-		</Alert>
+				<svelte:fragment slot="actions">
+					<a href="/app/accounts/{data.account.id}/billing" class="link">
+						{$_('button.upgrade')}
+					</a>
+				</svelte:fragment>
+			</Alert>
 		{/if}
 
 		{#if accountSuspended}
@@ -77,9 +78,9 @@
 
 				<svelte:fragment slot="actions">
 					{#if ['trial_expired', 'subscription_expired', 'billing_problem'].includes(accountSuspended)}
-					<a href="/app/accounts/{data.account.id}/billing" class="link">
-						{$_('button.billing')}
-					</a>
+						<a href="/app/accounts/{data.account.id}/billing" class="link">
+							{$_('button.billing')}
+						</a>
 					{/if}
 				</svelte:fragment>
 			</Alert>

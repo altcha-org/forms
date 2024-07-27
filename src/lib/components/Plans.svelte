@@ -108,7 +108,7 @@
 {#each Object.entries(groupedPrices) as [group, plans]}
 	<div class="mb-6">
 		{#if group}
-		<div class="text-lg font-bold mb-3">{$_('text.plan_group_' + group)}</div>
+			<div class="text-lg font-bold mb-3">{$_('text.plan_group_' + group)}</div>
 		{/if}
 
 		<div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">

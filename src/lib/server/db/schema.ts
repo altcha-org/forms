@@ -58,31 +58,35 @@ export const customJson = <TData>(name: string) =>
 		}
 	})(name);
 
-export const accounts = pgTable('accounts', {
-	id: varchar('id', { length: 32 }).primaryKey(),
-	planId: varchar('plan_id', { length: 32 }).references(() => plans.id, {
-		onDelete: 'set null'
-	}),
-	auditlog: auditlogEnum('auditlog'),
-	auditlogRetention: integer('auditlog_retention'),
-	billingCycle: billingCycleEnum('billing_cycle').default('year'),
-	canSendEmails: boolean('can_send_emails').default(true),
-	encryptionEnabled: boolean('encryption_enabled').notNull().default(true),
-	name: varchar('name', { length: 256 }).notNull(),
-	smtpUrl: varchar('smtp_url', { length: 256 }),
-	smtpSender: varchar('smtp_sender', { length: 64 }),
-	suspended: suspendedEnum('suspended'),
-	timeZone: varchar('time_zone', { length: 64 }),
-	trialExpiresAt: timestamp('trial_expires_at'),
-	responses: integer('responses').notNull().default(0),
-	uploads: integer('uploads').notNull().default(0),
-	createdAt: timestamp('created_at').notNull().defaultNow(),
-	updatedAt: timestamp('updated_at').notNull().defaultNow()
-}, (table) => {
-	return {
-		trialExpiresAtIdx: index('accounts_trial_expires_at_idx').on(table.trialExpiresAt)
-	};
-});
+export const accounts = pgTable(
+	'accounts',
+	{
+		id: varchar('id', { length: 32 }).primaryKey(),
+		planId: varchar('plan_id', { length: 32 }).references(() => plans.id, {
+			onDelete: 'set null'
+		}),
+		auditlog: auditlogEnum('auditlog'),
+		auditlogRetention: integer('auditlog_retention'),
+		billingCycle: billingCycleEnum('billing_cycle').default('year'),
+		canSendEmails: boolean('can_send_emails').default(true),
+		encryptionEnabled: boolean('encryption_enabled').notNull().default(true),
+		name: varchar('name', { length: 256 }).notNull(),
+		smtpUrl: varchar('smtp_url', { length: 256 }),
+		smtpSender: varchar('smtp_sender', { length: 64 }),
+		suspended: suspendedEnum('suspended'),
+		timeZone: varchar('time_zone', { length: 64 }),
+		trialExpiresAt: timestamp('trial_expires_at'),
+		responses: integer('responses').notNull().default(0),
+		uploads: integer('uploads').notNull().default(0),
+		createdAt: timestamp('created_at').notNull().defaultNow(),
+		updatedAt: timestamp('updated_at').notNull().defaultNow()
+	},
+	(table) => {
+		return {
+			trialExpiresAtIdx: index('accounts_trial_expires_at_idx').on(table.trialExpiresAt)
+		};
+	}
+);
 
 export const apiKeys = pgTable(
 	'api_keys',

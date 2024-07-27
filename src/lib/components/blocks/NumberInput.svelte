@@ -2,14 +2,36 @@
 	import BaseInput from '$lib/components/blocks/BaseInput.svelte';
 	import type { IFormBlockPartial } from '$lib/types';
 
-	export let block: IFormBlockPartial;
-	export let value: number | null = block.default ? +block.default : null;
+	export let block: IFormBlockPartial<{
+		max?: string | number;
+		min?: string | number;
+		step?: string | number;
+		unit?: string;
+	}>;
+	export let readonly: boolean = false;
+	export let value: string | undefined = block.default;
+	export let number: number | null | undefined = value !== void 0 ? +value : null;
 
 	$: max = block.options?.max;
 	$: min = block.options?.min;
 	$: step = block.options?.step;
 	$: unit = block.options?.unit;
-	$: value === null && block.default ? (value = +block.default) : void 0;
+	$: onNumberChange(number);
+	$: onValueChange(value);
+
+	function onNumberChange(_: typeof number) {
+		const newValue = typeof number === 'number' ? String(number) : void 0;
+		if (newValue !== value) {
+			value = newValue;
+		}
+	}
+
+	function onValueChange(_: typeof value) {
+		const newNumber = typeof value === 'string' && value ? +value : null;
+		if (newNumber !== number) {
+			number = newNumber;
+		}
+	}
 </script>
 
 <BaseInput {block} {value} on:change>
@@ -17,7 +39,7 @@
 		<input
 			type="number"
 			placeholder={block.placeholder}
-			readonly={block.readonly}
+			readonly={readonly || block.readonly}
 			name={block.name}
 			{min}
 			{max}

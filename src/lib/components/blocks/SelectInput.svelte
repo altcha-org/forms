@@ -3,7 +3,9 @@
 	import { parseInputOptions } from '$lib/helpers';
 	import type { IFormBlockPartial } from '$lib/types';
 
-	export let block: IFormBlockPartial;
+	export let block: IFormBlockPartial<{
+		options?: string | string[] | { disabled?: boolean; label: string; value: string | null }[];
+	}>;
 	export let disabled: boolean = false;
 	export let error: string | undefined = void 0;
 	export let hideLabel: boolean = false;

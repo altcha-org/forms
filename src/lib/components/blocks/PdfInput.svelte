@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import BaseInput from '$lib/components/blocks/BaseInput.svelte';
 	import ArrowDownIcon from '$lib/components/icons/ArrowDown.svelte';
@@ -40,6 +40,10 @@
 		: ([] as IFormBlock[]);
 	$: index = pdfBlocks.indexOf(block);
 	$: pdfLink = `/storage/${pdfFileId}`;
+
+	onDestroy(() => {
+		elForm?.removeEventListener('submit', onFormSubmit);
+	});
 
 	onMount(() => {
 		elForm = el.closest('form');

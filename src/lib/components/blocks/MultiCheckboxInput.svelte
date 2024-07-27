@@ -3,34 +3,37 @@
 	import { parseInputOptions } from '$lib/helpers';
 	import type { IFormBlockPartial } from '$lib/types';
 
-	export let block: IFormBlockPartial;
-	export let value: string[] = parseValue(block.default);
+	export let block: IFormBlockPartial<{
+		inline?: boolean;
+		options?: string | string[] | { disabled?: boolean; label: string; value: string | null }[];
+		maxItems?: string | number;
+	}>;
+	export let readonly: boolean = false;
+	export let value: string | undefined = void 0;
+	export let selected: string[] = parseValue(value || block.default);
 
 	$: options = parseInputOptions(block.options?.options, ['...']);
 	$: inline = block.options?.inline === true;
-	$: maxItems = block.options?.maxItems || 0;
+	$: maxItems = parseInt(String(block.options?.maxItems || '0'), 10);
 	$: length = value?.length || 0;
 	$: canAddMore = !maxItems || length < maxItems;
-	$: value === void 0 ? (value = parseValue(block.default)) : void 0;
-	$: onValueChange(value);
+	$: onSelectedChange(selected);
 
-	function onValueChange(_: typeof value) {
-		if (!Array.isArray(value)) {
-			value = [];
-		}
+	function onSelectedChange(_: typeof selected) {
+		value = selected.join(',');
 	}
 
 	function parseValue(str: string | undefined) {
 		return (
 			str
-				?.split(',')
+				?.split(/(?<!\\),/)
 				.map((p) => p.trim())
 				.filter((p) => !!p) || []
 		);
 	}
 </script>
 
-<BaseInput {block} {value} on:change>
+<BaseInput {block} value={String(value)} on:change>
 	<input type="hidden" name={block.name} {value} />
 
 	<div class="flex flex-wrap gap-2" class:flex-col={!inline}>
@@ -41,9 +44,10 @@
 						type="checkbox"
 						class="checkbox checkbox-sm bg-base-100"
 						value={option.value}
-						disabled={option.disabled || (!value?.includes(option.value) && !canAddMore)}
-						readonly={block.readonly}
-						bind:group={value}
+						disabled={option.disabled ||
+							(option.value !== null && !value?.includes(option.value) && !canAddMore)}
+						readonly={readonly || block.readonly}
+						bind:group={selected}
 						on:click={(ev) => (block.readonly ? ev.preventDefault() : void 0)}
 					/>
 
@@ -57,7 +61,7 @@
 
 	<svelte:fragment slot="aside">
 		{#if maxItems}
-			<span class="text-xs whitespace-nowrap">{value.length} / {maxItems}</span>
+			<span class="text-xs whitespace-nowrap">{selected.length} / {maxItems}</span>
 		{/if}
 	</svelte:fragment>
 </BaseInput>

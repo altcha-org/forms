@@ -49,7 +49,7 @@
 				help: $_('help.enable_encryption'),
 				name: 'encryptionEnabled'
 			}}
-			bind:value={account.encryptionEnabled}
+			bind:checked={account.encryptionEnabled}
 		/>
 	</div>
 
@@ -97,7 +97,7 @@
 						min: 0
 					}
 				}}
-				bind:value={account.auditlogRetention}
+				bind:number={account.auditlogRetention}
 			/>
 		</div>
 	{/if}
@@ -115,7 +115,7 @@
 				label: $_('label.enable_custom_smtp'),
 				name: ''
 			}}
-			bind:value={customSmtp}
+			bind:checked={customSmtp}
 		/>
 
 		<PasswordInput

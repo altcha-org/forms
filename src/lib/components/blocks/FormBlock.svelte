@@ -25,10 +25,12 @@
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	export let block: IFormBlock<any>;
+	export let disabled: boolean = false;
 	export let encrypted: boolean = false;
 	export let form: Pick<IForm, 'id' | 'locale' | 'steps'> | undefined = void 0;
 	export let preview: boolean = false;
-	export let value: string | null | undefined = void 0;
+	export let readonly: boolean = false;
+	export let value: string | undefined = void 0;
 	export let visible: boolean = true;
 
 	let cmp: ReturnType<typeof getComponent>;
@@ -37,9 +39,11 @@
 	$: onTypeChange(block.type);
 	$: props = {
 		block,
+		disabled,
 		encrypted,
 		form,
 		preview,
+		readonly,
 		visible
 	};
 

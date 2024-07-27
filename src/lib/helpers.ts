@@ -90,7 +90,11 @@ export function timeZoneToCountryCode(timezone?: string) {
 }
 
 export function parseInputOptions(
-	options: string | string[] | { disabled?: boolean; label: string; value: string }[] | undefined,
+	options:
+		| string
+		| string[]
+		| { disabled?: boolean; label: string; value: string | null }[]
+		| undefined,
 	defaultOptions: typeof options = []
 ) {
 	if (options === void 0) {
@@ -101,7 +105,12 @@ export function parseInputOptions(
 			.split(/(?<!\\),|\r?\n/)
 			.map((item) => item.trim())
 			.filter((item) => !!item)
-			.map((item) => item.replace(/\\,/, ','));
+			.map((item) => {
+				return {
+					label: item.replace(/\\,/, ','),
+					value: item
+				};
+			});
 	}
 	options = options.map((item) => {
 		if (typeof item === 'string') {

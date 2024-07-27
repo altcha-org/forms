@@ -5,6 +5,7 @@
 	export let block: IFormBlockPartial;
 	export let error: string | undefined = void 0;
 	export let preview: boolean = false;
+	export let readonly: boolean = false;
 	export let value: string | null | undefined = block.default;
 	export let visible: boolean = true;
 
@@ -16,7 +17,7 @@
 		type="url"
 		name={block.name}
 		placeholder={block.placeholder}
-		readonly={block.readonly}
+		readonly={readonly || block.readonly}
 		required={visible && !preview && block.required}
 		class="input input-bordered shadow-sm"
 		bind:value

@@ -34,7 +34,7 @@
 					help: $_('help.collect_context_info'),
 					name: 'contextInfo'
 				}}
-				bind:value={$form.contextInfo}
+				bind:checked={$form.contextInfo}
 			/>
 		</div>
 
@@ -48,7 +48,7 @@
 						name: 'password_enabled',
 						type: 'ToggleInput'
 					}}
-					bind:value={passwordEnabled}
+					bind:checked={passwordEnabled}
 				/>
 			</div>
 
@@ -79,7 +79,7 @@
 						help: $_('help.invisible_captcha'),
 						name: 'captchaInvisible'
 					}}
-					bind:value={$form.captchaInvisible}
+					bind:checked={$form.captchaInvisible}
 				/>
 
 				<ToggleInput
@@ -89,7 +89,7 @@
 						name: 'captchaFloating'
 					}}
 					disabled={$form.captchaInvisible}
-					bind:value={$form.captchaFloating}
+					bind:checked={$form.captchaFloating}
 				/>
 
 				<ToggleInput
@@ -99,7 +99,7 @@
 						name: 'captchaAuto'
 					}}
 					disabled={$form.captchaInvisible || $form.captchaFloating}
-					bind:value={$form.captchaAuto}
+					bind:checked={$form.captchaAuto}
 				/>
 
 				<SelectInput

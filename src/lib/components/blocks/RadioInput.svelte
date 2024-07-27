@@ -3,16 +3,21 @@
 	import { parseInputOptions } from '$lib/helpers';
 	import type { IFormBlockPartial } from '$lib/types';
 
-	export let block: IFormBlockPartial;
+	export let block: IFormBlockPartial<{
+		inline?: boolean;
+		maxItems?: string | number;
+		options?: string | string[] | { disabled?: boolean; label: string; value: string | null }[];
+	}>;
 	export let disabled: boolean = false;
 	export let error: string | undefined = void 0;
 	export let preview: boolean = false;
+	export let readonly: boolean = false;
 	export let value: string | null | undefined = block.default;
 	export let visible: boolean = true;
 
 	$: options = parseInputOptions(block.options?.options, preview ? ['...'] : []);
 	$: inline = block.options?.inline === true;
-	$: maxItems = block.options?.maxItems || 0;
+	$: maxItems = parseInt(String(block.options?.maxItems || '0'), 10) || 0;
 	$: length = value?.length || 0;
 	$: canAddMore = !maxItems || length < maxItems;
 </script>
@@ -27,8 +32,9 @@
 						class="radio radio-sm bg-base-100"
 						name={block.name}
 						value={option.value}
-						disabled={disabled || (!value?.includes(option.value) && !canAddMore)}
-						readonly={block.readonly}
+						disabled={disabled ||
+							(option.value !== null && !value?.includes(option.value) && !canAddMore)}
+						readonly={readonly || block.readonly}
 						required={visible && !preview && block.required}
 						bind:group={value}
 						on:click={(ev) => (block.readonly ? ev.preventDefault() : void 0)}

@@ -111,7 +111,7 @@ async function createSubscription(accountId: string, event: SubscriptionCreatedE
 		if (data.planId) {
 			await accountsService.updateAccount(accountId, {
 				billingCycle: getBillingCycle(event),
-				plan: subscription.plan,
+				plan: subscription.plan
 			});
 		}
 	}

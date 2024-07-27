@@ -23,7 +23,7 @@ export const actions = {
 			const account = await accountsService.createAccount({
 				name: data.name,
 				plan,
-				timeZone: data.tz,
+				timeZone: data.tz
 			});
 			await accountsService.createAccountUser({
 				accountId: account.id,

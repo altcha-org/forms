@@ -16,7 +16,11 @@
 	import { matchesFileType } from '$lib/helpers';
 	import type { IFormBlockPartial } from '$lib/types';
 
-	export let block: IFormBlockPartial;
+	export let block: IFormBlockPartial<{
+		accept?: string;
+		maxFiles?: string;
+		maxFileSize?: string;
+	}>;
 	export let encrypted: boolean = false;
 	export let error: string | undefined = void 0;
 	export let ghost: boolean = false;
@@ -25,7 +29,7 @@
 	export let imagePreviews: [File, string][] = [];
 	export let showIcon: boolean = true;
 	export let submitUrl: string = `${$page.url.pathname}/file`;
-	export let value: string[] = [];
+	export let value: string | undefined = void 0;
 	export let visible: boolean = true;
 
 	const dispatch = createEventDispatcher();
@@ -38,8 +42,9 @@
 
 	$: accept = block.options?.accept;
 	$: canUpload = !maxFiles || files.length < maxFiles;
-	$: maxFileSize = 1024 * 1024 * Math.min(limitFileSize, block.options?.maxFileSize || 100);
-	$: maxFiles = block.options?.maxFiles || 0;
+	$: maxFileSize =
+		1024 * 1024 * Math.min(limitFileSize, parseInt(block.options?.maxFileSize || '10', 10));
+	$: maxFiles = parseInt(block.options?.maxFiles || '10', 10);
 	$: multiple = maxFiles !== 1;
 	$: required = block.required && !preview && visible;
 
@@ -55,7 +60,7 @@
 		if (!files.includes(file)) {
 			if (maxFileSize && file.size > maxFileSize) {
 				error = $_('error.file_too_large', { values: { name: file.name } });
-			} else if (!matchesFileType(accept, file)) {
+			} else if (accept && !matchesFileType(accept, file)) {
 				error = $_('error.file_type_not_allowed', { values: { name: file.name } });
 			} else if (maxFiles && files.length >= maxFiles) {
 				error = $_('error.too_many_files');
@@ -167,7 +172,7 @@
 				{@const isLast = i === files.length - 1}
 				{@const preview = imagePreviews.find((item) => item[0] === file)?.[1]}
 				{@const progress = $uploadProgress.find((item) => item.file === file)}
-				{@const percent = progress ? progress.loaded / progress.file.size : 0}
+				{@const percent = progress ? Math.min(1, progress.loaded / progress.file.size) : 0}
 				<div class="flex gap-3 p-2 relative" class:border-b={!isLast}>
 					{#if showIcon}
 						<div>

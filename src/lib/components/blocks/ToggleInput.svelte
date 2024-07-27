@@ -4,14 +4,20 @@
 	import type { IFormBlockPartial } from '$lib/types';
 
 	export let block: IFormBlockPartial;
+	export let checked: boolean = block.default === 'true';
 	export let disabled: boolean = false;
 	export let error: string | undefined = void 0;
 	export let preview: boolean = false;
-	export let value: boolean = block.default === 'true';
+	export let readonly: boolean = false;
+	export let value: string | undefined = block.default;
 	export let visible: boolean = true;
 
 	$: label = block.label || block.name;
-	$: value === void 0 ? (value = block.default === 'true') : void 0;
+	$: onCheckedChange(checked);
+
+	function onCheckedChange(_: typeof checked) {
+		value = String(checked);
+	}
 </script>
 
 <BaseInput hideLabel {block} {error} {value} on:change>
@@ -20,15 +26,15 @@
 			<input
 				type="checkbox"
 				name={block.name}
-				readonly={block.readonly}
+				readonly={readonly || block.readonly}
 				required={visible && !preview && block.required}
 				value="true"
 				class="toggle toggle-primary"
 				{disabled}
-				bind:checked={value}
+				bind:checked
 				on:click={(ev) => (block.readonly ? ev.preventDefault() : void 0)}
 			/>
-			{#if !value}
+			{#if !checked}
 				<input type="hidden" name={block.name} value="false" />
 			{/if}
 

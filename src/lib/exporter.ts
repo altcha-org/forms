@@ -49,7 +49,7 @@ export function exportResponsesAsCSV(
 		const row: string[] = [response.id, new Date(response.createdAt).toISOString()];
 		acc.push(row);
 		for (const { name } of blocks) {
-			row.push(data[name] === void 0 ? '' : String(data[name]));
+			row.push(data[name] === void 0 || data[name] === null ? '' : String(data[name]));
 		}
 		return acc;
 	}, [] as string[][]);
@@ -77,7 +77,10 @@ export function exportResponsesAsJSON(
 	options: IExportResponsesOptions = {}
 ) {
 	const blocks = getFormBlocks(form);
-	const entries: { response: Pick<IResponse, 'id' | 'createdAt'>; data: TResponseData }[] = [];
+	const entries: {
+		response: Pick<IResponse, 'id' | 'createdAt'>;
+		data: Record<string, unknown>;
+	}[] = [];
 	for (const { data, files, response } of responses) {
 		entries.push({
 			response: {
@@ -102,7 +105,7 @@ export function exportResponsesAsJSON(
 								};
 							});
 					} else {
-						acc[name] = data[name] === void 0 ? '' : String(data[name]);
+						acc[name] = data[name] === void 0 || data[name] === null ? '' : String(data[name]);
 					}
 					return acc;
 				},

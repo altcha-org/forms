@@ -37,8 +37,12 @@ export const actions = {
 			if (data.smtpUrl) {
 				validateSmtpUrl(data.smtpUrl);
 			}
-			let auditlogRetention = data.auditlogRetention ? +data.auditlogRetention : void 0;
-			if (auditlogRetention !== void 0 && account.plan) {
+			let auditlogRetention = data.auditlogRetention
+				? +data.auditlogRetention
+				: data.auditlogRetention === ''
+					? null
+					: void 0;
+			if (auditlogRetention !== void 0 && auditlogRetention !== null && account.plan) {
 				auditlogRetention = Math.min(account.plan.auditlogMaxRetention, auditlogRetention);
 			}
 			await accountsService.updateAccount(accountId, {

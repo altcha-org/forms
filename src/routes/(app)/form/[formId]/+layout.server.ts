@@ -13,7 +13,12 @@ export const load = loadHandler(
 		if (!form) {
 			return error(404);
 		}
-		if (!event.url.pathname.endsWith('/success') && (form.status !== 'published' || form.account.suspended || form.account.plan?.featureForms === false)) {
+		if (
+			!event.url.pathname.endsWith('/success') &&
+			(form.status !== 'published' ||
+				form.account.suspended ||
+				form.account.plan?.featureForms === false)
+		) {
 			return error(403);
 		}
 		return {

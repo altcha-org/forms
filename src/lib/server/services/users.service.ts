@@ -113,7 +113,7 @@ export class UsersService {
 			const account = await accountsService.createAccount({
 				name: t('text.users_account_name', { values: { name } }),
 				plan,
-				timeZone,
+				timeZone
 			});
 			accountId = account.id;
 		}

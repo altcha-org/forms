@@ -7,6 +7,7 @@
 	export let disabled: boolean = false;
 	export let error: string | null | undefined = void 0;
 	export let preview: boolean = false;
+	export let readonly: boolean = false;
 	export let value: string | null | undefined = block.default;
 	export let visible: boolean = true;
 
@@ -19,7 +20,7 @@
 		name={block.name}
 		placeholder={block.placeholder}
 		required={visible && !preview && block.required}
-		readonly={block.readonly}
+		readonly={readonly || block.readonly}
 		{autocomplete}
 		{disabled}
 		class="input input-bordered shadow-sm"

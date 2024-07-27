@@ -103,14 +103,9 @@ export async function registerChallengeUse(challenge: string, expire: number = 3
 		return null;
 	}
 	const key = 'chlng:' + challenge;
-	const result = await client
-		.multi()
-		.get(key)
-		.setnx(key, 1)
-		.expire(key, expire, 'NX')
-		.exec();
+	const result = await client.multi().get(key).setnx(key, 1).expire(key, expire, 'NX').exec();
 	if (result) {
-		const [ prev ] = result;
+		const [prev] = result;
 		return !!prev[1];
 	}
 	return null;

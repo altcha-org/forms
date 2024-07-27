@@ -251,7 +251,7 @@
 					name: ''
 				}}
 				disabled={selectedFormat === 'pdf'}
-				bind:value={individual}
+				bind:checked={individual}
 			/>
 		{/if}
 
@@ -261,7 +261,7 @@
 				label: $_('label.export_include_attachments'),
 				name: ''
 			}}
-			bind:value={includeAttachments}
+			bind:checked={includeAttachments}
 		/>
 	</div>
 

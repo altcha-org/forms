@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import BaseInput from '$lib/components/blocks/BaseInput.svelte';
 	import SignatureCanvas from '$lib/components/SignatureCanvas.svelte';
@@ -26,6 +26,10 @@
 
 	$: kind = block.options?.kind || 'drawn';
 	$: hasPdfInput = form?.steps.some(({ blocks }) => blocks.some(({ type }) => type === 'PdfInput'));
+
+	onDestroy(() => {
+		elForm?.removeEventListener('submit', onFormSubmit);
+	});
 
 	onMount(() => {
 		elForm = elInput.closest('form');

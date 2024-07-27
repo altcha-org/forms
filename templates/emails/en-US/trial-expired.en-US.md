@@ -8,7 +8,7 @@ We would like to inform you that your trial on the Altcha Forms platform has exp
 
 **Account: {$.accountName}**
 
-To continue using our services, please upgrade to a paid plan in the *Billing* section of your account settings.
+To continue using our services, please upgrade to a paid plan in the _Billing_ section of your account settings.
 
 Thank you for choosing Altcha Forms.
 

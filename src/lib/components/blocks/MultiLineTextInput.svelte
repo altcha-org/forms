@@ -4,15 +4,21 @@
 	import MarkdownIcon from '$lib/components/icons/Markdown.svelte';
 	import type { IFormBlockPartial } from '$lib/types';
 
-	export let block: IFormBlockPartial;
+	export let block: IFormBlockPartial<{
+		maxLength?: string | number;
+		rows?: string | number;
+	}>;
 	export let error: string | undefined = void 0;
 	export let markdown: boolean = false;
 	export let preview: boolean = false;
+	export let readonly: boolean = false;
 	export let value: string | null | undefined = block.default;
 	export let visible: boolean = true;
 
-	$: maxLength = block.options?.maxLength;
-	$: rows = block.options?.rows || 3;
+	$: maxLength = block.options?.maxLength
+		? parseInt(String(block.options?.maxLength || '0'), 10)
+		: void 0;
+	$: rows = parseInt(String(block.options?.rows || '0'), 10) || 3;
 	$: length = value?.length || 0;
 	$: value === void 0 ? (value = block.default) : void 0;
 </script>
@@ -23,7 +29,7 @@
 		maxlength={maxLength}
 		name={block.name}
 		placeholder={block.placeholder}
-		readonly={block.readonly}
+		readonly={readonly || block.readonly}
 		required={visible && !preview && block.required}
 		class="textarea textarea-bordered shadow-sm"
 		bind:value

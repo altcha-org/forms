@@ -7,13 +7,14 @@
 	export let disabled: boolean = false;
 	export let error: string | undefined = void 0;
 	export let preview: boolean = false;
+	export let readonly: boolean = false;
 	export let transform:
 		| ((value: string | null | undefined) => string | null | undefined)
 		| undefined = void 0;
 	export let value: string | null | undefined = block.default;
 	export let visible: boolean = true;
 
-	$: maxLength = block.options?.maxLength;
+	$: maxLength = block.options?.maxLength as number;
 	$: length = value?.length || 0;
 	$: value === void 0 ? (value = block.default) : void 0;
 
@@ -32,7 +33,7 @@
 		{disabled}
 		placeholder={block.placeholder}
 		maxlength={maxLength}
-		readonly={block.readonly}
+		readonly={readonly || block.readonly}
 		required={visible && !preview && block.required}
 		class="input input-bordered shadow-sm"
 		bind:value

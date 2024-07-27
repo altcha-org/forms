@@ -5,7 +5,8 @@
 	import FileRenderer from '$lib/components/FileRenderer.svelte';
 	import AsteriskIcon from '$lib/components/icons/Asterisk.svelte';
 	import MoreHorizontalIcon from '$lib/components/icons/MoreHorizontal.svelte';
-	import RatingInput from './blocks/RatingInput.svelte';
+	import CheckIcon from '$lib/components/icons/Check.svelte';
+	import RatingInput from '$lib/components/blocks/RatingInput.svelte';
 	import { copyToClipboard, stringifyBlockValue } from '$lib/helpers';
 	import type { IFileWithoutAccount, IFormBlock } from '$lib/types';
 
@@ -48,6 +49,20 @@
 						{/if}
 					{/await}
 				</div>
+			{:else if ['MultiCheckboxInput', 'MultiSelectInput'].includes(block.type)}
+				{@const values = String(value || '')
+					.split(/(?<!\\),/)
+					.filter((p) => !!p)}
+				<div class="flex flex-col gap-1">
+					{#each values as v}
+						<div class="flex items-center gap-2">
+							<div>
+								<CheckIcon class="w-4 h-4" />
+							</div>
+							<div>{v.replace(/\\,/g, ',')}</div>
+						</div>
+					{/each}
+				</div>
 			{:else if block.type === 'RatingInput'}
 				<div class="flex items-center gap-6 mt-1">
 					<div class="grow">
@@ -60,7 +75,7 @@
 									label: ''
 								}}
 								disabled
-								{value}
+								value={value || void 0}
 							/>
 						{/if}
 					</div>

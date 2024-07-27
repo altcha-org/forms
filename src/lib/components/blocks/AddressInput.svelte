@@ -33,6 +33,7 @@
 	}>;
 	export let error: string | undefined = void 0;
 	export let preview: boolean = false;
+	export let readonly: boolean = false;
 	export let value: string | null | undefined = void 0;
 	export let visible: boolean = true;
 
@@ -168,6 +169,7 @@
 					type="text"
 					autocomplete="street-address"
 					placeholder={block.placeholder}
+					readonly={readonly || block.readonly}
 					{required}
 					class="input input-bordered shadow-sm w-full"
 					data-popover-input
@@ -211,6 +213,7 @@
 				<input
 					type="text"
 					class="input input-bordered shadow-sm w-full"
+					readonly={readonly || block.readonly}
 					bind:value={addressLine2}
 				/>
 			</div>
@@ -220,14 +223,24 @@
 			<div class="grow flex flex-col gap-1 w-full md:w-auto">
 				<div class="text-sm">{$_('label.city')}</div>
 				<div>
-					<input type="text" class="input input-bordered shadow-sm w-full" bind:value={city} />
+					<input
+						type="text"
+						class="input input-bordered shadow-sm w-full"
+						readonly={readonly || block.readonly}
+						bind:value={city}
+					/>
 				</div>
 			</div>
 
 			<div class="grow flex flex-col gap-1">
 				<div class="text-sm">{$_('label.county_or_region')}</div>
 				<div>
-					<input type="text" class="input input-bordered shadow-sm w-full" bind:value={county} />
+					<input
+						type="text"
+						class="input input-bordered shadow-sm w-full"
+						readonly={readonly || block.readonly}
+						bind:value={county}
+					/>
 				</div>
 			</div>
 
@@ -238,6 +251,7 @@
 						type="text"
 						autocomplete="postal-code"
 						class="input input-bordered shadow-sm w-full"
+						readonly={readonly || block.readonly}
 						bind:value={postalCode}
 					/>
 				</div>

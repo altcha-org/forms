@@ -63,7 +63,7 @@ export class EmailProcessor extends BaseProcessor<{
 		if (!ctx.form.account.canSendEmails) {
 			const users = await accountsService.listAccountUsers(ctx.form.accountId);
 			recipients = recipients.filter((email) => !!users.find((user) => user.user.email === email));
-			ctx.log('Email restricted to account users only.')
+			ctx.log('Email restricted to account users only.');
 		}
 		if (!recipients.length) {
 			throw new Error('No recipients.');

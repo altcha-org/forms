@@ -12,6 +12,6 @@ export const POST = requestHandler(
 		}
 	},
 	{
-		authorization: false,
+		authorization: false
 	}
 ) satisfies RequestHandler;

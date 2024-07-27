@@ -120,7 +120,7 @@
 					label: $_('label.encryption_key'),
 					name: 'privateKey',
 					options: {
-						allowedTypes: '.pem'
+						accept: '.pem'
 					},
 					required: true
 				}}

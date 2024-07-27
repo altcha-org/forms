@@ -74,7 +74,9 @@ export class FilesService {
 		return roundTime(Date.now() + ttl);
 	}
 
-	async getUploadUrl(file: Pick<IFile, 'accountId' | 'id' | 'name' | 'persistent' | 'size' | 'type'>) {
+	async getUploadUrl(
+		file: Pick<IFile, 'accountId' | 'id' | 'name' | 'persistent' | 'size' | 'type'>
+	) {
 		return this.storage.getUploadUrl(file);
 	}
 

@@ -28,7 +28,7 @@ export class PlansService {
 		name: true,
 		premium: true,
 		prices: true,
-		trialDays: true,
+		trialDays: true
 	} as const satisfies Partial<Record<keyof typeof plans.$inferSelect, boolean>>;
 
 	async getDefaultPlan() {
@@ -70,7 +70,7 @@ export class PlansService {
 	async listPlans() {
 		return db.query.plans.findMany({
 			columns: this.columns,
-			where: eq(plans.hidden, false),
+			where: eq(plans.hidden, false)
 		});
 	}
 }

@@ -2,7 +2,9 @@ import { idgen } from '$lib/server/id';
 import type { IFile } from '$lib/types';
 
 export abstract class BaseStorage {
-	abstract getUploadUrl(file: Pick<IFile, 'accountId' | 'id' | 'name' | 'persistent' | 'size' | 'type'>): Promise<string>;
+	abstract getUploadUrl(
+		file: Pick<IFile, 'accountId' | 'id' | 'name' | 'persistent' | 'size' | 'type'>
+	): Promise<string>;
 	abstract get(key: string): Promise<ReadableStream<Uint8Array>>;
 	abstract delete(key: string): Promise<void>;
 	abstract move(keySource: string, keyTarget: string): Promise<void>;

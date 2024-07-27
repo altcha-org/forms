@@ -43,7 +43,7 @@ async function translate(text: string, lang: string) {
 
 for (const file of files) {
 	const targetFile = file.replaceAll('en-GB', targetLangCode);
-	if (!await exists(targetFile)) {
+	if (!(await exists(targetFile))) {
 		const start = performance.now();
 		console.log('Translating', file);
 		const contents = await readFile(file, 'utf8');

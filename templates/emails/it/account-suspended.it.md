@@ -6,7 +6,7 @@ Salve,
 
 Ci dispiace informarvi che il vostro account **{$.accountName}** sulla piattaforma Altcha Forms è stato sospeso.
 
-**Motivo: {$.reason}
+\*\*Motivo: {$.reason}
 
 Per risolvere questo problema, vi preghiamo di contattare il nostro team di supporto il prima possibile.
 

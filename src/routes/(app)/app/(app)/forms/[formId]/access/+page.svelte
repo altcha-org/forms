@@ -39,7 +39,6 @@
 	}}
 	on:reset={() => onReset()}
 	let:changed
-	let:loading
 >
 	<div class="flex flex-col gap-6">
 		<div>
@@ -57,7 +56,7 @@
 					help: $_('help.restricted_access'),
 					name: 'restricted'
 				}}
-				bind:value={$form.restricted}
+				bind:checked={$form.restricted}
 			/>
 		</div>
 
@@ -95,6 +94,6 @@
 			</div>
 		{/if}
 
-		<StickyButtons disabled={!changed} {loading}></StickyButtons>
+		<StickyButtons disabled={!changed}></StickyButtons>
 	</div>
 </Form>

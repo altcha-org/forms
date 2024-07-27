@@ -23,7 +23,7 @@ const config = {
 			reportOnly: {
 				'script-src': ['self'],
 				'report-uri': ['/_report/csp']
-			},
+			}
 		},
 		csrf: {
 			checkOrigin: false

@@ -244,7 +244,7 @@
 						]
 					}
 				}}
-				bind:value={updateApiKey.features}
+				bind:selected={updateApiKey.features}
 			/>
 		{/if}
 	</div>

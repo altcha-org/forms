@@ -68,7 +68,6 @@ async function makeRequest(
 			signal: controller.signal
 		});
 	} catch (err) {
-		console.error(err);
 		if (retry) {
 			await delay();
 			return makeRequest(url, body, timeout, false);

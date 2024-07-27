@@ -9,13 +9,17 @@
 	import { formatBytes } from '$lib/format';
 	import type { IFormBlockPartial } from '$lib/types';
 
-	export let block: IFormBlockPartial;
+	export let block: IFormBlockPartial<{
+		accept: string;
+		maxFiles: string;
+		maxFileSize: string;
+	}>;
 	export let encrypted: boolean = false;
 	export let error: string | undefined = void 0;
 	export let imagePreviews: [File, string][] = [];
 	export let preview: boolean = false;
 	export let submitUrl: string = `${$page.url.pathname}/file`;
-	export let value: string[] = [];
+	export let value: string | undefined = void 0;
 	export let visible: boolean = true;
 
 	const limitFileSize = getContext<number>('limitFileSize') || 10;
@@ -26,8 +30,9 @@
 	let selectedFile: File | null = null;
 
 	$: accept = block.options?.accept || 'image/*';
-	$: maxFileSize = 1024 * 1024 * Math.min(limitFileSize, block.options?.maxFileSize || 100);
-	$: maxFiles = block.options?.maxFiles || 0;
+	$: maxFileSize =
+		1024 * 1024 * Math.min(limitFileSize, parseInt(block.options?.maxFileSize || '10', 10));
+	$: maxFiles = parseInt(block.options?.maxFiles || '0', 10);
 	$: canUpload = !maxFiles || maxFiles > files.length;
 	$: required = block.required && !preview && visible;
 
