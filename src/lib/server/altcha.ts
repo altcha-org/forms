@@ -2,7 +2,8 @@ import { createHash } from 'node:crypto';
 import duration from 'parse-duration';
 import * as lib from 'altcha-lib';
 import { env } from '$lib/server/env';
-import { ForbiddenError, UnauthorizedError } from './errors';
+import { ForbiddenError, UnauthorizedError } from '$lib/server/errors';
+import { registerChallengeUse } from '$lib/server/redis';
 import { EComplexity } from '$lib/types';
 import type { Payload } from 'altcha-lib/types';
 import type { RequestEvent } from '@sveltejs/kit';
@@ -52,7 +53,13 @@ export async function verifySolution(payload: string | Payload, hmacKey: string)
 	if (!parsed.salt || !parsed.challenge || parsed.number === void 0) {
 		return false;
 	}
-	return lib.verifySolution(parsed, hmacKey);
+	const ok = await lib.verifySolution(parsed, hmacKey);
+	const { expires } = lib.extractParams(parsed);
+	const expireMs = expires ? Math.max(0, (+expires - Date.now()) / 1000) : void 0;
+	if (await registerChallengeUse(parsed.challenge, expireMs)) {
+		throw new Error('Challenge has been already used.');
+	}
+	return ok;
 }
 
 export async function protectedEndpoint(event: RequestEvent, hmacKey: string) {

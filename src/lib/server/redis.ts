@@ -98,6 +98,24 @@ export async function incrementAccountUsage(
 	return 0;
 }
 
+export async function registerChallengeUse(challenge: string, expire: number = 3600) {
+	if (!client) {
+		return null;
+	}
+	const key = 'chlng:' + challenge;
+	const result = await client
+		.multi()
+		.get(key)
+		.setnx(key, 1)
+		.expire(key, expire, 'NX')
+		.exec();
+	if (result) {
+		const [ prev ] = result;
+		return !!prev[1];
+	}
+	return null;
+}
+
 function getCurrentMonth() {
 	const date = new Date().toISOString().split('T')[0];
 	return date.slice(0, -3);
