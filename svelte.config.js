@@ -18,10 +18,12 @@ const config = {
 		adapter: adapter(),
 		csp: {
 			directives: {
-				'script-src': ['self']
+				'script-src': ['self'],
+				'worker-src': ['self', 'blob:'],
 			},
 			reportOnly: {
 				'script-src': ['self'],
+				'worker-src': ['self', 'blob:'],
 				'report-uri': ['/_report/csp']
 			}
 		},
