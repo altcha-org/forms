@@ -428,7 +428,6 @@
 		"users": "Users",
 		"visuals": "Visuals",
 		"your_account": "Your account",
-		"your_name": "Your name",
 		"account_usage": "Account Usage",
 		"classifications": "Classifications",
 		"referrers": "Referrers",
@@ -497,7 +496,8 @@
 		"upload_banner": "Upload banner...",
 		"upload_logo": "Upload logo...",
 		"select": "Select...",
-		"select_file": "Select file..."
+		"select_file": "Select file...",
+		"enter_your_name": "Enter your name..."
 	},
 	"processor": {
 		"description": {
@@ -590,7 +590,6 @@
 		"download_encrypted_file": "This file is protected by the Encryption Shield. The file will be downloaded to your browser and safely decrypted.",
 		"download_encryption_key": "To save the key, first download it to your computer and store it securely, for example, on a flash drive.",
 		"downloading": "Downloading...",
-		"draw_your_signature": "Draw your signature...",
 		"drop_files_here": "Drop or select files here...",
 		"drop_encryption_key_here": "Drop the .PEM file here...",
 		"drop_image_here": "Drop or select an image here...",
@@ -699,7 +698,10 @@
 		"select_pdf_file": "Select PDF file.",
 		"account_trial_expired": "Your trial has expired. Please upgrade to a paid plan.",
 		"account_trial_expires_in_days": "Your trial will expire in {days} days.",
-		"account_suspended": "Your account has been suspended (reason: {reason})."
+		"account_suspended": "Your account has been suspended (reason: {reason}).",
+		"signature_enter_your_name": "Enter your name to sign",
+		"signature_finished": "Signed",
+		"signature_slide_to_right": "Slide to right"
 	},
 	"title": {
 		"add_block": "Add Block",

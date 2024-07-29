@@ -469,8 +469,7 @@
 		"views_and_responses": "Views and Responses",
 		"visuals": "Visuals",
 		"yes": "Yes",
-		"your_account": "Your account",
-		"your_name": "Your name"
+		"your_account": "Your account"
 	},
 	"limit": {
 		"api": "API requests",
@@ -490,6 +489,7 @@
 		"year": "yr"
 	},
 	"placeholder": {
+		"enter_your_name": "Enter your name...",
 		"label": "Label...",
 		"search": "Search...",
 		"select": "Select...",
@@ -601,7 +601,6 @@
 		"downloading": "Downloading...",
 		"downloading_file_name": "Downloading {name}...",
 		"drag_fields_to_pdf": "Drag and drop fields to the PDF.",
-		"draw_your_signature": "Draw your signature...",
 		"drop_files_here": "Drop or select files here...",
 		"drop_encryption_key_here": "Drop the .PEM file here...",
 		"drop_image_here": "Drop or select an image here...",
@@ -678,6 +677,9 @@
 		"share_encryption_key": "Share the downloaded private key with your team-mates who need access to the app. Otherwise, they won't be able to read the encrypted data. They can import keys in their profile.",
 		"sign": "Sign",
 		"sign_form": "Sign the form",
+		"signature_enter_your_name":"Enter your name to sign",
+		"signature_finished": "Signed",
+		"signature_slide_to_right": "Slide to right",
 		"subscription_created": "Your subscription has been successfully created! Please allow a few minutes for your account to be activated.",
 		"this_is_spam": "This message was identified as spam and will be deleted soon.",
 		"unable_to_decrypt_data": "Unable to decrypt data.",

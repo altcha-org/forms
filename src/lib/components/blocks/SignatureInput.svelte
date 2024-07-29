@@ -18,11 +18,11 @@
 	export let value: string | null = null;
 	export let visible: boolean = true;
 
-	let changed: boolean = false;
 	let elInput: HTMLInputElement;
 	let elForm: HTMLFormElement | null = null;
 	let file: File | null = null;
 	let signatureCanvas: SignatureCanvas | null = null;
+	let signed: boolean = false;
 
 	$: kind = block.options?.kind || 'drawn';
 	$: hasPdfInput = form?.steps.some(({ blocks }) => blocks.some(({ type }) => type === 'PdfInput'));
@@ -69,7 +69,7 @@
 	}
 
 	async function onFormSubmit(ev: SubmitEvent) {
-		if (form && !preview && !value && changed && !hasPdfInput) {
+		if (form && !preview && !value && signed && !hasPdfInput) {
 			ev.preventDefault();
 			ev.stopPropagation();
 			if (!file) {
@@ -94,7 +94,7 @@
 	<input bind:this={elInput} type="hidden" name={block.name} {value} />
 
 	<div
-		class="input input-bordered shadow-sm h-auto min-h-auto p-0"
+		class="border border-base-content/30 rounded-md overflow-hidden shadow-sm h-auto min-h-auto p-0"
 		class:overflow-auto={preview}
 		class:max-w-md={kind === 'drawn'}
 	>
@@ -105,20 +105,21 @@
 					certificate={kind === 'certificate'}
 					{preview}
 					{visible}
-					bind:changed
+					bind:changed={signed}
 					bind:file
 					on:download={() => onDownload()}
 				/>
 			</div>
 		{:else}
 			<SignatureCanvas
-				class="h-52"
+				class="h-80"
 				name={block.name}
-				bind:changed
+				required={block.required && !preview && visible}
+				bind:signed
 				bind:this={signatureCanvas}
 				on:download={() => onDownload()}
 			/>
-			{#if block.required && !preview && visible && !changed}
+			{#if block.required && !preview && visible && !signed}
 				<input
 					type="text"
 					required

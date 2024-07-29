@@ -7,18 +7,26 @@
 	import CheckIcon from '$lib/components/icons/Check.svelte';
 	import SignatureIcon from '$lib/components/icons/Signature.svelte';
 	import DownloadIcon from '$lib/components/icons/Download.svelte';
-	import FontIcon from '$lib/components/icons/Font.svelte';
+	import ArrowRightIcon from '$lib/components/icons/ArrowRight.svelte';
 	import SignaturePad from 'signature_pad';
 
 	export let changed: boolean = false;
 	export let name: string = '';
+	export let required: boolean = false;
+	export let signed: boolean = false;
 
 	const dispatch = createEventDispatcher();
 
 	let elCanvas: HTMLCanvasElement;
+	let elNameInput: HTMLInputElement;
+	let elSlider: HTMLElement;
 	let pad: SignaturePad;
+	let slider: number = 0;
 	let stamp: HTMLImageElement | null = null;
 	let text: string | null = null;
+
+	$: onTextChange(text);
+	$: onSliderChange(slider);
 
 	onMount(() => {
 		if (browser) {
@@ -40,11 +48,28 @@
 		dispatch('download');
 	}
 
-	function onTypeClick() {
-		const str = prompt($_('label.your_name'));
-		if (str) {
-			text = str;
-			changed = true;
+	function onScreenClick() {
+		if (elNameInput && !text) {
+			elNameInput.focus();
+		} else if (elSlider) {
+			if (slider < 1) {
+				slider += 0.1;
+			}
+			elSlider.focus();
+		}
+	}
+
+	function onSliderChange(_: typeof slider) {
+		if (browser && slider > 0.8 && slider < 1) {
+			slider = 1;
+		}
+		if (!signed && !!changed && !!text && slider >= 1) {
+			signed = true;
+		}
+	}
+
+	function onTextChange(_: typeof text) {
+		if (browser && pad) {
 			redraw();
 		}
 	}
@@ -104,8 +129,8 @@
 	function renderText(str: string, color: string = '#000000') {
 		const ctx = elCanvas.getContext('2d');
 		if (ctx) {
-			const offset = elCanvas.offsetHeight * 0.7;
-			ctx.font = '28px cursive';
+			const offset = elCanvas.offsetHeight * 0.75;
+			ctx.font = 'italic 24px serif';
 			const width = ctx.measureText(str).width;
 			ctx.fillStyle = color;
 			ctx.fillText(str, (elCanvas.offsetWidth - width) / 2, offset);
@@ -124,11 +149,12 @@
 		stamp = null;
 		text = null;
 		changed = false;
+		slider = 0;
 		redraw();
 	}
 
 	function redraw() {
-		pad.clear();
+		pad?.clear();
 		resizeCanvas();
 		renderBackground();
 		if (stamp) {
@@ -162,24 +188,21 @@
 <div class="bg-base-200/50 rounded-sm flex flex-col {$$restProps.class || ''}">
 	<div class="flex items-center gap-3 px-3 py-1 border-b border-base-300">
 		<div class="grow truncate">
-			{#if changed}
+			{#if changed && text && slider >= 1}
 				<div class="flex items-center gap-3">
-					<CheckIcon class="w-5 h-5 text-success" />
+					<div class="bg-success rounded-full w-6 h-6 flex items-center justify-center">
+						<CheckIcon class="w-4 h-4 text-success-content" />
+					</div>
+					<div>{$_('text.signature_finished')}</div>
 				</div>
+			{:else if changed && text}
+				<div class="text-sm opacity-60 truncate">{$_('text.signature_slide_to_right')}</div>
 			{:else}
-				<div class="text-sm opacity-60 truncate">{$_('text.draw_your_signature')}</div>
+				<div class="text-sm opacity-60 truncate">{$_('text.signature_enter_your_name')}</div>
 			{/if}
 		</div>
 
 		<div class="flex items-center gap-2">
-			<button
-				type="button"
-				on:click|preventDefault={() => onTypeClick()}
-				class="btn btn-sm btn-circle"
-			>
-				<FontIcon class="w-4 h-4" />
-			</button>
-
 			<button
 				type="button"
 				on:click|preventDefault={() => onUploadClick()}
@@ -206,17 +229,25 @@
 		</div>
 	</div>
 
-	<div class="grow relative select-none rounded-b-md overflow-hidden bg-white">
+	<div class="grow relative select-none overflow-hidden bg-white">
 		<div
-			class="border border-base-300 border-dashed absolute bottom-9 left-0 right-0 z-40"
-			class:hidden={changed}
+			class="border border-base-300 border-dashed absolute bottom-6 left-0 right-0 z-40"
 		></div>
 
 		<canvas bind:this={elCanvas} data-signature-canvas={name} class="w-full h-full relative z-30"
 		></canvas>
 
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
+		<div
+			on:click={() => onScreenClick()}
+			class="absolute top-0 bottom-0 right-0 left-0 bg-base-200/30 z-40" style="left:{slider * 100}%"
+		>
+
+		</div>
+
 		{#if !changed}
-			<div class="absolute left-4 bottom-8 z-40">
+			<div class="absolute left-4 bottom-4 z-40">
 				<div
 					class="flex flex-col gap-2 items-center bg-error text-error-content rounded-t-md w-8 h-20 py-2"
 				>
@@ -226,5 +257,46 @@
 				<div class="w-0 h-0 border-[1rem] border-transparent border-t-error"></div>
 			</div>
 		{/if}
+
+	</div>
+
+	<div class="flex flex-col gap-3 p-3">
+		<div>
+			<input
+				type="text"
+				placeholder={$_('placeholder.enter_your_name')}
+				class="input input-bordered shadow-sm !bg-base-100 w-full"
+				disabled={slider >= 1}
+				{required}
+				bind:this={elNameInput}
+				bind:value={text}
+			/>
+		</div>
+
+		<div class="relative">
+			<div
+				class="rounded-full p-1 flex items-center"
+				class:bg-animated-progress={text}
+			>
+				<input
+					type="range"
+					min="0"
+					max="1"
+					step="0.01"
+					class="range range-lg range-success"
+					class:range-success={text}
+					class:disabled={!text}
+					disabled={!text}
+					bind:this={elSlider}
+					bind:value={slider}
+				/>
+			</div>
+
+			{#if text && slider === 0}
+			<div class="absolute left-10 top-3">
+				<ArrowRightIcon class="w-4 h-4 text-success animate-translate-right" />
+			</div>
+			{/if}
+		</div>
 	</div>
 </div>

@@ -428,7 +428,6 @@
 		"users": "Benutzer",
 		"visuals": "Visuelle Elemente",
 		"your_account": "Ihr Konto",
-		"your_name": "Ihr Name",
 		"account_usage": "Kontonutzung",
 		"classifications": "Klassifizierungen",
 		"referrers": "Verweiser",
@@ -497,7 +496,8 @@
 		"upload_banner": "Banner hochladen...",
 		"upload_logo": "Logo hochladen...",
 		"select": "Auswählen...",
-		"select_file": "Datei auswählen..."
+		"select_file": "Datei auswählen...",
+		"enter_your_name": "Geben Sie Ihren Namen ein..."
 	},
 	"processor": {
 		"description": {
@@ -590,7 +590,6 @@
 		"download_encrypted_file": "Diese Datei ist durch den Verschlüsselungsschutz geschützt. Die Datei wird heruntergeladen und sicher entschlüsselt.",
 		"download_encryption_key": "Um den Schlüssel zu speichern, laden Sie ihn zuerst auf Ihren Computer herunter und speichern Sie ihn sicher, z. B. auf einem USB-Stick.",
 		"downloading": "Herunterladen...",
-		"draw_your_signature": "Unterschreiben Sie...",
 		"drop_files_here": "Dateien hier ablegen oder auswählen...",
 		"drop_encryption_key_here": ".PEM-Datei hier ablegen...",
 		"drop_image_here": "Bild hier ablegen oder auswählen...",
@@ -699,7 +698,10 @@
 		"select_pdf_file": "Wählen Sie die PDF-Datei aus.",
 		"account_trial_expired": "Ihr Testzeitraum ist abgelaufen. Bitte wechseln Sie zu einem kostenpflichtigen Plan.",
 		"account_trial_expires_in_days": "Ihr Testzeitraum läuft in {days} Tagen ab.",
-		"account_suspended": "Ihr Konto wurde gesperrt (Grund: {reason})."
+		"account_suspended": "Ihr Konto wurde gesperrt (Grund: {reason}).",
+		"signature_enter_your_name": "Geben Sie Ihren Namen ein, um zu unterschreiben",
+		"signature_finished": "Unterschrieben",
+		"signature_slide_to_right": "Nach rechts schieben"
 	},
 	"title": {
 		"add_block": "Block hinzufügen",

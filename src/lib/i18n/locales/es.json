@@ -432,7 +432,6 @@
 		"users": "Usuarios",
 		"visuals": "Visuales",
 		"your_account": "Tu cuenta",
-		"your_name": "Tu nombre",
 		"account_usage": "Uso de la cuenta",
 		"classifications": "Clasificaciones",
 		"referrers": "Referentes",
@@ -501,7 +500,8 @@
 		"upload_banner": "Subir banner...",
 		"upload_logo": "Subir logo...",
 		"select": "Seleccionar...",
-		"select_file": "Seleccionar archivo..."
+		"select_file": "Seleccionar archivo...",
+		"enter_your_name": "Ingresa tu nombre..."
 	},
 	"processor": {
 		"description": {
@@ -594,7 +594,6 @@
 		"download_encrypted_file": "Este archivo está protegido por el Escudo de Encriptación. El archivo se descargará a tu navegador y se descifrará de forma segura.",
 		"download_encryption_key": "Para guardar la clave, primero descárgala a tu computadora y guárdala de forma segura, por ejemplo, en un disco flash.",
 		"downloading": "Descargando...",
-		"draw_your_signature": "Dibuja tu firma...",
 		"drop_files_here": "Suelta o selecciona archivos aquí...",
 		"drop_encryption_key_here": "Suelta el archivo .PEM aquí...",
 		"drop_image_here": "Suelta o selecciona una imagen aquí...",
@@ -703,7 +702,10 @@
 		"select_pdf_file": "Seleccionar archivo PDF.",
 		"account_trial_expired": "Tu prueba ha expirado. Por favor, actualiza a un plan de pago.",
 		"account_trial_expires_in_days": "Tu prueba expirará en {days} días.",
-		"account_suspended": "Tu cuenta ha sido suspendida (razón: {reason})."
+		"account_suspended": "Tu cuenta ha sido suspendida (razón: {reason}).",
+		"signature_enter_your_name": "Ingrese su nombre para firmar",
+		"signature_finished": "Firmado",
+		"signature_slide_to_right": "Deslizar hacia la derecha"
 	},
 	"title": {
 		"add_block": "Agregar Bloque",

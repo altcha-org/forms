@@ -428,7 +428,6 @@
 		"users": "Utilisateurs",
 		"visuals": "Visuels",
 		"your_account": "Votre compte",
-		"your_name": "Votre nom",
 		"account_usage": "Utilisation du compte",
 		"classifications": "Classifications",
 		"referrers": "Référents",
@@ -497,7 +496,8 @@
 		"upload_banner": "Télécharger une bannière...",
 		"upload_logo": "Télécharger un logo...",
 		"select": "Sélectionnez...",
-		"select_file": "Sélectionnez un fichier..."
+		"select_file": "Sélectionnez un fichier...",
+		"enter_your_name": "Entrez votre nom..."
 	},
 	"processor": {
 		"description": {
@@ -590,7 +590,6 @@
 		"download_encrypted_file": "Ce fichier est protégé par le Bouclier de Chiffrement. Le fichier sera téléchargé sur votre navigateur et déchiffré en toute sécurité.",
 		"download_encryption_key": "Pour enregistrer la clé, téléchargez-la d'abord sur votre ordinateur et stockez-la en toute sécurité, par exemple sur une clé USB.",
 		"downloading": "Téléchargement...",
-		"draw_your_signature": "Dessinez votre signature...",
 		"drop_files_here": "Déposez ou sélectionnez des fichiers ici...",
 		"drop_encryption_key_here": "Déposez le fichier .PEM ici...",
 		"drop_image_here": "Déposez ou sélectionnez une image ici...",
@@ -699,7 +698,10 @@
 		"select_pdf_file": "Sélectionnez le fichier PDF.",
 		"account_trial_expired": "Votre essai a expiré. Veuillez passer à un plan payant.",
 		"account_trial_expires_in_days": "Votre essai expirera dans {days} jours.",
-		"account_suspended": "Votre compte a été suspendu (raison: {reason})."
+		"account_suspended": "Votre compte a été suspendu (raison: {reason}).",
+		"signature_enter_your_name": "Entrez votre nom pour signer",
+		"signature_finished": "Signé",
+		"signature_slide_to_right": "Faites glisser vers la droite"
 	},
 	"title": {
 		"add_block": "Ajouter un bloc",

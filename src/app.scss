@@ -239,3 +239,44 @@ mark {
 	background-color: oklch(var(--wa) / 0.2);
 	color: currentColor;
 }
+
+.bg-animated-progress {
+	background: repeating-linear-gradient(
+		to right,
+		transparent 0%,
+		oklch(var(--su) / 0.2) 50%,
+		transparent 100%,
+	);
+  background-size: 200% auto;
+  background-position: 0 100%;
+  animation: gradient-progress 2s infinite;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+.animate-translate-right {
+  animation: translate-right 1s infinite;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+@keyframes gradient-progress {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -200% 0%;
+  }
+}
+
+@keyframes translate-right {
+  0% {
+		transform: translateX(0);
+  }
+  50% {
+		transform: translateX(0.25rem);
+  }
+  100% {
+		transform: translateX(0);
+  }
+}

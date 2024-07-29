@@ -68,6 +68,7 @@ export class Pdf {
 			padding,
 			pageNumbers
 		};
+		this.doc.setDrawColor('#000000');
 		this.doc.setLineHeightFactor(lineHeight);
 		this.doc.setLineWidth(0.25);
 		this.doc.setDocumentProperties({
@@ -185,7 +186,7 @@ export class Pdf {
 								height: number;
 								width: number;
 							};
-							this.image(image, format, width, height);
+							this.image(image, format, width, height, true);
 						} else {
 							this.lineBreak(25);
 						}
@@ -250,8 +251,16 @@ export class Pdf {
 		return this;
 	}
 
-	image(img: string, format: string, width: number, height: number) {
+	image(img: string, format: string, width: number, height: number, border: boolean = false) {
 		this.doc.addImage(img, format, this.x, this.y, width, height);
+		if (border) {
+			const color = this.doc.getDrawColor();
+			this.doc.setLineDashPattern([2, 1], 0);
+			this.doc.setDrawColor('#DDDDDD');
+			this.doc.rect(this.x, this.y, width, height, 'S');
+			this.doc.setDrawColor(color);
+			this.doc.setLineDashPattern([0, 0], 0);
+		}
 		this.moveCursorBy(0, height);
 	}
 

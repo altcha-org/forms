@@ -428,7 +428,6 @@
 		"users": "Utenti",
 		"visuals": "Visuali",
 		"your_account": "Il tuo account",
-		"your_name": "Il tuo nome",
 		"account_usage": "Utilizzo dell'account",
 		"classifications": "Classificazioni",
 		"referrers": "Referenti",
@@ -498,7 +497,8 @@
 		"upload_banner": "Carica banner...",
 		"upload_logo": "Carica logo...",
 		"select": "Seleziona...",
-		"select_file": "Seleziona file..."
+		"select_file": "Seleziona file...",
+		"enter_your_name": "Inserisci il tuo nome..."
 	},
 	"processor": {
 		"description": {
@@ -591,7 +591,6 @@
 		"download_encrypted_file": "Questo file è protetto dallo Scudo di Crittografia. Il file verrà scaricato sul tuo browser e decrittografato in modo sicuro.",
 		"download_encryption_key": "Per salvare la chiave, scaricala prima sul tuo computer e conservala in modo sicuro, ad esempio su una chiavetta USB.",
 		"downloading": "Scaricamento...",
-		"draw_your_signature": "Disegna la tua firma...",
 		"drop_files_here": "Rilascia o seleziona i file qui...",
 		"drop_encryption_key_here": "Rilascia il file .PEM qui...",
 		"drop_image_here": "Rilascia o seleziona un'immagine qui...",
@@ -700,7 +699,10 @@
 		"select_pdf_file": "Seleziona il file PDF.",
 		"account_trial_expired": "Il tuo periodo di prova è scaduto. Si prega di passare a un piano a pagamento.",
 		"account_trial_expires_in_days": "Il tuo periodo di prova scadrà tra {days} giorni.",
-		"account_suspended": "Il tuo account è stato sospeso (motivo: {reason})."
+		"account_suspended": "Il tuo account è stato sospeso (motivo: {reason}).",
+		"signature_enter_your_name": "Inserisci il tuo nome per firmare",
+		"signature_finished": "Firmato",
+		"signature_slide_to_right": "Scorri verso destra"
 	},
 	"title": {
 		"add_block": "Aggiungi Blocco",
