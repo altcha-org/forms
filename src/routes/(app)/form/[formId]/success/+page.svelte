@@ -13,7 +13,7 @@
 	export let data: PageData;
 
 	$: form = data.form;
-	$: referrer = getReferrer($page.url.searchParams.get('ref'));
+	$: referrer = $page.url.searchParams.get('ref');
 	$: backUrl = referrer || (form.mode === 'hidden' ? null : `/form/${shortenFormId(form.id)}`);
 	$: hidePoweredBy = form.hidePoweredBy && data.licenseValid;
 
@@ -26,17 +26,6 @@
 			});
 		}
 	});
-
-	function getReferrer(ref?: string | null) {
-		if (ref) {
-			try {
-				return atob(ref);
-			} catch {
-				// noop
-			}
-		}
-		return null;
-	}
 </script>
 
 <div class="flex flex-col items-center gap-6 my-12">

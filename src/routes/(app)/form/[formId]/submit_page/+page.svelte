@@ -18,7 +18,7 @@
 
 <div class="max-w-lg mx-auto py-12">
 	<Form
-		action={`/form/${shortenFormId(data.form.id)}/submit_handle`}
+		action={`/form/${shortenFormId(data.form.id)}/submit`}
 		data={{
 			__referrer: data.referrer,
 			...data.formData

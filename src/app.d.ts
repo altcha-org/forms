@@ -19,6 +19,7 @@ declare global {
 			device?: IDevice;
 			deviceId?: string;
 			error?: unknown;
+			formData?: Record<string, string>;
 			i18n: (key: string, params?: { values: unknown }) => string;
 			locale: string;
 			remoteAddress: string;

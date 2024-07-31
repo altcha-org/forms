@@ -43,7 +43,9 @@
 
 	{#if extraFields.length}
 		<div class="flex flex-col gap-2">
-			<div class="text-lg">{$_('label.extra_fields')}</div>
+			{#if steps.length}
+				<div class="text-lg">{$_('label.extra_fields')}</div>
+			{/if}
 
 			<List items={extraFields} let:item>
 				<FormDataRendererItem

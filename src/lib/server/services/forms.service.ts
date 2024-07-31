@@ -442,6 +442,9 @@ export class FormsService {
 
 	validate(form: IForm, data: TResponseData) {
 		const schema = this.createValidationSchema(form);
+		if (Object.keys(schema.properties).length === 0) {
+			return data;
+		}
 		const validate = ajv.compile(schema);
 		const valid = validate(data);
 		if (!valid) {

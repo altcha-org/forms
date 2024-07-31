@@ -470,7 +470,8 @@
 		"font": "Font",
 		"font_color": "Font Colour",
 		"font_size": "Font Size",
-		"page": "Page"
+		"page": "Page",
+		"extra_fields": "Extra fields"
 	},
 	"limit": {
 		"api": "API requests",
@@ -701,7 +702,8 @@
 		"account_suspended": "Your account has been suspended (reason: {reason}).",
 		"signature_enter_your_name": "Enter your name to sign",
 		"signature_finished": "Signed",
-		"signature_slide_to_right": "Slide to right"
+		"signature_slide_to_right": "Slide to right",
+		"security_check_auto": "Hold on a moment while we verify your browser..."
 	},
 	"title": {
 		"add_block": "Add Block",

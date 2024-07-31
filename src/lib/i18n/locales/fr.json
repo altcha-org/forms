@@ -470,7 +470,8 @@
 		"font": "Police",
 		"font_color": "Couleur de police",
 		"font_size": "Taille de police",
-		"page": "Page"
+		"page": "Page",
+		"extra_fields": "Champs supplémentaires"
 	},
 	"limit": {
 		"api": "Demandes d'API",
@@ -701,7 +702,8 @@
 		"account_suspended": "Votre compte a été suspendu (raison: {reason}).",
 		"signature_enter_your_name": "Entrez votre nom pour signer",
 		"signature_finished": "Signé",
-		"signature_slide_to_right": "Faites glisser vers la droite"
+		"signature_slide_to_right": "Faites glisser vers la droite",
+		"security_check_auto": "Veuillez patienter pendant que nous vérifions votre navigateur..."
 	},
 	"title": {
 		"add_block": "Ajouter un bloc",

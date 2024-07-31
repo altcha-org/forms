@@ -18,6 +18,7 @@ import localeMiddleware from '$lib/server/middleware/locale.middleware';
 import usageMiddleware from '$lib/server/middleware/usage.middleware';
 import { BaseError, RateLimitError } from '$lib/server/errors';
 import '$lib/server/jobs';
+import { htmlFormHandler } from '$lib/server/handlers/htmlform.handler';
 
 if (env.LICENSE) {
 	await license.load(env.LICENSE);
@@ -59,6 +60,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 				break;
 			}
 		}
+
+		if (event.request.method === 'POST' && event.url.pathname.startsWith('/form/')) {
+			// A workaround for custom HTML form submissions to the form's endpoint, overrides the event request
+			response = await htmlFormHandler(event);
+		}
+
 		if (!response) {
 			response = await resolve(event);
 		}

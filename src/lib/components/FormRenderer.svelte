@@ -126,7 +126,7 @@
 
 	<div class="flex-1 pt-4 max-w-full">
 		<Form
-			action={preview ? '' : `/form/${shortenFormId(form.id)}/submit_handle`}
+			action={preview ? '' : `/form/${shortenFormId(form.id)}/submit`}
 			allowSubmit={!preview}
 			data={{
 				__context,
@@ -224,7 +224,7 @@
 								disabled={loading || !browserLoaded}
 							>
 								<span class="grow">{form.submitLabel || $_('button.submit')}</span>
-								{#if loading && !form.captchaFloating}
+								{#if loading && (!form.captchaFloating || form.captchaInvisible)}
 									<span class="loading loading-spinner loading-sm"></span>
 								{:else}
 									<CheckIcon class="w-5 h-5" />

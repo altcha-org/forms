@@ -19,7 +19,7 @@ const config = {
 		csp: {
 			directives: {
 				'script-src': ['self'],
-				'worker-src': ['self', 'blob:'],
+				'worker-src': ['self', 'blob:']
 			},
 			reportOnly: {
 				'script-src': ['self'],

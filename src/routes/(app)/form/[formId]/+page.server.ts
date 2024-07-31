@@ -16,6 +16,7 @@ export const load = loadHandler(
 		return {
 			analytics: form.account.plan?.featureAnalytics === true,
 			encrypted: !!form.account?.encryptionEnabled,
+			formData: event.locals.formData,
 			limitFileSize: form.account.plan?.limitFileSize || 10,
 			passwordOk: !!event.cookies.get('form_password')
 		};

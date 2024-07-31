@@ -46,10 +46,18 @@ export function exportResponsesAsCSV(
 	const blocks = getFormBlocks(form);
 	const head = ['id', 'created_at', ...blocks.map(({ name }) => name)];
 	const body = responses.reduce((acc, { data, response }) => {
+		const extraFields = getExtraFields(blocks, data);
 		const row: string[] = [response.id, new Date(response.createdAt).toISOString()];
 		acc.push(row);
 		for (const { name } of blocks) {
 			row.push(data[name] === void 0 || data[name] === null ? '' : String(data[name]));
+		}
+		for (const name in extraFields) {
+			let idx = head.indexOf(name);
+			if (idx < 0) {
+				idx = head.push(name) - 1;
+			}
+			row[idx] = String(extraFields[name] || '');
 		}
 		return acc;
 	}, [] as string[][]);
@@ -109,7 +117,7 @@ export function exportResponsesAsJSON(
 					}
 					return acc;
 				},
-				{} as Record<string, unknown>
+				getExtraFields(blocks, data)
 			)
 		});
 	}
@@ -170,5 +178,18 @@ function getFormBlocks(form: IForm) {
 			return acc;
 		},
 		[] as { name: string; type: string }[]
+	);
+}
+
+function getExtraFields(blocks: { name: string; type: string }[], data: TResponseData) {
+	return Object.entries(data).reduce(
+		(acc, [key, value]) => {
+			const isBlock = blocks.find((block) => block.name === key);
+			if (!isBlock && value !== void 0 && value !== null) {
+				acc[key] = value;
+			}
+			return acc;
+		},
+		{} as Record<string, unknown>
 	);
 }

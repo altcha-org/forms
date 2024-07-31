@@ -470,7 +470,8 @@
 		"font": "Schriftart",
 		"font_color": "Schriftfarbe",
 		"font_size": "Schriftgröße",
-		"page": "Seite"
+		"page": "Seite",
+		"extra_fields": "Zusatzfelder"
 	},
 	"limit": {
 		"api": "API-Anfragen",
@@ -701,7 +702,8 @@
 		"account_suspended": "Ihr Konto wurde gesperrt (Grund: {reason}).",
 		"signature_enter_your_name": "Geben Sie Ihren Namen ein, um zu unterschreiben",
 		"signature_finished": "Unterschrieben",
-		"signature_slide_to_right": "Nach rechts schieben"
+		"signature_slide_to_right": "Nach rechts schieben",
+		"security_check_auto": "Bitte warten Sie einen Moment, während wir Ihren Browser überprüfen..."
 	},
 	"title": {
 		"add_block": "Block hinzufügen",

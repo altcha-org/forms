@@ -230,9 +230,7 @@
 	</div>
 
 	<div class="grow relative select-none overflow-hidden bg-white">
-		<div
-			class="border border-base-300 border-dashed absolute bottom-6 left-0 right-0 z-40"
-		></div>
+		<div class="border border-base-300 border-dashed absolute bottom-6 left-0 right-0 z-40"></div>
 
 		<canvas bind:this={elCanvas} data-signature-canvas={name} class="w-full h-full relative z-30"
 		></canvas>
@@ -241,10 +239,9 @@
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<div
 			on:click={() => onScreenClick()}
-			class="absolute top-0 bottom-0 right-0 left-0 bg-base-200/30 z-40" style="left:{slider * 100}%"
-		>
-
-		</div>
+			class="absolute top-0 bottom-0 right-0 left-0 bg-base-200/30 z-40"
+			style="left:{slider * 100}%"
+		></div>
 
 		{#if !changed}
 			<div class="absolute left-4 bottom-4 z-40">
@@ -257,7 +254,6 @@
 				<div class="w-0 h-0 border-[1rem] border-transparent border-t-error"></div>
 			</div>
 		{/if}
-
 	</div>
 
 	<div class="flex flex-col gap-3 p-3">
@@ -274,10 +270,7 @@
 		</div>
 
 		<div class="relative">
-			<div
-				class="rounded-full p-1 flex items-center"
-				class:bg-animated-progress={text}
-			>
+			<div class="rounded-full p-1 flex items-center" class:bg-animated-progress={text}>
 				<input
 					type="range"
 					min="0"
@@ -293,9 +286,9 @@
 			</div>
 
 			{#if text && slider === 0}
-			<div class="absolute left-10 top-3">
-				<ArrowRightIcon class="w-4 h-4 text-success animate-translate-right" />
-			</div>
+				<div class="absolute left-10 top-3">
+					<ArrowRightIcon class="w-4 h-4 text-success animate-translate-right" />
+				</div>
 			{/if}
 		</div>
 	</div>

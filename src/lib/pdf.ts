@@ -1,7 +1,7 @@
 import { AcroFormTextField, jsPDF } from 'jspdf';
 import '$lib/pdf-fonts/Roboto-Regular-normal';
 import '$lib/pdf-fonts/Roboto-Bold-bold';
-import type { IFile, IForm } from './types';
+import type { IFile, IForm, IFormBlock } from './types';
 import { stringifyBlockValue } from './helpers';
 
 export interface IPdfOptions {
@@ -155,6 +155,7 @@ export class Pdf {
 	}
 
 	form(form: IForm, data: Record<string, unknown>, options: IPdfFormOptions = {}) {
+		const rendered: string[] = [];
 		for (const step of form.steps) {
 			if (step.title) {
 				this.heading(step.title, 2);
@@ -165,59 +166,78 @@ export class Pdf {
 					if (block.type.endsWith('Content')) {
 						continue;
 					}
-					let value = data[block.name];
-					if (value === null || value === void 0) {
-						value = '';
-					}
-					this.heading(block.label || block.name, 4);
-					if (block.type === 'SignatureInput' && options.signature) {
-						if (block.options.kind === 'certificate') {
-							this.signature();
-						} else if (
-							!['certificate', 'other'].includes(block.options.kind as string) &&
-							typeof value === 'object' &&
-							value &&
-							'image' in value &&
-							value.image
-						) {
-							const { format, height, image, width } = value as {
-								image: string;
-								format: string;
-								height: number;
-								width: number;
-							};
-							this.image(image, format, width, height, true);
-						} else {
-							this.lineBreak(25);
-						}
-					} else if (['FileInput', 'SignatureInput'].includes(block.type)) {
-						const files = String(value || '')
-							.split(',')
-							.filter((f) => !!f);
-						if (files.length) {
-							for (const fileId of files) {
-								const file = options.files?.find(({ id }) => id === fileId);
-								if (file) {
-									this.text(file?.name || fileId, {
-										link: new URL(
-											`/app/responses/${options.responseId}/data#${fileId}`,
-											location.origin || 'http://localhost'
-										).toString()
-									});
-								} else {
-									this.text(fileId);
-								}
-							}
-						} else {
-							this.text('—');
-						}
-					} else {
-						this.text(stringifyBlockValue(value));
-					}
-					this.lineBreak();
+					const value = data[block.name];
+					this.renderFormBlock(block, value, options);
+					rendered.push(block.name);
 				}
 			}
 		}
+		// render extra fields
+		for (const name in data) {
+			if (!rendered.includes(name)) {
+				this.renderFormBlock(
+					{
+						name,
+						options: {},
+						type: 'TextInput'
+					},
+					data[name],
+					options
+				);
+			}
+		}
+	}
+
+	renderFormBlock(block: IFormBlock, value: unknown, options: IPdfFormOptions = {}) {
+		if (value === null || value === void 0) {
+			value = '';
+		}
+		this.heading(block.label || block.name, 4);
+		if (block.type === 'SignatureInput' && options.signature) {
+			if (block.options.kind === 'certificate') {
+				this.signature();
+			} else if (
+				!['certificate', 'other'].includes(block.options.kind as string) &&
+				typeof value === 'object' &&
+				value &&
+				'image' in value &&
+				value.image
+			) {
+				const { format, height, image, width } = value as {
+					image: string;
+					format: string;
+					height: number;
+					width: number;
+				};
+				this.image(image, format, width, height, true);
+			} else {
+				this.lineBreak(25);
+			}
+		} else if (['FileInput', 'SignatureInput'].includes(block.type)) {
+			const files = String(value || '')
+				.split(',')
+				.filter((f) => !!f);
+			if (files.length) {
+				for (const fileId of files) {
+					const file = options.files?.find(({ id }) => id === fileId);
+					if (file) {
+						this.text(file?.name || fileId, {
+							link: new URL(
+								`/app/responses/${options.responseId}/data#${fileId}`,
+								location.origin || 'http://localhost'
+							).toString()
+						});
+					} else {
+						this.text(fileId);
+					}
+				}
+			} else {
+				this.text('—');
+			}
+		} else {
+			this.text(stringifyBlockValue(value));
+		}
+		this.lineBreak();
 	}
 
 	getTextDimensions(str: string) {

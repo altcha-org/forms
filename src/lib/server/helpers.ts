@@ -1,7 +1,7 @@
 import { createHmac } from 'node:crypto';
 import dns from 'node:dns/promises';
 import { env } from '$lib/server/env';
-import { ForbiddenError } from '$lib/server/errors';
+import { BadRequestError, ForbiddenError } from '$lib/server/errors';
 import type { RequestEvent } from '@sveltejs/kit';
 import type { IUser } from '$lib/server/services/users.service';
 
@@ -72,4 +72,17 @@ export async function verifyEmailMxDns(email: string) {
 		// noop
 	}
 	return false;
+}
+
+export async function readFormDataFromEvent(event: RequestEvent) {
+	const contentType = event.request.headers.get('content-type') || '';
+	if (contentType.includes('application/json')) {
+		return event.request.json();
+	} else if (
+		contentType.includes('multipart/form-data') ||
+		contentType.includes('application/x-www-form-urlencoded')
+	) {
+		return Object.fromEntries(await event.request.formData());
+	}
+	throw new BadRequestError('Cannot parse form data.');
 }

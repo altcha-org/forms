@@ -470,7 +470,8 @@
 		"font": "Fonte",
 		"font_color": "Cor da fonte",
 		"font_size": "Tamanho da fonte",
-		"page": "Página"
+		"page": "Página",
+		"extra_fields": "Campos extras"
 	},
 	"limit": {
 		"api": "Pedidos da API",
@@ -701,7 +702,8 @@
 		"account_suspended": "Sua conta foi suspensa (motivo: {reason}).",
 		"signature_enter_your_name": "Digite seu nome para assinar",
 		"signature_finished": "Assinado",
-		"signature_slide_to_right": "Deslize para a direita"
+		"signature_slide_to_right": "Deslize para a direita",
+		"security_check_auto": "Aguarde um momento enquanto verificamos seu navegador..."
 	},
 	"title": {
 		"add_block": "Adicionar Bloco",
