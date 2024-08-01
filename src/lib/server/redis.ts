@@ -3,7 +3,9 @@ import { env } from './env.js';
 
 const client = env.REDIS_URL
 	? new Redis(env.REDIS_URL, {
-			lazyConnect: true
+			lazyConnect: true,
+			maxRetriesPerRequest: 3,
+			commandTimeout: 1500,
 		})
 	: null;
 
@@ -109,6 +111,27 @@ export async function registerChallengeUse(challenge: string, expire: number = 3
 		return !!prev[1];
 	}
 	return null;
+}
+
+export async function acquireLock(key: string, ttl: number = 5000, retries: number = 10, retryDelay: number = 200) {
+	if (!client) {
+		return null;
+	}
+	const res = await client.set('lock:' + key, 1, 'PX', ttl, 'NX');
+	if (!res && retries < 1) {
+		return false;
+	} else if (res) {
+		return true;
+	}
+	await new Promise((resolve) => setTimeout(resolve, retryDelay));
+	return acquireLock(key, ttl, retries - 1, retryDelay);
+}
+
+export async function releaseLock(key: string) {
+	if (!client) {
+		return null;
+	}
+	return client.del('lock:' + key);
 }
 
 function getCurrentMonth() {
