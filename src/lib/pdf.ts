@@ -234,6 +234,15 @@ export class Pdf {
 			} else {
 				this.text('—');
 			}
+		} else if (['MultiSelectInput', 'MultiCheckboxInput'].includes(block.type)) {
+			const options = String(value || '')
+				.split(/(?<!\\),/)
+				.filter((p) => !!p);
+			for (const option of options) {
+				if (option) {
+					this.text(stringifyBlockValue(option));
+				}
+			}
 		} else {
 			this.text(stringifyBlockValue(value));
 		}
