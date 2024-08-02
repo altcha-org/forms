@@ -163,14 +163,19 @@
 			return false;
 		}
 		const entries = Object.entries(data);
-		const primaryField = excludeFileIds(data[form.displayBlocks[0]]);
-		const secondaryField = excludeFileIds(data[form.displayBlocks[1]]);
+		let primaryField = excludeFileIds(data[form.displayBlocks[0]]);
+		let secondaryField = excludeFileIds(data[form.displayBlocks[1]]);
+		if (!primaryField && secondaryField) {
+			primaryField = secondaryField;
+			secondaryField = '';
+		}
 		const { emailField, otherFields } = entries.reduce(
 			(acc, [key, value]) => {
 				if (value && String(value).includes('@')) {
 					acc.emailField = value;
 				} else if (
-					value?.length > 2 &&
+					value?.length &&
+					value.length > 2 &&
 					key !== form.displayBlocks[0] &&
 					key !== form.displayBlocks[1]
 				) {
@@ -186,6 +191,9 @@
 				otherFields: string[];
 			}
 		);
+		if (!primaryField && emailField) {
+			primaryField = emailField;
+		}
 		await responsesSearch.put({
 			createdAt: response.createdAt,
 			emailField,
@@ -207,7 +215,7 @@
 		if (typeof value === 'string' && value.startsWith('file_')) {
 			return '';
 		}
-		return String(value);
+		return (value === void 0 || value === null) ? '' : String(value);
 	}
 
 	export function stopSearch() {
@@ -340,7 +348,7 @@
 								/>
 							</div>
 						{/if}
-						{#if hit.document.emailField}
+						{#if hit.document.emailField && hit.document.emailField !== hit.document.primaryField}
 							<div class="text-sm text-base-content/60">
 								<StringHighlight
 									value={hit.document.emailField}
