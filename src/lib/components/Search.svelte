@@ -215,7 +215,7 @@
 		if (typeof value === 'string' && value.startsWith('file_')) {
 			return '';
 		}
-		return (value === void 0 || value === null) ? '' : String(value);
+		return value === void 0 || value === null ? '' : String(value);
 	}
 
 	export function stopSearch() {

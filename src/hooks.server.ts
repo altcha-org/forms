@@ -17,8 +17,8 @@ import ipMiddleware from '$lib/server/middleware/ip.middleware';
 import localeMiddleware from '$lib/server/middleware/locale.middleware';
 import usageMiddleware from '$lib/server/middleware/usage.middleware';
 import { BaseError, RateLimitError } from '$lib/server/errors';
+import { htmlFormHandler } from '$lib/server/handlers/htmlForm.handler';
 import '$lib/server/jobs';
-import { htmlFormHandler } from '$lib/server/handlers/htmlform.handler';
 
 if (env.LICENSE) {
 	await license.load(env.LICENSE);

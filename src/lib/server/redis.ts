@@ -5,7 +5,7 @@ const client = env.REDIS_URL
 	? new Redis(env.REDIS_URL, {
 			lazyConnect: true,
 			maxRetriesPerRequest: 3,
-			commandTimeout: 1500,
+			commandTimeout: 1500
 		})
 	: null;
 
@@ -113,7 +113,12 @@ export async function registerChallengeUse(challenge: string, expire: number = 3
 	return null;
 }
 
-export async function acquireLock(key: string, ttl: number = 5000, retries: number = 10, retryDelay: number = 200) {
+export async function acquireLock(
+	key: string,
+	ttl: number = 5000,
+	retries: number = 10,
+	retryDelay: number = 200
+) {
 	if (!client) {
 		return null;
 	}

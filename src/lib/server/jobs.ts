@@ -74,7 +74,11 @@ async function processJob(name: string, fn: () => Promise<void> | void, unlock: 
 		lock = await acquireLock(lockKey);
 		if (lock !== false) {
 			await fn();
-			logger.info('Job %s executed in %d ms', name, Math.floor((performance.now() - start) * 10) / 10);
+			logger.info(
+				'Job %s executed in %d ms',
+				name,
+				Math.floor((performance.now() - start) * 10) / 10
+			);
 		} else {
 			logger.info('Job %s skipped due to present lock.', name);
 		}
