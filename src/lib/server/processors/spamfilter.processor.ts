@@ -34,8 +34,8 @@ export class SpamfilterProcessor extends BaseProcessor<{
 		const { classification, reasons, score } = json;
 		context.log(`(spamfilter) Classification: ${classification}, score: ${score}`);
 		context.log(`(spamfilter) Reasons: ${reasons?.join(', ') || '-'}`);
-		context.set('spamfilter-classification', classification);
-		context.set('spamfilter-score', score);
+		context.set('spamfilter_classification', classification);
+		context.set('spamfilter_score', score);
 		if (classification === 'BAD') {
 			context.spam = true;
 			if (this.options.rejectSpam) {
