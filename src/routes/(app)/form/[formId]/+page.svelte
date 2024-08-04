@@ -10,11 +10,17 @@
 	import FormRenderer from '$lib/components/FormRenderer.svelte';
 	import PasswordInput from '$lib/components/blocks/PasswordInput.svelte';
 	import CheckIcon from '$lib/components/icons/Check.svelte';
-	import { shortenFormId } from '$lib/helpers';
+	import { getTimeZone, isMobile, shortenFormId } from '$lib/helpers';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
+	const __context = data.form.contextInfo
+		? new URLSearchParams({
+				mobile: String(browser ? isMobile() : false),
+				timezone: getTimeZone() || ''
+			}).toString()
+		: '';
 	const referrer = getReferrer();
 
 	let formPassword: string = '';
@@ -106,6 +112,7 @@
 				bind:this={securityForm}
 				action={`/form/${shortenFormId(data.form.id)}/submit`}
 				data={{
+					__context,
 					__referrer: referrer,
 					...data.formData
 				}}
