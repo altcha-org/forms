@@ -243,7 +243,6 @@ export class SessionsService {
 			label: string;
 			values: ISessionStatsEntry;
 		}[];
-		console.log(entries);
 		if (options.includeCompacted) {
 			const compacted = await this.statsCompacted(options);
 			return [
