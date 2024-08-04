@@ -13,18 +13,17 @@ const formLruCache = new LRUCache<string, boolean>({
 });
 
 export const POST: RequestHandler = requestHandler(
-	async ({ params, url }, data) => {
-		const tz = url.searchParams.get('tz');
-		const mobile = url.searchParams.get('mobile') === '1';
+	async ({ params }, data) => {
 		const formId = normalizeFormId(params.formId);
 		await checkForm(formId);
 		await sessionsService.createSession({
 			abondoned: data.submit ? false : true,
-			country: (tz && timeZoneToCountryCode(tz)) || null,
-			mobile,
-			fieldDropOff: data.submit ? null : data.fields[data.fields.length - 1]?.[0],
+			correction: data.correction === void 0 ? 0 : Math.min(100, data.correction * 100),
+			country: (data.tz && timeZoneToCountryCode(data.tz)) || null,
+			mobile: data.mobile === true,
+			fieldDropOff: data.dropoff || null,
 			error: data.error || null,
-			fields: data.fields.length ? data.fields : null,
+			fields: null,
 			formId,
 			responseId: null,
 			startAt: new Date(data.start || Date.now()),
@@ -34,26 +33,21 @@ export const POST: RequestHandler = requestHandler(
 	{
 		authorization: false,
 		body: t.Object({
-			error: t.Optional(t.Boolean()),
-			fields: t.Array(
-				t.Tuple([
-					t.String({
-						maxLength: 120
-					}),
-					t.Integer(),
-					t.Integer(),
-					t.Integer()
-				]),
-				{
-					maxItems: 200
-				}
+			correction: t.Optional(
+				t.Number({
+					minimum: 0
+				})
 			),
+			error: t.Optional(t.Boolean()),
+			dropoff: t.Optional(t.String()),
+			mobile: t.Optional(t.Boolean()),
 			start: t.Integer({
 				minimum: 0
 			}),
 			submit: t.Integer({
 				minimum: 0
-			})
+			}),
+			tz: t.Optional(t.String())
 		}),
 		jsonBody: true,
 		rateLimit: 'L3'

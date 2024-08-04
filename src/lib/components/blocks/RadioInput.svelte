@@ -31,6 +31,8 @@
 						type="radio"
 						class="radio radio-sm bg-base-100"
 						name={block.name}
+						aria-label={option.label}
+						data-group-label={block.label || block.name}
 						value={option.value}
 						disabled={disabled ||
 							(option.value !== null && !value?.includes(option.value) && !canAddMore)}

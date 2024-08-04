@@ -60,10 +60,8 @@
 		if (browser) {
 			browserLoaded = true;
 			if (!preview && analytics) {
-				session = new Session({
-					form: cmpForm.getElement(),
-					beaconUrl: `/form/${shortenFormId(form.id)}/beacon`
-				});
+				session = new Session(cmpForm.getElement());
+				session.beaconUrl = `/form/${shortenFormId(form.id)}/beacon`;
 			}
 		}
 	});
@@ -71,7 +69,7 @@
 	function onBeforeSubmit() {
 		if (session) {
 			session.end();
-			__session = session.dataToUrlString() || '';
+			__session = session.dataAsBase64() || '';
 		}
 	}
 
