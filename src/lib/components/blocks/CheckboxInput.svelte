@@ -24,6 +24,8 @@
 		<input
 			type="checkbox"
 			name={block.name}
+			aria-label={label}
+			data-group-label={block.label || block.name}
 			required={visible && !preview && block.required}
 			readonly={readonly || block.readonly}
 			class="checkbox shadow-sm bg-base-100"

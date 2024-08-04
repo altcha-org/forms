@@ -49,7 +49,8 @@
 		>
 			{#each item.bars as bar}
 				<div
-					class="absolute left-0 bottom-0 right-0 border-t border-base-100"
+					class="absolute left-0 bottom-0 right-0 border-base-100"
+					class:border-t={bar.height}
 					style="background-color:{bar.color};height:{bar.height}%;min-height:{bar.height
 						? '2px'
 						: '0px'}"

@@ -1,24 +1,9 @@
-import { debounce, getTimeZone, isMobile } from '$lib/helpers';
-
-export interface ISessionOptions {
-	form: HTMLFormElement;
-	beaconUrl?: string;
-	onBeforeSubmit?: () => void;
-}
+import { getTimeZone } from './helpers';
 
 export class Session {
-	currentFieldName: string | null = null;
+	beaconUrl: string | null = null;
 
 	error: string | null = null;
-
-	readonly fields: Record<
-		string,
-		{
-			duration: number;
-			changes: number;
-			startTime: number;
-		}
-	> = {};
 
 	readonly loadTime: number = Date.now();
 
@@ -26,54 +11,80 @@ export class Session {
 
 	startTime: number | null = null;
 
-	readonly viewThresholdMs: number = 3000;
+	viewTimeThresholdMs: number = 1500;
 
-	readonly _onFormChange = this.onFormChange.bind(this);
+	readonly #fieldChanges: Record<string, number> = {};
 
-	readonly _onFormFocus = debounce(this.onFormFocus.bind(this), 250);
+	#lastInputName: string | null = null;
 
-	readonly _onFormSubmit = this.onFormSubmit.bind(this);
+	readonly #onFormChange = this.onFormChange.bind(this);
 
-	readonly _onUnload = this.onUnload.bind(this);
+	readonly #onFormFocus = this.onFormFocus.bind(this);
 
-	constructor(readonly options: ISessionOptions) {
-		window.addEventListener('unload', this._onUnload);
-		this.options.form.addEventListener('change', this._onFormChange);
-		this.options.form.addEventListener('focusin', this._onFormFocus);
-		this.options.form.addEventListener('submit', this._onFormSubmit);
+	readonly #onFormSubmit = this.onFormSubmit.bind(this);
+
+	readonly #onUnload = this.onUnload.bind(this);
+
+	constructor(readonly elForm: HTMLFormElement) {
+		window.addEventListener('unload', this.#onUnload);
+		this.elForm.addEventListener('change', this.#onFormChange);
+		this.elForm.addEventListener('focusin', this.#onFormFocus);
+		this.elForm.addEventListener('submit', this.#onFormSubmit);
 	}
 
 	data() {
+		const fields = Object.entries(this.#fieldChanges);
 		return {
-			error: !!this.error,
-			fields: Object.entries(this.fields).map(([name, { changes, duration, startTime }]) => {
-				return [name, startTime, duration, changes];
-			}),
+			correction: fields.length
+				? fields.filter(([_, changes]) => changes > 1).length / fields.length || 0
+				: 0,
+			dropoff: !this.submitTime && !this.error && this.#lastInputName ? this.#lastInputName : null,
+			error: this.error,
+			mobile: this.isMobile(),
 			start: this.startTime,
-			submit: this.submitTime
+			submit: this.submitTime,
+			tz: getTimeZone()
 		};
 	}
 
-	dataToUrlString() {
-		const data = this.data();
-		return new URLSearchParams({
-			error: String(data.error),
-			fields: JSON.stringify(data.fields),
-			start: String(data.start || ''),
-			submit: String(data.submit || '')
-		}).toString();
+	dataAsBase64() {
+		try {
+			return btoa(JSON.stringify(this.data()));
+		} catch (err) {
+			console.error('failed to encode ALTCHA session data to base64', err);
+		}
+		return '';
 	}
 
 	destroy() {
-		window.removeEventListener('unload', this._onUnload);
-		this.options.form.removeEventListener('change', this._onFormChange);
-		this.options.form.removeEventListener('focusin', this._onFormFocus);
-		this.options.form.removeEventListener('submit', this._onFormSubmit);
+		window.removeEventListener('unload', this.#onUnload);
+		this.elForm.removeEventListener('change', this.#onFormChange);
+		this.elForm.removeEventListener('focusin', this.#onFormFocus);
+		this.elForm.removeEventListener('submit', this.#onFormSubmit);
 	}
 
 	end() {
-		this.submitTime = Date.now();
-		this.sendData();
+		if (!this.submitTime) {
+			this.submitTime = Date.now();
+		}
+	}
+
+	getFieldName(el: HTMLInputElement, maxLength: number = 40) {
+		const group = el.getAttribute('data-group-label');
+		const name = el.getAttribute('name') || el.getAttribute('aria-label');
+		return ((group ? group + ': ' : '') + name).slice(0, maxLength);
+	}
+
+	isMobile(): boolean {
+		const userAgentData =
+			'userAgentData' in navigator && navigator.userAgentData
+				? (navigator.userAgentData as Record<string, unknown>)
+				: {};
+		if ('mobile' in userAgentData) {
+			return userAgentData.mobile === true;
+		}
+		// https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent
+		return /Mobi/i.test(window.navigator.userAgent);
 	}
 
 	isInput(el: HTMLElement) {
@@ -81,27 +92,9 @@ export class Session {
 	}
 
 	onFormFieldChange(el: HTMLInputElement) {
-		const name = el.getAttribute('name');
+		const name = this.getFieldName(el);
 		if (name) {
 			this.trackFieldChange(name);
-		}
-	}
-
-	onFormFieldFocus(el: HTMLInputElement) {
-		const name = el.getAttribute('name');
-		if (name) {
-			if (this.currentFieldName && this.currentFieldName !== name) {
-				this.trackFieldBlur(this.currentFieldName);
-			}
-			this.currentFieldName = name;
-			this.trackFieldFocus(name);
-			const onBlur = () => {
-				this.trackFieldBlur(name);
-				el.removeEventListener('blur', onBlur);
-			};
-			requestAnimationFrame(() => {
-				el.addEventListener('blur', onBlur);
-			});
 		}
 	}
 
@@ -118,30 +111,30 @@ export class Session {
 			this.start();
 		}
 		if (target && this.isInput(target)) {
-			this.onFormFieldFocus(target);
+			const name = this.getFieldName(target);
+			if (name) {
+				this.#lastInputName = name;
+			}
 		}
 	}
 
 	onFormSubmit() {
 		this.end();
-		this.options.onBeforeSubmit?.();
 	}
 
 	onUnload() {
-		this.sendData();
+		if (this.loadTime <= Date.now() - this.viewTimeThresholdMs && !this.submitTime) {
+			this.sendBeacon();
+		}
 	}
 
-	async sendData() {
-		if (
-			this.loadTime <= Date.now() - this.viewThresholdMs &&
-			!this.submitTime &&
-			this.options.beaconUrl &&
-			'sendBeacon' in navigator
-		) {
-			const url = new URL(this.options.beaconUrl, location.origin);
-			url.searchParams.set('tz', getTimeZone() || '');
-			url.searchParams.set('mobile', isMobile() ? '1' : '0');
-			navigator.sendBeacon(url, JSON.stringify(this.data()));
+	async sendBeacon() {
+		if (this.beaconUrl && 'sendBeacon' in navigator) {
+			try {
+				navigator.sendBeacon(new URL(this.beaconUrl, location.origin), JSON.stringify(this.data()));
+			} catch {
+				// noop
+			}
 		}
 	}
 
@@ -149,29 +142,11 @@ export class Session {
 		this.startTime = Date.now();
 	}
 
-	trackError(err: string) {
-		this.error = String(err);
-	}
-
-	trackFieldBlur(name: string) {
-		if (this.fields[name] && !this.fields[name].duration) {
-			this.fields[name].duration = Date.now() - this.fields[name].startTime;
-		}
-	}
-
-	trackFieldFocus(name: string) {
-		if (!this.fields[name]) {
-			this.fields[name] = {
-				duration: 0,
-				changes: 0,
-				startTime: Date.now()
-			};
-		}
+	trackError(err: string | null) {
+		this.error = err === null ? null : String(err);
 	}
 
 	trackFieldChange(name: string) {
-		if (this.fields[name]) {
-			this.fields[name].changes += 1;
-		}
+		this.#fieldChanges[name] = (this.#fieldChanges[name] || 0) + 1;
 	}
 }

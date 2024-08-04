@@ -22,7 +22,6 @@ export async function formHandler(event: RequestEvent<{ formId: string }>) {
 	const cleanFormData = cleanupFormData(formData);
 	const altcha = formData['altcha'];
 	const contextParams = new URLSearchParams(String(formData['__context'] || ''));
-	const sessionParams = new URLSearchParams(String(formData['__session'] || ''));
 	const referrer = formData['__referrer']
 		? formData['__referrer']
 		: event.request.headers.get('referer');
@@ -30,12 +29,18 @@ export async function formHandler(event: RequestEvent<{ formId: string }>) {
 	let dataEncrypted: string | null = null;
 	let encryptionKeyHash: string | null = null;
 	let identity: Pick<IIdentity, 'id'> | null | undefined = null;
+	let sessionParams: Record<string, unknown> = {};
 	if (!altcha) {
 		throw new ForbiddenError();
 	}
 	const ok = await verifySolution(String(altcha), createHmacKey(formId));
 	if (!ok) {
 		throw new ForbiddenError();
+	}
+	try {
+		sessionParams = formData['__session'] ? JSON.parse(atob(formData['__session'])) : {};
+	} catch {
+		// noop
 	}
 	const form = await formsService.findForm(formId);
 	if (!form) {
@@ -136,23 +141,18 @@ export async function formHandler(event: RequestEvent<{ formId: string }>) {
 			}
 		}
 		if (form.account.plan?.featureAnalytics === true) {
-			let fields: [string, number, number, number][] = [];
-			try {
-				fields = JSON.parse(sessionParams.get('fields') || '[]');
-			} catch (err) {
-				// noop
-			}
 			await sessionsService.createSession({
 				abondoned: false,
+				correction: Math.min(100, (parseFloat(String(sessionParams.correction || '0')) || 0) * 100),
 				country: context.get('country'),
-				error: error || sessionParams.get('error') === 'true',
-				fields,
+				error: error || !!sessionParams.error,
+				fields: null,
 				fieldDropOff: null,
 				formId: form.id,
 				mobile: context.get('mobile') || false,
 				responseId,
-				startAt: new Date(parseInt(sessionParams.get('start') || '0', 10) || Date.now()),
-				submitAt: new Date(parseInt(sessionParams.get('submit') || '0', 10) || Date.now())
+				startAt: new Date(parseInt(String(sessionParams.start || '0'), 10) || Date.now()),
+				submitAt: new Date(parseInt(String(sessionParams.submit || '0'), 10) || Date.now())
 			});
 		}
 		await formsService.incrementReceivedResponses(form.id);

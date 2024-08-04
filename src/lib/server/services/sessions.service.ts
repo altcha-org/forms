@@ -67,6 +67,7 @@ export class SessionsService {
 		data: Pick<
 			ISession,
 			| 'abondoned'
+			| 'correction'
 			| 'country'
 			| 'error'
 			| 'fieldDropOff'
@@ -79,16 +80,6 @@ export class SessionsService {
 		> &
 			Partial<Pick<ISession, 'id'>>
 	) {
-		const correction =
-			!data.abondoned && data.fields?.length
-				? Math.floor(
-						(data.fields.reduce((acc, field) => {
-							return acc + Math.max(0, field[3] - 1);
-						}, 0) /
-							data.fields.length) *
-							100
-					)
-				: 0;
 		await db
 			.insert(sessions)
 			.values({
@@ -97,7 +88,7 @@ export class SessionsService {
 					!data.abondoned && data.submitAt && data.startAt
 						? data.submitAt?.getTime() - data.startAt.getTime()
 						: null,
-				correction,
+				correction: data.correction,
 				country: data.country,
 				error: data.error,
 				fieldDropOff: data.fieldDropOff,
@@ -208,7 +199,7 @@ export class SessionsService {
 					},
 					{
 						completionTime: [] as number[] | number | null,
-						correctionRate: [] as number[] | number,
+						correctionRate: [] as number[] | number | null,
 						countries: {} as Record<string, number>,
 						errored: 0,
 						fieldDropOff: {} as Record<string, number>,
@@ -237,7 +228,7 @@ export class SessionsService {
 								entry.values.correctionRate.reduce((acc, r) => acc + r, 0) /
 									entry.values.correctionRate.length
 							) / 100
-						: 0;
+						: null;
 				}
 				entry.values.countries = this.sortAndSliceObject(
 					entry.values.countries,
@@ -252,6 +243,7 @@ export class SessionsService {
 			label: string;
 			values: ISessionStatsEntry;
 		}[];
+		console.log(entries);
 		if (options.includeCompacted) {
 			const compacted = await this.statsCompacted(options);
 			return [

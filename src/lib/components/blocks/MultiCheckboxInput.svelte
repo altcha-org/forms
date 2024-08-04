@@ -44,6 +44,8 @@
 						type="checkbox"
 						class="checkbox checkbox-sm bg-base-100"
 						value={option.value}
+						aria-label={option.label}
+						data-group-label={block.label || block.name}
 						disabled={option.disabled ||
 							(option.value !== null && !value?.includes(option.value) && !canAddMore)}
 						readonly={readonly || block.readonly}

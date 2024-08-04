@@ -24,8 +24,8 @@
 		),
 		correctionRate:
 			stats.reduce((acc, { values }) => {
-				return acc + values.correctionRate;
-			}, 0) / stats.length,
+				return acc + (values.correctionRate || 0);
+			}, 0) / stats.filter(({ values }) => values.correctionRate !== null).length,
 		errored: stats.reduce((acc, { values }) => {
 			return acc + values.errored;
 		}, 0),
@@ -37,9 +37,7 @@
 	};
 	$: abandonmentRate =
 		Math.floor((1 - summary.submissions / (summary.views - summary.errored)) * 1000) / 10;
-	$: correctionRate = summary.submissions
-		? Math.floor((summary.correctionRate || 0) * 1000) / 10
-		: null;
+	$: correctionRate = summary.views ? Math.floor((summary.correctionRate || 0) * 1000) / 10 : null;
 	$: errorRate = Math.floor((summary.errored / summary.views) * 1000) / 10;
 	$: countries = stats.reduce(
 		(acc, { values }) => {
